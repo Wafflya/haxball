@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Home {% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
+{% endblock %}
+
+{% block content %}
+{% include "core/navbar.html" %}
+{% include "core/footer.html" %}
+{% endblock %}
