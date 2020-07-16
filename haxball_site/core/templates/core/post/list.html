@@ -17,7 +17,8 @@
                 <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Читать подробнее</a>
             </div>
             <div class="card-footer text-muted">
-                Опубликовано {{ post.created|date:"SHORT_DATE_FORMAT" }} в {{ post.created|time:"H:i" }}, Автор: <a href="">{{ post.author }}</a>
+                Опубликовано {{ post.created|date:"SHORT_DATE_FORMAT" }} в {{ post.created|time:"H:i" }}, Автор: <a
+                    href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>
             </div>
         </div>
     {% endfor %}
