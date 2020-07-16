@@ -8,7 +8,7 @@ from .models import Post, Profile
 # Вьюха для списка постов
 
 class PostListView(ListView):
-    queryset = Post.objects.all().order_by('-created')
+    queryset = Post.objects.all().order_by('-important', '-created', )
     context_object_name = 'posts'
     paginate_by = 3
     template_name = 'core/post/list.html'

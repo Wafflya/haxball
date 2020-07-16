@@ -3,7 +3,12 @@
 
 {% block profile_of_user %}
     <h1>{{ profile.name }}</h1>
-    <img src="{{ profile.avatar.url }}">
+    <h2>Зарегестрирован:</h2>
+    <h2>{{ profile.name.date_joined }}</h2>
+    {% if profile.avatar %}
+        <img src="{{ profile.avatar.url }}" width="200" height="300">
+    {% endif %}
+    <h3>О себе:</h3>
     <p>{{ profile.about }}</p>
 
 {% endblock %}

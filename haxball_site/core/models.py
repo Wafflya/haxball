@@ -14,6 +14,7 @@ class Post(models.Model):
     publish = models.DateTimeField('Начало публикации', default=timezone.now)
     created = models.DateTimeField("Опубликовано", auto_now_add=True)
     updated = models.DateTimeField("Изменено", auto_now=True)
+    important = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return reverse('core:post_detail', args=[self.publish.year, self.publish.month, self.publish.day, self.slug])
@@ -29,7 +30,7 @@ class Post(models.Model):
 class Profile(models.Model):
     name = models.OneToOneField(User, verbose_name='Пользователь', on_delete=models.CASCADE, related_name='user_profile')
     slug = AutoSlugField(populate_from='name')
-    avatar = models.ImageField('Аватар', upload_to='users_avatars/')
+    avatar = models.ImageField('Аватар', upload_to='users_avatars/', blank=True)
     about = models.TextField()
 
     def get_absolute_url(self):

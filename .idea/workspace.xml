@@ -3,11 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templates/core/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/post/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templates/core/post/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/post/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templates/core/post/list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/profile/profile_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templates/core/profile/profile_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +79,7 @@
       <workItem from="1594740553875" duration="13486000" />
       <workItem from="1594798046879" duration="17626000" />
       <workItem from="1594868329951" duration="13984000" />
-      <workItem from="1594886578941" duration="786000" />
+      <workItem from="1594886578941" duration="6220000" />
     </task>
     <servers />
   </component>
