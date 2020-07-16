@@ -11,15 +11,16 @@
             </a>
         </div>
         <div class="card-body">
-            <p class="card-text">{{ post.body|striptags }}</p>
+            <p class="card-text">{{ post.body|linebreaks }}</p>
             <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Читать подробнее</a>
         </div>
         <div class="card-footer text-muted">
-            Опубликовано {{ post.publish.year }}.{{ post.publish.month }}.{{ post.publish.day }} в
-            {{ post.publish.hour }}:{{ post.publish.minute }}, Автор: {{ post.author }}
+            Опубликовано {{ post.created|date:"SHORT_DATE_FORMAT" }} в {{ post.created|time:"H:i" }}, Автор: <a
+                href="">{{ post.author }}</a>
         </div>
     </div>
 {% endblock %}
+
 {% block comments %}
     {% with comments.count as total_comments %}
         <h2>

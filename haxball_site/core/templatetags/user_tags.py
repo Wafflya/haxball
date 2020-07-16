@@ -6,5 +6,5 @@ register = template.Library()
 
 @register.inclusion_tag('core/include/sidebar_for_users.html')
 def show_users_online(count=5):
-    users_online = User.objects.filter(is_active=True).order_by('-date_joined')
+    users_online = User.objects.filter(is_active=True).order_by('-date_joined')[:count]
     return {'users_online': users_online}

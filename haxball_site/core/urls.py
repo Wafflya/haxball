@@ -11,5 +11,5 @@ urlpatterns = [
     path('<int:year>/<int:month>/<int:day>/<slug:slug>/',
          views.post_detail,
          name='post_detail'),
-    path('profile/<slug:slug>', views.ProfileDetail.as_view(), name = 'profile_detail')
+    path('profile/<slug:slug>', views.ProfileDetail.as_view(), name='profile_detail')
 ]
