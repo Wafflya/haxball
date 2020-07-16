@@ -41,7 +41,7 @@
     </ul>
 
     {% if user.is_authenticated %}
-        <span class="p-2 bd-highlight" href="{% url 'account_signup' %}">{{ user.username }}</span>
+        <a class="p-2 bd-highlight" href="{{ user.user_profile.get_absolute_url }}">{{ user.username }}</a>
     {% else %}
         <a class="p-2 bd-highlight" href="{% url 'account_signup' %}">Регистрация</a>
     {% endif %}

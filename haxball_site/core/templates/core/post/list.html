@@ -1,0 +1,22 @@
+{% extends "core/home.html" %}
+{% load static %}
+
+{% block postlist %}
+    {% for post in posts %}
+        <div class="card post_list">
+            <div class="card-header">
+                <a href="{{ post.get_absolute_url }}" class="post_header">
+                    {{ post.title }}
+                </a>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ post.body|truncatewords:30|linebreaks }}</p>
+                <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Читать подробнее</a>
+            </div>
+            <div class="card-footer text-muted">
+                Опубликовано {{ post.created|date:"SHORT_DATE_FORMAT" }} в {{ post.created|time:"H:i" }}, Автор: <a href="">{{ post.author }}</a>
+            </div>
+        </div>
+    {% endfor %}
+    {% include "core/include/pagination.html" with page=page_obj %}
+{% endblock %}

@@ -1,17 +1,43 @@
+from autoslug import AutoSlugField
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 
 # Create your models here.
 class Post(models.Model):
-    title = models.CharField(max_length=256)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
+    title = models.CharField('Заголовок', max_length=256)
+    author = models.ForeignKey(User, verbose_name='Автор', on_delete=models.CASCADE, related_name='blog_posts')
     slug = models.SlugField(max_length=250, unique_for_date='publish')
-    body = models.TextField()
-    publish = models.DateTimeField(default=timezone.now)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    body = models.TextField("Текст поста")
+    publish = models.DateTimeField('Начало публикации', default=timezone.now)
+    created = models.DateTimeField("Опубликовано", auto_now_add=True)
+    updated = models.DateTimeField("Изменено", auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse('core:post_detail', args=[self.publish.year, self.publish.month, self.publish.day, self.slug])
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = 'Пост'
+        verbose_name_plural = 'Посты'
+
+
+class Profile(models.Model):
+    name = models.OneToOneField(User, verbose_name='Пользователь', on_delete=models.CASCADE, related_name='user_profile')
+    slug = AutoSlugField(populate_from='name')
+    avatar = models.ImageField('Аватар', upload_to='users_avatars/')
+    about = models.TextField()
+
+    def get_absolute_url(self):
+        return reverse('core:profile_detail', args=[self.slug])
+
+    def __str__(self):
+        return self.name.username
+
+    class Meta:
+        verbose_name = 'Профиль'
+        verbose_name_plural = 'Профили'

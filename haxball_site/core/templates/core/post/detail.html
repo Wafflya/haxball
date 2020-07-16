@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "core/home.html" %}
 
-</body>
-</html>
+{% block title %}
+{{post.title}}
+{% endblock %}
+{% block post %}
+   <div class="card post_list">
+            <div class="card-header">
+                <a href="{{ post.get_absolute_url }}" class="post_header">
+                    {{ post.title }}
+                </a>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ post.body|striptags }}</p>
+                <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Читать подробнее</a>
+            </div>
+            <div class="card-footer text-muted">
+                Опубликовано {{ post.publish.year }}.{{ post.publish.month }}.{{ post.publish.day }} в
+                {{ post.publish.hour }}:{{ post.publish.minute }}, Автор: {{ post.author }}
+            </div>
+        </div>
+{% endblock %}

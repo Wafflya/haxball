@@ -1,15 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="" />
+    <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/haxball.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/haxball.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/core/core.css" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/static/core/core.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templates/core/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/include/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templates/core/include/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/post/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templates/core/post/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/post/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templates/core/post/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/profile/profile_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templates/core/profile/profile_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/login_page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/account_inactive.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/account_inactive.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/email.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/email.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/email_confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/email_confirm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/logout.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/logout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/password_reset.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/password_reset.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/password_reset_done.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/password_reset_done.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/password_reset_from_key.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/password_reset_from_key.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/signup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/signup_closed.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/signup_closed.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/snippets/already_logged_in.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/snippets/already_logged_in.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/verification_sent.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/verification_sent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/verified_email_required.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/verified_email_required.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JavaScript File" />
         <option value="Python Script" />
         <option value="HTML File" />
       </list>
@@ -19,18 +55,33 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1efJOG6fx5wmnayIKZ6WXajgBJb" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/haxball_site/core/static/jquery" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.django.DjangoModulesConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\haxball\haxball_site\core\templates\core\include" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\haxball\haxball_site\core\static\jquery" />
     </key>
@@ -45,7 +96,49 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1594706679098</updated>
+      <workItem from="1594719248556" duration="26000" />
+      <workItem from="1594719600755" duration="16569000" />
+      <workItem from="1594740097828" duration="271000" />
+      <workItem from="1594740381448" duration="150000" />
+      <workItem from="1594740553875" duration="13486000" />
+      <workItem from="1594798046879" duration="17626000" />
+      <workItem from="1594868329951" duration="5904000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594740500582">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594740500582" />
+    <state x="740" y="279" key="FileChooserDialogImpl" timestamp="1594740378430">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="279" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1594740378430" />
+    <state x="463" y="166" key="SettingsEditor" timestamp="1594719779982">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="463" y="166" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594719779982" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1594742709284">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1594742709284" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="django-line">
+          <url>file://$PROJECT_DIR$/haxball_site/templates/account/login.html</url>
+          <line>12</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

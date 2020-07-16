@@ -7,7 +7,47 @@
     <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
 {% endblock %}
 
+
+
+
 {% block content %}
-{% include "core/navbar.html" %}
-{% include "core/footer.html" %}
+
+
+    <div class="container-xl">
+
+        <div class="row">
+            <div class="col-xl-8">
+
+                {% block post %}
+                {% endblock %}
+
+                {% block postlist %}
+                {% endblock %}
+
+                {% block profile %}
+                {% endblock %}
+
+            </div>
+
+            <div class="col-xl-3 offset-xl-1">
+                <div class="alert alert-primary users-online" role="alert">
+                    Тут типа юзеры онлайн, хызы
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Вася</li>
+                    <li class="list-group-item">Петя</li>
+                    <li class="list-group-item">Гибон</li>
+                    <li class="list-group-item">Венамка</li>
+                    <li class="list-group-item">мас</li>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+    {% include "core/include/footer.html" %}
+
 {% endblock %}
+
+
