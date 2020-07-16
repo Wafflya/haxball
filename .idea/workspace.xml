@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/haxball_site/core/templates/core/include/sidebar_for_users.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/core/templatetags/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templates/core/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/post/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templates/core/post/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/base.html" afterDir="false" />
-    </list>
+    <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -84,7 +70,7 @@
       <workItem from="1594740381448" duration="150000" />
       <workItem from="1594740553875" duration="13486000" />
       <workItem from="1594798046879" duration="17626000" />
-      <workItem from="1594868329951" duration="13702000" />
+      <workItem from="1594868329951" duration="13984000" />
     </task>
     <servers />
   </component>
@@ -107,14 +93,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="463" y="166" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594719779982" />
-    <state x="769" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1594886271818">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1594742709284">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="769" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594886271818" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1594872528482">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1594872528482" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1594742709284" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,22 +1,53 @@
 {% extends "core/home.html" %}
 
 {% block title %}
-{{post.title}}
+    {{ post.title }}
 {% endblock %}
 {% block post %}
-   <div class="card post_list">
-            <div class="card-header">
-                <a href="{{ post.get_absolute_url }}" class="post_header">
-                    {{ post.title }}
-                </a>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ post.body|striptags }}</p>
-                <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Читать подробнее</a>
-            </div>
-            <div class="card-footer text-muted">
-                Опубликовано {{ post.publish.year }}.{{ post.publish.month }}.{{ post.publish.day }} в
-                {{ post.publish.hour }}:{{ post.publish.minute }}, Автор: {{ post.author }}
-            </div>
+    <div class="card post_list">
+        <div class="card-header">
+            <a href="{{ post.get_absolute_url }}" class="post_header">
+                {{ post.title }}
+            </a>
         </div>
+        <div class="card-body">
+            <p class="card-text">{{ post.body|striptags }}</p>
+            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Читать подробнее</a>
+        </div>
+        <div class="card-footer text-muted">
+            Опубликовано {{ post.publish.year }}.{{ post.publish.month }}.{{ post.publish.day }} в
+            {{ post.publish.hour }}:{{ post.publish.minute }}, Автор: {{ post.author }}
+        </div>
+    </div>
+{% endblock %}
+{% block comments %}
+    {% with comments.count as total_comments %}
+        <h2>
+            {{ total_comments }} comment{{ total_comments|pluralize }}
+        </h2>
+    {% endwith %}
+
+    {% for comment in comments %}
+        <div class="comment">
+            <p class="info">
+                Comment {{ forloop.counter }} by {{ comment.author }}
+                {{ comment.created }}
+            </p>
+            {{ comment.body|linebreaks }}
+        </div>
+    {% empty %}
+        <p>There are no comments yet.</p>
+    {% endfor %}
+
+    {% if new_comment %}
+        <h2>Your comment has been added.</h2>
+    {% else %}
+        <h2>Add a new comment</h2>
+        <form action="." method="post">
+            {{ comment_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Add comment"></p>
+        </form>
+    {% endif %}
+
 {% endblock %}
