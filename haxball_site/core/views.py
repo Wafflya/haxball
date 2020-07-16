@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
 
@@ -36,7 +37,7 @@ def post_detail(request, year, month, day, slug):
                              publish__day=day)
 
     # List of active comments for this post
-    comments = post.comments.all()
+    comments_obj = post.comments.all()
 
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
@@ -48,10 +49,22 @@ def post_detail(request, year, month, day, slug):
     else:
         comment_form = CommentForm()
 
+    paginator = Paginator(comments_obj, 10)
+    page = request.GET.get('page')
+    try:
+        comments = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        comments = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range deliver last page of results
+        comments = paginator.page(paginator.num_pages)
+
     return render(request,
                   'core/post/detail.html',
                   {'post': post,
                    'comments': comments,
+                   'page': page,
                    'comment_form': comment_form})
 
 
@@ -61,9 +74,10 @@ class ProfileDetail(DetailView):
     template_name = 'core/profile/profile_detail.html'
     comment_form = CommentForm()
 
-    extra_context = {'comment_form': comment_form}
+    extra_context = {'comment_form': comment_form,}
 
-    # List of active comments for this post
+#    def get_com(self):
+ #       self.object
 
     def post(self, request, slug):
         comment_form = CommentForm(request.POST)
@@ -75,4 +89,3 @@ class ProfileDetail(DetailView):
             prof_to.comments.add(new_comment)
 
         return redirect(prof_to.get_absolute_url())
-

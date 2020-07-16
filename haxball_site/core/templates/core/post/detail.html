@@ -21,8 +21,8 @@
     </div>
 {% endblock %}
 
-{% block comments %}
-    {% with comments.count as total_comments %}
+{% block comments %}>
+    {% with post.comments.count as total_comments %}
         <h2>
             {{ total_comments }} comment{{ total_comments|pluralize }}
         </h2>
@@ -31,7 +31,7 @@
     {% for comment in comments %}
         <div class="comment">
             <p class="info">
-                Comment {{ forloop.counter }} by {{ comment.author }}
+                Comment by {{ comment.author }}
                 {{ comment.created }}
             </p>
             {{ comment.body|linebreaks }}
@@ -50,5 +50,5 @@
             <p><input type="submit" value="Add comment"></p>
         </form>
     {% endif %}
-
+    {% include "core/include/pagination.html" with page=comments %}
 {% endblock %}
