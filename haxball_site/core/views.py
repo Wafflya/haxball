@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
 
 from .forms import CommentForm
@@ -43,8 +43,8 @@ def post_detail(request, year, month, day, slug):
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
             new_comment.author = request.user
-            new_comment.post = post
             new_comment.save()
+            post.comments.add(new_comment)
     else:
         comment_form = CommentForm()
 
@@ -59,3 +59,20 @@ class ProfileDetail(DetailView):
     model = Profile
     context_object_name = 'profile'
     template_name = 'core/profile/profile_detail.html'
+    comment_form = CommentForm()
+
+    extra_context = {'comment_form': comment_form}
+
+    # List of active comments for this post
+
+    def post(self, request, slug):
+        comment_form = CommentForm(request.POST)
+        prof_to = Profile.objects.get(slug=slug)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.author = request.user
+            new_comment.save()
+            prof_to.comments.add(new_comment)
+
+        return redirect(prof_to.get_absolute_url())
+

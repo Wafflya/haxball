@@ -6,6 +6,20 @@ from django.utils import timezone
 
 
 # Create your models here.
+class Comment(models.Model):
+    author = models.ForeignKey(User, verbose_name='Автор', related_name='comments_by_user', on_delete=models.CASCADE)
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+        ordering = ('-created',)
+
+    def __str__(self):
+        return 'Комментарий от {}'.format(self.author)
+
+
 class Post(models.Model):
     title = models.CharField('Заголовок', max_length=256)
     author = models.ForeignKey(User, verbose_name='Автор', on_delete=models.CASCADE, related_name='blog_posts')
@@ -15,6 +29,7 @@ class Post(models.Model):
     created = models.DateTimeField("Опубликовано", auto_now_add=True)
     updated = models.DateTimeField("Изменено", auto_now=True)
     important = models.BooleanField(default=False)
+    comments = models.ManyToManyField(Comment, related_name='post_comments', blank=True)
 
     def get_absolute_url(self):
         return reverse('core:post_detail', args=[self.publish.year, self.publish.month, self.publish.day, self.slug])
@@ -31,7 +46,8 @@ class Profile(models.Model):
     name = models.OneToOneField(User, verbose_name='Пользователь', on_delete=models.CASCADE, related_name='user_profile')
     slug = AutoSlugField(populate_from='name')
     avatar = models.ImageField('Аватар', upload_to='users_avatars/', blank=True)
-    about = models.TextField()
+    about = models.TextField(blank=True)
+    comments = models.ManyToManyField(Comment, related_name='profile_comments', blank=True)
 
     def get_absolute_url(self):
         return reverse('core:profile_detail', args=[self.slug])
@@ -43,18 +59,4 @@ class Profile(models.Model):
         verbose_name = 'Профиль'
         verbose_name_plural = 'Профили'
 
-
-class Comment(models.Model):
-    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
-    author = models.ForeignKey(User, verbose_name='Автор', related_name='comments_by_user', on_delete=models.CASCADE)
-    body = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        verbose_name = 'Комментарий'
-        verbose_name_plural = 'Комментарии'
-        ordering = ('created',)
-
-    def __str__(self):
-        return 'Комментарий от {} к записи {}'.format(self.author, self.post)
 
