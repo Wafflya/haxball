@@ -1,0 +1,25 @@
+<nav aria-label="Page navigation" class="bot_nav_page">
+    <ul class="pagination justify-content-center">
+        {% if page.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page.previous_page_number }}">Предыдущая</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href=""
+                   aria-disabled="true">Предыдущая</a>
+            </li>
+        {% endif %}
+        <li class="page-item disabled"><a class="page-link" href="#">{{ page.number }} из {{ page.paginator.num_pages }}</a></li>
+        {% if page.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page.next_page_number }}">Следующая</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href=""
+                   aria-disabled="true">Следующая</a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>

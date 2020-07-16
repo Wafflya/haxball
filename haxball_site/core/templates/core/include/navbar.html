@@ -1,0 +1,55 @@
+{% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Oswald:wght@300&display=swap" rel="stylesheet">
+<nav class="navbar navbar-light navbar_color nav-fill">
+
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+    </form>
+
+    <a class="navbar-brand nav-item" href="{% url 'core:home' %}">
+        <!-- <img src={% static "img/Logo2.png" %} width="50" height="50" class="d-inline-block align-middle"
+                alt="Логотип" > --!>
+        <div class="page-name"> Чемпионат России по футзалу</div>
+    </a>
+</nav>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark d-flex bd-highlight mb-2 sticky-top">
+    <!-- Brand -->
+    <a class="navbar-brand" href="{% url 'core:home' %}">Главная</a>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto p-2 bd-highlight">
+        <li class="nav-item">
+            <a class="nav-link" href="#">Игроки</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Команды</a>
+        </li>
+
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Чемпионат
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Вышка</a>
+                <a class="dropdown-item" href="#">Лохи 2</a>
+                <a class="dropdown-item" href="#">Лохи 3</a>
+            </div>
+        </li>
+    </ul>
+
+    {% if user.is_authenticated %}
+        <span class="p-2 bd-highlight" href="{% url 'account_signup' %}">{{ user.username }}</span>
+    {% else %}
+        <a class="p-2 bd-highlight" href="{% url 'account_signup' %}">Регистрация</a>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <a class="p-2 bd-highlight" href="{% url 'account_logout' %}">Выход</a>
+    {% else %}
+        <a class="p-2 bd-highlight" href="{% url 'account_login' %}">Вход</a>
+    {% endif %}
+</nav>
+
