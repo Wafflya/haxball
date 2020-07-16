@@ -16,3 +16,7 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug')
+
+@admin.register(Comment)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('author', 'post', 'created')
