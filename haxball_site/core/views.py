@@ -106,10 +106,9 @@ class EditMyProfile(DetailView, View):
     def post(self, request, slug):
         profile = Profile.objects.get(slug=slug)
         profile_form = EditProfileForm(request.POST, instance=profile)
-        print(request.POST)
         if profile_form.is_valid():
             profile_form.save()
-
+        print(profile.born_date)
         return redirect(profile.get_absolute_url())
 
 
