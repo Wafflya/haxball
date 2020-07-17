@@ -10,6 +10,7 @@ class Comment(models.Model):
     author = models.ForeignKey(User, verbose_name='Автор', related_name='comments_by_user', on_delete=models.CASCADE)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
+    parent = models.ForeignKey('self', verbose_name='Родитель', on_delete=models.SET_NULL, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Комментарий'
@@ -43,7 +44,8 @@ class Post(models.Model):
 
 
 class Profile(models.Model):
-    name = models.OneToOneField(User, verbose_name='Пользователь', on_delete=models.CASCADE, related_name='user_profile')
+    name = models.OneToOneField(User, verbose_name='Пользователь', on_delete=models.CASCADE,
+                                related_name='user_profile')
     slug = AutoSlugField(populate_from='name')
     avatar = models.ImageField('Аватар', upload_to='users_avatars/', blank=True)
     about = models.TextField(blank=True)
@@ -58,5 +60,3 @@ class Profile(models.Model):
     class Meta:
         verbose_name = 'Профиль'
         verbose_name_plural = 'Профили'
-
-

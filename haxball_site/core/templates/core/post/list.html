@@ -13,7 +13,7 @@
                 {% endif %}
             </div>
             <div class="card-body">
-                <p class="card-text">{{ post.body|truncatewords:30|linebreaks }}</p>
+                <p class="card-text">{{ post.body|linebreaks|truncatewords:20 }}</p>
                 <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Читать подробнее</a>
             </div>
             <div class="card-footer text-muted">

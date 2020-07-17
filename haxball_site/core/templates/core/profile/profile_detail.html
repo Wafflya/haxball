@@ -17,31 +17,32 @@
 {% block comments %}
     {% with profile.comments.count as total_comments %}
         <h2>
-            {{ total_comments }} comment{{ total_comments|pluralize }}
+            Комментариев {{ total_comments }}
         </h2>
     {% endwith %}
 
+
+    {% include 'core/include/form_comment.html' with nickname=user.username element=profile %}
+
     {% for comment in profile.comments.all %}
-        <div class="comment">
-            <p class="info">
-                Comment {{ forloop.counter }} by {{ comment.author }}
-                {{ comment.created }}
-            </p>
-            {{ comment.body|linebreaks }}
+        <div class="card post_list">
+        <div class="card-header">
+            <a href="{{ comment.author.user_profile.get_absolute_url }}" class="post_header">
+                {{ comment.author }}
+            </a>
         </div>
+        <div class="card-body">
+            <p class="card-text">{{ comment.body|linebreaks }}</p>
+        </div>
+        <div class="card-footer text-muted">
+            Отправлено {{ comment.created|date:"SHORT_DATE_FORMAT" }} в {{ comment.created|time:"H:i" }}, Автор: <a
+                href="{{ comment.author.user_profile.get_absolute_url }}">{{ comment.author }}</a>
+        </div>
+        </div>
+
     {% empty %}
         <p>There are no comments yet.</p>
     {% endfor %}
 
-    {% if new_comment %}
-        <h2>Your comment has been added.</h2>
-    {% else %}
-        <h2>Add a new comment</h2>
-        <form action={% url 'core:profile_detail' profile.slug %} method="post">
-            {{ comment_form.as_p }}
-            {% csrf_token %}
-            <p><input type="submit" value="Add comment"></p>
-        </form>
-    {% endif %}
-
+    {% include "core/include/pagination.html" with page=comments %}
 {% endblock %}

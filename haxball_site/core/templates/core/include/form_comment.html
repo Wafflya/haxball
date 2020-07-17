@@ -1,0 +1,14 @@
+<form action={% url 'core:add_comment' element.id element.slug %} method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="nickname">{{ nickname }}</label>
+    </div>
+    <div class="form-group editContent">
+        <label for="contactcomment" class="editContent">
+            Ваш комментарий:
+        </label>
+        <textarea class="form-control border" rows="5" name="body"
+                  id="contactcomment" required=""></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
