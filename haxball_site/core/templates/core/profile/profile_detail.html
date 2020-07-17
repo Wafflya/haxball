@@ -5,10 +5,10 @@
     <hr>
     <div class="profile" style="padding: 20px; background-color: #95999c">
         <div class="d-flex justify-content-between bd-highlight mb-3">
-            <div class="d-flex justify-content-start"><h1>{{ profile.name }}</h1></div>
+            <div class="d-flex justify-content-start"><h2>{{ profile.name }}</h2></div>
             {% if profile.name.username == user.username %}
-            <div class="d-flex justify-content-end" style="padding: 4px">
-                <button type="button" class="btn btn-warning">Редактировать профиль</button>
+            <div class="d-flex justify-content-end" >
+                <a href="{% url 'core:edit_profile' profile.slug %}" type="button" class="btn btn-warning" role="button" aria-disabled="true">Редактировать профиль</a>
             </div>
             {% endif %}
         </div>

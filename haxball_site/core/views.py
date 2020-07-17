@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 
-from .forms import CommentForm
+from .forms import CommentForm, EditProfileForm
 from .models import Post, Profile, Comment
 
 
@@ -94,3 +94,22 @@ class AddComment(ListView, View):
             object_to.comments.add(new_comment)
 
         return redirect(object_to.get_absolute_url())
+
+
+class EditMyProfile(DetailView, View):
+    model = Profile
+    context_object_name = 'profile'
+    template_name = 'core/profile/profile_edit.html'
+
+
+
+    def post(self, request, slug):
+        profile = Profile.objects.get(slug=slug)
+        profile_form = EditProfileForm(request.POST, instance=profile)
+        print(request.POST)
+        if profile_form.is_valid():
+            profile_form.save()
+
+        return redirect(profile.get_absolute_url())
+
+

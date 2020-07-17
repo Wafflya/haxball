@@ -1,0 +1,14 @@
+{% extends './profile_detail.html' %}
+
+
+
+{% block profile_of_user %}
+    {% if user.username == profile.name.username %}
+        {% include "core/include/profile_editor_form.html" with element=profile %}
+    {% else %}
+        Вы петух, батенька!
+    {% endif %}
+{% endblock %}
+
+{% block comments %}
+{% endblock %}

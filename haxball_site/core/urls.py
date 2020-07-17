@@ -12,5 +12,6 @@ urlpatterns = [
          views.post_detail,
          name='post_detail'),
     path('profile/<slug:slug>', views.ProfileDetail.as_view(), name='profile_detail'),
-    path('comment/<int:id>/<slug:slug>', views.AddComment.as_view(), name='add_comment')
+    path('comment/<int:id>/<slug:slug>', views.AddComment.as_view(), name='add_comment'),
+    path('profile/<slug:slug>/edit', views.EditMyProfile.as_view(), name='edit_profile')
 ]
