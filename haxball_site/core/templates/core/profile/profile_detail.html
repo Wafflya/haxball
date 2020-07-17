@@ -4,8 +4,15 @@
 {% block profile_of_user %}
     <hr>
     <div class="profile" style="padding: 20px; background-color: #95999c">
+        <div class="d-flex justify-content-between bd-highlight mb-3">
+            <div class="d-flex justify-content-start"><h1>{{ profile.name }}</h1></div>
+            {% if profile.name.username == user.username %}
+            <div class="d-flex justify-content-end" style="padding: 4px">
+                <button type="button" class="btn btn-warning">Редактировать профиль</button>
+            </div>
+            {% endif %}
+        </div>
 
-        <h1>{{ profile.name }}</h1>
         {% if profile.avatar %}
             <img src="{{ profile.avatar.url }}" class="rounded-circle float-left" width="200" height="200">
         {% else %}
@@ -14,7 +21,7 @@
         <ul class="list-group list-group-flush" style="padding: 20px">
             <li class="list-group-item"><b>Дата регистрации: </b> {{ profile.name.date_joined }}</li>
             <li class="list-group-item"><b>Дата рождения: </b> {{ profile.born_date }}</li>
-            <li class="list-group-item"><b>Последний вход: </b> </li>
+            <li class="list-group-item"><b>Последний вход: </b></li>
             <li class="list-group-item"><b>Способы связи: </b> <a href="https://vk.com/wafflya95">Вк</a></li>
             <li class="list-group-item"><b>Команда:</b> Без команды</li>
         </ul>
