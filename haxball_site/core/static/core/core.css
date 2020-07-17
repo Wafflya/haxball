@@ -1,11 +1,12 @@
 
 .navbar_color {
-    background-color: rgba(224, 248, 209, 0.53);
+    background-color: #effff4;
 }
 
 .page-name {
     font-family: 'Lobster', cursive;
     font-size: 28px;
+    color: #7abaff;
 }
 
 .post_list {
@@ -35,4 +36,8 @@
 
 .bot_nav_page {
     margin-top: 20px;
+    margin-bottom: 25px;
+}
+.form-send-comment {
+
 }

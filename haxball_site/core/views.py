@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 
 from .forms import CommentForm
-from .models import Post, Profile
+from .models import Post, Profile, Comment
 
 
 # Вьюха для списка постов
@@ -50,7 +50,7 @@ def post_detail(request, year, month, day, slug):
     else:
         comment_form = CommentForm()
 
-    paginator = Paginator(comments_obj, 10)
+    paginator = Paginator(comments_obj, 2)
     page = request.GET.get('page')
     try:
         comments = paginator.page(page)
@@ -75,20 +75,6 @@ class ProfileDetail(DetailView):
     template_name = 'core/profile/profile_detail.html'
 
 
-#    comment_form = CommentForm()
-
-#    extra_context = {'comment_form': comment_form, }
-#
-#    def post(self, request, slug):
-#        comment_form = CommentForm(request.POST)
-#        prof_to = Profile.objects.get(slug=slug)
-#        if comment_form.is_valid():
-#            new_comment = comment_form.save(commit=False)
-#            new_comment.author = request.user
-#            new_comment.save()
-#            prof_to.comments.add(new_comment)
-#
-#        return redirect(prof_to.get_absolute_url())
 
 
 class AddComment(ListView, View):

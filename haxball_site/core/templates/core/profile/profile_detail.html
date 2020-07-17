@@ -2,15 +2,34 @@
 {% load static %}
 
 {% block profile_of_user %}
-    <h1>{{ profile.name }}</h1>
-    <h2>Зарегестрирован:</h2>
-    <h2>{{ profile.name.date_joined }}</h2>
-    {% if profile.avatar %}
-        <img src="{{ profile.avatar.url }}" width="200" height="300">
-    {% endif %}
-    <h3>О себе:</h3>
-    <p>{{ profile.about }}</p>
+    <hr>
+    <div class="profile" style="padding: 20px; background-color: #95999c">
 
+        <h1>{{ profile.name }}</h1>
+        {% if profile.avatar %}
+            <img src="{{ profile.avatar.url }}" class="rounded-circle float-left" width="200" height="200">
+        {% else %}
+            <img src="{% static 'img/no_avatar.png' %}" class="rounded-circle float-left" width="200" height="200">
+        {% endif %}
+        <ul class="list-group list-group-flush" style="padding: 20px">
+            <li class="list-group-item"><b>Дата регистрации: </b> {{ profile.name.date_joined }}</li>
+            <li class="list-group-item"><b>Дата рождения: </b> {{ profile.born_date }}</li>
+            <li class="list-group-item"><b>Последний вход: </b> </li>
+            <li class="list-group-item"><b>Способы связи: </b> <a href="https://vk.com/wafflya95">Вк</a></li>
+            <li class="list-group-item"><b>Команда:</b> Без команды</li>
+        </ul>
+
+        <div class="card">
+            <div class="card-header">
+                <b>Информация обо мне:</b>
+            </div>
+            <div class="card-body">
+                {{ profile.about }}
+            </div>
+        </div>
+
+    </div>
+    <hr>
 {% endblock %}
 
 
@@ -21,23 +40,26 @@
         </h2>
     {% endwith %}
 
-
-    {% include 'core/include/form_comment.html' with nickname=user.username element=profile %}
+    {% if user.is_authenticated %}
+        {% include 'core/include/form_comment.html' with nickname=user.username element=profile %}
+    {% else %}
+        Войдите, чтобы оставить комментарий
+    {% endif %}
 
     {% for comment in profile.comments.all %}
         <div class="card post_list">
-        <div class="card-header">
-            <a href="{{ comment.author.user_profile.get_absolute_url }}" class="post_header">
-                {{ comment.author }}
-            </a>
-        </div>
-        <div class="card-body">
-            <p class="card-text">{{ comment.body|linebreaks }}</p>
-        </div>
-        <div class="card-footer text-muted">
-            Отправлено {{ comment.created|date:"SHORT_DATE_FORMAT" }} в {{ comment.created|time:"H:i" }}, Автор: <a
-                href="{{ comment.author.user_profile.get_absolute_url }}">{{ comment.author }}</a>
-        </div>
+            <div class="card-header">
+                <a href="{{ comment.author.user_profile.get_absolute_url }}" class="post_header">
+                    {{ comment.author }}
+                </a>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ comment.body|linebreaks }}</p>
+            </div>
+            <div class="card-footer text-muted">
+                Отправлено {{ comment.created|date:"SHORT_DATE_FORMAT" }} в {{ comment.created|time:"H:i" }}, Автор: <a
+                    href="{{ comment.author.user_profile.get_absolute_url }}">{{ comment.author }}</a>
+            </div>
         </div>
 
     {% empty %}

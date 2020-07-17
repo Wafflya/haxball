@@ -1,3 +1,5 @@
+from datetime import date
+
 from autoslug import AutoSlugField
 from django.contrib.auth.models import User
 from django.db import models
@@ -48,7 +50,8 @@ class Profile(models.Model):
                                 related_name='user_profile')
     slug = AutoSlugField(populate_from='name')
     avatar = models.ImageField('Аватар', upload_to='users_avatars/', blank=True)
-    about = models.TextField(blank=True)
+    born_date = models.DateField('Дата рождения', blank=True, null=True)
+    about = models.TextField(max_length=1000, blank=True)
     comments = models.ManyToManyField(Comment, related_name='profile_comments', blank=True)
 
     def get_absolute_url(self):

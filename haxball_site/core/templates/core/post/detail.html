@@ -4,20 +4,13 @@
     {{ post.title }}
 {% endblock %}
 {% block post %}
-    <div class="card post_list">
-        <div class="card-header">
-            <a href="{{ post.get_absolute_url }}" class="post_header">
-                {{ post.title }}
-            </a>
-        </div>
-        <div class="card-body">
-            <p class="card-text">{{ post.body|linebreaks }}</p>
-            <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Читать подробнее</a>
-        </div>
-        <div class="card-footer text-muted">
-            Опубликовано {{ post.created|date:"SHORT_DATE_FORMAT" }} в {{ post.created|time:"H:i" }}, Автор: <a
-                href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>
-        </div>
+
+    <h2>{{ post.title }}</h2>
+    <p class="post-text">{{ post.body|linebreaks }}</p>
+
+    <div class="text-muted">
+        Опубликовано {{ post.created|date:"SHORT_DATE_FORMAT" }} в {{ post.created|time:"H:i" }}, Автор: <a
+            href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>
     </div>
 {% endblock %}
 
@@ -28,23 +21,25 @@
         </h2>
     {% endwith %}
 
-
-    {% include 'core/include/form_comment.html' with nickname=user.username element=post %}
-
+    {% if user.is_authenticated %}
+        {% include 'core/include/form_comment.html' with nickname=user.username element=post %}
+    {% else %}
+        Войдите, чтобы оставить комментарий
+    {% endif %}
     {% for comment in comments %}
         <div class="card post_list">
-        <div class="card-header">
-            <a href="{{ comment.author.user_profile.get_absolute_url }}" class="post_header">
-                {{ comment.author }}
-            </a>
-        </div>
-        <div class="card-body">
-            <p class="card-text">{{ comment.body|linebreaks }}</p>
-        </div>
-        <div class="card-footer text-muted">
-            Отправлено {{ comment.created|date:"SHORT_DATE_FORMAT" }} в {{ comment.created|time:"H:i" }}, Автор: <a
-                href="{{ comment.author.user_profile.get_absolute_url }}">{{ comment.author }}</a>
-        </div>
+            <div class="card-header">
+                <a href="{{ comment.author.user_profile.get_absolute_url }}" class="post_header">
+                    {{ comment.author }}
+                </a>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ comment.body|linebreaks }}</p>
+            </div>
+            <div class="card-footer text-muted">
+                Отправлено {{ comment.created|date:"SHORT_DATE_FORMAT" }} в {{ comment.created|time:"H:i" }}, Автор: <a
+                    href="{{ comment.author.user_profile.get_absolute_url }}">{{ comment.author }}</a>
+            </div>
         </div>
 
     {% empty %}

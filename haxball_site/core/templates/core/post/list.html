@@ -7,10 +7,10 @@
             <div class="card-header">
                 <a href="{{ post.get_absolute_url }}" class="post_header">
                     {{ post.title }}
+                    {% if post.important %}
+                        <span class="badge badge-secondary">Закреплен</span>
+                    {% endif %}
                 </a>
-                {% if post.important %}
-                    <h3>Закреплён</h3>
-                {% endif %}
             </div>
             <div class="card-body">
                 <p class="card-text">{{ post.body|linebreaks|truncatewords:20 }}</p>
