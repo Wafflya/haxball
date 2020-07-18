@@ -11,7 +11,7 @@ from django.urls import reverse
 from django.utils import timezone
 
 
-#Менеджер модели лайк-дизлайк
+# Менеджер модели лайк-дизлайк
 class LikeDislikeManager(models.Manager):
     use_for_related_fields = True
 
@@ -31,7 +31,7 @@ class LikeDislikeManager(models.Manager):
         return self.get_queryset().filter(content_type__model='post').order_by('-posts__pub_date')
 
 
-#Модель для лайк-дизлайк системы
+# Модель для лайк-дизлайк системы
 class LikeDislike(models.Model):
     LIKE = 1
     DISLIKE = -1
@@ -50,6 +50,7 @@ class LikeDislike(models.Model):
 
     objects = LikeDislikeManager()
 
+
 # Модель для комментария
 class Comment(models.Model):
     author = models.ForeignKey(User, verbose_name='Автор', related_name='comments_by_user', on_delete=models.CASCADE)
@@ -66,7 +67,7 @@ class Comment(models.Model):
         return 'Комментарий от {}'.format(self.author)
 
 
-#Модель для поста
+# Модель для поста
 class Post(models.Model):
     title = models.CharField('Заголовок', max_length=256)
     author = models.ForeignKey(User, verbose_name='Автор', on_delete=models.CASCADE, related_name='blog_posts')
@@ -78,8 +79,6 @@ class Post(models.Model):
     important = models.BooleanField(default=False)
     comments = models.ManyToManyField(Comment, related_name='post_comments', blank=True)
     votes = GenericRelation(LikeDislike, related_query_name='posts')
-
-
 
     def get_absolute_url(self):
         return reverse('core:post_detail', args=[self.id, self.slug])
@@ -111,8 +110,3 @@ class Profile(models.Model):
     class Meta:
         verbose_name = 'Профиль'
         verbose_name_plural = 'Профили'
-
-
-
-
-

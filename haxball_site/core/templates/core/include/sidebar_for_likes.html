@@ -1,0 +1,12 @@
+{% load static %}
+    <div class="alert alert-primary users-online" role="alert">
+        Топ лайков по постам
+    </div>
+    <ul class="list-group list-group-flush">
+        {% for post in liked_posts %}
+                {% if post.votes.likes.count != 0 %}
+                    <a class="list-group-item" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                    {{ post.votes.likes.count }}
+                {% endif %}
+        {% endfor %}
+    </ul>
