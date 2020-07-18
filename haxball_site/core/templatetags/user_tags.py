@@ -1,7 +1,9 @@
+
 from django import template
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.urls import reverse
+from pytils.translit import slugify
 
 from ..models import Profile
 
@@ -16,7 +18,7 @@ def show_users_online(count=5):
 
 @register.simple_tag()
 def create_profile(user):
-    profile = Profile(name=user, slug=user.username)
+    profile = Profile(name=user, slug=slugify(user.username))
     profile.save()
-    return 'Регистрация прошла успешно!'
+    return ''
 

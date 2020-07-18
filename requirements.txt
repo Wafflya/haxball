@@ -2,3 +2,4 @@ django==3.0.8
 django-allauth
 Pillow==7.2.0
 django-autoslug==1.9.7
+pytils==0.3

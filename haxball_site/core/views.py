@@ -1,5 +1,6 @@
 import json
 
+
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
@@ -71,10 +72,14 @@ def post_detail(request, slug, id):
                    'comment_form': comment_form})
 
 
+
 class ProfileDetail(DetailView):
+
     model = Profile
     context_object_name = 'profile'
     template_name = 'core/profile/profile_detail.html'
+
+
 
 
 class AddComment(ListView, View):
@@ -101,19 +106,19 @@ class EditMyProfile(DetailView, View):
     context_object_name = 'profile'
     template_name = 'core/profile/profile_edit.html'
 
-    def post(self, request, id, slug):
-        profile = Profile.objects.get(slug=slug, id=id)
+    def post(self, request, pk, slug):
+        profile = Profile.objects.get(slug=slug, id=pk)
         profile_form = EditProfileForm(request.POST, instance=profile)
         if profile_form.is_valid():
+            if 'avatar' in request.FILES:
+                profile.avatar = request.FILES['avatar']
             profile_form.save()
-        print(profile.born_date)
         return redirect(profile.get_absolute_url())
 
 
 class VotesView(View):
     model = None  # Модель данных - Статьи или Комментарии
     vote_type = None  # Тип комментария Like/Dislike
-    print('pidor')
     def post(self, request, id):
         obj = self.model.objects.get(id=id)
         # GenericForeignKey не поддерживает метод get_or_create

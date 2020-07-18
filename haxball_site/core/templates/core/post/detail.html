@@ -6,6 +6,7 @@
 {% load static %}
 {% block scripts %}
 
+    <!-- Аякс-скрипт проставления лайков-дизлайков к постам -->
     <script>
         function getCookie(name) {
             var cookieValue = null;
@@ -79,6 +80,7 @@
             $('[data-action="dislike"]').click(dislike);
         });
     </script>
+
 {% endblock %}
 {% block post %}
 
@@ -88,13 +90,11 @@
     <div class="text-muted">
         Опубликовано {{ post.created|date:"SHORT_DATE_FORMAT" }} в {{ post.created|time:"H:i" }}, Автор: <a
             href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>
-        <ul>
+        <ul class="list-group list-group-horizontal">
             <li data-id="{{ post.id }}" data-type="post" data-action="like" title="Нравится">
-                <span class="glyphicon glyphicon-thumbs-up"></span>
                 <span data-count="like">{{ post.votes.likes.count }}</span>
             </li>
             <li data-id="{{ post.id }}" data-type="post" data-action="dislike" title="Не нравится">
-                <span class="glyphicon glyphicon-thumbs-down"></span>
                 <span data-count="dislike">{{ post.votes.dislikes.count }}</span>
             </li>
         </ul>

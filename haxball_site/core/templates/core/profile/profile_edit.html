@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block profile_of_user %}
-    {% if user.username == profile.name.username %}
+    {% if user == profile.name %}
         {% include "core/include/profile_editor_form.html" with element=profile %}
     {% else %}
         Вы петух, батенька!

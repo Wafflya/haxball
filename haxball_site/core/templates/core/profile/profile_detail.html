@@ -8,7 +8,7 @@
             <div class="d-flex justify-content-start"><h2>{{ profile.name }}</h2></div>
             {% if profile.name.username == user.username %}
             <div class="d-flex justify-content-end" >
-                <a href="{% url 'core:edit_profile' profile.slug %}" type="button" class="btn btn-warning" role="button" aria-disabled="true">Редактировать профиль</a>
+                <a href="{% url 'core:edit_profile' profile.slug profile.id %}" type="button" class="btn btn-warning" role="button" aria-disabled="true">Редактировать профиль</a>
             </div>
             {% endif %}
         </div>

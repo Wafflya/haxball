@@ -103,7 +103,7 @@ class Profile(models.Model):
     comments = models.ManyToManyField(Comment, related_name='profile_comments', blank=True)
 
     def get_absolute_url(self):
-        return reverse('core:profile_detail', args=[self.slug])
+        return reverse('core:profile_detail', args=[self.id, self.slug])
 
     def __str__(self):
         return self.name.username

@@ -1,10 +1,10 @@
 {% load static %}
 <div class="card" style="padding: 10px; background-color: #e2e3e5">
-    <form action={% url 'core:edit_profile' element.slug %} method="post">
+    <form action={% url 'core:edit_profile' element.slug element.id %} method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <!-- <div class="form-group">
         <label for="nickname">{{ nickname }}</label>
-    </div> --!>
+    </div> -->
 
         <hr>
         <div class="profile" style="padding: 20px; background-color: #95999c">
@@ -18,6 +18,7 @@
             {% else %}
                 <img src="{% static 'img/no_avatar.png' %}" class="rounded-circle float-left" width="200" height="200">
             {% endif %}
+            <input type="file" name="avatar" accept="image/*">
             <ul class="list-group list-group-flush" style="padding: 20px">
                 <li class="list-group-item"><b>Дата регистрации: </b> {{ element.name.date_joined }}</li>
                 <li class="list-group-item"><b>Дата рождения: </b> <input type="date" id="start" name="born_date"
@@ -36,8 +37,7 @@
                 </div>
                 <div class="card-body">
                   <textarea class="form-control border" rows="3" name="about"
-                            id="contactcomment" required="" rows="2"
-                            placeholder="{{ element.about }}">{{ element.about }}</textarea>
+                            id="contactcomment" rows="2">{{ element.about }}</textarea>
                 </div>
             </div>
         </div>
