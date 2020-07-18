@@ -6,48 +6,49 @@
         <label for="nickname">{{ nickname }}</label>
     </div> --!>
 
-                <hr>
-    <div class="profile" style="padding: 20px; background-color: #95999c">
-        <div class="d-flex justify-content-between bd-highlight mb-3">
-            <div class="d-flex justify-content-start"><h2>{{ profile.name }}</h2></div>
+        <hr>
+        <div class="profile" style="padding: 20px; background-color: #95999c">
+            <div class="d-flex justify-content-between bd-highlight mb-3">
+                <div class="d-flex justify-content-start"><h2>{{ profile.name }}</h2></div>
 
-        </div>
-
-        {% if element.avatar %}
-            <img src="{{ element.avatar.url }}" class="rounded-circle float-left" width="200" height="200">
-        {% else %}
-            <img src="{% static 'img/no_avatar.png' %}" class="rounded-circle float-left" width="200" height="200">
-        {% endif %}
-        <ul class="list-group list-group-flush" style="padding: 20px">
-            <li class="list-group-item"><b>Дата регистрации: </b> {{ element.name.date_joined }}</li>
-            <li class="list-group-item"><b>Дата рождения: </b> <input type="date" id="start" name="born_date"
-       value="{{ element.born_date|date:"Y-m-d" }}"
-       min="1966-01-01" max="2020-07-17"> {{ element.born_date|date:"Y-m-d"  }}</li>
-            <li class="list-group-item"><b>Последний вход: </b></li>
-            <li class="list-group-item"><b>Способы связи: </b> <a href="https://vk.com/wafflya95">Вк</a></li>
-            <li class="list-group-item"><b>Команда:</b> Без команды</li>
-        </ul>
-
-        <div class="card">
-            <div class="card-header">
-                <b>Информация обо мне:</b>
             </div>
-            <div class="card-body">
+
+            {% if element.avatar %}
+                <img src="{{ element.avatar.url }}" class="rounded-circle float-left" width="200" height="200">
+            {% else %}
+                <img src="{% static 'img/no_avatar.png' %}" class="rounded-circle float-left" width="200" height="200">
+            {% endif %}
+            <ul class="list-group list-group-flush" style="padding: 20px">
+                <li class="list-group-item"><b>Дата регистрации: </b> {{ element.name.date_joined }}</li>
+                <li class="list-group-item"><b>Дата рождения: </b> <input type="date" id="start" name="born_date"
+                                                                          value="{{ element.born_date|date:"Y-m-d" }}"
+                                                                          min="1966-01-01"
+                                                                          max="2020-07-17"> {{ element.born_date|date:"Y-m-d" }}
+                </li>
+                <li class="list-group-item"><b>Последний вход: </b></li>
+                <li class="list-group-item"><b>Способы связи: </b> <a href="https://vk.com/wafflya95">Вк</a></li>
+                <li class="list-group-item"><b>Команда:</b> Без команды</li>
+            </ul>
+
+            <div class="card">
+                <div class="card-header">
+                    <b>Информация обо мне:</b>
+                </div>
+                <div class="card-body">
                   <textarea class="form-control border" rows="3" name="about"
-                  id="contactcomment" required="" rows="2" placeholder="{{ element.about }}">{{ element.about }}</textarea>
-        </div>
+                            id="contactcomment" required="" rows="2"
+                            placeholder="{{ element.about }}">{{ element.about }}</textarea>
+                </div>
             </div>
         </div>
-
-
-    <hr>
+        <hr>
 
         <div class="form-group editContent">
 
 
-
-        <div align="right">
-            <button type="submit" class="btn btn-primary" style="margin-right: 20px">Отправить</button>
+            <div align="right">
+                <button type="submit" class="btn btn-primary" style="margin-right: 20px">Отправить</button>
+            </div>
         </div>
     </form>
 </div>

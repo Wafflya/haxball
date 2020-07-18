@@ -3,6 +3,83 @@
 {% block title %}
     {{ post.title }}
 {% endblock %}
+{% load static %}
+{% block scripts %}
+
+    <script>
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        // Настройка AJAX
+        $(function () {
+            $.ajaxSetup({
+                headers: {"X-CSRFToken": getCookie("csrftoken")}
+            });
+        });
+
+        function like() {
+            var like = $(this);
+            var type = like.data('type');
+            var pk = like.data('id');
+            var action = like.data('action');
+            var dislike = like.next();
+
+            $.ajax({
+                url: "/api/" + type + "/" + pk + "/" + action + "/",
+                type: 'POST',
+                data: {'obj': pk},
+
+                success: function (json) {
+                    like.find("[data-count='like']").text(json.like_count);
+                    dislike.find("[data-count='dislike']").text(json.dislike_count);
+                }
+            });
+
+            return false;
+
+        }
+
+        function dislike() {
+            var dislike = $(this);
+            var type = dislike.data('type');
+            var pk = dislike.data('id');
+            var action = dislike.data('action');
+            var like = dislike.prev();
+
+            $.ajax({
+                url: "/api/" + type + "/" + pk + "/" + action + "/",
+                type: 'POST',
+                data: {'obj': pk},
+
+                success: function (json) {
+                    dislike.find("[data-count='dislike']").text(json.dislike_count);
+                    like.find("[data-count='like']").text(json.like_count);
+                }
+            });
+
+            return false;
+        }
+
+        // Подключение обработчиков
+        $(function () {
+            $('[data-action="like"]').click(like);
+            $('[data-action="dislike"]').click(dislike);
+        });
+    </script>
+{% endblock %}
 {% block post %}
 
     <h2>{{ post.title }}</h2>
@@ -11,6 +88,16 @@
     <div class="text-muted">
         Опубликовано {{ post.created|date:"SHORT_DATE_FORMAT" }} в {{ post.created|time:"H:i" }}, Автор: <a
             href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>
+        <ul>
+            <li data-id="{{ post.id }}" data-type="post" data-action="like" title="Нравится">
+                <span class="glyphicon glyphicon-thumbs-up"></span>
+                <span data-count="like">{{ post.votes.likes.count }}</span>
+            </li>
+            <li data-id="{{ post.id }}" data-type="post" data-action="dislike" title="Не нравится">
+                <span class="glyphicon glyphicon-thumbs-down"></span>
+                <span data-count="dislike">{{ post.votes.dislikes.count }}</span>
+            </li>
+        </ul>
     </div>
 {% endblock %}
 

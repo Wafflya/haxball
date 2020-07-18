@@ -1,10 +1,14 @@
+import json
+
+from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 
 from .forms import CommentForm, EditProfileForm
-from .models import Post, Profile, Comment
+from .models import Post, Profile, LikeDislike
 
 
 # Вьюха для списка постов
@@ -31,11 +35,9 @@ class PostListView(ListView):
 
 # Вьюха для поста
 
-def post_detail(request, year, month, day, slug):
+def post_detail(request, slug, id):
     post = get_object_or_404(Post, slug=slug,
-                             publish__year=year,
-                             publish__month=month,
-                             publish__day=day)
+                             id=id)
 
     # List of active comments for this post
     comments_obj = post.comments.all()
@@ -75,8 +77,6 @@ class ProfileDetail(DetailView):
     template_name = 'core/profile/profile_detail.html'
 
 
-
-
 class AddComment(ListView, View):
 
     def post(self, request, id, slug):
@@ -101,10 +101,8 @@ class EditMyProfile(DetailView, View):
     context_object_name = 'profile'
     template_name = 'core/profile/profile_edit.html'
 
-
-
-    def post(self, request, slug):
-        profile = Profile.objects.get(slug=slug)
+    def post(self, request, id, slug):
+        profile = Profile.objects.get(slug=slug, id=id)
         profile_form = EditProfileForm(request.POST, instance=profile)
         if profile_form.is_valid():
             profile_form.save()
@@ -112,3 +110,34 @@ class EditMyProfile(DetailView, View):
         return redirect(profile.get_absolute_url())
 
 
+class VotesView(View):
+    model = None  # Модель данных - Статьи или Комментарии
+    vote_type = None  # Тип комментария Like/Dislike
+    print('pidor')
+    def post(self, request, id):
+        obj = self.model.objects.get(id=id)
+        # GenericForeignKey не поддерживает метод get_or_create
+        try:
+            likedislike = LikeDislike.objects.get(content_type=ContentType.objects.get_for_model(obj), object_id=obj.id,
+                                                  user=request.user)
+
+            if likedislike.vote is not self.vote_type:
+                likedislike.vote = self.vote_type
+                likedislike.save(update_fields=['vote'])
+                result = True
+            else:
+                likedislike.delete()
+                result = False
+        except LikeDislike.DoesNotExist:
+            obj.votes.create(user=request.user, vote=self.vote_type)
+            result = True
+
+        return HttpResponse(
+            json.dumps({
+                "result": result,
+                "like_count": obj.votes.likes().count(),
+                "dislike_count": obj.votes.dislikes().count(),
+                "sum_rating": obj.votes.sum_rating()
+            }),
+            content_type="application/json"
+        )

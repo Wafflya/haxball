@@ -1,6 +1,5 @@
-{% extends './profile_detail.html' %}
-
-
+{% extends "core/home.html" %}
+{% load static %}
 
 {% block profile_of_user %}
     {% if user.username == profile.name.username %}
@@ -8,7 +7,4 @@
     {% else %}
         Вы петух, батенька!
     {% endif %}
-{% endblock %}
-
-{% block comments %}
 {% endblock %}
