@@ -95,9 +95,13 @@
                 <p class="card-text">{{ post.body|linebreaks|truncatewords:20 }}</p>
                 <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Читать подробнее</a>
             </div>
+
             <div class="card-footer text-muted">
                 Опубликовано {{ post.created|date:"SHORT_DATE_FORMAT" }} в {{ post.created|time:"H:i" }}, Автор: <a
-                    href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>
+                    href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>, 
+                Комментариев: {{ post.comments.count }}
+
+                <!-- Тут выводится наша лайк-дизлайк панель -->
                 <ul class="list-group list-group-horizontal">
                     <li data-id="{{ post.id }}" data-type="post" data-action="like" title="Нравится">
                         <span data-count="like">{{ post.votes.likes.count }}</span>
@@ -106,8 +110,11 @@
                         <span data-count="dislike">{{ post.votes.dislikes.count }}</span>
                     </li>
                 </ul>
+                <!-- Конец лайк-дизлайк панели -->
+
             </div>
         </div>
     {% endfor %}
+
     {% include "core/include/pagination.html" with page=page_obj %}
 {% endblock %}

@@ -1,12 +1,12 @@
 import json
 
-
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
+from django.views.generic.list import MultipleObjectMixin
 
 from .forms import CommentForm, EditProfileForm
 from .models import Post, Profile, LikeDislike
@@ -20,19 +20,6 @@ class PostListView(ListView):
     paginate_by = 3
     template_name = 'core/post/list.html'
 
-    # def post_list(request):
-    #    posts = Post.objects.all()
-    #    return render(request,
-    #                  'core/post/list.html',
-    #                  {'posts': posts})
-
-    # class PostDetailView(DetailView):
-    #    model = Post
-    #    #slug_url_kwarg = {
-    #    'slug': 'slug', 'publish__year':'year', 'publish__month':'month', 'publish__day':'day',
-    #    }
-    #    template_name = 'core/post/list.html'
-
 
 # Вьюха для поста
 
@@ -41,7 +28,6 @@ def post_detail(request, slug, id):
                              id=id)
 
     # List of active comments for this post
-    comments_obj = post.comments.all()
 
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
@@ -53,33 +39,50 @@ def post_detail(request, slug, id):
     else:
         comment_form = CommentForm()
 
-    paginator = Paginator(comments_obj, 2)
+    comments_obj = post.comments.all()
+    paginat = Paginator(comments_obj, 2)
     page = request.GET.get('page')
+
     try:
-        comments = paginator.page(page)
+        post_comments = paginat.page(page)
     except PageNotAnInteger:
         # If page is not an integer deliver the first page
-        comments = paginator.page(1)
+        post_comments = paginat.page(1)
     except EmptyPage:
         # If page is out of range deliver last page of results
-        comments = paginator.page(paginator.num_pages)
+        post_comments = paginat.page(paginat.num_pages)
 
     return render(request,
                   'core/post/detail.html',
                   {'post': post,
-                   'comments': comments,
+                   'post_comments': post_comments,
                    'page': page,
                    'comment_form': comment_form})
 
 
-
+# Вьюха для профиля пользователя MultipleObjectMixin
 class ProfileDetail(DetailView):
-
     model = Profile
     context_object_name = 'profile'
     template_name = 'core/profile/profile_detail.html'
 
+    def get_context_data(self, **kwargs):
+        comment_list = self.object.comments.all()
+        paginat = Paginator(comment_list, 2)
+        page = self.request.GET.get("page")
+        try:
+            comment_list = paginat.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer deliver the first page
+            comment_list = paginat.page(1)
+        except EmptyPage:
+            # If page is out of range deliver last page of results
+            comment_list = paginat.page(paginat.num_pages)
 
+        context = super(ProfileDetail, self).get_context_data(comments_in_profile=comment_list, page=page, **kwargs)
+        print(context)
+
+        return context
 
 
 class AddComment(ListView, View):
@@ -119,6 +122,7 @@ class EditMyProfile(DetailView, View):
 class VotesView(View):
     model = None  # Модель данных - Статьи или Комментарии
     vote_type = None  # Тип комментария Like/Dislike
+
     def post(self, request, id):
         obj = self.model.objects.get(id=id)
         # GenericForeignKey не поддерживает метод get_or_create

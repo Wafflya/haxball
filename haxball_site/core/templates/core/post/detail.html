@@ -102,37 +102,6 @@
 {% endblock %}
 
 {% block comments %}
-    {% with post.comments.count as total_comments %}
-        <h2>
-            Комментариев {{ total_comments }}
-        </h2>
-    {% endwith %}
-
-    {% if user.is_authenticated %}
-        {% include 'core/include/form_comment.html' with nickname=user.username element=post %}
-    {% else %}
-        Войдите, чтобы оставить комментарий
-    {% endif %}
-    {% for comment in comments %}
-        <div class="card post_list">
-            <div class="card-header">
-                <a href="{{ comment.author.user_profile.get_absolute_url }}" class="post_header">
-                    {{ comment.author }}
-                </a>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{ comment.body|linebreaks }}</p>
-            </div>
-            <div class="card-footer text-muted">
-                Отправлено {{ comment.created|date:"SHORT_DATE_FORMAT" }} в {{ comment.created|time:"H:i" }}, Автор: <a
-                    href="{{ comment.author.user_profile.get_absolute_url }}">{{ comment.author }}</a>
-            </div>
-        </div>
-
-    {% empty %}
-        <p>There are no comments yet.</p>
-    {% endfor %}
-
-    {% include "core/include/pagination.html" with page=comments %}
+    {% include 'core/include/comments.html' with object=post comments=post_comments %}
 {% endblock %}
 
