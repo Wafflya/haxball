@@ -82,7 +82,7 @@
 
 {% block postlist %}
     {% for post in posts %}
-        <div class="card post_list">
+        <!-- <div class="card post_list">
             <div class="card-header">
                 <a href="{{ post.get_absolute_url }}" class="post_header">
                     {{ post.title }}
@@ -91,29 +91,53 @@
                     {% endif %}
                 </a>
             </div>
-            <!-- <div class="card-body">
+            <div class="card-body">
                 <p class="card-text">{{ post.body|safe }}</p>
                 <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Читать подробнее</a>
-            </div> -->
+            </div>
 
             <div class="card-footer text-muted">
                 Опубликовано {{ post.created|date:"SHORT_DATE_FORMAT" }} в {{ post.created|time:"H:i" }}, Автор: <a
                     href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>,
                 Комментариев: {{ post.comments.count }}
+                -->
+        <div class="card post_list">
+            <a href="{{ post.get_absolute_url }}" type="button" class="button btn btn-outline-primary btn-lg btn-block">
 
-                <!-- Тут выводится наша лайк-дизлайк панель -->
-                <ul class="list-group list-group-horizontal">
-                    <li data-id="{{ post.id }}" data-type="post" data-action="like" title="Нравится">
-                        <span data-count="like">{{ post.votes.likes.count }}</span>
-                    </li>
-                    <li data-id="{{ post.id }}" data-type="post" data-action="dislike" title="Не нравится">
-                        <span data-count="dislike">{{ post.votes.dislikes.count }}</span>
-                    </li>
-                </ul>
-                <!-- Конец лайк-дизлайк панели -->
+                {{ post.title }}
 
+
+                {% if post.important %}
+                    <span class="badge badge-secondary">Закреплен</span>
+                {% endif %}
+            </a>
+
+            <div class="card-footer" style="padding: 1px 20px 1px 20px">
+                Опубликовано {{ post.created|date:"SHORT_DATE_FORMAT" }} в {{ post.created|time:"H:i" }}, Автор: <a
+                    href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>,
+                Комментариев: {{ post.comments.count }}
+
+                <button data-id="{{ post.id }}" data-type="post" data-action="like" class="btn btn-sm float-right"><img
+                        src={% static "img/thumb-up.png" %} width="20" height="20"
+                        >
+                    <span data-count="like" title="Нравится">{{ post.votes.likes.count }}</span>
+                </button>
             </div>
         </div>
+
+        <!-- Тут выводится наша лайк-дизлайк панель -->
+        <!-- <ul class="list-group list-group-horizontal">
+            <li data-id="{{ post.id }}" data-type="post" data-action="like" title="Нравится">
+                <span data-count="like">{{ post.votes.likes.count }}</span>
+            </li>
+            <li data-id="{{ post.id }}" data-type="post" data-action="dislike" title="Не нравится">
+                <span data-count="dislike">{{ post.votes.dislikes.count }}</span>
+            </li>
+        </ul> -->
+        <!-- Конец лайк-дизлайк панели -->
+
+        <!-- </div>
+         </div> -->
     {% endfor %}
 
     {% include "core/include/pagination.html" with page=page_obj %}
