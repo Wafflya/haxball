@@ -1,0 +1,43 @@
+
+.navbar_color {
+    background-color: #effff4;
+}
+
+.page-name {
+    font-family: 'Lobster', cursive;
+    font-size: 28px;
+    color: #7abaff;
+}
+
+.post_list {
+    margin-left: 30px;
+    margin-top: 15px;
+}
+
+.main-container {
+    background-color: #6c757d;
+}
+
+.post_header {
+    font-size: 30px;
+}
+
+.users-online {
+    margin-top: 15px;
+}
+
+.nav-font {
+    font-size: 20px;
+}
+
+.box_block {
+    margin-left: 500px;
+}
+
+.bot_nav_page {
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+.form-send-comment {
+
+}

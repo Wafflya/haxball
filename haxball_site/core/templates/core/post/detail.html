@@ -85,7 +85,7 @@
 {% block post %}
 
     <h2>{{ post.title }}</h2>
-    <p class="post-text">{{ post.body|linebreaks }}</p>
+    <p class="post-text">{{ post.body|safe }}</p>
 
     <div class="text-muted">
         Опубликовано {{ post.created|date:"SHORT_DATE_FORMAT" }} в {{ post.created|time:"H:i" }}, Автор: <a

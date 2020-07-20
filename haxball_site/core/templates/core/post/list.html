@@ -92,13 +92,13 @@
                 </a>
             </div>
             <div class="card-body">
-                <p class="card-text">{{ post.body|linebreaks|truncatewords:20 }}</p>
+                <p class="card-text">{{ post.body|striptags|truncatewords:30 }}</p>
                 <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Читать подробнее</a>
             </div>
 
             <div class="card-footer text-muted">
                 Опубликовано {{ post.created|date:"SHORT_DATE_FORMAT" }} в {{ post.created|time:"H:i" }}, Автор: <a
-                    href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>, 
+                    href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>,
                 Комментариев: {{ post.comments.count }}
 
                 <!-- Тут выводится наша лайк-дизлайк панель -->
