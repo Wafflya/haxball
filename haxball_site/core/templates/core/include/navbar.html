@@ -1,6 +1,6 @@
 {% load static %}
 <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Oswald:wght@300&display=swap" rel="stylesheet">
-<nav class="navbar navbar-light navbar_color nav-fill" style = background-image:url({% static "img/green_back.jpg" %})>
+<nav class="navbar navbar-light navbar_color nav-fill" style=background-image:url({% static "img/green_back.jpg" %})>
 
     <form class="form-inline">
         <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
@@ -9,8 +9,8 @@
 
     <a class="navbar-brand nav-item" href="{% url 'core:home' %}">
         <!-- <img src={% static "img/Logo2.png" %} width="50" height="50" class="d-inline-block align-middle"
-                alt="Логотип" > --!>
-        <div class="page-name"> Чемпионат России по футзалу</div>
+                alt="Логотип" > -->
+        <div class="page-name"> Чемпионат России по хаксболлу</div>
     </a>
 </nav>
 
@@ -20,24 +20,45 @@
 
     <!-- Links -->
     <ul class="navbar-nav mr-auto p-2 bd-highlight">
-        <li class="nav-item">
-            <a class="nav-link" href="#">Игроки</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Команды</a>
-        </li>
-
-        <!-- Dropdown -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                 Чемпионат
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">Вышка</a>
-                <a class="dropdown-item" href="#">Лохи 2</a>
-                <a class="dropdown-item" href="#">Лохи 3</a>
+                <a class="dropdown-item" href="#">Пердив</a>
+                <a class="dropdown-item" href="#">Кубок</a>
+                <a class="dropdown-item" href="#">Регламент</a>
+                <a class="dropdown-item" href="#">Переносы</a>
+                <a class="dropdown-item" href="#">Трансферы</a>
+                <a class="dropdown-item" href="#">Свободные агенты</a>
             </div>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Турниры</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Фасткапы</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Трансляции</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Архив
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Сезон 1</a>
+                <a class="dropdown-item" href="#">Сезон 2</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Администрация</a>
+        </li>
+
+        <!-- Dropdown -->
+
+
     </ul>
 
     {% if user.is_authenticated %}

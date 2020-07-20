@@ -79,6 +79,10 @@ class Post(models.Model):
     important = models.BooleanField(default=False)
     comments = models.ManyToManyField(Comment, related_name='post_comments', blank=True)
     votes = GenericRelation(LikeDislike, related_query_name='posts')
+    category = (
+        (),
+        (),
+    )
 
     def get_absolute_url(self):
         return reverse('core:post_detail', args=[self.id, self.slug])

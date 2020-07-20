@@ -91,10 +91,10 @@
                     {% endif %}
                 </a>
             </div>
-            <div class="card-body">
-                <p class="card-text">{{ post.body|striptags|truncatewords:30 }}</p>
+            <!-- <div class="card-body">
+                <p class="card-text">{{ post.body|safe }}</p>
                 <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Читать подробнее</a>
-            </div>
+            </div> -->
 
             <div class="card-footer text-muted">
                 Опубликовано {{ post.created|date:"SHORT_DATE_FORMAT" }} в {{ post.created|time:"H:i" }}, Автор: <a
