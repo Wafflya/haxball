@@ -1,9 +1,12 @@
+
 import json
+from datetime import date
 
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
+from django.utils import timezone
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 from django.views.generic.list import MultipleObjectMixin
@@ -17,7 +20,7 @@ from .models import Post, Profile, LikeDislike
 class PostListView(ListView):
     queryset = Post.objects.all().order_by('-important', '-created', )
     context_object_name = 'posts'
-    paginate_by = 10
+    paginate_by = 6
     template_name = 'core/post/list.html'
 
 

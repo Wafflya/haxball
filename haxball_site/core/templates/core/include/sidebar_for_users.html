@@ -1,9 +1,0 @@
-{% load static %}
-    <div class="alert alert-primary users-online" role="alert">
-        Последние регистрации
-    </div>
-    <ul class="list-group list-group-flush">
-        {% for user in users_online %}
-                <a class="list-group-item" href="{{ user.user_profile.get_absolute_url }}">{{ user }}</a>
-        {% endfor %}
-    </ul>

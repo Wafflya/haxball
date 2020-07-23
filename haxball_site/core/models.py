@@ -7,6 +7,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.db.models import Sum
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.urls import reverse
 from django.utils import timezone
 
@@ -79,10 +81,7 @@ class Post(models.Model):
     important = models.BooleanField(default=False)
     comments = models.ManyToManyField(Comment, related_name='post_comments', blank=True)
     votes = GenericRelation(LikeDislike, related_query_name='posts')
-    category = (
-        (),
-        (),
-    )
+
 
     def get_absolute_url(self):
         return reverse('core:post_detail', args=[self.id, self.slug])
@@ -104,6 +103,15 @@ class Profile(models.Model):
     born_date = models.DateField('Дата рождения', blank=True, null=True)
     about = models.TextField(max_length=1000, blank=True)
     comments = models.ManyToManyField(Comment, related_name='profile_comments', blank=True)
+
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(name=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.user_profile.save()
 
     def get_absolute_url(self):
         return reverse('core:profile_detail', args=[self.id, self.slug])

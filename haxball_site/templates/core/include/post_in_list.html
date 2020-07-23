@@ -1,0 +1,36 @@
+{% load static %}
+{% load user_tags %}
+<div class="card mx-1 my-2">
+
+    <a href="{{ post.get_absolute_url }}" type="button"
+       class="button btn btn-primary btn-lg btn-block">
+
+        {{ post.title }}
+        {% if post.created|is_fresh:6 %}
+            <span class="badge badge-pill badge-success">Новая!</span>
+        {% endif %}
+
+    </a>
+    <div class="collapse" id="{{ post.slug }}{{ post.id }}">
+        <div class="card card-body">
+            {{ post.body|safe }}
+        </div>
+    </div>
+
+    <div class="card-footer px-3 py-1">
+        <span class="text-muted"> <img src="{% static "img/ico/calendar_1.png" %}" height="21"
+                                       width="21">  {{ post.created|date:"SHORT_DATE_FORMAT" }} <img
+                src="{% static "img/ico/clock_1.png" %}" height="19" width="19"> {{ post.created|time:"H:i" }} <img
+                src="{% static "img/ico/user_1.png" %}" height="19" width="19"><a
+                href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>,
+            Комментариев: {{ post.comments.count }}</span>
+
+        <button data-id="{{ post.id }}" data-type="post" data-action="like" class="p-0 btn btn-sm float-right">
+            <img src="{% static "img/svg/hand-thumbs-up.svg" %}">
+            <span data-count="like" title="Нравится"
+                  class="badge badge-light">{{ post.votes.likes.count }}</span>
+
+        </button>
+
+    </div>
+</div>

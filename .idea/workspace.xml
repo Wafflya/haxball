@@ -2,9 +2,101 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/haxball_site/core/static/img/thumb-up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/background1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/background20.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/background52.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/calendar_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/clock_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/important.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/news-icon-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/user_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-dots-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-dots.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-left-dots-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-left-dots.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-left-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-left-quote-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-left-quote.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-left-text-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-left-text.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-left.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-quote-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-quote.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-right-dots-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-right-dots.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-right-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-right-quote-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-right-quote.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-right-text-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-right-text.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-right.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-square-dots-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-square-dots.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-square-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-square-quote-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-square-quote.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-square-text-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-square-text.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-square.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-text-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat-text.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/chat.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/clock-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/clock-history.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/clock.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/hand-thumbs-up.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/post_important_in_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/post_in_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/post/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templates/core/post/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/css/bootstrap-grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/css/bootstrap-grid.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/css/bootstrap-grid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/css/bootstrap-grid.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/css/bootstrap-reboot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/css/bootstrap-reboot.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/css/bootstrap-reboot.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/css/bootstrap-reboot.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/css/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/js/bootstrap.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/js/bootstrap.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/js/bootstrap.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/js/bootstrap.bundle.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/js/bootstrap.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/bootstrap/js/bootstrap.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/core/core.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/img/Logo2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/img/green_back.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/img/gril.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/img/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/img/no_avatar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/img/pink_back.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/img/thumb-up.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/static/jquery/jquery-3.5.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/include/comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/comments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/include/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/include/form_comment.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/form_comment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/include/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/include/pagination.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/pagination.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/include/profile_editor_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/profile_editor_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/include/sidebar_for_likes.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/sidebar_for_likes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/include/sidebar_for_users.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/sidebar_for_users.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/post/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/post/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/post/list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/profile/profile_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templates/core/profile/profile_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/static/core/core.css" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/static/core/core.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +132,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/Algoritms/Lesson2.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/haxball_site/static/img/backgrounds" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -52,9 +144,14 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\haxball\haxball_site\core\templates\core\include" />
+      <recent name="E:\haxball\haxball_site\static\img\ico" />
+      <recent name="E:\haxball\haxball_site\static\img" />
+      <recent name="E:\haxball\haxball_site\static\img\svg" />
+      <recent name="E:\haxball\haxball_site\core" />
+      <recent name="E:\haxball\haxball_site" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
       <recent name="E:\haxball\haxball_site\core\static\jquery" />
     </key>
   </component>
@@ -107,7 +204,9 @@
       <workItem from="1594886578941" duration="21198000" />
       <workItem from="1594962539281" duration="43827000" />
       <workItem from="1595068642521" duration="26986000" />
-      <workItem from="1595166185486" duration="40842000" />
+      <workItem from="1595166185486" duration="42361000" />
+      <workItem from="1595432554800" duration="4819000" />
+      <workItem from="1595440197811" duration="22628000" />
     </task>
     <servers />
   </component>

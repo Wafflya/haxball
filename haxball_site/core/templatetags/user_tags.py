@@ -1,6 +1,7 @@
 from django import template
 from django.contrib.auth.models import User
 from django.db.models import Count, Q
+from django.utils import timezone
 from pytils.translit import slugify
 
 from ..models import Profile, Post
@@ -24,8 +25,13 @@ def show_post_with_top_likes(count=5):
     return {'liked_posts': posts}
 
 
-@register.simple_tag()
-def create_profile(user):
-    profile = Profile(name=user, slug=slugify(user.username))
-    profile.save()
-    return ''
+#Фильтр, возращающий свежий ли пост или нет в зависимости от оффсета
+@register.filter
+def is_fresh(value, hours):
+    print(value)
+    x = timezone.now()-value
+    if x.days > 1:
+        return False
+    else:
+        sec = 3600*hours
+        return x.seconds < sec
