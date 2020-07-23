@@ -1,3 +1,5 @@
+{% load static %}
+
 {% with object.comments.count as total_comments %}
     <h2>
         Комментариев {{ total_comments }}
@@ -11,11 +13,13 @@
 {% else %}
     Войдите, чтобы оставить комментарий
 {% endif %}
+
 {% for comment in comments %}
     <div class="card post_list">
         <div class="card-header">
             <img src="{{ comment.author.user_profile.avatar.url }}" class="rounded-circle float-left" width="50"
                  height="50">
+
 
             <a href="{{ comment.author.user_profile.get_absolute_url }}" class="post_header">
                 {{ comment.author }}

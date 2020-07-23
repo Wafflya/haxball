@@ -1,0 +1,18 @@
+{% load static %}
+
+
+<div class="card">
+<div class="card-header rounded-lg" role="alert">
+    Последние обсуждения
+</div>
+{% for comment in last_comments %}
+    <blockquote class="blockquote">
+        <p class="mb-0">{{ comment.body|truncatechars:40 }}</p>
+        <footer class="blockquote-footer"><a
+                href="{{ comment.author.user_profile.get_absolute_url }}">{{ comment.author }}</a> в <cite
+                title="{{ comment.post.title }}">{{ comment.post.title|truncatechars:20 }}</cite>
+        </footer>
+    </blockquote>
+{% endfor %}
+
+</div>

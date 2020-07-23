@@ -84,14 +84,14 @@
 {% endblock %}
 
 {% block postlist %}
-    <h3 class="text-center mt-2"><img src="{% static "img/ico/important.png" %}" height="37" width="37"> Важная информация!</h3>
+    <h3 class="text-center mt-2 mb-0"><img src="{% static "img/ico/important.png" %}" height="37" width="37" style="vertical-align: top";> Важная информация!</h3>
     <hr>
     {% for post in posts %}
         {% if post.important %}
             {% include "core/include/post_important_in_list.html" with post=post %}
         {% endif %}
     {% endfor %}
-    <h3 class="text-center"><img src="{% static "img/ico/news-icon-1.png" %}" height="37" width="37"> Последние новости</h3>
+    <h3 class="text-center mb-0"><img src="{% static "img/ico/news-icon-1.png" %}" height="37" width="37" style="vertical-align: top";> Последние новости</h3>
     <hr>
 
     {% for post in posts %}

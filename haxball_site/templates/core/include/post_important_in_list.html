@@ -29,7 +29,7 @@
         <button data-id="{{ post.id }}" data-type="post" data-action="like" class="p-0 btn btn-sm float-right">
             <img src="{% static "img/svg/hand-thumbs-up.svg" %}">
             <span data-count="like" title="Нравится"
-                  class="badge badge-light">{{ post.votes.likes.count }}</span>
+                  class="font-weight-bold">{{ post.votes.likes.count }}</span>
 
         </button>
 

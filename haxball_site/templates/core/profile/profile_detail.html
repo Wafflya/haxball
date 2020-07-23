@@ -13,11 +13,8 @@
             {% endif %}
         </div>
 
-        {% if profile.avatar %}
-            <img src="{{ profile.avatar.url }}" class="rounded-circle float-left" width="200" height="200">
-        {% else %}
-            <img src="{% static 'img/no_avatar.png' %}" class="rounded-circle float-left" width="200" height="200">
-        {% endif %}
+        <img src="{{ profile.avatar.url }}" class="rounded-circle float-left" width="200" height="200">
+
         <ul class="list-group list-group-flush" style="padding: 20px">
             <li class="list-group-item"><b>Дата регистрации: </b> {{ profile.name.date_joined }}</li>
             <li class="list-group-item"><b>Дата рождения: </b> {{ profile.born_date }}</li>
@@ -37,9 +34,4 @@
 
     </div>
     <hr>
-{% endblock %}
-
-
-{% block comments %}
-    {% include 'core/include/comments.html' with object=profile comments=comments_in_profile%}
 {% endblock %}

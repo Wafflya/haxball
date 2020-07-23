@@ -1,10 +1,8 @@
-from datetime import date
-
 from autoslug import AutoSlugField
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import Sum
 from django.db.models.signals import post_save
@@ -53,8 +51,32 @@ class LikeDislike(models.Model):
     objects = LikeDislikeManager()
 
 
+# Модель для поста
+class Post(models.Model):
+    title = models.CharField('Заголовок', max_length=256)
+    author = models.ForeignKey(User, verbose_name='Автор', on_delete=models.CASCADE, related_name='blog_posts')
+    slug = models.SlugField(max_length=250, unique_for_date='publish')
+    body = models.TextField("Текст поста")
+    publish = models.DateTimeField('Начало публикации', default=timezone.now)
+    created = models.DateTimeField("Опубликовано", auto_now_add=True)
+    updated = models.DateTimeField("Изменено", auto_now=True)
+    important = models.BooleanField(default=False)
+    votes = GenericRelation(LikeDislike, related_query_name='posts')
+
+    def get_absolute_url(self):
+        return reverse('core:post_detail', args=[self.id, self.slug])
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Пост'
+        verbose_name_plural = 'Посты'
+
+
 # Модель для комментария
 class Comment(models.Model):
+    post = models.ForeignKey(Post, verbose_name='Место', related_name='comments', on_delete=models.CASCADE)
     author = models.ForeignKey(User, verbose_name='Автор', related_name='comments_by_user', on_delete=models.CASCADE)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
@@ -69,40 +91,14 @@ class Comment(models.Model):
         return 'Комментарий от {}'.format(self.author)
 
 
-# Модель для поста
-class Post(models.Model):
-    title = models.CharField('Заголовок', max_length=256)
-    author = models.ForeignKey(User, verbose_name='Автор', on_delete=models.CASCADE, related_name='blog_posts')
-    slug = models.SlugField(max_length=250, unique_for_date='publish')
-    body = models.TextField("Текст поста")
-    publish = models.DateTimeField('Начало публикации', default=timezone.now)
-    created = models.DateTimeField("Опубликовано", auto_now_add=True)
-    updated = models.DateTimeField("Изменено", auto_now=True)
-    important = models.BooleanField(default=False)
-    comments = models.ManyToManyField(Comment, related_name='post_comments', blank=True)
-    votes = GenericRelation(LikeDislike, related_query_name='posts')
-
-
-    def get_absolute_url(self):
-        return reverse('core:post_detail', args=[self.id, self.slug])
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = 'Пост'
-        verbose_name_plural = 'Посты'
-
-
 # Модель для профиля пользователя
 class Profile(models.Model):
     name = models.OneToOneField(User, verbose_name='Пользователь', on_delete=models.CASCADE,
                                 related_name='user_profile')
     slug = AutoSlugField(populate_from='name')
-    avatar = models.ImageField('Аватар', upload_to='users_avatars/', blank=True)
+    avatar = models.ImageField('Аватар', upload_to='users_avatars/', default='users_avatars/default.png')
     born_date = models.DateField('Дата рождения', blank=True, null=True)
     about = models.TextField(max_length=1000, blank=True)
-    comments = models.ManyToManyField(Comment, related_name='profile_comments', blank=True)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):

@@ -69,40 +69,20 @@ class ProfileDetail(DetailView):
     context_object_name = 'profile'
     template_name = 'core/profile/profile_detail.html'
 
-    def get_context_data(self, **kwargs):
-        comment_list = self.object.comments.all()
-        paginat = Paginator(comment_list, 2)
-        page = self.request.GET.get("page")
-        try:
-            comment_list = paginat.page(page)
-        except PageNotAnInteger:
-            # If page is not an integer deliver the first page
-            comment_list = paginat.page(1)
-        except EmptyPage:
-            # If page is out of range deliver last page of results
-            comment_list = paginat.page(paginat.num_pages)
 
-        context = super(ProfileDetail, self).get_context_data(comments_in_profile=comment_list, page=page, **kwargs)
-        print(context)
-
-        return context
 
 
 class AddComment(ListView, View):
 
     def post(self, request, id, slug):
         comment_form = CommentForm(request.POST)
-
-        if Profile.objects.filter(id=id, slug=slug).exists():
-            object_to = Profile.objects.get(id=id, slug=slug)
-        else:
-            object_to = Post.objects.get(id=id, slug=slug)
+        object_to = Post.objects.get(id=id, slug=slug)
 
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
             new_comment.author = request.user
+            new_comment.post = object_to
             new_comment.save()
-            object_to.comments.add(new_comment)
 
         return redirect(object_to.get_absolute_url())
 
