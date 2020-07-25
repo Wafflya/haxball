@@ -7,7 +7,7 @@
        class="button btn btn-danger btn-lg btn-block">
 
         {{ post.title }}
-        {% if post.created|is_fresh:6 %}
+        {% if post.created|is_fresh:5 %}
             <span class="badge badge-pill badge-success">Новая!</span>
         {% endif %}
 
@@ -26,12 +26,20 @@
                 href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>,
             Комментариев: {{ post.comments.count }}</span>
 
-        <button data-id="{{ post.id }}" data-type="post" data-action="like" class="p-0 btn btn-sm float-right">
-            <img src="{% static "img/svg/hand-thumbs-up.svg" %}">
-            <span data-count="like" title="Нравится"
-                  class="font-weight-bold">{{ post.votes.likes.count }}</span>
+            <button data-toggle="button" aria-pressed="false" data-id="{{ post.id }}" data-type="post" data-action="dislike" class="p-0 btn btn-sm float-right">
+                <img src="{% static "img/svg/hand-thumbs-down.svg" %}">
+                <span data-count="dislike" title="Не нравится"
+                      class="font-weight-bold">{{ post.votes.dislikes.count }}</span>
 
-        </button>
+            </button>
 
+            <button data-id="{{ post.id }}" data-type="post" data-action="like" class="p-0 btn btn-sm float-right">
+                <img src="{% static "img/svg/hand-thumbs-up.svg" %}">
+                <span data-count="like" title="Нравится"
+                      class="font-weight-bold">{{ post.votes.likes.count }}</span>
+
+            </button>
     </div>
+
+
 </div>

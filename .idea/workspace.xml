@@ -2,18 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/sidebar_for_last_activity.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/new_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/reply.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/top_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/hand-thumbs-down.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/comments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/post_important_in_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/post_important_in_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/post_in_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/post_in_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/sidebar_for_last_activity.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/sidebar_for_last_activity.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,9 +62,9 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\haxball\haxball_site\static\img\svg" />
       <recent name="E:\haxball\haxball_site\static\img\ico" />
       <recent name="E:\haxball\haxball_site\static\img" />
-      <recent name="E:\haxball\haxball_site\static\img\svg" />
       <recent name="E:\haxball\haxball_site\core" />
       <recent name="E:\haxball\haxball_site" />
     </key>
@@ -123,7 +124,8 @@
       <workItem from="1595068642521" duration="26986000" />
       <workItem from="1595166185486" duration="42361000" />
       <workItem from="1595432554800" duration="4819000" />
-      <workItem from="1595440197811" duration="36452000" />
+      <workItem from="1595440197811" duration="48732000" />
+      <workItem from="1595603798203" duration="1278000" />
     </task>
     <servers />
   </component>

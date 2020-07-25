@@ -30,6 +30,9 @@ class LikeDislikeManager(models.Manager):
     def posts(self):
         return self.get_queryset().filter(content_type__model='post').order_by('-posts__pub_date')
 
+    def comments(self):
+        return self.get_queryset().filter(content_type__model='comment').order_by('-comments__pub_date')
+
 
 # Модель для лайк-дизлайк системы
 class LikeDislike(models.Model):
@@ -81,6 +84,7 @@ class Comment(models.Model):
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     parent = models.ForeignKey('self', verbose_name='Родитель', on_delete=models.SET_NULL, blank=True, null=True)
+    votes = GenericRelation(LikeDislike, related_query_name='comments')
 
     class Meta:
         verbose_name = 'Комментарий'
