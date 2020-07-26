@@ -1,12 +1,5 @@
 {% load static %}
 
-{% with object.comments.count as total_comments %}
-    <h2>
-        Комментариев {{ total_comments }}
-    </h2>
-{% endwith %}
-
-
 
 {% if user.is_authenticated %}
     {% include 'core/include/form_comment.html' with nickname=user.username element=object %}
@@ -28,25 +21,20 @@
         <div class="card-body">
             <p class="card-text">{{ comment.body|linebreaks }}</p>
         </div>
-        <div class="card-footer text-muted">
-            Отправлено {{ comment.created|date:"SHORT_DATE_FORMAT" }} в {{ comment.created|time:"H:i" }}, Автор: <a
+        <div class="card-footer text-muted d-inline-flex justify-content-between">
+            <span> Отправлено {{ comment.created|date:"SHORT_DATE_FORMAT" }} в {{ comment.created|time:"H:i" }}, Автор: <a
                 href="{{ comment.author.user_profile.get_absolute_url }}">{{ comment.author }}</a>
-
-
-
-            <button data-id="{{ comment.id }}" data-type="comment" data-action="dislike" class="p-0 btn btn-sm float-right">
+            </span>
+        <ul class="list-group list-group-horizontal-md">
+            <li class="btn btn-sm p-0" type="button" data-id="{{ comment.id }}" data-type="comment" data-action="like" title="Нравится">
+                  <img src="{% static "img/svg/hand-thumbs-up.svg" %}">
+                <span data-count="like" class="font-weight-bold">{{ comment.votes.likes.count }}</span>
+            </li>
+            <li class="btn btn-sm p-0" type="button" data-id="{{ comment.id }}" data-type="comment" data-action="dislike" title="Не нравится">
                 <img src="{% static "img/svg/hand-thumbs-down.svg" %}">
-                <span data-count="dislike" title="Не нравится"
-                      class="font-weight-bold">{{ comment.votes.dislikes.count }}</span>
-
-            </button>
-
-                        <button data-id="{{ comment.id }}" data-type="comment" data-action="like" class="p-0 btn btn-sm float-right">
-                <img src="{% static "img/svg/hand-thumbs-up.svg" %}">
-                <span data-count="like" title="Нравится"
-                      class="font-weight-bold">{{ comment.votes.likes.count }}</span>
-
-            </button>
+                <span data-count="dislike" class="font-weight-bold">{{ comment.votes.dislikes.count }}</span>
+            </li>
+        </ul>
 
         </div>
     </div>

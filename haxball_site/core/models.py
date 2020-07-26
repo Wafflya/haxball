@@ -69,6 +69,9 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('core:post_detail', args=[self.id, self.slug])
 
+    def last_comment(self):
+        return self.comments.annotate(Max('created'))
+
     def __str__(self):
         return self.title
 

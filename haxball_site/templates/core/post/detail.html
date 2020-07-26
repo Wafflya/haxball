@@ -4,6 +4,7 @@
     {{ post.title }}
 {% endblock %}
 {% load static %}
+{% load user_tags %}
 {% block scripts %}
 
     <!-- Аякс-скрипт проставления лайков-дизлайков к постам -->
@@ -38,6 +39,11 @@
             var action = like.data('action');
             var dislike = like.next();
 
+            var l_id = 'l' + type + pk
+            var d_id = 'd' + type + pk
+            $('#' + l_id).toggleClass('active');
+            $('#' + d_id).removeClass('active');
+
             $.ajax({
                 url: "/api/" + type + "/" + pk + "/" + action + "/",
                 type: 'POST',
@@ -59,6 +65,11 @@
             var pk = dislike.data('id');
             var action = dislike.data('action');
             var like = dislike.prev();
+
+            var l_id = 'l' + type + pk
+            var d_id = 'd' + type + pk
+            $('#' + d_id).toggleClass('active');
+            $('#' + l_id).removeClass('active');
 
             $.ajax({
                 url: "/api/" + type + "/" + pk + "/" + action + "/",
@@ -84,20 +95,47 @@
 {% endblock %}
 {% block post %}
 
-    <h2>{{ post.title }}</h2>
-    <p class="post-text">{{ post.body|safe }}</p>
+    <div class="card my-4" style="border-radius: 25px">
+        <div class="card-header" style="border-radius: 25px">
+            <h4 class="card-title mb-1">{{ post.title }}</h4>
+            <small class="text-muted">
+                <img src="{% static "img/ico/calendar_1.png" %}" height="21"
+                     width="21"> {{ post.created|date:"SHORT_DATE_FORMAT" }} <img
+                    src="{% static "img/ico/clock_1.png" %}" height="19" width="19"> {{ post.created|time:"H:i" }} <img
+                    src="{% static "img/ico/user_1.png" %}" height="19" width="19"><a
+                    href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>
 
-    <div class="text-muted">
-        Опубликовано {{ post.created|date:"SHORT_DATE_FORMAT" }} в {{ post.created|time:"H:i" }}, Автор: <a
-            href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>
-        <ul class="list-group list-group-horizontal">
-            <li data-id="{{ post.id }}" data-type="post" data-action="like" title="Нравится">
-                <span data-count="like">{{ post.votes.likes.count }}</span>
-            </li>
-            <li data-id="{{ post.id }}" data-type="post" data-action="dislike" title="Не нравится">
-                <span data-count="dislike">{{ post.votes.dislikes.count }}</span>
-            </li>
-        </ul>
+            </small>
+        </div>
+        <div class="card-body">
+
+            <p class="card-text">
+                {{ post.body|safe }}
+            </p>
+        </div>
+        <div class="card-footer d-inline-flex justify-content-between">
+            <span class="text-muted"> Комментариев: {{ post.comments.count }} </span>
+
+            <div class="btn-group btn-group-toggle vote">
+                <label style="border-radius: 8px" class="p-0 btn btn-sm btn-outline-success
+                {% if post.votes.likes.all|user_in:user %}active{% endif %}"
+                       data-id="{{ post.id }}" data-type="post" data-action="like" id="lpost{{ post.id }}" title="Нравится">
+                    <img src="{% static "img/svg/hand-thumbs-up.svg" %}">
+                    <span data-count="like" class="font-weight-bold">{{ post.votes.likes.count }}</span>
+
+                </label>
+
+                <label style="border-radius: 8px"
+                       class="p-0 btn btn-sm btn-outline-danger {% if post.votes.dislikes.all|user_in:user %}active{% endif %}"
+                       data-id="{{ post.id }}" data-type="post" data-action="dislike" id="dpost{{ post.id }}"
+                       title="Мас петух">
+                    <img src="{% static "img/svg/hand-thumbs-down.svg" %}">
+                    <span data-count="dislike" class="font-weight-bold">{{ post.votes.dislikes.count }}</span>
+                </label>
+            </div>
+
+        </div>
+
     </div>
 {% endblock %}
 

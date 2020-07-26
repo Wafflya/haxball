@@ -2,19 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/new_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/reply.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/top_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/svg/hand-thumbs-down.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/sidebar_for_top_comments.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/comments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/form_comment.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/form_comment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/pagination.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/pagination.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/post_important_in_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/post_important_in_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/post_in_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/post_in_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/profile_editor_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/profile_editor_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/sidebar_for_last_activity.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/sidebar_for_last_activity.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/sidebar_for_likes.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/sidebar_for_likes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/post/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/post/detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_edit.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,6 +137,7 @@
       <workItem from="1595432554800" duration="4819000" />
       <workItem from="1595440197811" duration="48732000" />
       <workItem from="1595603798203" duration="1278000" />
+      <workItem from="1595755455825" duration="7586000" />
     </task>
     <servers />
   </component>

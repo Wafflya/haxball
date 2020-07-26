@@ -20,7 +20,7 @@ from .models import Post, Profile, LikeDislike
 class PostListView(ListView):
     queryset = Post.objects.all().order_by('-important', '-created', )
     context_object_name = 'posts'
-    paginate_by = 6
+    paginate_by = 5
     template_name = 'core/post/list.html'
 
 

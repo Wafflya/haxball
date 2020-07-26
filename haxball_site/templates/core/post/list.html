@@ -6,6 +6,7 @@
     <!-- Аякс-скрипт проставления лайков-дизлайков к постам -->
 
     <script>
+
         function getCookie(name) {
             var cookieValue = null;
             if (document.cookie && document.cookie !== '') {
@@ -29,12 +30,20 @@
             });
         });
 
+        var elClass = '.vote';
+
         function like() {
             var like = $(this);
             var type = like.data('type');
             var pk = like.data('id');
             var action = like.data('action');
             var dislike = like.next();
+
+
+            var l_id = 'l' + pk
+            var d_id = 'd' + pk
+            $('#' + l_id).toggleClass('active');
+            $('#' + d_id).removeClass('active');
 
             $.ajax({
                 url: "/api/" + type + "/" + pk + "/" + action + "/",
@@ -50,6 +59,7 @@
             return false;
 
         }
+
 
         function dislike() {
             var dislike = $(this);
@@ -58,6 +68,11 @@
             var action = dislike.data('action');
             var like = dislike.prev();
 
+            var l_id = 'l'+pk
+            var d_id = 'd'+pk
+            $('#'+d_id).toggleClass('active');
+            $('#'+l_id).removeClass('active');
+
             $.ajax({
                 url: "/api/" + type + "/" + pk + "/" + action + "/",
                 type: 'POST',
@@ -72,11 +87,19 @@
             return false;
         }
 
+
+
         // Подключение обработчиков
         $(function () {
             $('[data-action="like"]').click(like);
             $('[data-action="dislike"]').click(dislike);
+
+
         });
+
+
+
+
 
 
     </script>
@@ -84,7 +107,11 @@
 {% endblock %}
 
 {% block postlist %}
-    <h3 class="text-center mt-3 mb-0"><img src="{% static "img/ico/important.png" %}" height="37" width="37" style="vertical-align: top";> Важная информация!</h3>
+<div class="card my-2" style="border-radius: 25px; background-image: url({% static "img/backgrounds/background1.png" %})">
+    <div class="card-body">
+    <h3 class="text-center mt-1 mb-0"><img src="{% static "img/ico/important.png" %}" height="37" width="37" style="vertical-align: top";>
+        Важная информация!
+    </h3>
     <hr>
     {% for post in posts %}
         {% if post.important %}
@@ -99,6 +126,12 @@
             {% include "core/include/post_in_list.html" with post=post %}
         {% endif %}
     {% endfor %}
+    </div>
+
+        <div class="card-footer text-muted">
+        <a href="#">Смотреть все новости</a>
+    </div>
+</div>
 
 {% endblock %}
 

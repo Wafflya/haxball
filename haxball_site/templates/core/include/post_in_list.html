@@ -3,7 +3,7 @@
 <div class="card mx-1 my-2">
 
     <a href="{{ post.get_absolute_url }}" type="button"
-       class="button btn btn-primary btn-lg btn-block">
+       class="button btn btn-outline-info btn-lg btn-block">
 
         {{ post.title }}
         {% if post.created|is_fresh:5 %}
@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="card-footer px-3 py-1">
+    <div class="card-footer px-3 py-1 d-inline-flex justify-content-between">
         <span class="text-muted"> <img src="{% static "img/ico/calendar_1.png" %}" height="21"
                                        width="21">  {{ post.created|date:"SHORT_DATE_FORMAT" }} <img
                 src="{% static "img/ico/clock_1.png" %}" height="19" width="19"> {{ post.created|time:"H:i" }} <img
@@ -25,18 +25,25 @@
                 href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>,
             Комментариев: {{ post.comments.count }}</span>
 
-        <button data-id="{{ post.id }}" data-type="post" data-action="dislike" class="p-0 btn btn-sm float-right">
-            <img src="{% static "img/svg/hand-thumbs-down.svg" %}">
-            <span data-count="dislike" title="Нравится"
-                  class="font-weight-bold">{{ post.votes.dislikes.count }}</span>
+        {% if user.is_authenticated %}
+            <div class="btn-group btn-group-toggle vote">
+                <label style="border-radius: 8px" class="p-0 btn btn-sm btn-outline-success
+                {% if post.votes.likes.all|user_in:user %}active{% endif %}"
+                       data-id="{{ post.id }}" data-type="post" data-action="like" id="l{{ post.id }}" title="Нравится">
+                    <img src="{% static "img/svg/hand-thumbs-up.svg" %}">
+                    <span data-count="like" class="font-weight-bold">{{ post.votes.likes.count }}</span>
 
-        </button>
+                </label>
 
-        <button data-id="{{ post.id }}" data-type="post" data-action="like" class="p-0 btn btn-sm float-right">
-            <img src="{% static "img/svg/hand-thumbs-up.svg" %}">
-            <span data-count="like" title="Нравится"
-                  class="font-weight-bold">{{ post.votes.likes.count }}</span>
+                <label style="border-radius: 8px"
+                       class="p-0 btn btn-sm btn-outline-danger {% if post.votes.dislikes.all|user_in:user %}active{% endif %}"
+                       data-id="{{ post.id }}" data-type="post" data-action="dislike" id="d{{ post.id }}"
+                       title="Мас петух">
+                    <img src="{% static "img/svg/hand-thumbs-down.svg" %}">
+                    <span data-count="dislike" class="font-weight-bold">{{ post.votes.dislikes.count }}</span>
+                </label>
+            </div>
+        {% endif %}
 
-        </button>
     </div>
 </div>
