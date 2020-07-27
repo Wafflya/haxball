@@ -1,8 +1,98 @@
 {% load static %}
+
+{% load user_tags %}
 <div class="card" style="padding: 10px; background-color: #e2e3e5">
     <form action={% url 'core:edit_profile' element.slug element.id %} method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
+        <hr>
+        <div class="card user-card-full">
+            <div class="row m-l-0 m-r-0">
+                <div class="col-sm-4 bg-c-lite-green user-profile">
+                    <div class="card-block text-center text-white">
+                        <div class="m-b-10"><img src="{{ profile.avatar.url }}" width="100%" height="200"
+                                                 class="img-radius" alt="User-Profile-Image">
+                            <input type="file" name="avatar" accept="image/*">
+                        </div>
+                        <h4 class="f-w-600">{{ profile.name }}
+                            {% if profile.name.is_superuser %}
+                                <img src="{% static "img/ico/crown.png" %}" height="16"
+                                     width="16" title="Король ёпт"></h4>
+                            {% endif %}
+                        <p class="mb-1">Без команды</p>
+                        <p>Рейтинг {% karma profile %}</p>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="card-block">
+                        <h5 class="m-b-20 p-b-5 b-b-default f-w-600">Основная информация
+                            <button type="submit" class="btn btn-primary" style="margin-right: 20px">Отправить</button>
+                        </h5>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="m-b-10 f-w-600">Дата регистрации</p>
+                                <h6 class="text-muted f-w-400">{{ profile.name.date_joined|date }}</h6>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="m-b-10 f-w-600">Последний визит</p>
+                                <h6 class="text-muted f-w-400">{{ profile.name.last_login }}</h6>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="m-b-10 f-w-600">Дата рождения</p>
+                                <h6 class="text-muted f-w-400">
+                                    <input type="date" id="start" name="born_date"
+                                           value="{{ element.born_date|date:"Y-m-d" }}"
+                                           min="1966-01-01"
+                                           max="2020-07-17">
+                                </h6>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="m-b-10 f-w-600">Город</p>
+                                <h6 class="text-muted f-w-400">
+                                <input type="text" class="form-control" name="city" value="{{ profile.city }}">
+                                </h6>
+                            </div>
+                        </div>
+
+                        <h5 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Активность</h5>
+                        <div class="row">
+                            <div class="col-sm-4 text-center">
+                                <p class="m-b-10 f-w-600"><img src="{% static "img/ico/comment_1.png" %}"></p>
+                                <h6 class="text-primary f-w-400">{{ profile.name.comments_by_user.count }}</h6>
+                            </div>
+                            <div class="col-sm-4 text-center">
+                                <p class="m-b-10 f-w-600"><img src="{% static "img/ico/like_1.png" %}"></p>
+                                <h6 class="text-success f-w-400">{{ profile.name.likedislike_set.likes.count }}</h6>
+                            </div>
+                            <div class="col-sm-4 text-center">
+                                <p class="m-b-10 f-w-600"><img src="{% static "img/ico/dislike_1.png" %}"></p>
+                                <h6 class="text-danger f-w-400">{{ profile.name.likedislike_set.dislikes.count }}</h6>
+                            </div>
+                        </div>
+
+                        <h5 class="m-b-20 m-t-30 p-b-5 b-b-default f-w-600">О себе</h5>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h6 class="text-muted f-w-400">
+                                                      <textarea class="form-control border" rows="3" name="about"
+                                                                id="contactcomment"
+                                                                rows="2">{{ element.about }}</textarea>
+                                </h6>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- OLD FORM -->
+
+    </form>
+</div>
+
+<!--
         <hr>
         <div class="profile" style="padding: 20px; background-color: #95999c">
             <div class="d-flex justify-content-between bd-highlight mb-3">
@@ -47,5 +137,4 @@
                 <button type="submit" class="btn btn-primary" style="margin-right: 20px">Отправить</button>
             </div>
         </div>
-    </form>
-</div>
+-->

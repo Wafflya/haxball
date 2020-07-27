@@ -1,5 +1,11 @@
 {% extends "core/home.html" %}
 {% load static %}
+{% load user_tags %}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static "core/profile/profile.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
+
+{% endblock %}
 
 {% block profile_of_user %}
     {% if user == profile.name %}

@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'ckeditor',
     'ckeditor_uploader',
-    # 'autoslug',
 ]
 
 MIDDLEWARE = [

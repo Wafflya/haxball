@@ -1,6 +1,5 @@
 import json
 
-from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
@@ -86,7 +85,6 @@ class EditMyProfile(DetailView, View):
     model = Profile
     context_object_name = 'profile'
     template_name = 'core/profile/profile_edit.html'
-
 
     def post(self, request, pk, slug):
         profile = Profile.objects.get(slug=slug, id=pk)

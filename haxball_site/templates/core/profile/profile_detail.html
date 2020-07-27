@@ -9,6 +9,7 @@
 
 {% block profile_of_user %}
     <hr>
+
     <div class="card user-card-full">
         <div class="row m-l-0 m-r-0">
             <div class="col-sm-4 bg-c-lite-green user-profile">
@@ -26,7 +27,13 @@
             </div>
             <div class="col-sm-8">
                 <div class="card-block">
-                    <h5 class="m-b-20 p-b-5 b-b-default f-w-600">Основная информация</h5>
+                    <h5 class="m-b-20 p-b-5 b-b-default f-w-600">Основная информация  {% if profile.name.username == user.username %}
+
+                    <a href="{% url 'core:edit_profile' profile.slug profile.id %}" type="button"
+                       class="btn btn-warning">Редактировать профиль</a>
+
+            {% endif %}
+                    </h5>
                     <div class="row">
                         <div class="col-sm-6">
                             <p class="m-b-10 f-w-600">Дата регистрации</p>
@@ -39,8 +46,10 @@
                         <div class="col-sm-6">
                             <p class="m-b-10 f-w-600">Дата рождения</p>
                             <h6 class="text-muted f-w-400">
+
                                 {% if profile.born_date %}
-                                    {{ profile.born_date }}(15 лет)
+                                    {{ profile.born_date }}
+                                    ({% age profile.born_date %})
                                 {% else %}
                                     не указана(
                                 {% endif %}
@@ -50,7 +59,7 @@
                             <p class="m-b-10 f-w-600">Город</p>
                             <h6 class="text-muted f-w-400">
                                 {% if profile.city %}
-                                    {{ profile.city }}(15 лет)
+                                    {{ profile.city }}
                                 {% else %}
                                     не указан
                                 {% endif %}</h6>
@@ -92,51 +101,5 @@
 
 
 
-    <hr>
-    <div class="card">
-        <div class="card-body">
-            <img src="{{ profile.avatar.url }}" class="float-left" width="200" height="200">
-            <div class="card-title">
-                <h4> Профиль игрока Радик</h4> <h5>(Худшая команда человечества)</h5>
 
-            </div>
-        </div>
-    </div>
-
-    <!-- самописное гамно-->
-    <hr>
-    <div class="profile" style="padding: 20px; background-color: #95999c">
-        <div class="d-flex justify-content-between bd-highlight mb-3">
-            <div class="d-flex justify-content-start"><h2>{{ profile.name }}</h2></div>
-            {% if profile.name.username == user.username %}
-                <div class="d-flex justify-content-end">
-                    <a href="{% url 'core:edit_profile' profile.slug profile.id %}" type="button"
-                       class="btn btn-warning" role="button" aria-disabled="true">Редактировать профиль</a>
-                </div>
-            {% endif %}
-        </div>
-
-        <img src="{{ profile.avatar.url }}" class="rounded-circle float-left" width="200" height="200">
-
-        <ul class="list-group list-group-flush" style="padding: 20px">
-            <li class="list-group-item"><b>Дата регистрации: </b> {{ profile.name.date_joined }}</li>
-            <li class="list-group-item"><b>Дата рождения: </b> {{ profile.born_date }}</li>
-            <li class="list-group-item"><b>Последний вход: </b></li>
-            <li class="list-group-item"><b>Способы связи: </b> <a href="https://vk.com/wafflya95">Вк</a></li>
-            <li class="list-group-item"><b>Команда:</b> Без команды</li>
-        </ul>
-
-        <div class="card">
-            <div class="card-header">
-                <b>Информация обо мне:</b>
-            </div>
-            <div class="card-body">
-
-                Зовут Лёха, крутой челик, играю в хакс с 6 лет, каждый день по 18 часов, сейчас мне 25,
-                считаю себя легендой в этом виде спорта!
-            </div>
-        </div>
-
-    </div>
-    <hr>
 {% endblock %}

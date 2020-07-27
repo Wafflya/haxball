@@ -1,3 +1,5 @@
+from datetime import date
+
 from django import template
 from django.contrib.auth.models import User
 from django.db.models import Count, Q
@@ -20,6 +22,18 @@ def karma(profile):
     for post in Post.objects.filter(author=profile.name):
         s += post.votes.sum_rating()
     return {'k': s}
+
+# Упоролся и написал своё вычисление возраста 1 цифрой, т.к. встроенный
+# таймсинс обрезает с месяцами... хз, надо доработать будет, чтобы писало возраст красиво, но хз зачем так из-за такой
+# мелочи упарываться
+@register.simple_tag
+def age(born_date):
+    if date.today().month > born_date.month:
+        return (date.today().year - born_date.year)
+    elif born_date.month == date.today().month and date.today().day > born_date.day:
+        return date.today().year - born_date.year
+    else:
+        return date.today().year - born_date.year + 1
 
 
 # Вообще, это ласт-реги, но надо будет сделать куррент онлайн
