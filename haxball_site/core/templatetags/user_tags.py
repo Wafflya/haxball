@@ -9,6 +9,19 @@ from ..models import Post, Comment
 register = template.Library()
 
 
+# тег для поискса кармы юзера(профиля), будем писать в профиль
+# !!Пока что ищет ток по комментам карму, хз, могу допилить и по постам!
+# ! Добавил и по постам
+@register.inclusion_tag('core/include/profile/karma.html')
+def karma(profile):
+    s = 0
+    for comment in Comment.objects.filter(author=profile.name):
+        s += comment.votes.sum_rating()
+    for post in Post.objects.filter(author=profile.name):
+        s += post.votes.sum_rating()
+    return {'k': s}
+
+
 # Вообще, это ласт-реги, но надо будет сделать куррент онлайн
 @register.inclusion_tag('core/include/sidebar_for_users.html')
 def show_users_online(count=5):
@@ -27,7 +40,7 @@ def show_last_activity(count=10):
     return {'last_comments': last_com}
 
 
-# Чтобы топ по лайкам за период считал(период добавить)
+# Чтобы топ по лайкам за период считал(!!!период добавить!!!)
 @register.inclusion_tag('core/include/sidebar_for_top_comments.html')
 def show_top_comments(count=5, for_year=2020):
     top_com = Comment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(

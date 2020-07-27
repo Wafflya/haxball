@@ -2,9 +2,6 @@
 <div class="card" style="padding: 10px; background-color: #e2e3e5">
     <form action={% url 'core:edit_profile' element.slug element.id %} method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <!-- <div class="form-group">
-        <label for="nickname">{{ nickname }}</label>
-    </div> -->
 
         <hr>
         <div class="profile" style="padding: 20px; background-color: #95999c">

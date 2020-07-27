@@ -106,6 +106,7 @@ class Profile(models.Model):
     avatar = models.ImageField('Аватар', upload_to='users_avatars/', default='users_avatars/default.png')
     born_date = models.DateField('Дата рождения', blank=True, null=True)
     about = models.TextField(max_length=1000, blank=True)
+    city = models.CharField(max_length=100, blank=True)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):

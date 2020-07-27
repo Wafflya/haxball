@@ -27,21 +27,21 @@
 
         {% if user.is_authenticated %}
             <div class="btn-group btn-group-toggle vote">
-                <label style="border-radius: 8px" class="p-0 btn btn-sm btn-outline-success
+                <label style="border-radius: 8px" class="py-0 px-1 btn btn-sm btn-outline-success
                 {% if post.votes.likes.all|user_in:user %}active{% endif %}"
                        data-id="{{ post.id }}" data-type="post" data-action="like" id="l{{ post.id }}" title="Нравится">
                     <img src="{% static "img/svg/hand-thumbs-up.svg" %}">
                     <span data-count="like" class="font-weight-bold">{{ post.votes.likes.count }}</span>
-
                 </label>
 
                 <label style="border-radius: 8px"
-                       class="p-0 btn btn-sm btn-outline-danger {% if post.votes.dislikes.all|user_in:user %}active{% endif %}"
+                       class="py-0 px-1 btn btn-sm btn-outline-danger {% if post.votes.dislikes.all|user_in:user %}active{% endif %}"
                        data-id="{{ post.id }}" data-type="post" data-action="dislike" id="d{{ post.id }}"
                        title="Мас петух">
                     <img src="{% static "img/svg/hand-thumbs-down.svg" %}">
                     <span data-count="dislike" class="font-weight-bold">{{ post.votes.dislikes.count }}</span>
                 </label>
+
             </div>
         {% endif %}
 

@@ -1,15 +1,12 @@
-
 import json
-from datetime import date
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
-from django.utils import timezone
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
-from django.views.generic.list import MultipleObjectMixin
 
 from .forms import CommentForm, EditProfileForm
 from .models import Post, Profile, LikeDislike
@@ -70,8 +67,6 @@ class ProfileDetail(DetailView):
     template_name = 'core/profile/profile_detail.html'
 
 
-
-
 class AddComment(ListView, View):
 
     def post(self, request, id, slug):
@@ -91,6 +86,7 @@ class EditMyProfile(DetailView, View):
     model = Profile
     context_object_name = 'profile'
     template_name = 'core/profile/profile_edit.html'
+
 
     def post(self, request, pk, slug):
         profile = Profile.objects.get(slug=slug, id=pk)
