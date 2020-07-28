@@ -5,3 +5,4 @@ django-autoslug==1.9.7
 pytils==0.3
 django-ckeditor==5.9.0
 django-js-asset==1.2.2
+django-froala-editor==3.2.0

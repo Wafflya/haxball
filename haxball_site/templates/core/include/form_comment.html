@@ -1,14 +1,22 @@
-<div class="card" style="padding: 10px; background-color: #e2e3e5">
-    <form action={% url 'core:add_comment' element.id element.slug %} method="post">
-        {% csrf_token %}
-        <!-- <div class="form-group">
-        <label for="nickname">{{ nickname }}</label>
-    </div> -->
-        <div class="form-group editContent">
+<head>
 
-        <textarea class="form-control border" rows="3" name="body"
-                  id="contactcomment" required="" rows="2" placeholder="Оставьте Ваш комментарий"></textarea>
-        </div>
+               {{ comment_form.media}}
+</head>
+
+<div class="card" style="padding: 10px; background-color: #e2e3e5">
+    <form action={% url 'core:post_detail' post.id post.slug %} method="post">
+        {% csrf_token %}
+           <div id="editor">
+               {{comment_form.body}}
+            </div>
+        <script>
+            InlineEditor
+                .create(document.querySelector('#editor'))
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
+
         <div align="right">
             <button type="submit" class="btn btn-primary" style="margin-right: 20px">Отправить</button>
         </div>

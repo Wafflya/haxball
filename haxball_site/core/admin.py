@@ -9,7 +9,7 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
 class PostAdminForm(forms.ModelForm):
-    body = forms.CharField(label='Пост', widget=CKEditorUploadingWidget())
+    body = forms.CharField(label='Пост', widget=CKEditorUploadingWidget(config_name='default') )
 
     class Meta:
         model = Post

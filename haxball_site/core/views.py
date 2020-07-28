@@ -20,8 +20,9 @@ class PostListView(ListView):
     template_name = 'core/post/list.html'
 
 
-# Вьюха для поста
-
+# Вьюха для поста и комментариев к нему.
+# С одной стороны удобно одним методом, с другой-хезе как правильно надо)
+# Учитывая, что потом пост-комменты будут использоваться для форума.. Такие дела
 def post_detail(request, slug, id):
     post = get_object_or_404(Post, slug=slug,
                              id=id)
@@ -33,13 +34,13 @@ def post_detail(request, slug, id):
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
             new_comment.author = request.user
+            new_comment.post = post
             new_comment.save()
-            post.comments.add(new_comment)
     else:
         comment_form = CommentForm()
 
     comments_obj = post.comments.all()
-    paginat = Paginator(comments_obj, 2)
+    paginat = Paginator(comments_obj, 5)
     page = request.GET.get('page')
 
     try:
@@ -66,19 +67,6 @@ class ProfileDetail(DetailView):
     template_name = 'core/profile/profile_detail.html'
 
 
-class AddComment(ListView, View):
-
-    def post(self, request, id, slug):
-        comment_form = CommentForm(request.POST)
-        object_to = Post.objects.get(id=id, slug=slug)
-
-        if comment_form.is_valid():
-            new_comment = comment_form.save(commit=False)
-            new_comment.author = request.user
-            new_comment.post = object_to
-            new_comment.save()
-
-        return redirect(object_to.get_absolute_url())
 
 
 class EditMyProfile(DetailView, View):

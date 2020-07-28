@@ -33,7 +33,7 @@ def age(born_date):
     elif born_date.month == date.today().month and date.today().day > born_date.day:
         return date.today().year - born_date.year
     else:
-        return date.today().year - born_date.year + 1
+        return date.today().year - born_date.year - 1
 
 
 # Вообще, это ласт-реги, но надо будет сделать куррент онлайн
@@ -78,7 +78,7 @@ def show_post_with_top_likes(count=5):
 @register.filter
 def is_fresh(value, hours):
     x = timezone.now() - value
-    if x.days > 1:
+    if x.days >= 1:
         return False
     else:
         sec = 3600 * hours

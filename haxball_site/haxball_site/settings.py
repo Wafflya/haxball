@@ -140,11 +140,10 @@ EMAIL_USE_TLS = True
 STATIC_URL = '/static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [STATIC_DIR]
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
@@ -152,8 +151,6 @@ LOGIN_REDIRECT_URL = "/"
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
 SITE_ID = 1
-
-
 
 CKEDITOR_CONFIGS = {
     'default': {
@@ -202,7 +199,7 @@ CKEDITOR_CONFIGS = {
         # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
         'tabSpaces': 4,
         'extraPlugins': ','.join([
-            'uploadimage', # the upload image feature
+            'uploadimage',  # the upload image feature
             # your extra plugins here
             'div',
             'autolink',
@@ -218,5 +215,32 @@ CKEDITOR_CONFIGS = {
             'elementspath',
             'youtube'
         ]),
+    },
+    'comment': {
+        'skin': 'minimalist',
+        "removePlugins": "stylesheetparser",
+        'allowedContent': True,
+        'height': 100,
+        'width': '200%',
+        'toolbar':
+            [
+                ['Bold', 'Italic', 'Underline' ]
+            ],
+        'extraPlugins': ','.join([
+            'uploadimage',  # the upload image feature
+            # your extra plugins here
+            'div',
+            'autolink',
+            'autoembed',
+            'embedsemantic',
+            'autogrow',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath',
+            'youtube'
+        ])
     }
 }
