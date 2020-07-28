@@ -24,6 +24,8 @@ urlpatterns = [
     path('', include('core.urls', namespace='core')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('accounts/', include('allauth.urls')),
+    #path('markdownx/', include('markdownx.urls')),
+    #path('summernote/', include('django_summernote.urls')),
     path('froala_editor/',include('froala_editor.urls'))
 ]
 

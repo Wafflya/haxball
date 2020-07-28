@@ -4,7 +4,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.db.models import Sum
+from django.db.models import Sum, Max
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
@@ -86,7 +86,7 @@ class Comment(models.Model):
     author = models.ForeignKey(User, verbose_name='Автор', related_name='comments_by_user', on_delete=models.CASCADE)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
-    parent = models.ForeignKey('self', verbose_name='Родитель', on_delete=models.SET_NULL, blank=True, null=True)
+    parent = models.ForeignKey('self', verbose_name='Родитель', on_delete=models.SET_NULL, blank=True, null=True, related_name="childs")
     votes = GenericRelation(LikeDislike, related_query_name='comments')
 
     class Meta:
@@ -96,6 +96,21 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Комментарий от {}'.format(self.author)
+
+    def is_parent(self):
+        return self.parent == None
+
+    def has_childs(self):
+        return self.childs.count() > 0
+
+    #def all_childs(self):
+     #   for child in self.childs:
+      #      k = child.childs.count()
+      #      while child.childs.count()
+      #  return self.childs.count()
+
+
+
 
 
 # Модель для профиля пользователя

@@ -1,24 +1,16 @@
-<head>
+<head>{{ comment_form.media }}</head>
 
-               {{ comment_form.media}}
-</head>
+<form action='{% url 'core:post_detail' post.id post.slug %}' method="post" id="addcomment">
+    {% csrf_token %}
+    <input type="hidden" name="page" value="{{ page }}">
+    <input type="hidden" name="parent" id="contactparent" value="">
+    <div class="form-group">
+        <!-- {{ comment_form.body }}-->
+        <textarea class="form-control border" rows="3" name="body"
+                  id="contactcomment" required="" rows="2" placeholder="Оставьте Ваш комментарий"></textarea>
+    </div>
 
-<div class="card" style="padding: 10px; background-color: #e2e3e5">
-    <form action={% url 'core:post_detail' post.id post.slug %} method="post">
-        {% csrf_token %}
-           <div id="editor">
-               {{comment_form.body}}
-            </div>
-        <script>
-            InlineEditor
-                .create(document.querySelector('#editor'))
-                .catch(error => {
-                    console.error(error);
-                });
-        </script>
-
-        <div align="right">
-            <button type="submit" class="btn btn-primary" style="margin-right: 20px">Отправить</button>
-        </div>
-    </form>
-</div>
+    <div align="right">
+        <button type="submit" class="btn btn-primary" style="margin-right: 20px">Отправить</button>
+    </div>
+</form>

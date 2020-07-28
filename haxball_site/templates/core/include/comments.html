@@ -1,4 +1,10 @@
 {% load static %}
+{% load user_tags %}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static "core/include/comments.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
+    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+{% endblock %}
 
 {% if user.is_authenticated %}
     {% include 'core/include/form_comment.html' %}
@@ -6,42 +12,77 @@
     Войдите, чтобы оставить комментарий
 {% endif %}
 
-{% for comment in comments %}
-    <div class="card post_list">
-        <div class="card-header">
-            <img src="{{ comment.author.user_profile.avatar.url }}" class="rounded-circle float-left" width="50"
-                 height="50">
+<div class="row">
+    <div class="col-md-12">
+        <div class="card"  style="border-radius: 20px 20px 0px 0px">
+            <div class="card-body card-body-comment">
+                <h4 class="card-title">Последние комментарии </h4>
+                <h6 class="card-subtitle">Комментарии</h6>
+            </div>
+            <div class="comment-widgets m-b-20">
+                {% for comment in comments %}
+                    <div class="d-flex flex-row comment-row">
+                        <div class="p-2">
+                            <span class="round">
+                                <img src="{{ comment.author.user_profile.avatar.url }}"
+                                     alt="{{ comment.author.username }}" width="50">
+                            </span>
+                        </div>
+                        <div class="comment-text w-100">
+                            <a href="{{ comment.author.user_profile.get_absolute_url }}">
+                                <h5>
+                                    {{ comment.author.username }}
+                                    <span class="badge">
+                                        {% karma comment.author.user_profile %}
+                                    </span>
+                                    {{ comment.is_parent }}
+                                    {{ comment.chil }}
+                                </h5>
+                            </a>
+                            <div class="comment-footer">
+                                <span class="date">
+                                    {{ comment.created|timesince }} назад
+                                </span>
 
-            <a href="{{ comment.post.get_absolute_url }}#{{ comment.id }}">комментрий номер()</a>
+                                <ul class="list-group list-group-horizontal-md d-inline-flex">
+                                    <li class="action-like fa fa-thumbs-up {% if comment.votes.likes.all|user_in:user %}text-success{% endif %}" data-id="{{ comment.id }}"
+                                        data-type="comment" data-action="like" id="lcomment{{ comment.id }}">
+                                        <span data-count="like">{{ comment.votes.likes.count }}</span>
+                                    </li>
 
-            <a href="{{ comment.author.user_profile.get_absolute_url }}" class="post_header">
-                {{ comment.author }}
-            </a>
-        </div>
-        <div class="card-body">
-            <p class="card-text">{{ comment.body|safe }}</p>
-        </div>
-        <div class="card-footer text-muted d-inline-flex justify-content-between">
-            <span> Отправлено {{ comment.created|date:"SHORT_DATE_FORMAT" }} в {{ comment.created|time:"H:i" }}, Автор: <a
-                href="{{ comment.author.user_profile.get_absolute_url }}">{{ comment.author }}</a>
-            </span>
-        <ul class="list-group list-group-horizontal-md">
-            <li class="btn btn-sm p-0" type="button" data-id="{{ comment.id }}" data-type="comment" data-action="like" title="Нравится">
-                  <img src="{% static "img/svg/hand-thumbs-up.svg" %}">
-                <span data-count="like" class="font-weight-bold">{{ comment.votes.likes.count }}</span>
-            </li>
-            <li class="btn btn-sm p-0" type="button" data-id="{{ comment.id }}" data-type="comment" data-action="dislike" title="Не нравится">
-                <img src="{% static "img/svg/hand-thumbs-down.svg" %}">
-                <span data-count="dislike" class="font-weight-bold">{{ comment.votes.dislikes.count }}</span>
-            </li>
-        </ul>
+                                    <li class="action-dislike fa fa-thumbs-down {% if comment.votes.dislikes.all|user_in:user %}text-danger{% endif %}" data-id="{{ comment.id }}"
+                                        data-type="comment" data-action="dislike" id="dcomment{{ comment.id }}">
 
+                                        <span data-count="dislike">{{ comment.votes.dislikes.count }}</span>
+                                    </li>
+                                </ul>
+
+
+                                <span class="action-icons">
+                                    <a href="#addcomment" onclick="addComment('{{ comment.author.username }}','{{ comment.id }}')">
+                                        <i class="fa fa-reply"></i>
+                                    </a>
+                                </span>
+                            </div>
+                            <p class="m-b-5 m-t-10">
+                                {{ comment.body|safe }}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+            </div>
         </div>
     </div>
+</div>
+<script>
+    function addComment(name,id) {
+        document.getElementById('contactparent').value = id
+        document.getElementById('contactcomment').innerText = `${name},`
+    }
+</script>
 
-{% empty %}
-    <p>Пока никто не оставил комментарий. Будьте первым!</p>
-{% endfor %}
 
 {% if object.comments.count > 2 %}
     {% include "core/include/pagination.html" with page=comments %}

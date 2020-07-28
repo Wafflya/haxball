@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+    # text-editors testing
+    #'markdownx',
     'ckeditor',
+    'django_summernote',
+    'froala_editor',
     'ckeditor_uploader',
 ]
 
@@ -75,6 +79,8 @@ WSGI_APPLICATION = 'haxball_site.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 DATABASES = {
     'default': {
@@ -140,7 +146,7 @@ EMAIL_USE_TLS = True
 STATIC_URL = '/static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [STATIC_DIR]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -151,6 +157,53 @@ LOGIN_REDIRECT_URL = "/"
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
 SITE_ID = 1
+
+SUMMERNOTE_THEME = 'bs3'
+
+SUMMERNOTE_CONFIG = {
+    'iframe': True,
+    'summernote': {
+        'airMode': False,
+        'width': '100%',
+        'height': '200',
+        'js': {
+        },
+        'codemirror': {
+            'mode': 'htmlmixed',
+            'lineNumbers': 'true',
+            # You have to include theme file in 'css' or 'css_for_inplace' before using it.
+            'theme': 'monokai',
+        },
+        'toolbar': [
+            # ['style', ['style']],
+            ['insert', ['link', 'picture', 'video']],
+            ['font', ['bold', 'underline', 'clear']],
+            # ['fontname', ['fontname']],
+            ['color', ['color']],
+        ],
+
+    },
+    'js': (
+        '/static/summernote-ext-print.js',
+    ),
+    'js_for_inplace': (
+        '/static/summernote-ext-print.js',
+    ),
+    'css': (
+        '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.0/theme/base16-dark.min.css',
+    ),
+    'css_for_inplace': (
+        '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.0/theme/base16-dark.min.css',
+    ),
+    'codemirror': {
+        'theme': 'base16-dark',
+        'mode': 'htmlmixed',
+        'lineNumbers': 'true',
+    },
+    'lazy': False,
+
+
+}
 
 CKEDITOR_CONFIGS = {
     'default': {
@@ -224,7 +277,7 @@ CKEDITOR_CONFIGS = {
         'width': '200%',
         'toolbar':
             [
-                ['Bold', 'Italic', 'Underline' ]
+                ['Bold', 'Italic', 'Underline']
             ],
         'extraPlugins': ','.join([
             'uploadimage',  # the upload image feature

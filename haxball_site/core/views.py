@@ -31,11 +31,16 @@ def post_detail(request, slug, id):
 
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
+        page = request.POST.get('page')
+        print(page)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
+            if request.POST.get("parent", None):
+                new_comment.parent_id = int(request.POST.get('parent'))
             new_comment.author = request.user
             new_comment.post = post
             new_comment.save()
+            return redirect(post.get_absolute_url()+'?page='+str(page)+'#r'+str(new_comment.id))
     else:
         comment_form = CommentForm()
 

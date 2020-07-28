@@ -1,0 +1,100 @@
+@import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+
+
+.card-no-border .card {
+    border: 0px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)
+}
+
+.card-body-comment {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    font-family: 'Calibri', sans-serif !important
+}
+
+.comment-widgets .comment-row:hover {
+    background: rgba(0, 0, 0, 0.02);
+    cursor: pointer;
+
+}
+
+.comment-widgets .comment-row {
+    border-bottom: 1px solid rgba(120, 130, 140, 0.13);
+    padding: 15px;
+    font-family: 'Calibri', sans-serif !important
+}
+
+
+.label {
+    padding: 3px 10px;
+    line-height: 13px;
+    color: #ffffff;
+    font-weight: 400;
+    border-radius: 4px;
+    font-size: 75%
+}
+
+.round img {
+    border-radius: 100%
+}
+
+.label-info {
+    background-color: #1976d2
+}
+
+.label-success {
+    background-color: green
+}
+
+.label-danger {
+    background-color: #ef5350
+}
+
+.action-icons a {
+    padding-left: 7px;
+    vertical-align: middle;
+    color: #99abb4
+}
+
+.action-like{
+    padding-left: 7px;
+    vertical-align: middle;
+    color: #99abb4
+}
+
+.action-like:hover {
+    color: #00FF00;
+}
+
+.action-like:active {
+    color: #34ce57;
+}
+
+.action-dislike{
+    padding-left: 7px;
+    vertical-align: middle;
+    color: #99abb4
+}
+.action-dislike:active {
+    color: #F53D65;
+}
+
+.action-dislike:hover {
+    color: #bd2130;
+}
+
+.action-icons a:hover {
+    color: #1976d2
+}
+
+.mt-100 {
+    margin-top: 100px
+}
+
+.mb-100 {
+    margin-bottom: 100px
+}

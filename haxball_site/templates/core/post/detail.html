@@ -41,8 +41,8 @@
 
             var l_id = 'l' + type + pk
             var d_id = 'd' + type + pk
-            $('#' + l_id).toggleClass('active');
-            $('#' + d_id).removeClass('active');
+            $('#' + l_id).toggleClass('text-success');
+            $('#' + d_id).removeClass('text-danger');
 
             $.ajax({
                 url: "/api/" + type + "/" + pk + "/" + action + "/",
@@ -68,8 +68,8 @@
 
             var l_id = 'l' + type + pk
             var d_id = 'd' + type + pk
-            $('#' + d_id).toggleClass('active');
-            $('#' + l_id).removeClass('active');
+            $('#' + d_id).toggleClass('text-danger');
+            $('#' + l_id).removeClass('text-success');
 
             $.ajax({
                 url: "/api/" + type + "/" + pk + "/" + action + "/",
@@ -113,26 +113,23 @@
                 {{ post.body|safe }}
             </p>
         </div>
-        <div class="card-footer d-inline-flex justify-content-between">
+        <div class="card-footer d-inline-flex justify-content-between" style="cursor: pointer">
             <span class="text-muted"> Комментариев: {{ post.comments.count }} </span>
 
-            <div class="btn-group btn-group-toggle vote">
-                <label style="border-radius: 8px" class="p-0 btn btn-sm btn-outline-success
-                {% if post.votes.likes.all|user_in:user %}active{% endif %}"
-                       data-id="{{ post.id }}" data-type="post" data-action="like" id="lpost{{ post.id }}" title="Нравится">
-                    <img src="{% static "img/svg/hand-thumbs-up.svg" %}">
-                    <span data-count="like" class="font-weight-bold">{{ post.votes.likes.count }}</span>
+            <ul class="list-group list-group-horizontal-md d-inline-flex">
+                <li class="action-like fa fa-thumbs-up {% if post.votes.likes.all|user_in:user %}text-success{% endif %}"
+                    data-id="{{ post.id }}"
+                    data-type="post" data-action="like" id="lpost{{ post.id }}">
+                    <span data-count="like">{{ post.votes.likes.count }}</span>
+                </li>
 
-                </label>
+                <li class="action-dislike fa fa-thumbs-down {% if post.votes.dislikes.all|user_in:user %}text-danger{% endif %}"
+                    data-id="{{ post.id }}"
+                    data-type="post" data-action="dislike" id="dpost{{ post.id }}">
 
-                <label style="border-radius: 8px"
-                       class="p-0 btn btn-sm btn-outline-danger {% if post.votes.dislikes.all|user_in:user %}active{% endif %}"
-                       data-id="{{ post.id }}" data-type="post" data-action="dislike" id="dpost{{ post.id }}"
-                       title="Мас петух">
-                    <img src="{% static "img/svg/hand-thumbs-down.svg" %}">
-                    <span data-count="dislike" class="font-weight-bold">{{ post.votes.dislikes.count }}</span>
-                </label>
-            </div>
+                    <span data-count="dislike">{{ post.votes.dislikes.count }}</span>
+                </li>
+            </ul>
 
         </div>
 
