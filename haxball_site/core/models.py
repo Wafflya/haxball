@@ -1,3 +1,5 @@
+import collections
+
 from autoslug import AutoSlugField
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -103,17 +105,24 @@ class Comment(models.Model):
     def has_childs(self):
         return self.childs.count() > 0
 
-    #def all_childs(self):
-     #   for child in self.childs:
-      #      k = child.childs.count()
-      #      while child.childs.count()
-      #  return self.childs.count()
+    def all_childs(self):
+        return bfs(self)
 
 
+# Обход графа в ширину хе-хе, хоть где-то пригодилось)
+def bfs(root):
+    visited = set()
+    queue = collections.deque([root])
+    while queue:
+        vertex = queue.popleft()
+        for neighbour in vertex.childs.all():
+            if neighbour not in visited:
+                visited.add(neighbour)
+                queue.append(neighbour)
+    return visited
 
 
-
-# Модель для профиля пользователя
+            # Модель для профиля пользователя
 class Profile(models.Model):
     name = models.OneToOneField(User, verbose_name='Пользователь', on_delete=models.CASCADE,
                                 related_name='user_profile')
