@@ -33,7 +33,7 @@
                                       ; class="mr-1">Сегодня</h4>
             </div>
             <div class="btn-group-vertical">
-                 {% for comment in top_comments %}
+                 {% for comment in top_comments_day %}
                     <a type="button" href="{{ comment.post.get_absolute_url }}" class="btn btn-secondary btn-block text-right px-1"
                        data-toggle="tooltip" data-placement="right" title="от {{ comment.author }}">
                         <div class="d-flex justify-content-between">
@@ -53,10 +53,10 @@
      <div class="card mt-2">
             <div class="card-header text-center">
                 <h4 class="mb-0"><img src="{% static "img/ico/top_1.png" %}" height="37" width="37" style="vertical-align: top"
-                                      ; class="mr-1">Неделю</h4>
+                                      ; class="mr-1">Месяц</h4>
             </div>
             <div class="btn-group-vertical">
-                 {% for comment in top_comments %}
+                 {% for comment in top_comments_month %}
                     <a type="button" href="{{ comment.post.get_absolute_url }}" class="btn btn-secondary btn-block text-right px-1"
                        data-toggle="tooltip" data-placement="right" title="от {{ comment.author }}">
                         <div class="d-flex justify-content-between">
@@ -75,10 +75,10 @@
            <div class="card mt-2">
             <div class="card-header text-center">
                 <h4 class="mb-0"><img src="{% static "img/ico/top_1.png" %}" height="37" width="37" style="vertical-align: top"
-                                      ; class="mr-1">Месяц</h4>
+                                      ; class="mr-1">Год</h4>
             </div>
             <div class="btn-group-vertical">
-                 {% for comment in top_comments %}
+                 {% for comment in top_comments_year %}
                     <a type="button" href="{{ comment.post.get_absolute_url }}" class="btn btn-secondary btn-block text-right px-1"
                        data-toggle="tooltip" data-placement="right" title="от {{ comment.author }}">
                         <div class="d-flex justify-content-between">

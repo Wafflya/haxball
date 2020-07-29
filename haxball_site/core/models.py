@@ -106,7 +106,7 @@ class Comment(models.Model):
         return self.childs.count() > 0
 
     def all_childs(self):
-        return bfs(self)
+        return sorted(list(bfs(self)), key=lambda x: x.created)
 
 
 # Обход графа в ширину хе-хе, хоть где-то пригодилось)

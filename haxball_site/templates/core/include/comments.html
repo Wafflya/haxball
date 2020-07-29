@@ -6,11 +6,7 @@
     <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 {% endblock %}
 
-{% if user.is_authenticated %}
-    {% include 'core/include/form_comment.html' %}
-{% else %}
-    Войдите, чтобы оставить комментарий
-{% endif %}
+
 
 <div class="row">
     <div class="col-md-12">
@@ -33,7 +29,7 @@
                         </div>
                         <div class="comment-text w-100">
                             <a href="{{ comment.author.user_profile.get_absolute_url }}">
-                                <h5>
+                                <h5 class="m-0">
                                     {{ comment.author.username }}
                                     <span class="badge">
                                         {% karma comment.author.user_profile %}
@@ -41,7 +37,7 @@
                                 </h5>
                             </a>
                             <div class="comment-footer">
-                                <span class="date">
+                                <span class="date text-muted small">
                                     {{ comment.created|timesince }} назад
                                 </span>
 
@@ -81,7 +77,7 @@
                         </div>
                         <div class="comment-text w-100">
                             <a href="{{ children.author.user_profile.get_absolute_url }}">
-                                <h5>
+                                <h5 class="m-0">
                                     {{ children.author.username }}
                                     <span class="badge">
                                         {% karma children.author.user_profile %}
@@ -89,17 +85,17 @@
                                 </h5>
                             </a>
                             <div class="comment-footer">
-                                <span class="date">
+                                <span class="date text-muted small">
                                     {{ children.created|timesince }} назад
                                 </span>
 
                                 <ul class="list-group list-group-horizontal-md d-inline-flex">
-                                    <li class="action-like fa fa-thumbs-up {% if children.votes.likes.all|user_in:user %}text-success{% endif %}" data-id="{{ comment.id }}"
-                                        data-type="comment" data-action="like" id="lcomment{{ comment.id }}">
+                                    <li class="action-like fa fa-thumbs-up {% if children.votes.likes.all|user_in:user %}text-success{% endif %}" data-id="{{ children.id }}"
+                                        data-type="comment" data-action="like" id="lcomment{{ children.id }}">
                                         <span data-count="like">{{ children.votes.likes.count }}</span>
                                     </li>
 
-                                    <li class="action-dislike fa fa-thumbs-down {% if children.votes.dislikes.all|user_in:user %}text-danger{% endif %}" data-id="{{ comment.id }}"
+                                    <li class="action-dislike fa fa-thumbs-down {% if children.votes.dislikes.all|user_in:user %}text-danger{% endif %}" data-id="{{ children.id }}"
                                         data-type="comment" data-action="dislike" id="dcomment{{ children.id }}">
 
                                         <span data-count="dislike">{{ children.votes.dislikes.count }}</span>
@@ -128,14 +124,22 @@
         </div>
     </div>
 </div>
+
+{% if user.is_authenticated %}
+    {% include 'core/include/form_comment.html' %}
+{% else %}
+    Войдите, чтобы оставить комментарий
+{% endif %}
+
+
+
+{% if object.comments.count > 2 %}
+    {% include "core/include/pagination.html" with page=comments %}
+{% endif %}
+
 <script>
     function addComment(name,id) {
         document.getElementById('contactparent').value = id
         document.getElementById('contactcomment').innerText = `${name},`
     }
 </script>
-
-
-{% if object.comments.count > 2 %}
-    {% include "core/include/pagination.html" with page=comments %}
-{% endif %}

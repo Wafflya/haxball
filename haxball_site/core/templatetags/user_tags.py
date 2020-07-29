@@ -57,10 +57,23 @@ def show_last_activity(count=10):
 # Чтобы топ по лайкам за период считал(!!!период добавить!!!)
 @register.inclusion_tag('core/include/sidebar_for_top_comments.html')
 def show_top_comments(count=5, for_year=2020):
-    top_com = Comment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(
-        dislike_count=Count('votes', filter=Q(votes__vote__lt=0))).filter(created__year=2020).order_by('-like_count')[
+    my_date = timezone.now()
+    year, week, day_of_week = my_date.isocalendar()
+    day = my_date.day
+    month = my_date.month
+    print(day,week,month)
+    top_com_today = Comment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(
+        dislike_count=Count('votes', filter=Q(votes__vote__lt=0))).filter(created__year=year, created__month=month, created__day=day).order_by('-like_count')[
               :count]
-    return {'top_comments': top_com}
+    top_com_month = Comment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(
+        dislike_count=Count('votes', filter=Q(votes__vote__lt=0))).filter(created__year=year, created__month=month).order_by('-like_count')[
+                    :count]
+    top_com_year = Comment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(
+        dislike_count=Count('votes', filter=Q(votes__vote__lt=0))).filter(created__year=year).order_by('-like_count')[
+                    :count]
+    return {'top_comments_day': top_com_today,
+            'top_comments_month':top_com_month,
+            'top_comments_year':top_com_year}
 
 
 # Сайд-бар для отображеня топа лайков постов за всё время
