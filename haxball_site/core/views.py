@@ -8,17 +8,24 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 
 from .forms import CommentForm, EditProfileForm
-from .models import Post, Profile, LikeDislike
+from .models import Post, Profile, LikeDislike, Category
 
 
 # Вьюха для списка постов
 
 class PostListView(ListView):
-    queryset = Post.objects.all().order_by('-important', '-created', )
+    queryset = Post.objects.filter(category__is_official=True).order_by('-important', '-created', )
     context_object_name = 'posts'
     paginate_by = 5
     template_name = 'core/post/list.html'
 
+
+class PostFastcupsView(ListView):
+    category = Category.objects.get(slug='fastcups')
+    queryset = Post.objects.filter(category=category)
+    context_object_name = 'posts'
+    paginate_by = 5
+    template_name = 'core/post/list.html'
 
 # Вьюха для поста и комментариев к нему.
 # С одной стороны удобно одним методом, с другой-хезе как правильно надо)

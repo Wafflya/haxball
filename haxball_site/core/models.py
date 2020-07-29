@@ -56,9 +56,32 @@ class LikeDislike(models.Model):
     objects = LikeDislikeManager()
 
 
+# Огромный раздел форума в котором категории создаются админами
+class Themes(models.Model):
+    title = models.CharField('Тема', max_length=256)
+    def __str__(self):
+        return self.title
+
+
+# Модель для категории поста(Новость, Фасткап, Регламент, Турнир, Трансляция, Архив, общение...)
+# Это также секции форума, в которых можно публиковать посты, поэтому доступно описание, если тема
+# неофицальная, ставим ис-оффишл НОУ и пишем описание, привязываем к теме форума
+class Category(models.Model):
+    title = models.CharField('Категория', max_length=256)
+    slug = models.SlugField(max_length=250, unique=True)
+    description = models.TextField('Описание категории', blank=True)
+    is_official = models.BooleanField(default=True)
+    theme = models.ForeignKey(Themes, verbose_name='Тема на форуме', on_delete=models.CASCADE, blank=True, null=True,
+                              related_name='category_in_theme')
+    def __str__(self):
+        return self.title
+
+
 # Модель для поста
 class Post(models.Model):
     title = models.CharField('Заголовок', max_length=256)
+    category = models.ForeignKey(Category, verbose_name='Категория поста', on_delete=models.SET_NULL, blank=True,
+                                 null=True, related_name='posts_in_category')
     author = models.ForeignKey(User, verbose_name='Автор', on_delete=models.CASCADE, related_name='blog_posts')
     slug = models.SlugField(max_length=250, unique_for_date='publish')
     body = models.TextField("Текст поста")
@@ -88,7 +111,8 @@ class Comment(models.Model):
     author = models.ForeignKey(User, verbose_name='Автор', related_name='comments_by_user', on_delete=models.CASCADE)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
-    parent = models.ForeignKey('self', verbose_name='Родитель', on_delete=models.SET_NULL, blank=True, null=True, related_name="childs")
+    parent = models.ForeignKey('self', verbose_name='Родитель', on_delete=models.SET_NULL, blank=True, null=True,
+                               related_name="childs")
     votes = GenericRelation(LikeDislike, related_query_name='comments')
 
     class Meta:
@@ -121,8 +145,9 @@ def bfs(root):
                 queue.append(neighbour)
     return visited
 
+    # Модель для профиля пользователя
 
-            # Модель для профиля пользователя
+
 class Profile(models.Model):
     name = models.OneToOneField(User, verbose_name='Пользователь', on_delete=models.CASCADE,
                                 related_name='user_profile')

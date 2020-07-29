@@ -1,15 +1,15 @@
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
 from django.contrib import admin
+
 from .models import *
 
-from ckeditor.widgets import CKEditorWidget
-from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 # Register your models here.
 
 
 class PostAdminForm(forms.ModelForm):
-    body = forms.CharField(label='Пост', widget=CKEditorUploadingWidget(config_name='default') )
+    body = forms.CharField(label='Пост', widget=CKEditorUploadingWidget(config_name='default'))
 
     class Meta:
         model = Post
@@ -18,7 +18,7 @@ class PostAdminForm(forms.ModelForm):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'created', 'important')
+    list_display = ('title', 'author', 'created', 'important', 'category')
     list_filter = ('created', 'publish', 'author')
     search_fields = ('title', 'body')
     prepopulated_fields = {'slug': ('title',)}
@@ -29,6 +29,16 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'slug')
+
+
+@admin.register(Themes)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+
+
+@admin.register(Category)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'description', 'is_official', 'theme')
 
 
 @admin.register(Comment)
