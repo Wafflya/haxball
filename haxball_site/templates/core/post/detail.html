@@ -116,6 +116,7 @@
         <div class="card-footer d-inline-flex justify-content-between" style="cursor: pointer">
             <span class="text-muted"> Комментариев: {{ post.comments.count }} </span>
 
+            <div>
             <ul class="list-group list-group-horizontal-md d-inline-flex">
                 <li class="action-like fa fa-thumbs-up {% if post.votes.likes.all|user_in:user %}text-success{% endif %}"
                     data-id="{{ post.id }}"
@@ -129,7 +130,15 @@
 
                     <span data-count="dislike">{{ post.votes.dislikes.count }}</span>
                 </li>
+
             </ul>
+
+            <span class="action-icons">
+                <a href="#addcomment" onclick="addComment('','')">
+                    <i class="fa fa-reply"></i>
+                </a>
+            </span>
+            </div>
 
         </div>
 

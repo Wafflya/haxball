@@ -20,8 +20,8 @@ class PostListView(ListView):
     template_name = 'core/post/list.html'
 
 
-class PostFastcupsView(ListView):
-    category = Category.objects.get(slug='fastcups')
+class StuffView(ListView):
+    category = Category.objects.filter(slug='fastcups')[0]
     queryset = Post.objects.filter(category=category)
     context_object_name = 'posts'
     paginate_by = 5
@@ -47,12 +47,12 @@ def post_detail(request, slug, id):
             new_comment.author = request.user
             new_comment.post = post
             new_comment.save()
-            return redirect(post.get_absolute_url()+'?page='+str(page)+'#r'+str(new_comment.id))
+            return redirect(post.get_absolute_url()+'#r'+str(new_comment.id))
     else:
         comment_form = CommentForm()
 
     comments_obj = post.comments.all()
-    paginat = Paginator(comments_obj, 15)
+    paginat = Paginator(comments_obj, 50)
     page = request.GET.get('page')
 
     try:

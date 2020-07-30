@@ -2,7 +2,7 @@
 
 <form action='{% url 'core:post_detail' post.id post.slug %}' method="post" id="addcomment">
     {% csrf_token %}
-    <input type="hidden" name="page" value="{{ page }}">
+    <!--<input type="hidden" name="page" value="{{ page }}">-->
     <input type="hidden" name="parent" id="contactparent" value="">
     <div class="form-group">
         <!-- {{ comment_form.body }}-->

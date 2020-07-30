@@ -18,7 +18,7 @@ urlpatterns = [
     path('profile/<slug:slug>/<int:pk>/edit', views.EditMyProfile.as_view(), name='edit_profile'),
 
 #  Путь к фасткапам
-    path('fastcups/', views.PostFastcupsView.as_view(), name='fastcups'),
+    path('<slug:slug>/', views.StuffView.as_view(), name='fastcups'),
 #  Путь на форум
     #path('forum/', )
 

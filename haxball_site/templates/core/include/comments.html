@@ -3,7 +3,6 @@
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static "core/include/comments.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
-    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 {% endblock %}
 
 
@@ -12,15 +11,19 @@
     <div class="col-md-12">
         <div class="card"  style="border-radius: 20px 20px 0px 0px">
             <div class="card-body card-body-comment">
-                <h4 class="card-title">Последние комментарии </h4>
-                <h6 class="card-subtitle">Комментарии</h6>
+                {% if post.comments.count > 0 %}
+                    <h4 class="card-title">Последние комментарии </h4>
+                {% else %}
+                    <h6 class="card-subtitle">Здесь пока пусто, не хочешь быть первым?</h6>
+                {% endif %}
+                <!-- <h6 class="card-subtitle">Комментарии</h6> -->
             </div>
             <div class="comment-widgets m-b-20">
                 {% for comment in comments %}
 
                     <!-- Непосредственно комментарий -->
                     {% if comment.is_parent %}
-                    <div class="d-flex flex-row comment-row">
+                    <div class="d-flex flex-row comment-row" id="r{{comment.id}}">
                         <div class="p-2">
                             <span class="round">
                                 <img src="{{ comment.author.user_profile.avatar.url }}"
@@ -64,11 +67,21 @@
                             <p class="m-b-5 m-t-10">
                                 {{ comment.body|safe }}
                             </p>
+
+                            <div class="comment-footer">
+                                {% if comment.childs_count > 2 %}
+                                <a href="#commentcollapse{{comment.id}}" data-toggle="collapse" aria-expanded="true"
+                                   aria-controls="commentcollapse{{comment.id}}" class="small"><span class="fa fa-chevron-up"> </span>Показать ответы ({{ comment.childs_count }}) </a>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                         {% if comment.has_childs %}
+                        {% if comment.childs_count > 2 %}
+                            <div class="collapse" id="commentcollapse{{comment.id}}">
+                        {% endif %}
                             {% for children in comment.all_childs %}
-                                <div class="d-flex flex-row comment-row" style="padding-left: 100px">
+                                <div class="d-flex flex-row comment-row" style="padding-left: 100px" id="r{{children.id}}">
                         <div class="p-2">
                             <span class="round">
                                 <img src="{{ children.author.user_profile.avatar.url }}"
@@ -115,6 +128,10 @@
                         </div>
                     </div>
                             {% endfor %}
+
+                        {% if comment.childs_count > 2 %}
+                            </div>
+                        {% endif %}
                         {% endif %}
                     {% endif %}
                 {% endfor %}

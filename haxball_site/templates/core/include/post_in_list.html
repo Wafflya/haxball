@@ -1,9 +1,9 @@
 {% load static %}
 {% load user_tags %}
-<div class="card mx-1 my-2">
+<div class="card mx-1 my-2" style="border-radius:20px;">
 
     <a href="{{ post.get_absolute_url }}" type="button"
-       class="button btn btn-outline-info btn-lg btn-block">
+       class="button btn btn-outline-info btn-lg btn-block" style="border-radius:20px 20px 0px 0px;">
 
         {{ post.title }}
         {% if post.created|is_fresh:5 %}
@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="card-footer px-3 py-1 d-inline-flex justify-content-between">
+    <div class="card-footer px-3 py-1 d-inline-flex justify-content-between" style="border-radius:0px 0px 20px 20px;">
         <span class="text-muted"> <img src="{% static "img/ico/calendar_1.png" %}" height="21"
                                        width="21">  {{ post.created|date:"SHORT_DATE_FORMAT" }} <img
                 src="{% static "img/ico/clock_1.png" %}" height="19" width="19"> {{ post.created|time:"H:i" }} <img

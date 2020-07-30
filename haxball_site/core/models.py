@@ -55,12 +55,20 @@ class LikeDislike(models.Model):
 
     objects = LikeDislikeManager()
 
+    class Meta:
+        verbose_name = 'Лайк/дизлайк элемент'
+        verbose_name_plural = "Лайк/дизлайк элементы"
+
 
 # Огромный раздел форума в котором категории создаются админами
 class Themes(models.Model):
     title = models.CharField('Тема', max_length=256)
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = 'Раздел форума'
+        verbose_name_plural = "Разделы форума"
 
 
 # Модель для категории поста(Новость, Фасткап, Регламент, Турнир, Трансляция, Архив, общение...)
@@ -70,11 +78,15 @@ class Category(models.Model):
     title = models.CharField('Категория', max_length=256)
     slug = models.SlugField(max_length=250, unique=True)
     description = models.TextField('Описание категории', blank=True)
-    is_official = models.BooleanField(default=True)
+    is_official = models.BooleanField(default=True, verbose_name = 'Официальная')
     theme = models.ForeignKey(Themes, verbose_name='Тема на форуме', on_delete=models.CASCADE, blank=True, null=True,
                               related_name='category_in_theme')
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
 
 
 # Модель для поста
@@ -131,6 +143,9 @@ class Comment(models.Model):
 
     def all_childs(self):
         return sorted(list(bfs(self)), key=lambda x: x.created)
+
+    def childs_count(self):
+        return len(list(bfs(self)))
 
 
 # Обход графа в ширину хе-хе, хоть где-то пригодилось)

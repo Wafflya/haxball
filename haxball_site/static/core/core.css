@@ -39,3 +39,31 @@ html, body {
 .form-send-comment {
 
 }
+
+
+.action-like{
+    padding-left: 7px;
+    vertical-align: middle;
+    color: #99abb4
+}
+
+.action-like:hover {
+    color: #00FF00;
+}
+
+.action-like:active {
+    color: #34ce57;
+}
+
+.action-dislike{
+    padding-left: 7px;
+    vertical-align: middle;
+    color: #99abb4
+}
+.action-dislike:active {
+    color: #F53D65;
+}
+
+.action-dislike:hover {
+    color: #bd2130;
+}
