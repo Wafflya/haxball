@@ -1,14 +1,17 @@
 import json
-
+from autoslug import AutoSlugField
+from pytils.translit import slugify
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
+from django.core.exceptions import ObjectDoesNotExist
+from datetime import date, datetime
 
-from .forms import CommentForm, EditProfileForm
-from .models import Post, Profile, LikeDislike, Category
+from .forms import CommentForm, EditProfileForm, PostForm
+from .models import Post, Profile, LikeDislike, Category, Themes
 
 
 # Вьюха для списка постов
@@ -20,23 +23,66 @@ class PostListView(ListView):
     template_name = 'core/post/list.html'
 
 
+# Вьюха для трансляций
 class LivesView(ListView):
-    print(1)
-    category = Category.objects.filter(slug='live')[0]
+    try:
+        category = Category.objects.get(slug='live')
+    except ObjectDoesNotExist:
+        category = None
     queryset = Post.objects.filter(category=category)
     context_object_name = 'posts'
     paginate_by = 5
     template_name = 'core/lives/lives_list.html'
 
-#class ForumView(ListView):
+
+# Главная форума тута
+class ForumView(ListView):
+    queryset = Themes.objects.all()
+    context_object_name = 'themes'
+    template_name = 'core/forum/forum_main.html'
 
 
+# Вьюха для списка постов в категории форума
+class CategoryListView(DetailView):
+    model = Category
+    template_name = 'core/forum/post_list_in_category.html'
+    context_name = 'category'
+
+    def get_context_data(self, **kwargs):
+        post_list = self.object.posts_in_category.all().order_by('-created')
+        context = super().get_context_data(**kwargs)
+        context['posts'] = post_list
+        return context
+
+def post_new(request, slug):
+    category = Category.objects.get(slug=slug)
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit = False)
+            post.author = request.user
+            post.category = category
+            print(category.title)
+            post.slug = slugify(post.title)
+            post.created = datetime.now()
+            post.save()
+            return redirect(category.get_absolute_url())
+    else:
+        form = PostForm()
+    return render(request, 'core/forum/add_post.html', {'form':form, 'category':category})
+
+
+# Вьюха для фасткапов
 class FastcupView(ListView):
-    category = Category.objects.filter(slug='fastcups')[0]
+    try:
+        category = Category.objects.get(slug='fastcups')
+    except ObjectDoesNotExist:
+        category = None
     queryset = Post.objects.filter(category=category)
     context_object_name = 'posts'
     paginate_by = 5
     template_name = 'core/fastcups/fastcups_list.html'
+
 
 # Вьюха для поста и комментариев к нему.
 # С одной стороны удобно одним методом, с другой-хезе как правильно надо)
@@ -58,7 +104,7 @@ def post_detail(request, slug, id):
             new_comment.author = request.user
             new_comment.post = post
             new_comment.save()
-            return redirect(post.get_absolute_url()+'#r'+str(new_comment.id))
+            return redirect(post.get_absolute_url() + '#r' + str(new_comment.id))
     else:
         comment_form = CommentForm()
 
@@ -89,6 +135,9 @@ class ProfileDetail(DetailView):
     context_object_name = 'profile'
     template_name = 'core/profile/profile_detail.html'
 
+
+#class AddPost(DetailView):
+#    def post(self, request, ):
 
 
 

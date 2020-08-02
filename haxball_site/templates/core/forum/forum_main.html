@@ -1,0 +1,35 @@
+{% extends "core/home.html" %}
+{% load static %}
+
+{% block postlist %}
+
+<div class="card my-2"
+     style="border-radius: 25px; background-image: url({% static "img/backgrounds/background1.png" %})">
+
+<div class="card-body">
+    {% for theme in themes %}
+    <h3 class="text-center mt-1 mb-0">
+        {{ theme.title }}
+    </h3>
+    <hr>
+    {% for subtheme in theme.category_in_theme.all %}
+
+            <div class="card mx-1 my-2" style="border-radius:20px;">
+                <div class="card-body d-inline-flex justify-content-between">
+                    <div class="d-inline-block">
+                    <h5 class="card-title"><a href="{{ subtheme.get_absolute_url }}"> {{ subtheme.title }} </a></h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ subtheme.description }}</h6>
+                    </div>
+                    <div class="d-inline-block">
+                        <h6 class="text-right">Постов: {{ subtheme.posts_in_category.count }}</h6>
+                        <h6 class="text-muted small mt-2">Последний ответ: 20 мин назад</h6>
+                    </div>
+                </div>
+
+            </div>
+    {% endfor %}
+    {% endfor %}
+</div>
+
+</div>
+{% endblock %}

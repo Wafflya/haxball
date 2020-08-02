@@ -84,6 +84,9 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('core:forum_category', args=[self.slug])
+
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
@@ -95,7 +98,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, verbose_name='Категория поста', on_delete=models.SET_NULL, blank=True,
                                  null=True, related_name='posts_in_category')
     author = models.ForeignKey(User, verbose_name='Автор', on_delete=models.CASCADE, related_name='blog_posts')
-    slug = models.SlugField(max_length=250, unique_for_date='publish')
+    slug = models.SlugField(max_length=250)
     body = models.TextField("Текст поста")
     publish = models.DateTimeField('Начало публикации', default=timezone.now)
     created = models.DateTimeField("Опубликовано", auto_now_add=True)

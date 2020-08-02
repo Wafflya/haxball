@@ -212,6 +212,8 @@ SUMMERNOTE_CONFIG = {
 CKEDITOR_CONFIGS = {
     'default': {
         'skin': 'moono',
+        'height': 400,
+        'width': '100%',
         # 'skin': 'office2013',
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']

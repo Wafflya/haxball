@@ -24,9 +24,13 @@ urlpatterns = [
     path('lives/', views.LivesView.as_view(), name='lives'),
 
 #  Путь на форум
-    #path('forum/', views.ForumView.as_view(), name = 'forum'),
+    path('forum/', views.ForumView.as_view(), name = 'forum'),
+    path('forum/<slug:slug>', views.CategoryListView.as_view(), name='forum_category'),
 
-# Самописный путь на апи обработку лайка/дизлайка ПОСТА
+# Ссылка на создание нового поста на форуме
+    path('forum/<slug:slug>/add_post', views.post_new, name='new_post'),
+
+# Путь на самописный апи для обработку лайка/дизлайка ПОСТА через Ажакс-запрос
     path('api/post/<int:id>/like/',
          login_required(views.VotesView.as_view(model=Post, vote_type=LikeDislike.LIKE)),
          name='post_like'),
@@ -34,7 +38,7 @@ urlpatterns = [
          login_required(views.VotesView.as_view(model=Post, vote_type=LikeDislike.DISLIKE)),
          name='post_dislike'),
 
-# Самописный путь на апи обработку лайка/дизлайка Комментария
+# Путь на самописный апи для обработку лайка/дизлайка Комментария через Ажакс-запрос
     path('api/comment/<int:id>/like/',
          login_required(views.VotesView.as_view(model=Comment, vote_type=LikeDislike.LIKE)),
          name='comment_like'),

@@ -18,7 +18,7 @@ class PostAdminForm(forms.ModelForm):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'created', 'important', 'category')
+    list_display = ('title', 'author', 'category', 'created', 'important')
     list_filter = ('created', 'publish', 'author')
     search_fields = ('title', 'body')
     prepopulated_fields = {'slug': ('title',)}

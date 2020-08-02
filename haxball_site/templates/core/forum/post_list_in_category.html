@@ -1,0 +1,24 @@
+{% extends "core/home.html" %}
+{% load static %}
+
+{% block postlist %}
+<div class="card my-2"
+     style="border-radius: 25px; background-image: url({% static "img/backgrounds/background1.png" %})">
+
+    <div class="card-body">
+        <h3 class="text-center mt-1 mb-0"><i class="fa fa-list-alt text-primary" aria-hidden="true"></i>
+
+            {{ category }}
+        </h3>
+        <a href="{% url 'core:new_post' category.slug %}"> Создать пост </a>
+
+        <hr>
+
+        {% for post in posts %}
+                {% include "core/include/post_important_in_list.html" with post=post %}
+        {% endfor %}
+
+    </div>
+
+</div>
+{% endblock %}
