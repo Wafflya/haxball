@@ -75,7 +75,6 @@ def post_new(request, slug):
 
 # post-edit view
 def post_edit(request, slug, pk):
-    edit_time = datetime.now()
     post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
@@ -85,7 +84,7 @@ def post_edit(request, slug, pk):
             return redirect(post.get_absolute_url())
     else:
         form = PostForm(instance = post)
-    return render(request, 'core/forum/add_post.html', {'form': form, 'edit_time':edit_time})
+    return render(request, 'core/forum/add_post.html', {'form': form})
 
 # Вьюха для фасткапов
 class FastcupView(ListView):
