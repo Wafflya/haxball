@@ -1,6 +1,8 @@
 {% extends "core/home.html" %}
 {% load static %}
+{% load user_tags %}
 
+{% block title %}Форум{% endblock %}
 {% block postlist %}
 
 <div class="card my-2"
@@ -15,14 +17,15 @@
     {% for subtheme in theme.category_in_theme.all %}
 
             <div class="card mx-1 my-2" style="border-radius:20px;">
-                <div class="card-body d-inline-flex justify-content-between">
+                <div class="card-body d-inline-flex justify-content-between py-2">
                     <div class="d-inline-block">
                     <h5 class="card-title"><a href="{{ subtheme.get_absolute_url }}"> {{ subtheme.title }} </a></h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{ subtheme.description }}</h6>
                     </div>
                     <div class="d-inline-block">
-                        <h6 class="text-right">Постов: {{ subtheme.posts_in_category.count }}</h6>
-                        <h6 class="text-muted small mt-2">Последний ответ: 20 мин назад</h6>
+                        <h6 class="text-right"><i class="fa fa-bars text-primary" aria-hidden="true"></i> Статей: {{ subtheme.posts_in_category.count }}</h6>
+                        <h6 class="text-muted small mt-2 text-right"><i class="fa fa-reply text-success" aria-hidden="true"></i>
+ {% forum_last_activity subtheme %}</h6>
                     </div>
                 </div>
 

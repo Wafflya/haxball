@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
 
 {% endblock %}
+{% block title %}Профиль {{ profile.name }} {% endblock %}
 
 {% block profile_of_user %}
     <hr>
@@ -19,7 +20,7 @@
                     <h4 class="f-w-600">{{ profile.name }}
                         {% if profile.name.is_superuser %}
                         <img src="{% static "img/ico/crown.png" %}" height="16"
-                                                                width="16" title="Король ёпт"></h4>
+                                                                width="16" title="Администрация"></h4>
                         {% endif %}
                     <p class="mb-1">Без команды</p>
                     <p>Рейтинг {% karma profile %}</p>
@@ -34,8 +35,8 @@
                 <div class="card-block">
                     <h5 class="m-b-20 p-b-5 b-b-default f-w-600">Основная информация  {% if profile.name.username == user.username %}
 
-                    <a href="{% url 'core:edit_profile' profile.slug profile.id %}" type="button"
-                       class="btn btn-warning">Редактировать профиль</a>
+                    <a href="{% url 'core:edit_profile' profile.slug profile.id %}"
+                       class="text-warning small text-right"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
             {% endif %}
                     </h5>

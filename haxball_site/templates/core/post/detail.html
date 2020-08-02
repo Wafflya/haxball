@@ -97,7 +97,12 @@
 
     <div class="card my-4" style="border-radius: 25px">
         <div class="card-header" style="border-radius: 25px">
-            <h4 class="card-title mb-1">{{ post.title }}</h4>
+            <h4 class="card-title mb-1">{{ post.title }}
+                {% if post.author == user %}
+                     <a href="{% url 'core:post_edit' post.slug post.id %}"
+                       class="text-warning small text-right"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                {% endif %}
+            </h4>
             <small class="text-muted">
                 <img src="{% static "img/ico/calendar_1.png" %}" height="21"
                      width="21"> {{ post.created|date:"SHORT_DATE_FORMAT" }} <img

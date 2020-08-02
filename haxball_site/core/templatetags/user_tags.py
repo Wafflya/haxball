@@ -36,6 +36,27 @@ def age(born_date):
         return date.today().year - born_date.year - 1
 
 
+# Тег для отображения последней активности на форуме
+@register.inclusion_tag('core/include/forum/last_activity_in_category.html')
+def forum_last_activity(category):
+    print(category)
+    last_post = Post.objects.filter(category=category).order_by('-created').first()
+    last_comment = Comment.objects.filter(post__category = category).order_by('-created').first()
+    print(last_post)
+    print(last_comment)
+    if last_comment == None and last_post==None:
+        return {'last_act':None}
+    elif last_comment == None:
+        return {'last_act':last_post.created}
+    elif last_post == None:
+        return {'last_act':last_comment.created}
+    else:
+        if last_comment.created > last_post.created:
+            return {'last_act': last_comment.created}
+        else:
+            return {'last_act': last_post.created}
+
+
 # Вообще, это ласт-реги, но надо будет сделать куррент онлайн
 @register.inclusion_tag('core/include/sidebar_for_users.html')
 def show_users_online(count=5):
@@ -62,7 +83,7 @@ def show_top_comments(count=5, for_year=2020):
     year, week, day_of_week = my_date.isocalendar()
     day = my_date.day
     month = my_date.month
-    print(day,week,month)
+    #print(day,week,month)
     top_com_today = Comment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(
         dislike_count=Count('votes', filter=Q(votes__vote__lt=0))).filter(created__year=year, created__month=month, created__day=day).order_by('-like_count')[
               :count]

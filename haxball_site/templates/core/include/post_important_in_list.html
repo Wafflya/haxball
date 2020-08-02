@@ -19,10 +19,16 @@
     </div>
 
     <div class="card-footer px-3 py-1 d-inline-flex justify-content-between" style="border-radius:0px 0px 20px 20px;">
-        <span class="text-muted"> <i class="fa fa-calendar text-primary" aria-hidden="true"></i>  {{ post.created|date:"SHORT_DATE_FORMAT" }}
+        <span class="text-muted">
+            <i class="fa fa-calendar text-primary" aria-hidden="true"></i>  {{ post.created|date:"SHORT_DATE_FORMAT" }}
             <i class="fa fa-clock-o text-primary" aria-hidden="true"></i>{{ post.created|time:"H:i" }}<a
                     href="{{ post.author.user_profile.get_absolute_url }}" class="fa fa-user-o text-primary pl-1">{{ post.author }}</a>,
-            <i class="fa fa-comments-o text-primary" aria-hidden="true"></i>{{ post.comments.count }}</span>
+            <i class="fa fa-comments-o text-primary" aria-hidden="true"></i>{{ post.comments.count }}
+            {% if post.updated > post.created %}
+
+                <span class="small">Изменено: {{ post.updated|timesince }} назад</span>
+            {% endif %}
+        </span>
 
 
 

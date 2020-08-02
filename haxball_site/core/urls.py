@@ -30,6 +30,9 @@ urlpatterns = [
 # Ссылка на создание нового поста на форуме
     path('forum/<slug:slug>/add_post', views.post_new, name='new_post'),
 
+# Редактирование профиля, если создан пользователем
+    path('post/<slug:slug>/<int:pk>/edit', views.post_edit, name='post_edit'),
+
 # Путь на самописный апи для обработку лайка/дизлайка ПОСТА через Ажакс-запрос
     path('api/post/<int:id>/like/',
          login_required(views.VotesView.as_view(model=Post, vote_type=LikeDislike.LIKE)),

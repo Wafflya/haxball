@@ -54,6 +54,7 @@ class CategoryListView(DetailView):
         context['posts'] = post_list
         return context
 
+# post-create view
 def post_new(request, slug):
     category = Category.objects.get(slug=slug)
     if request.method == 'POST':
@@ -71,6 +72,20 @@ def post_new(request, slug):
         form = PostForm()
     return render(request, 'core/forum/add_post.html', {'form':form, 'category':category})
 
+
+# post-edit view
+def post_edit(request, slug, pk):
+    edit_time = datetime.now()
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect(post.get_absolute_url())
+    else:
+        form = PostForm(instance = post)
+    return render(request, 'core/forum/add_post.html', {'form': form, 'edit_time':edit_time})
 
 # Вьюха для фасткапов
 class FastcupView(ListView):
