@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 
 from django import template
 from django.contrib.auth.models import User
@@ -58,7 +58,7 @@ def show_last_activity(count=10):
 # Чтобы топ по лайкам за период считал(!!!период добавить!!!)
 @register.inclusion_tag('core/include/sidebar_for_top_comments.html')
 def show_top_comments(count=5, for_year=2020):
-    my_date = timezone.now()
+    my_date = datetime.now()
     year, week, day_of_week = my_date.isocalendar()
     day = my_date.day
     month = my_date.month

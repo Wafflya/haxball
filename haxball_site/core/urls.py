@@ -18,9 +18,13 @@ urlpatterns = [
     path('profile/<slug:slug>/<int:pk>/edit', views.EditMyProfile.as_view(), name='edit_profile'),
 
 #  Путь к фасткапам
-    path('<slug:slug>/', views.StuffView.as_view(), name='fastcups'),
+    path('fastcups/', views.FastcupView.as_view(), name='fastcups'),
+
+#  Путь к трансляциям
+    path('lives/', views.LivesView.as_view(), name='lives'),
+
 #  Путь на форум
-    #path('forum/', )
+    #path('forum/', views.ForumView.as_view(), name = 'forum'),
 
 # Самописный путь на апи обработку лайка/дизлайка ПОСТА
     path('api/post/<int:id>/like/',

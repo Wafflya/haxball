@@ -88,7 +88,6 @@
         }
 
 
-
         // Подключение обработчиков
         $(function () {
             $('[data-action="like"]').click(like);
@@ -98,40 +97,25 @@
         });
 
 
-
-
-
-
     </script>
 
 {% endblock %}
 
 {% block postlist %}
-<div class="card my-2" style="border-radius: 25px; background-image: url({% static "img/backgrounds/background1.png" %})">
+<div class="card my-2"
+     style="border-radius: 25px; background-image: url({% static "img/backgrounds/background1.png" %})">
+
     <div class="card-body">
-    <h3 class="text-center mt-1 mb-0"><i class="fa fa-exclamation text-danger" aria-hidden="true"></i>
+        <h3 class="text-center mt-1 mb-0"><i class="fa fa-television" aria-hidden="true"></i>
+            Трансляции
+        </h3>
+        <hr>
 
-        Важная информация <i class="fa fa-exclamation text-danger" aria-hidden="true"></i>
-    </h3>
-    <hr>
-    {% for post in posts %}
-        {% if post.important %}
-            {% include "core/include/post_important_in_list.html" with post=post %}
-        {% endif %}
-    {% endfor %}
-    <h3 class="text-center mb-0"><i class="fa fa-newspaper-o text-success" aria-hidden="true"></i> Последние новости</h3>
-    <hr>
+        {% for post in posts %}
+                {% include "core/include/post_in_list.html" with post=post %}
+        {% endfor %}
 
-    {% for post in posts %}
-        {% if not post.important %}
-            {% include "core/include/post_in_list.html" with post=post %}
-        {% endif %}
-    {% endfor %}
     </div>
 
-        <div class="card-footer text-muted">
-        <a href="#">Смотреть все новости</a>
-    </div>
 </div>
-
 {% endblock %}

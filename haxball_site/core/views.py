@@ -20,12 +20,23 @@ class PostListView(ListView):
     template_name = 'core/post/list.html'
 
 
-class StuffView(ListView):
+class LivesView(ListView):
+    print(1)
+    category = Category.objects.filter(slug='live')[0]
+    queryset = Post.objects.filter(category=category)
+    context_object_name = 'posts'
+    paginate_by = 5
+    template_name = 'core/lives/lives_list.html'
+
+#class ForumView(ListView):
+
+
+class FastcupView(ListView):
     category = Category.objects.filter(slug='fastcups')[0]
     queryset = Post.objects.filter(category=category)
     context_object_name = 'posts'
     paginate_by = 5
-    template_name = 'core/post/list.html'
+    template_name = 'core/fastcups/fastcups_list.html'
 
 # Вьюха для поста и комментариев к нему.
 # С одной стороны удобно одним методом, с другой-хезе как правильно надо)

@@ -1,5 +1,5 @@
 {% load static %}
-<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Oswald:wght@300&display=swap" rel="stylesheet">
+
 <nav class="navbar navbar-light navbar_color nav-fill"
      style=background-image:url({% static "img/backgrounds/background1.png" %})>
 
@@ -37,10 +37,10 @@
             <a class="nav-link" href="#">Турниры</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'core:fastcups' 'fastcups' %}">Фасткапы</a>
+            <a class="nav-link" href="{% url 'core:fastcups' %}">Фасткапы</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Трансляции</a>
+            <a class="nav-link" href="{% url 'core:lives' %}">Трансляции</a>
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -76,5 +76,14 @@
     {% else %}
         <a class="p-2" href="{% url 'account_login' %}">Вход</a>
     {% endif %}
+
+
+    <!-- Button to Open the Modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+        Входу
+    </button>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#logoutModal">
+        Выход
+    </button>
 </nav>
 
