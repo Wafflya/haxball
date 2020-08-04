@@ -19,8 +19,8 @@
                                              class="img-radius" alt="User-Profile-Image"></div>
                     <h4 class="f-w-600">{{ profile.name }}
                         {% if profile.name.is_superuser %}
-                        <img src="{% static "img/ico/crown.png" %}" height="16"
-                                                                width="16" title="Администрация"></h4>
+                        <i class="fa fa-star text-success" aria-hidden="true"></i>
+
                         {% endif %}
                     <p class="mb-1">Без команды</p>
                     <p>Рейтинг {% karma profile %}</p>
