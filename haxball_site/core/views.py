@@ -23,11 +23,17 @@ class PostListView(ListView):
     template_name = 'core/post/list.html'
 
 
+def get_object_or_none(klass, *args, **kwargs):
+    try:
+        return klass._default_manager.get(*args, **kwargs)
+    except klass.DoesNotExist:
+        return None
+
 # Вьюха для трансляций
 class LivesView(ListView):
     try:
         category = Category.objects.get(slug='live')
-    except ObjectDoesNotExist:
+    except:
         category = None
     queryset = Post.objects.filter(category=category)
     context_object_name = 'posts'
@@ -90,7 +96,7 @@ def post_edit(request, slug, pk):
 class FastcupView(ListView):
     try:
         category = Category.objects.get(slug='fastcups')
-    except ObjectDoesNotExist:
+    except:
         category = None
     queryset = Post.objects.filter(category=category)
     context_object_name = 'posts'
