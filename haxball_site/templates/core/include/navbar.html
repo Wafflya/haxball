@@ -11,12 +11,18 @@
     <a class="navbar-brand nav-item" href="{% url 'core:home' %}">
         <div class="page-name"> Чемпионат России по футзалу</div>
     </a>
+    <div class="mr-100">
+        <iframe src="https://money.yandex.ru/quickpay/button-widget?targets=%D0%9D%D0%B0%20%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0&default-sum=200&button-text=14&yamoney-payment-type=on&button-size=m&button-color=black&successURL=&quickpay=small&account=410011043451485&" width="250" height="36" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+        </div>
 </nav>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark d-flex bd-highlight mb-0 sticky-top">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark d-flex bd-highlight mb-0 sticky-top">
     <!-- Brand -->
     <a class="navbar-brand" href="{% url 'core:home' %}">Главная</a>
-
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <!-- Links -->
     <ul class="navbar-nav mr-auto p-2 bd-highlight">
         <li class="nav-item dropdown">
@@ -80,7 +86,7 @@
         Вход
     </button>
     {% endif %}
-
+    </div>
 
     <!-- Button to Open the Modal -->
 
