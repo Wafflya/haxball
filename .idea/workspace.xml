@@ -2,8 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/background_dark_1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/bg-dark-0003.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/bg-light-4860.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/bg-light-4866.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/brik-black-012.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/geometric-pat-003.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/gibon.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/green-370121_1280.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/green_11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/holiday-1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/stone-pat-005.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/static/core/core.css" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/static/core/core.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/static/core/profile/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/static/core/profile/profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +56,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/haxball_site/static/img/backgrounds" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -53,17 +68,18 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/haxball_site/static/img/backgrounds" />
+      <recent name="E:\haxball\haxball_site\static\img\ico" />
+      <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
+      <recent name="E:\haxball\haxball_site\core\static\jquery" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\haxball\haxball_site\static\img\ico" />
       <recent name="E:\haxball\haxball_site\static\img\svg" />
       <recent name="E:\haxball\haxball_site\static\img" />
       <recent name="E:\haxball\haxball_site\core" />
       <recent name="E:\haxball\haxball_site" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\haxball\haxball_site\static\img\ico" />
-      <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
-      <recent name="E:\haxball\haxball_site\core\static\jquery" />
     </key>
   </component>
   <component name="RunManager">
