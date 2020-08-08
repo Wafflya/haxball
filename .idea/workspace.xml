@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/haxball_site/templates/core/post/all_posts_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/signup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/pagination.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/pagination.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

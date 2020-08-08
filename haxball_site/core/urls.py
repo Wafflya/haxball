@@ -20,6 +20,9 @@ urlpatterns = [
 #  Путь к фасткапам
     path('fastcups/', views.FastcupView.as_view(), name='fastcups'),
 
+#  Все посты
+    path('news_all/', views.AllPostView.as_view(), name='all_posts'),
+
 #  Путь к трансляциям
     path('lives/', views.LivesView.as_view(), name='lives'),
 

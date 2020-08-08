@@ -23,6 +23,14 @@ class PostListView(ListView):
     template_name = 'core/post/list.html'
 
 
+# Смотреть все новости
+class AllPostView(ListView):
+    queryset = Post.objects.filter(category__is_official=True).order_by('-created')
+    context_object_name = 'posts'
+    paginate_by = 7
+    template_name = 'core/post/all_posts_list.html'
+
+
 def get_object_or_none(klass, *args, **kwargs):
     try:
         return klass._default_manager.get(*args, **kwargs)
