@@ -72,18 +72,18 @@
     {% endif %}
 
     {% if user.is_authenticated %}
-        <a class="p-2" href="{% url 'account_logout' %}">Выход</a>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#logoutModal">
+        Выход
+    </button>
     {% else %}
-        <a class="p-2" href="{% url 'account_login' %}">Вход</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+        Вход
+    </button>
     {% endif %}
 
 
     <!-- Button to Open the Modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
-        Входу
-    </button>
-    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#logoutModal">
-        Выход
-    </button>
+
+
 </nav>
 
