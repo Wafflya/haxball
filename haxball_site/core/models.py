@@ -170,7 +170,7 @@ class Profile(models.Model):
     name = models.OneToOneField(User, verbose_name='Пользователь', on_delete=models.CASCADE,
                                 related_name='user_profile')
     slug = AutoSlugField(populate_from='name')
-    avatar = models.ImageField('Аватар', upload_to='users_avatars/', default='users_avatars/default.png')
+    avatar = models.ImageField('Аватар', upload_to='users_avatars/', default='users_avatars/default/default.png')
     born_date = models.DateField('Дата рождения', blank=True, null=True)
     about = models.TextField(max_length=1000, blank=True)
     city = models.CharField(max_length=100, blank=True)
