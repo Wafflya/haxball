@@ -24,7 +24,10 @@ SECRET_KEY = 'm_5m)8w^h+8avxko^()kmlr6fnp(r+m1^=(m!kldx$*47(-za6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+if DEBUG:
+    ALLOWED_HOSTS = []
+else:
+    ALLOWED_HOSTS = ['185.7.145.91','127.0.0.1']
 
 # Application definition
 
@@ -83,12 +86,28 @@ WSGI_APPLICATION = 'haxball_site.wsgi.application'
 
 #X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': 'hax_db',
+                'USER': 'kikimor24',
+                'PASSWORD': 'gibby4mopolnoye322',
+                'HOST': 'localhost',
+                'PORT': '5432',
+            }
+        }
+    }
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -130,30 +149,37 @@ USE_L10N = True
 
 USE_TZ = True
 
-#ACCOUNT_EMAIL_REQUIRED = True
-#ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
-#ACCOUNT_USERNAME_MIN_LENGTH = 1
-#ACCOUNT_EMAIL_VERIFICATION = True
-EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    ACCOUNT_EMAIL_REQUIRED = True
+    ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+    ACCOUNT_EMAIL_VERIFICATION = True
+    # ACCOUNT_USERNAME_MIN_LENGTH = 1
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'vmarat95@gmail.com'
-EMAIL_HOST_PASSWORD = 'eik9zeeKaeci'
+EMAIL_HOST_USER = 'haxballcis@gmail.com'
+EMAIL_HOST_PASSWORD = 'ciscis08062020'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [STATIC_DIR]
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+if DEBUG:
+    STATIC_URL = '/static/'
+    STATIC_DIR = os.path.join(BASE_DIR, 'static')
+    STATICFILES_DIRS = [STATIC_DIR]
+    # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    STATIC_URL = '/static/'
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = '/root/site/media'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
