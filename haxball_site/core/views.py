@@ -1,14 +1,13 @@
 import json
-from autoslug import AutoSlugField
-from pytils.translit import slugify
+from datetime import datetime
+
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
-from django.core.exceptions import ObjectDoesNotExist
-from datetime import date, datetime
+from pytils.translit import slugify
 
 from .forms import CommentForm, EditProfileForm, PostForm
 from .models import Post, Profile, LikeDislike, Category, Themes
@@ -36,6 +35,7 @@ def get_object_or_none(klass, *args, **kwargs):
         return klass._default_manager.get(*args, **kwargs)
     except klass.DoesNotExist:
         return None
+
 
 # Вьюха для трансляций
 class LivesView(ListView):
@@ -68,13 +68,14 @@ class CategoryListView(DetailView):
         context['posts'] = post_list
         return context
 
+
 # post-create view
 def post_new(request, slug):
     category = Category.objects.get(slug=slug)
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
-            post = form.save(commit = False)
+            post = form.save(commit=False)
             post.author = request.user
             post.category = category
             print(category.title)
@@ -84,7 +85,7 @@ def post_new(request, slug):
             return redirect(category.get_absolute_url())
     else:
         form = PostForm()
-    return render(request, 'core/forum/add_post.html', {'form':form, 'category':category})
+    return render(request, 'core/forum/add_post.html', {'form': form, 'category': category})
 
 
 # post-edit view
@@ -97,8 +98,9 @@ def post_edit(request, slug, pk):
             post.save()
             return redirect(post.get_absolute_url())
     else:
-        form = PostForm(instance = post)
+        form = PostForm(instance=post)
     return render(request, 'core/forum/add_post.html', {'form': form})
+
 
 # Вьюха для фасткапов
 class FastcupView(ListView):
@@ -164,9 +166,8 @@ class ProfileDetail(DetailView):
     template_name = 'core/profile/profile_detail.html'
 
 
-#class AddPost(DetailView):
+# class AddPost(DetailView):
 #    def post(self, request, ):
-
 
 
 class EditMyProfile(DetailView, View):

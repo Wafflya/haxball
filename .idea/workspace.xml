@@ -2,23 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/background_dark_1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/bg-dark-0003.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/bg-light-4860.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/bg-light-4866.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/brik-black-012.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/geometric-pat-003.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/gibon.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/green-370121_1280.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/green_11.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/holiday-1.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/stone-pat-005.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/static/core/core.css" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/static/core/core.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/static/core/profile/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/static/core/profile/profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/profile_editor_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/profile_editor_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,7 +100,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -139,6 +128,7 @@
       <workItem from="1595755455825" duration="88439000" />
       <workItem from="1596285342187" duration="9723000" />
       <workItem from="1596557858228" duration="6122000" />
+      <workItem from="1597054034616" duration="2998000" />
     </task>
     <servers />
   </component>
