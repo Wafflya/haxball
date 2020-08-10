@@ -65,7 +65,7 @@
                                 </span>
                             </div>
                             <p class="m-b-5 m-t-10">
-                                {{ comment.body|safe }}
+                                {{ comment.body|safe|linebreaks }}
                             </p>
 
                             <div class="comment-footer">
@@ -123,7 +123,7 @@
                                 </span>
                             </div>
                             <p class="m-b-5 m-t-10">
-                                {{ children.body|safe }}
+                                {{ children.body|safe|linebreaks }}
                             </p>
                         </div>
                     </div>
