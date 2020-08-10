@@ -174,7 +174,7 @@ class Profile(models.Model):
     born_date = models.DateField('Дата рождения', blank=True, null=True)
     about = models.TextField(max_length=1000, blank=True)
     city = models.CharField(max_length=100, blank=True)
-    vk = models.URLField(max_length=100, blank=True)
+    vk = models.CharField(max_length=100, blank=True)
     telegram = models.CharField(max_length=100, blank=True)
     discord = models.CharField(max_length=100, blank=True)
 

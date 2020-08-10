@@ -30,7 +30,7 @@
                     <p>Рейтинг {% karma profile %}</p>
                     <p class="mb-0">
                         {% if profile.vk %}
-                            <a href="{{ profile.vk }}"><img src="{% static "img/ico/vk_1.png" %}" height="41" width="41" title="vk"></a>
+                            <a href="https://vk.com/{{ profile.vk }}"><img src="{% static "img/ico/vk_1.png" %}" height="41" width="41" title="vk"></a>
                         {% endif %}
                         {% if profile.discord %}
                             <img src="{% static "img/ico/discord_1.png" %}" height="41" width="41" title="{{ profile.discord }}">
