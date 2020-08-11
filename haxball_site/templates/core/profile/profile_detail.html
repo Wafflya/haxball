@@ -38,10 +38,8 @@
                                     src="{% static "img/ico/vk_1.png" %}" height="41" width="41" title="vk"></a>
                         {% endif %}
                         {% if profile.discord %}
-                            <span data-toggle="tooltip" title="Disabled tooltip">
                                 <img src="{% static "img/ico/discord_1.png" %}" onclick="myFunction()" id=discord
                                      height="41" width="41" title="{{ profile.discord }}">
-                                </span>
                         {% endif %}
                         {% if profile.telegram %}
                             <a href="https://t.me/{{ profile.telegram }}" target="_blank"><img
