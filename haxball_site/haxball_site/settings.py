@@ -202,9 +202,9 @@ SUMMERNOTE_CONFIG = {
             'theme': 'monokai',
         },
         'toolbar': [
-            # ['style', ['style']],
-            ['insert', ['link', 'picture', 'video']],
+            #['style', ['style']],
             ['font', ['bold', 'underline', 'clear']],
+            ['insert', ['link', 'picture', 'video']],
             # ['fontname', ['fontname']],
         ],
 
