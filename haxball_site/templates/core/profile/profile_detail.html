@@ -15,7 +15,14 @@
 
         function myFunction() {
             var discord = document.getElementById("discord");
-            navigator.clipboard.writeText(discord.title);
+            navigator.clipboard.writeText(discord.title)
+                .then(() => {
+                    console.log('Text copied to clipboard');
+                })
+                .catch(err => {
+                    // This can happen if the user denies clipboard permissions:
+                    console.error('Could not copy text: ', err);
+                });
             alert("Скопировано " + discord.title);
         }
 
