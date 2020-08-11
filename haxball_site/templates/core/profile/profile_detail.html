@@ -15,14 +15,7 @@
 
         function myFunction() {
             var discord = document.getElementById("discord");
-            navigator.clipboard.writeText(discord.title)
-                .then(() => {
-                    console.log('Text copied to clipboard');
-                })
-                .catch(err => {
-                    // This can happen if the user denies clipboard permissions:
-                    console.error('Could not copy text: ', err);
-                });
+            navigator.clipboard.writeText(discord.title);
             alert("Скопировано " + discord.title);
         }
 
@@ -58,7 +51,7 @@
                         {% endif %}
                         {% if profile.discord %}
                             <img src="{% static "img/ico/discord_1.png" %}" onclick="myFunction()" id=discord
-                                 height="41" width="41" title="{{ profile.discord }}">
+                                 height="41" width="41" data-title="{{ profile.discord }}" title="{{ profile.discord }}">
                         {% endif %}
                         {% if profile.telegram %}
                             <a href="https://t.me/{{ profile.telegram }}" target="_blank"><img

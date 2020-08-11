@@ -1,30 +1,49 @@
+{% extends "core/home.html" %}
+{% load static %}
 
 
-<div class="modal fade" id="adminsModal">
-    <div class="modal-dialog">
-        <div class="modal-content text-center">
+{% block title %}Администрация{% endblock %}
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Администрация</h4>
-                <button type="button" class="close" data-dismiss="modal">×</button>
-            </div>
+{% block postlist %}
+    <div class="card my-2"
+         style="border-radius: 25px; background-image: url({% static "img/backgrounds/background1.png" %})">
 
+        <div class="card-body text-center">
+            <h3 class="text-center mt-1 mb-0"><i class="fa fa-user-circle text-primary" aria-hidden="true"></i>
+                Администрация
+            </h3>
+            <hr>
 
-            <!-- Modal body -->
-            <div class="modal-body">
-                <h5 class="text-muted mb-2">
-                    Создатель
-                </h5>
-                    <h6><a href="http://185.7.145.91/profile/1/marat/">Marat</a></h6>
+            {% for user in users %}
+                {% if user.is_superuser %}
+                    <h4><a href="{{ user.user_profile.get_absolute_url }}"><img
+                            src="{% static "img/ico/my_crown_1.png" %}" height="16" width="16"
+                            title="creator">{{ user.username }}</a>
+                        <span class="small text-muted">
+                            {% for group in user.groups.all %}
+                                {{ group.name }}
+                            {% endfor %}
+                        </span>
+                    </h4>
+                {% endif %}
 
-                <h6 class="text-muted mb-2">
-                    Помощники
-                </h6>
-                    <h6><a href="http://185.7.145.91/profile/2/iks/">mas</a></h6>
-                    <h6><a href="http://185.7.145.91/profile/2/iks/">mas</a></h6>
-                    <h6><a href="http://185.7.145.91/profile/2/iks/">mas</a></h6>
-            </div>
+                {% if user.is_staff and not user.is_superuser %}
+                    <h4><a href="{{ user.user_profile.get_absolute_url }}"><img
+                            src="{% static "img/ico/sheriff_badge_1.png" %}" height="16" width="16"
+                            title="sheriff">{{ user.username }}</a>
+                    <span class="small text-muted">
+                            {% for group in user.groups.all %}
+                                {{ group.name }}
+                            {% endfor %}
+                        </span>
+                    </h4>
+                {% endif %}
+            {% endfor %}
+
         </div>
+
     </div>
-</div>
+
+
+
+{% endblock %}
