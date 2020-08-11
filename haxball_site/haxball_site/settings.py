@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'haxball_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-#X_FRAME_OPTIONS = 'SAMEORIGIN'
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 if DEBUG:
     DATABASES = {

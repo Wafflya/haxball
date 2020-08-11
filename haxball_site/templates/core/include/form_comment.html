@@ -4,10 +4,11 @@
     {% csrf_token %}
     <!--<input type="hidden" name="page" value="{{ page }}">-->
     <input type="hidden" name="parent" id="contactparent" value="">
+
     <div class="form-group">
-        <!-- {{ comment_form.body }}-->
-        <textarea class="form-control border" rows="3" name="body"
-                  id="contactcomment" required="" rows="2" placeholder="Оставьте Ваш комментарий"></textarea>
+        {{ comment_form.body }}
+       <!-- <textarea class="form-control border" rows="3" name="body"
+                  id="contactcomment" required="" rows="2" placeholder="Оставьте Ваш комментарий"></textarea> -->
     </div>
 
     <div align="right">

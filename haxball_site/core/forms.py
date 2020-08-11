@@ -10,8 +10,8 @@ from django_summernote.fields import SummernoteTextFormField, SummernoteTextFiel
 
 
 class CommentForm(forms.ModelForm):
-    #body = SummernoteTextFormField()
-    body = forms.CharField(widget=FroalaEditor(theme='dark'))
+    body = SummernoteTextFormField()
+    #body = forms.CharField(widget=FroalaEditor(theme='dark'))
 
     class Meta:
         model = Comment
