@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import socket
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -22,12 +24,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'm_5m)8w^h+8avxko^()kmlr6fnp(r+m1^=(m!kldx$*47(-za6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+
+
+#try:
+#   HOSTNAME = socket.gethostname()
+#except:
+#    HOSTNAME = 'localhost'
 
 if DEBUG:
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = ['cis-haxball.com','127.0.0.1']
+    ALLOWED_HOSTS = ['185.7.145.91','cis-haxball.com']
 
 # Application definition
 
@@ -148,7 +156,10 @@ USE_TZ = True
 
 
 if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    ACCOUNT_EMAIL_REQUIRED = True
+    ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+    ACCOUNT_EMAIL_VERIFICATION = True
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     ACCOUNT_EMAIL_REQUIRED = True

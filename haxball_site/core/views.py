@@ -118,7 +118,7 @@ class FastcupView(ListView):
 
 # Список админов
 class AdminListView(ListView):
-    queryset = User.objects.filter(is_staff=True)
+    queryset = User.objects.filter(is_staff=True).order_by('id')
     context_object_name = 'users'
     template_name = 'core/admins/admin_list.html'
 
