@@ -206,7 +206,6 @@ SUMMERNOTE_CONFIG = {
             ['insert', ['link', 'picture', 'video']],
             ['font', ['bold', 'underline', 'clear']],
             # ['fontname', ['fontname']],
-            ['color', ['color']],
         ],
 
     },
