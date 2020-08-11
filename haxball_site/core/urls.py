@@ -26,6 +26,8 @@ urlpatterns = [
 #  Путь к админам
     path('admin_list/', views.AdminListView.as_view(), name='admins'),
 
+#  Правила
+
 #  Все посты
     path('news_all/', views.AllPostView.as_view(), name='all_posts'),
 

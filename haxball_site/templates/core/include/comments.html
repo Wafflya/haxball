@@ -10,14 +10,16 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card" style="border-radius: 20px 20px 0px 0px">
+            {% if post.commentable %}
             <div class="card-body card-body-comment">
                 {% if post.comments.count > 0 %}
                     <h4 class="card-title">Последние комментарии </h4>
-                {% else %}
+                {% elif post.commentable %}
                     <h6 class="card-subtitle">Здесь пока пусто, не хочешь быть первым?</h6>
                 {% endif %}
                 <!-- <h6 class="card-subtitle">Комментарии</h6> -->
             </div>
+            {% endif %}
             <div class="comment-widgets m-b-20">
                 {% for comment in comments %}
 
@@ -160,9 +162,9 @@
     </div>
 </div>
 
-{% if user.is_authenticated %}
+{% if user.is_authenticated and post.commentable %}
     {% include 'core/include/form_comment.html' %}
-{% else %}
+{% elif post.commentable %}
     Войдите, чтобы оставить комментарий
 {% endif %}
 

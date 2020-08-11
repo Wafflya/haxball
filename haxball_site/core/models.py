@@ -103,8 +103,10 @@ class Post(models.Model):
     publish = models.DateTimeField('Начало публикации', default=timezone.now)
     created = models.DateTimeField("Опубликовано", auto_now_add=True)
     updated = models.DateTimeField("Изменено", auto_now=True)
-    important = models.BooleanField(default=False)
+    important = models.BooleanField("Закрепленный пост", default=False)
     votes = GenericRelation(LikeDislike, related_query_name='posts')
+    views = models.PositiveIntegerField(default=0)
+    commentable = models.BooleanField("Комментируемая запись", default=True)
 
     def get_absolute_url(self):
         return reverse('core:post_detail', args=[self.id, self.slug])
@@ -177,6 +179,7 @@ class Profile(models.Model):
     vk = models.CharField(max_length=100, blank=True)
     telegram = models.CharField(max_length=100, blank=True)
     discord = models.CharField(max_length=100, blank=True)
+    views = models.PositiveIntegerField(default=0)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):

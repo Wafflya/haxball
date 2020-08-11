@@ -4,6 +4,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import F
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
@@ -114,6 +115,7 @@ class FastcupView(ListView):
     paginate_by = 5
     template_name = 'core/fastcups/fastcups_list.html'
 
+
 # Список админов
 class AdminListView(ListView):
     queryset = User.objects.filter(is_staff=True)
@@ -139,7 +141,6 @@ class TournamentsView(ListView):
 def post_detail(request, slug, id):
     post = get_object_or_404(Post, slug=slug,
                              id=id)
-
     # List of active comments for this post
 
     if request.method == 'POST':
@@ -155,6 +156,8 @@ def post_detail(request, slug, id):
             new_comment.save()
             return redirect(post.get_absolute_url() + '#r' + str(new_comment.id))
     else:
+        post.views = F('views') + 1
+        post.save()
         comment_form = CommentForm()
 
     comments_obj = post.comments.all()
@@ -183,6 +186,14 @@ class ProfileDetail(DetailView):
     model = Profile
     context_object_name = 'profile'
     template_name = 'core/profile/profile_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        prof = context['profile']
+        prof.views = prof.views + 1
+        prof.save()
+        print(prof.views)
+        return context
 
 
 # class AddPost(DetailView):

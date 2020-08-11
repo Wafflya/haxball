@@ -30,7 +30,10 @@
                 src="{% static "img/ico/clock_1.png" %}" height="19" width="19"> {{ post.created|time:"H:i" }} <img
                 src="{% static "img/ico/user_1.png" %}" height="19" width="19"><a
                 href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>,
-            Комментариев: {{ post.comments.count }}</span>
+            <i class="fa fa-comments-o text-primary" aria-hidden="true"></i>
+                 {{ post.comments.count }},
+            <i class="fa fa-eye text-primary" aria-hidden="true"></i>{{ post.views }}
+                </span>
 
 
 

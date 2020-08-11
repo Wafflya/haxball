@@ -43,7 +43,8 @@
                         {% endif %}
                     </h4>
                     <p class="mb-1">Без команды</p>
-                    <p>Рейтинг {% karma profile %}</p>
+                    <p class="mb-0">Рейтинг {% karma profile %}</p>
+                    <p>Просмотров <i class="fa fa-eye text-warning" aria-hidden="true"></i>{{ profile.views }}</p>
                     <p class="mb-0">
                         {% if profile.vk %}
                             <a href="https://vk.com/{{ profile.vk }}" target="_blank"><img

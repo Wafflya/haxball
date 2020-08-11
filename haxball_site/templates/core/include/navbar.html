@@ -17,7 +17,7 @@
     </div>
 </nav>
 
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark d-flex bd-highlight mb-0 sticky-top">
+<nav class="navbar navbar-expand-xl bg-dark navbar-dark d-flex bd-highlight mb-0 sticky-top">
     <!-- Brand -->
     <a class="navbar-brand" href="{% url 'core:home' %}">Главная</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -32,10 +32,11 @@
                     Чемпионат
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Вышка</a>
-                    <a class="dropdown-item" href="#">Пердив</a>
-                    <a class="dropdown-item" href="#">Кубок</a>
+                    <a class="dropdown-item" href="#">Высшая лига</a>
+                    <a class="dropdown-item" href="#">Первый дивизион</a>
+                    <a class="dropdown-item" href="#">Кубок России</a>
                     <a class="dropdown-item" href="#">Регламент</a>
+                    <a class="dropdown-item" href="#">Бронь хоста</a>
                     <a class="dropdown-item" href="#">Переносы</a>
                     <a class="dropdown-item" href="#">Трансферы</a>
                     <a class="dropdown-item" href="#">Свободные агенты</a>
@@ -59,15 +60,17 @@
                     <a class="dropdown-item" href="#">Сезон 2</a>
                 </div>
             </li>
+
             <li class="nav-item">
-                <!-- <a class="nav-link" data-toggle="modal" data-target="#adminsModal">
-                    Администрация
-                </a>-->
+                <a class="nav-link" href="{% url 'core:forum' %}">Форум</a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="{% url 'core:admins' %}">Администрация</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'core:forum' %}">Форум</a>
+                <a class="nav-link" href="http://185.7.145.91/post/16/rules">Правила</a>
             </li>
 
 
