@@ -36,10 +36,10 @@
                     <h4 class="f-w-600">{{ profile.name }}
                         {% if profile.name.is_superuser %}
                             <img src="{% static "img/ico/my_crown_1.png" %}" height="16" width="16"
-                                 title="creator">
+                                 title="{% for group in profile.name.groups.all %} {{ group.name }} {% endfor %} ">
                         {% elif profile.name.is_staff %}
                             <img src="{% static "img/ico/sheriff_badge_1.png" %}" height="16" width="16"
-                                 title="sheriff">
+                                 title="{% for group in profile.name.groups.all %}{{ group.name }}{% endfor %}">
                         {% endif %}
                     </h4>
                     <p class="mb-1">Без команды</p>
@@ -51,7 +51,8 @@
                         {% endif %}
                         {% if profile.discord %}
                             <img src="{% static "img/ico/discord_1.png" %}" onclick="myFunction()" id=discord
-                                 height="41" width="41" data-title="{{ profile.discord }}" title="{{ profile.discord }}">
+                                 height="41" width="41" data-title="{{ profile.discord }}"
+                                 title="{{ profile.discord }}">
                         {% endif %}
                         {% if profile.telegram %}
                             <a href="https://t.me/{{ profile.telegram }}" target="_blank"><img
