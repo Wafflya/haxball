@@ -9,7 +9,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="card"  style="border-radius: 20px 20px 0px 0px">
+        <div class="card" style="border-radius: 20px 20px 0px 0px">
             <div class="card-body card-body-comment">
                 {% if post.comments.count > 0 %}
                     <h4 class="card-title">Последние комментарии </h4>
@@ -23,111 +23,129 @@
 
                     <!-- Непосредственно комментарий -->
                     {% if comment.is_parent %}
-                    <div class="d-flex flex-row comment-row" id="r{{comment.id}}">
-                        <div class="p-2">
+                        <div class="d-flex flex-row comment-row" id="r{{ comment.id }}">
+                            <div class="p-2">
                             <span class="round">
                                 <img src="{{ comment.author.user_profile.avatar.url }}"
                                      alt="{{ comment.author.username }}" width="50">
                             </span>
-                        </div>
-                        <div class="comment-text w-100">
-                            <a href="{{ comment.author.user_profile.get_absolute_url }}">
-                                <h5 class="m-0">
-                                    {{ comment.author.username }}
-                                    <span class="badge">
+                            </div>
+                            <div class="comment-text w-100">
+                                <a href="{{ comment.author.user_profile.get_absolute_url }}">
+                                    <h5 class="m-0">
+                                        {{ comment.author.username }}
+                                        <span class="badge">
                                         {% karma comment.author.user_profile %}
                                     </span>
-                                </h5>
-                            </a>
-                            <div class="comment-footer">
+                                    </h5>
+                                </a>
+                                <div class="comment-footer">
                                 <span class="date text-muted small">
-                                    {{ comment.created|timesince }} назад
+                                    <i class="fa fa-calendar text-primary"
+                                       aria-hidden="true"></i>  {{ comment.created|date:"SHORT_DATE_FORMAT" }}
+                                    <i class="fa fa-clock-o text-primary"
+                                       aria-hidden="true"></i>{{ comment.created|time:"H:i" }}
                                 </span>
 
-                                <ul class="list-group list-group-horizontal-md d-inline-flex">
-                                    <li class="action-like fa fa-thumbs-up {% if comment.votes.likes.all|user_in:user %}text-success{% endif %}" data-id="{{ comment.id }}"
-                                        data-type="comment" data-action="like" id="lcomment{{ comment.id }}">
-                                        <span data-count="like">{{ comment.votes.likes.count }}</span>
-                                    </li>
+                                    <ul class="list-group list-group-horizontal-md d-inline-flex">
+                                        <li class="action-like fa fa-thumbs-up {% if comment.votes.likes.all|user_in:user %}text-success{% endif %}"
+                                            data-id="{{ comment.id }}"
+                                            data-type="comment" data-action="like" id="lcomment{{ comment.id }}">
+                                            <span data-count="like">{{ comment.votes.likes.count }}</span>
+                                        </li>
 
-                                    <li class="action-dislike fa fa-thumbs-down {% if comment.votes.dislikes.all|user_in:user %}text-danger{% endif %}" data-id="{{ comment.id }}"
-                                        data-type="comment" data-action="dislike" id="dcomment{{ comment.id }}">
+                                        <li class="action-dislike fa fa-thumbs-down {% if comment.votes.dislikes.all|user_in:user %}text-danger{% endif %}"
+                                            data-id="{{ comment.id }}"
+                                            data-type="comment" data-action="dislike" id="dcomment{{ comment.id }}">
 
-                                        <span data-count="dislike">{{ comment.votes.dislikes.count }}</span>
-                                    </li>
-                                </ul>
+                                            <span data-count="dislike">{{ comment.votes.dislikes.count }}</span>
+                                        </li>
+                                    </ul>
 
 
-                                <span class="action-icons">
-                                    <a href="#addcomment" onclick="addComment('{{ comment.author.username }}','{{ comment.id }}')">
+                                    <span class="action-icons">
+                                    <a href="#addcomment"
+                                       onclick="addComment('{{ comment.author.username }}','{{ comment.id }}')">
                                         <i class="fa fa-reply"></i>
                                     </a>
                                 </span>
-                            </div>
-                            <p class="m-b-5 m-t-10">
-                                {{ comment.body|safe|linebreaks }}
-                            </p>
+                                </div>
+                                <p class="m-b-5 m-t-10">
+                                    {{ comment.body|safe|linebreaks }}
+                                </p>
 
-                            <div class="comment-footer">
-                                {% if comment.childs_count > 2 %}
-                                <a href="#commentcollapse{{comment.id}}" data-toggle="collapse" aria-expanded="true"
-                                   aria-controls="commentcollapse{{comment.id}}" class="small"><span class="fa fa-chevron-up"> </span>Показать ответы ({{ comment.childs_count }}) </a>
-                                {% endif %}
+                                <div class="comment-footer">
+                                    {% if comment.childs_count > 2 %}
+                                        <a href="#commentcollapse{{ comment.id }}" data-toggle="collapse"
+                                           aria-expanded="true"
+                                           aria-controls="commentcollapse{{ comment.id }}" class="small"><span
+                                                class="fa fa-chevron-up"> </span>Показать ответы
+                                            ({{ comment.childs_count }}) </a>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
-                    </div>
                         {% if comment.has_childs %}
-                        {% if comment.childs_count > 2 %}
-                            <div class="collapse" id="commentcollapse{{comment.id}}">
-                        {% endif %}
-                            {% for children in comment.all_childs %}
-                                <div class="d-flex flex-row comment-row" style="padding-left: 100px" id="r{{children.id}}">
-                        <div class="p-2">
+                            {% if comment.childs_count > 2 %}
+                                <div class="collapse" id="commentcollapse{{ comment.id }}">
+                            {% endif %}
+                        {% for children in comment.all_childs %}
+                            <div class="d-flex flex-row comment-row" style="padding-left: 100px"
+                                 id="r{{ children.id }}">
+                                <div class="p-2">
                             <span class="round">
                                 <img src="{{ children.author.user_profile.avatar.url }}"
                                      alt="{{ children.author.username }}" width="50">
                             </span>
-                        </div>
-                        <div class="comment-text w-100">
-                            <a href="{{ children.author.user_profile.get_absolute_url }}">
-                                <h5 class="m-0">
-                                    {{ children.author.username }}
-                                    <span class="badge">
+                                </div>
+                                <div class="comment-text w-100">
+                                    <a href="{{ children.author.user_profile.get_absolute_url }}">
+                                        <h5 class="m-0">
+                                            {{ children.author.username }}
+                                            <span class="badge">
                                         {% karma children.author.user_profile %}
                                     </span>
-                                </h5>
-                            </a>
-                            <div class="comment-footer">
+                                        </h5>
+                                    </a>
+                                    <div class="comment-footer">
                                 <span class="date text-muted small">
-                                    {{ children.created|timesince }} назад
+                                    <i class="fa fa-calendar text-primary"
+                                       aria-hidden="true"></i>  {{ children.created|date:"SHORT_DATE_FORMAT" }}
+                                    <i class="fa fa-clock-o text-primary"
+                                       aria-hidden="true"></i>{{ children.created|time:"H:i" }}
+                                    <!-- {{ children.created|timesince }} назад -->
                                 </span>
 
-                                <ul class="list-group list-group-horizontal-md d-inline-flex">
-                                    <li class="action-like fa fa-thumbs-up {% if children.votes.likes.all|user_in:user %}text-success{% endif %}" data-id="{{ children.id }}"
-                                        data-type="comment" data-action="like" id="lcomment{{ children.id }}">
-                                        <span data-count="like">{{ children.votes.likes.count }}</span>
-                                    </li>
+                                        <ul class="list-group list-group-horizontal-md d-inline-flex">
+                                            <li class="action-like fa fa-thumbs-up {% if children.votes.likes.all|user_in:user %}text-success{% endif %}"
+                                                data-id="{{ children.id }}"
+                                                data-type="comment" data-action="like" id="lcomment{{ children.id }}">
+                                                <span data-count="like">{{ children.votes.likes.count }}</span>
+                                            </li>
 
-                                    <li class="action-dislike fa fa-thumbs-down {% if children.votes.dislikes.all|user_in:user %}text-danger{% endif %}" data-id="{{ children.id }}"
-                                        data-type="comment" data-action="dislike" id="dcomment{{ children.id }}">
+                                            <li class="action-dislike fa fa-thumbs-down {% if children.votes.dislikes.all|user_in:user %}text-danger{% endif %}"
+                                                data-id="{{ children.id }}"
+                                                data-type="comment" data-action="dislike"
+                                                id="dcomment{{ children.id }}">
 
-                                        <span data-count="dislike">{{ children.votes.dislikes.count }}</span>
-                                    </li>
-                                </ul>
+                                                <span data-count="dislike">{{ children.votes.dislikes.count }}</span>
+                                            </li>
+                                        </ul>
 
 
-                                <span class="action-icons">
-                                    <a href="#addcomment" onclick="addComment('{{ children.author.username }}','{{ children.id }}')">
+                                        <span class="action-icons">
+                                    <a href="#addcomment"
+                                       onclick="addComment('{{ children.author.username }}','{{ children.id }}')">
                                         <i class="fa fa-reply"></i>
                                     </a>
                                 </span>
+                                    </div>
+                                    <p class="m-b-5 m-t-10">
+                                        {{ children.body|safe|linebreaks }}
+                                    </p>
+                                </div>
                             </div>
-                            <p class="m-b-5 m-t-10">
-                                {{ children.body|safe|linebreaks }}
-                            </p>
-                        </div>
-                    </div>
-                            {% endfor %}
+                        {% endfor %}
 
                         {% if comment.childs_count > 2 %}
                             </div>
@@ -155,7 +173,7 @@
 {% endif %}
 
 <script>
-    function addComment(name,id) {
+    function addComment(name, id) {
         document.getElementById('contactparent').value = id
         document.getElementById('contactcomment').innerText = `${name},`
     }

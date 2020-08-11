@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
@@ -112,6 +113,24 @@ class FastcupView(ListView):
     context_object_name = 'posts'
     paginate_by = 5
     template_name = 'core/fastcups/fastcups_list.html'
+
+# Список админов
+class AdminListView(ListView):
+    queryset = User.objects.filter(is_staff=True)
+    context_object_name = 'users'
+    template_name = 'core/admins/admin_list.html'
+
+
+# Вьюха для турниров
+class TournamentsView(ListView):
+    try:
+        category = Category.objects.get(slug='tournaments')
+    except:
+        category = None
+    queryset = Post.objects.filter(category=category)
+    context_object_name = 'posts'
+    paginate_by = 5
+    template_name = 'core/tournaments/tournaments_list.html'
 
 
 # Вьюха для поста и комментариев к нему.

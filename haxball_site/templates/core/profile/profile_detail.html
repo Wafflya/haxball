@@ -4,7 +4,7 @@
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static "core/profile/profile.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
-        <style>
+    <style>
         body {
             background-image: url({% static "img/backgrounds/bg-light-4860.png" %})
         }
@@ -22,33 +22,44 @@
                     <div class="m-b-10"><img src="{{ profile.avatar.url }}" width="100%" height="100%"
                                              class="img-radius" alt="User-Profile-Image"></div>
                     <h4 class="f-w-600">{{ profile.name }}
-                        {% if profile.name.is_superuser %}
-                        <i class="fa fa-star text-success" aria-hidden="true"></i>
-
-                        {% endif %}
+                    {% if profile.name.is_superuser %}
+                        <img src="{% static "img/ico/my_crown_1.png" %}" height="16" width="16"
+                             title="creator">
+                    {% elif profile.name.is_staff %}
+                        <img src="{% static "img/ico/sheriff_badge_1.png" %}" height="16" width="16"
+                             title="sheriff">
+                    {% endif %}
+                    </h4>
                     <p class="mb-1">Без команды</p>
                     <p>Рейтинг {% karma profile %}</p>
                     <p class="mb-0">
                         {% if profile.vk %}
-                            <a href="https://vk.com/{{ profile.vk }}" target="_blank"><img src="{% static "img/ico/vk_1.png" %}" height="41" width="41" title="vk"></a>
+                            <a href="https://vk.com/{{ profile.vk }}" target="_blank"><img
+                                    src="{% static "img/ico/vk_1.png" %}" height="41" width="41" title="vk"></a>
                         {% endif %}
                         {% if profile.discord %}
-                            <img src="{% static "img/ico/discord_1.png" %}" height="41" width="41" title="{{ profile.discord }}">
+                            <span data-toggle="tooltip" title="Disabled tooltip">
+                                <img src="{% static "img/ico/discord_1.png" %}" onclick="myFunction()" id=discord
+                                     height="41" width="41" title="{{ profile.discord }}">
+                                </span>
                         {% endif %}
                         {% if profile.telegram %}
-                            <a href="https://t.me/{{ profile.telegram }}" target="_blank"><img src="{% static "img/ico/tg_1.png" %}" height="41" width="41" title="telegram"></a>
+                            <a href="https://t.me/{{ profile.telegram }}" target="_blank"><img
+                                    src="{% static "img/ico/tg_1.png" %}" height="41" width="41"
+                                    title="telegram"></a>
                         {% endif %}
                     </p>
                 </div>
             </div>
             <div class="col-sm-8">
                 <div class="card-block">
-                    <h5 class="m-b-20 p-b-5 b-b-default f-w-600">Основная информация  {% if profile.name.username == user.username %}
+                    <h5 class="m-b-20 p-b-5 b-b-default f-w-600">Основная информация
+                        {% if profile.name.username == user.username %}
 
-                    <a href="{% url 'core:edit_profile' profile.slug profile.id %}"
-                       class="text-warning small text-right"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a href="{% url 'core:edit_profile' profile.slug profile.id %}"
+                               class="text-warning small text-right"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-            {% endif %}
+                        {% endif %}
                     </h5>
                     <div class="row">
                         <div class="col-sm-6">
@@ -112,7 +123,17 @@
         </div>
     </div>
 
+    <script>
 
+        function myFunction() {
+            var discord = document.getElementById("discord");
+            navigator.clipboard.writeText(discord.title)
+
+            alert("Скопировано " + discord.title);
+
+        }
+
+    </script>
 
 
 

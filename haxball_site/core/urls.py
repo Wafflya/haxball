@@ -20,6 +20,12 @@ urlpatterns = [
 #  Путь к фасткапам
     path('fastcups/', views.FastcupView.as_view(), name='fastcups'),
 
+#  Путь к турнирам
+    path('tournaments/', views.TournamentsView.as_view(), name='tournaments'),
+
+#  Путь к админам
+    path('admin_list/', views.AdminListView.as_view(), name='admins'),
+
 #  Все посты
     path('news_all/', views.AllPostView.as_view(), name='all_posts'),
 
