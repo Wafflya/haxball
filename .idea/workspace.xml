@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/backgrounds/background_112.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_edit.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,16 +56,16 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
       <recent name="E:\haxball\haxball_site\static\img\ico" />
       <recent name="E:\haxball\haxball_site\static\img\svg" />
       <recent name="E:\haxball\haxball_site\static\img" />
       <recent name="E:\haxball\haxball_site\core" />
-      <recent name="E:\haxball\haxball_site" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
       <recent name="$PROJECT_DIR$/haxball_site/static/img/backgrounds" />
       <recent name="E:\haxball\haxball_site\static\img\ico" />
-      <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
       <recent name="E:\haxball\haxball_site\core\static\jquery" />
     </key>
   </component>
@@ -123,7 +126,7 @@
       <workItem from="1595755455825" duration="88439000" />
       <workItem from="1596285342187" duration="9723000" />
       <workItem from="1596557858228" duration="6122000" />
-      <workItem from="1597054034616" duration="26278000" />
+      <workItem from="1597054034616" duration="27346000" />
     </task>
     <servers />
   </component>
