@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/core/include/navbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
