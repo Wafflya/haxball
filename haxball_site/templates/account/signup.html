@@ -22,6 +22,7 @@
                 <!--{{ form.as_p }}-->
                 <div class="form-group mb-1">
                     <label for="exampleInputEmail1" class="mb-1">Имя пользователя</label>
+                    <label for="exampleInputEmail1" class="mb-1">{{ form.errors.username }}</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                            name="username">
                     <small id="emailHelp" class="form-text text-muted">Ваш игровой никнейм <span

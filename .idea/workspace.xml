@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/signup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/comments.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
