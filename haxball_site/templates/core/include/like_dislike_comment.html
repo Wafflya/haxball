@@ -1,0 +1,29 @@
+{% load user_tags %}
+
+{% if user.is_authenticated %}
+<ul class="list-group list-group-horizontal-md d-inline-flex">
+    <li class="action-like fa fa-thumbs-up {% if comment.votes.likes.all|user_in:user %}text-success{% endif %}"
+        data-id="{{ comment.id }}"
+        data-type="comment" data-action="like" id="lcomment{{ comment.id }}">
+        <span data-count="like">{{ comment.votes.likes.count }}</span>
+    </li>
+
+    <li class="action-dislike fa fa-thumbs-down {% if comment.votes.dislikes.all|user_in:user %}text-danger{% endif %}"
+        data-id="{{ comment.id }}"
+        data-type="comment" data-action="dislike" id="dcomment{{ comment.id }}">
+
+        <span data-count="dislike">{{ comment.votes.dislikes.count }}</span>
+    </li>
+</ul>
+{% else %}
+    <ul class="list-group list-group-horizontal-md d-inline-flex">
+        <li class="action-like fa fa-thumbs-up" data-toggle="modal" data-target="#loginModal" style="cursor: pointer">
+            <span data-count="like">{{ comment.votes.likes.count }}</span>
+        </li>
+
+        <li class="action-dislike fa fa-thumbs-down" data-toggle="modal" data-target="#loginModal" style="cursor: pointer">
+
+            <span data-count="dislike">{{ comment.votes.dislikes.count }}</span>
+        </li>
+    </ul>
+{% endif %}

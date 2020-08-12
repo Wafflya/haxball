@@ -11,14 +11,14 @@
     <div class="col-md-12">
         <div class="card" style="border-radius: 20px 20px 0px 0px">
             {% if post.commentable %}
-            <div class="card-body card-body-comment">
-                {% if post.comments.count > 0 %}
-                    <h4 class="card-title">Последние комментарии </h4>
-                {% elif post.commentable %}
-                    <h6 class="card-subtitle">Здесь пока пусто, не хочешь быть первым?</h6>
-                {% endif %}
-                <!-- <h6 class="card-subtitle">Комментарии</h6> -->
-            </div>
+                <div class="card-body card-body-comment">
+                    {% if post.comments.count > 0 %}
+                        <h4 class="card-title">Последние комментарии </h4>
+                    {% elif post.commentable %}
+                        <h6 class="card-subtitle">Здесь пока пусто, не хочешь быть первым?</h6>
+                    {% endif %}
+                    <!-- <h6 class="card-subtitle">Комментарии</h6> -->
+                </div>
             {% endif %}
             <div class="comment-widgets m-b-20">
                 {% for comment in comments %}
@@ -49,27 +49,21 @@
                                        aria-hidden="true"></i>{{ comment.created|time:"H:i" }}
                                 </span>
 
-                                    <ul class="list-group list-group-horizontal-md d-inline-flex">
-                                        <li class="action-like fa fa-thumbs-up {% if comment.votes.likes.all|user_in:user %}text-success{% endif %}"
-                                            data-id="{{ comment.id }}"
-                                            data-type="comment" data-action="like" id="lcomment{{ comment.id }}">
-                                            <span data-count="like">{{ comment.votes.likes.count }}</span>
-                                        </li>
+                                    {% include 'core/include/like_dislike_comment.html' %}
 
-                                        <li class="action-dislike fa fa-thumbs-down {% if comment.votes.dislikes.all|user_in:user %}text-danger{% endif %}"
-                                            data-id="{{ comment.id }}"
-                                            data-type="comment" data-action="dislike" id="dcomment{{ comment.id }}">
-
-                                            <span data-count="dislike">{{ comment.votes.dislikes.count }}</span>
-                                        </li>
-                                    </ul>
 
 
                                     <span class="action-icons">
-                                    <a href="#addcomment"
-                                       onclick="addComment('{{ comment.author.username }}','{{ comment.id }}')">
-                                        <i class="fa fa-reply"></i>
-                                    </a>
+                                        {% if user.is_authenticated %}
+                                            <a href="#addcomment"
+                                               onclick="addComment('{{ comment.author.username }}','{{ comment.id }}')">
+                                                <i class="fa fa-reply"></i>
+                                            </a>
+                                        {% else %}
+                                            <a data-toggle="modal" data-target="#loginModal" style="cursor: pointer">
+                                                <i class="fa fa-reply"></i>
+                                            </a>
+                                        {% endif %}
                                 </span>
                                 </div>
                                 <p class="m-b-5 m-t-10">
@@ -118,28 +112,26 @@
                                     <!-- {{ children.created|timesince }} назад -->
                                 </span>
 
-                                        <ul class="list-group list-group-horizontal-md d-inline-flex">
-                                            <li class="action-like fa fa-thumbs-up {% if children.votes.likes.all|user_in:user %}text-success{% endif %}"
-                                                data-id="{{ children.id }}"
-                                                data-type="comment" data-action="like" id="lcomment{{ children.id }}">
-                                                <span data-count="like">{{ children.votes.likes.count }}</span>
-                                            </li>
+                                    <!-- ВОТ ТУТА -->
+                                        {% include 'core/include/like_dislike_comment.html' with comment=children %}
 
-                                            <li class="action-dislike fa fa-thumbs-down {% if children.votes.dislikes.all|user_in:user %}text-danger{% endif %}"
-                                                data-id="{{ children.id }}"
-                                                data-type="comment" data-action="dislike"
-                                                id="dcomment{{ children.id }}">
-
-                                                <span data-count="dislike">{{ children.votes.dislikes.count }}</span>
-                                            </li>
-                                        </ul>
 
 
                                         <span class="action-icons">
-                                    <a href="#addcomment"
-                                       onclick="addComment('{{ children.author.username }}','{{ children.id }}')">
-                                        <i class="fa fa-reply"></i>
-                                    </a>
+                                                {% if user.is_authenticated %}
+                                                    <a href="#addcomment"
+                                                       onclick="addComment('{{ children.author.username }}','{{ children.id }}')">
+                                                            <i class="fa fa-reply"></i>
+                                                        </a>
+                                                {% else %}
+                                                    <a data-toggle="modal" data-target="#loginModal"
+                                                       style="cursor: pointer">
+                                                                    <i class="fa fa-reply"></i>
+                                                    </a>
+                                                {% endif %}
+
+
+
                                 </span>
                                     </div>
                                     <p class="m-b-5 m-t-10">
@@ -158,15 +150,22 @@
 
 
             </div>
+            {% if user.is_authenticated and post.commentable %}
+                {% include 'core/include/form_comment.html' %}
+            {% elif post.commentable %}
+                <h6 class="text-center">
+                    <a class="text-primary" data-toggle="modal" data-target="#loginModal" style="cursor: pointer">
+                        Войдите</a>, чтобы оставить комментарий
+                </h6>
+            {% endif %}
         </div>
+
     </div>
+
+
 </div>
 
-{% if user.is_authenticated and post.commentable %}
-    {% include 'core/include/form_comment.html' %}
-{% elif post.commentable %}
-    Войдите, чтобы оставить комментарий
-{% endif %}
+
 
 
 

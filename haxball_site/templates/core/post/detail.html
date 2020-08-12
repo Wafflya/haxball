@@ -99,7 +99,7 @@
         <div class="card-header" style="border-radius: 25px">
             <h4 class="card-title mb-1">{{ post.title }}
                 {% if post.author == user %}
-                     <a href="{% url 'core:post_edit' post.slug post.id %}"
+                    <a href="{% url 'core:post_edit' post.slug post.id %}"
                        class="text-warning small text-right"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                 {% endif %}
             </h4>
@@ -122,27 +122,21 @@
             <span class="text-muted"> Комментариев: {{ post.comments.count }} </span>
 
             <div>
-            <ul class="list-group list-group-horizontal-md d-inline-flex">
-                <li class="action-like fa fa-thumbs-up {% if post.votes.likes.all|user_in:user %}text-success{% endif %}"
-                    data-id="{{ post.id }}"
-                    data-type="post" data-action="like" id="lpost{{ post.id }}">
-                    <span data-count="like">{{ post.votes.likes.count }}</span>
-                </li>
 
-                <li class="action-dislike fa fa-thumbs-down {% if post.votes.dislikes.all|user_in:user %}text-danger{% endif %}"
-                    data-id="{{ post.id }}"
-                    data-type="post" data-action="dislike" id="dpost{{ post.id }}">
+                {% include 'core/include/like_dislike_panel.html' %}
 
-                    <span data-count="dislike">{{ post.votes.dislikes.count }}</span>
-                </li>
 
-            </ul>
-
-            <span class="action-icons">
-                <a href="#addcomment" onclick="addComment('','')">
-                    <i class="fa fa-reply"></i>
-                </a>
-            </span>
+                <span class="action-icons">
+                    {% if user.is_authenticated %}
+                        <a href="#addcomment" onclick="addComment('','')">
+                            <i class="fa fa-reply"></i>
+                        </a>
+                    {% else %}
+                        <a data-toggle="modal" data-target="#loginModal" style="cursor: pointer">
+                            <i class="fa fa-reply"></i>
+                        </a>
+                    {% endif %}
+                </span>
             </div>
 
         </div>

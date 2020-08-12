@@ -1,14 +1,27 @@
 {% load user_tags %}
 
-<ul class="list-group list-group-horizontal-md d-inline-flex">
-    <li class="action-like fa fa-thumbs-up {% if post.votes.likes.all|user_in:user %}text-success{% endif %}"
-        data-id="{{ post.id }}" data-type="post" data-action="like" id="lpost{{ post.id }}" title="Нравится">
-        <span data-count="like">{{ post.votes.likes.count }}</span>
-    </li>
+{% if user.is_authenticated %}
+    <ul class="list-group list-group-horizontal-md d-inline-flex">
+        <li class="action-like fa fa-thumbs-up {% if post.votes.likes.all|user_in:user %}text-success{% endif %}"
+            data-id="{{ post.id }}" data-type="post" data-action="like" id="lpost{{ post.id }}" title="Нравится" style="cursor: pointer">
+            <span data-count="like">{{ post.votes.likes.count }}</span>
+        </li>
 
-    <li class="action-dislike fa fa-thumbs-down {% if post.votes.dislikes.all|user_in:user %}text-danger{% endif %}"
-        data-id="{{ post.id }}" data-type="post" data-action="dislike" id="dpost{{ post.id }}" title="Не нравится">
+        <li class="action-dislike fa fa-thumbs-down {% if post.votes.dislikes.all|user_in:user %}text-danger{% endif %}"
+            data-id="{{ post.id }}" data-type="post" data-action="dislike" id="dpost{{ post.id }}" title="Не нравится" style="cursor: pointer">
 
-        <span data-count="dislike">{{ post.votes.dislikes.count }}</span>
-    </li>
-</ul>
+            <span data-count="dislike">{{ post.votes.dislikes.count }}</span>
+        </li>
+    </ul>
+{% else %}
+    <ul class="list-group list-group-horizontal-md d-inline-flex">
+        <li class="action-like fa fa-thumbs-up" data-toggle="modal" data-target="#loginModal" style="cursor: pointer">
+            <span data-count="like">{{ post.votes.likes.count }}</span>
+        </li>
+
+        <li class="action-dislike fa fa-thumbs-down" data-toggle="modal" data-target="#loginModal" style="cursor: pointer">
+
+            <span data-count="dislike">{{ post.votes.dislikes.count }}</span>
+        </li>
+    </ul>
+{% endif %}
