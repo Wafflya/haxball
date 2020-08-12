@@ -1,13 +1,28 @@
-{% extends "account/base.html" %}
-
+{% extends "core/home.html" %}
+{% load static %}
+{% load account %}
 {% load i18n %}
 
-{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
 
-{% block content %}
-    <h1>{% trans "Verify Your E-mail Address" %}</h1>
+{% block title %}Подтверждение регистрации{% endblock %}
 
-    <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup
-        process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
+{% block post %}
 
+    <div class="card mt-2">
+        <div class="card-header text-center">
+            <h1>{% trans "Verify Your E-mail Address" %}</h1>
+        </div>
+
+     <div class="card-body">
+        <!-- <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup
+        process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p> -->
+        <p class="ml-2">На ваш e-mail отправлено письмо с ссылкой для подтверждения регистрации. Перейдите по полученной
+            ссылке, чтобы завершить процедуру регистрации!
+            Свяжитесь с <a href="http://www.cis-haxball.com/profile/1/marat/">администратором</a>, если письмо не
+            приходит в течении нескольких минут.
+        </p>
+        <p class="ml-2">P.S. Проверьте папку спам</p>
+    </div>
+
+    </div>
 {% endblock %}
