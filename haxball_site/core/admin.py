@@ -43,7 +43,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('author', 'body', 'created')
+    list_display = ('author', 'created', 'body', )
 
 
 @admin.register(LikeDislike)

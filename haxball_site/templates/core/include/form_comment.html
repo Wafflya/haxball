@@ -1,6 +1,6 @@
 <head>{{ comment_form.media }}</head>
 
-<form action='{% url 'core:post_detail' post.id post.slug %}' method="post" id="addcomment">
+<form action='{% url 'core:post_detail' post.id post.slug %}' method="post" id="addcomment" class="text-center">
     {% csrf_token %}
     <!--<input type="hidden" name="page" value="{{ page }}">-->
     <input type="hidden" name="parent" id="contactparent" value="">
@@ -12,6 +12,6 @@
     </div>
 
     <div align="right">
-        <button type="submit" class="btn btn-primary" style="margin-right: 20px">Отправить</button>
+        <button type="submit" class="btn btn-primary mb-5 mr-4">Отправить</button>
     </div>
 </form>
