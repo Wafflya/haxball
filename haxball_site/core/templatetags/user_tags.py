@@ -66,11 +66,11 @@ def show_users_online(count=5):
 @register.inclusion_tag('core/include/sidebar_for_last_activity.html')
 def show_last_activity(count=10):
     last_com = []
-    last_comments = Post.objects.annotate(last_comment=Max('comments__created')).order_by('-last_comment')[:count]
+    last_comments = Post.objects.annotate(last_comment=Max('comments__created')).order_by('-last_comment')
     for i in last_comments:
         if len(i.comments.all()) >0:
             last_com.append(i.comments.order_by('-created').last())
-    return {'last_comments': last_com}
+    return {'last_comments': last_com[:count]}
 
 
 # Чтобы топ по лайкам за период считал(!!!период добавить!!!)
