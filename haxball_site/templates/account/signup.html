@@ -7,51 +7,143 @@
 
 {% block post %}
 
-<div class="card">
-    <div class="card-header text-center">
-    <h1>{% trans "Sign Up" %}</h1>
+    <div class="card mt-2">
+        <div class="card-header text-center py-2">
+            <h2 class="mb-1">{% trans "Sign Up" %}</h2>
 
-    <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
-    </p>
+            <p class="mb-1">{% blocktrans %}Уже есть аккаунт? <a href="{{ login_url }}">Войдите</a>
+                .{% endblocktrans %}
+            </p>
+        </div>
+
+        <div class="card-body">
+            <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                {% csrf_token %}
+                <!-- {{ form.as_p }} -->
+                <div class="form-group mb-1">
+                    <label for="exampleInputEmail1" class="mb-1">Имя пользователя</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                           name="username">
+                    <small id="emailHelp" class="form-text text-muted">Ваш игровой никнейм <span
+                            class="text-danger"><strong>ИЗМЕНЕНИЕ - ПЛАТНО!</strong></span></small>
+                </div>
+                <div class="form-group mb-1">
+                    <label for="exampleInputEmail2" class="mb-1">Email-адрес</label>
+                    <input type="email" class="form-control" id="exampleInputEmail2" name="email"
+                           aria-describedby="emailHelp">
+
+                </div>
+                <div class="form-group mb-1">
+                    <label for="exampleInputPassword1" class="mb-1">Пароль</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1"
+                           name="password1">
+                </div>
+                <div class="form-group mb-1">
+                    <label for="exampleInputPassword2" class="mb-1">Повторите пароль</label>
+                    <input type="password" class="form-control" id="exampleInputPassword2"
+                           name="password2">
+                </div>
+                <h4 class="text-center mt-2">Правила</h4>
+                <div class="bd-example p-2 mt-1" style="border: solid #198af926;">
+                    <div class="row">
+                        <div class="col-4">
+                            <div id="list-example" class="list-group">
+                                <a class="list-group-item list-group-item-action" href="#list-item-1">Регистрация</a>
+                                <a class="list-group-item list-group-item-action" href="#list-item-2">Общие правила</a>
+                                <a class="list-group-item list-group-item-action" href="#list-item-3">Форум</a>
+                                <a class="list-group-item list-group-item-action" href="#list-item-4">Подтверждение</a>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div data-spy="scroll" data-target="#list-example" data-offset="0"
+                                 class="scrollspy-example" style="position: relative; height: 200px; overflow: auto">
+                                <h4 id="list-item-1">Регистрация</h4>
+                                <p><span style="font-size:14px"><strong>Запрещается:</strong></span></p>
+
+                                <p><span style="font-size:14px">&mdash; регистрация нескольких аккаунтов;</span></p>
+
+                                <p><span style="font-size:14px">&mdash; использование некорректных выражений в никнейме пользователя;</span>
+                                </p>
+
+                                <p><span style="font-size:14px">&mdash; использование никнеймов, схожих с никнеймами других пользователей сайта;</span>
+                                </p>
+
+                                <p><span style="font-size:14px"><strong>Наказание:</strong> перманентный бан аккаунта(-ов), без права создания нового.</span>
+                                </p>
+
+                                <p>&nbsp;</p>
+
+                                </p>
+                                <h4 id="list-item-2">Общие правила</h4>
+                                <p>
+                                <p><span
+                                        style="font-size:14px"><strong>Запрещается публиковать информацию, содержащую:</strong></span>
+                                </p>
+
+                                <p><span style="font-size:14px">&mdash; чрезмерное количество жаргонных слов, грубые и нецензурные слова или выражения;</span>
+                                </p>
+
+                                <p><span style="font-size:14px">&mdash; рекламу;</span></p>
+
+                                <p><span style="font-size:14px">&mdash; порнографию;</span></p>
+
+                                <p><span style="font-size:14px">&mdash; чужую личную информацию;</span></p>
+
+                                <p><span style="font-size:14px">&mdash; оскорбления, угрозы, клевету;</span></p>
+
+                                <p><span style="font-size:14px">&mdash; объекты расистского характера и разжигания межнациональной розни;</span>
+                                </p>
+
+                                <p><span
+                                        style="font-size:14px">&mdash; политическую, религиозную и иную пропаганду;</span>
+                                </p>
+
+                                <p><span style="font-size:14px">&mdash; призывы к насилию или нарушению действующего законодательства.</span>
+                                </p>
+
+                                <p><span style="font-size:14px"><strong>Наказание:</strong> редактирование или удаление информации, мьют или бан пользователя.</span>
+                                </p>
+
+                                </p>
+                                <h4 id="list-item-3">Форум</h4>
+                                <p>
+                                <p><span style="font-size:14px"><strong>Запрещается:</strong></span></p>
+
+                                <p><span style="font-size:14px">&mdash; дублирование уже существующих тем;</span></p>
+
+                                <p><span style="font-size:14px">&mdash; создание тем, которые не соответствуют тематике раздела;</span>
+                                </p>
+
+                                <p><span style="font-size:14px">&mdash; создание тем, оскорбляющих конкретного пользователя сайта.</span>
+                                </p>
+
+                                <p><span style="font-size:14px"><strong>Наказание:</strong> удаление темы или перенос её в соответствующий раздел, лишение возможности создавать темы на форуме, мьют или бан пользователя.</span>
+                                </p>
+
+                                </p>
+                                <h4 id="list-item-4">Подтверждение</h4>
+                                <p>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                           required="True">
+                                    <label class="form-check-label" for="exampleCheck1">С правилами ознакомлен</label>
+                                </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                {% endif %}
+                <div class="d-flex flex-row justify-content-end mt-2">
+                    <button type="submit" class="btn btn-success">Зарегистрироваться</button>
+                </div>
+            </form>
+        </div>
     </div>
-
-    <div class="card-body">
-        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-            {% csrf_token %}
-            <!-- {{ form.as_p }} -->
-            <div class="form-group">
-                <label for="exampleInputEmail1">Имя пользователя</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                       name="username">
-                <small id="emailHelp" class="form-text text-muted">Ваш игровой никнейм <span class="text-danger"><strong>ИЗМЕНЕНИЕ - ПЛАТНО!</strong></span></small>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail2">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail2" name="email" aria-describedby="emailHelp">
-
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Пароль</label>
-                <input type="password" class="form-control" id="exampleInputPassword1"
-                       name="password1">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword2">Повторите пароль</label>
-                <input type="password" class="form-control" id="exampleInputPassword2"
-                       name="password2">
-            </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1"
-                       required="True">
-                <label class="form-check-label" for="exampleCheck1">Ознакомлен с правилами(ссылка на правила)</label>
-            </div>
-
-
-            {% if redirect_field_value %}
-            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-            {% endif %}
-            <button type="submit" class="btn btn-success">Зарегистрироваться</button>
-        </form>
-    </div>
-</div>
 {% endblock %}
