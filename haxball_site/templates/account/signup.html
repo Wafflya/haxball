@@ -19,7 +19,7 @@
         <div class="card-body">
             <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                 {% csrf_token %}
-                <!-- {{ form.as_p }} -->
+                <!--{{ form.as_p }}-->
                 <div class="form-group mb-1">
                     <label for="exampleInputEmail1" class="mb-1">Имя пользователя</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
@@ -29,16 +29,19 @@
                 </div>
                 <div class="form-group mb-1">
                     <label for="exampleInputEmail2" class="mb-1">Email-адрес</label>
+                    <label for="exampleInputEmail2" class="mb-1">{{ form.errors.email }}</label>
                     <input type="email" class="form-control" id="exampleInputEmail2" name="email"
                            aria-describedby="emailHelp">
 
                 </div>
                 <div class="form-group mb-1">
+                    <label for="exampleInputPassword1" class="mb-1">{{ form.errors.password1 }}</label>
                     <label for="exampleInputPassword1" class="mb-1">Пароль</label>
                     <input type="password" class="form-control" id="exampleInputPassword1"
                            name="password1">
                 </div>
                 <div class="form-group mb-1">
+                    <label for="exampleInputPassword1" class="mb-1">{{ form.errors.password2 }}</label>
                     <label for="exampleInputPassword2" class="mb-1">Повторите пароль</label>
                     <input type="password" class="form-control" id="exampleInputPassword2"
                            name="password2">
