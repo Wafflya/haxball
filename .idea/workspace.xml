@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/comments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/form_comment.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/form_comment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
