@@ -39,11 +39,8 @@ def age(born_date):
 # Тег для отображения последней активности на форуме
 @register.inclusion_tag('core/include/forum/last_activity_in_category.html')
 def forum_last_activity(category):
-    print(category)
     last_post = Post.objects.filter(category=category).order_by('-created').first()
     last_comment = Comment.objects.filter(post__category = category).order_by('-created').first()
-    print(last_post)
-    print(last_comment)
     if last_comment == None and last_post==None:
         return {'last_act':None}
     elif last_comment == None:

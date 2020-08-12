@@ -24,8 +24,8 @@
                     </div>
                     <div class="d-inline-block">
                         <h6 class="text-right"><i class="fa fa-bars text-primary" aria-hidden="true"></i> Статей: {{ subtheme.posts_in_category.count }}</h6>
-                        <h6 class="text-muted small mt-2 text-right"><i class="fa fa-reply text-success" aria-hidden="true"></i>
- {% forum_last_activity subtheme %}</h6>
+                        <h6 class="text-muted small mt-2 text-right">
+                            {% forum_last_activity subtheme %}</h6>
                     </div>
                 </div>
 
