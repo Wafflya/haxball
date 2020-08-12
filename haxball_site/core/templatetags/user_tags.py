@@ -80,7 +80,6 @@ def show_top_comments(count=5, for_year=2020):
     year, week, day_of_week = my_date.isocalendar()
     day = my_date.day
     month = my_date.month
-    #print(day,week,month)
     top_com_today = Comment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(
         dislike_count=Count('votes', filter=Q(votes__vote__lt=0))).filter(created__year=year, created__month=month, created__day=day).order_by('-like_count')[
               :count]
