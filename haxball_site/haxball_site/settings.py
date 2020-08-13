@@ -26,7 +26,6 @@ SECRET_KEY = 'm_5m)8w^h+8avxko^()kmlr6fnp(r+m1^=(m!kldx$*47(-za6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-
 #try:
 #   HOSTNAME = socket.gethostname()
 #except:
@@ -272,7 +271,7 @@ CKEDITOR_CONFIGS = {
             {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
             {'name': 'colors', 'items': ['TextColor', 'BGColor']},
             {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
-            {'name': 'about', 'items': ['About']},
+            {'name': 'about', 'items': ['About', 'Spoiler']},
             '/',  # put this to force next toolbar on new line
             {'name': 'yourcustomtools', 'items': [
                 # put the name of your editor.ui.addButton here
@@ -298,6 +297,7 @@ CKEDITOR_CONFIGS = {
             'autoembed',
             'embedsemantic',
             'autogrow',
+            'spoiler',
             # 'devtools',
             'widget',
             'lineutils',
