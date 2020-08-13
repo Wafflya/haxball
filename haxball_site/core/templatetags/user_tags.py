@@ -69,7 +69,7 @@ def show_last_activity(count=10):
     last_comments = Post.objects.annotate(last_comment=Max('comments__created')).order_by('-last_comment')
     for i in last_comments:
         if len(i.comments.all()) >0:
-            last_com.append(i.comments.order_by('-created').last())
+            last_com.append(i.comments.order_by('created').last())
     return {'last_comments': last_com[:count]}
 
 

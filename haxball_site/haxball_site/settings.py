@@ -156,10 +156,10 @@ USE_TZ = True
 
 
 if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    ACCOUNT_EMAIL_REQUIRED = True
-    ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
-    ACCOUNT_EMAIL_VERIFICATION = True
+    EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+    #ACCOUNT_EMAIL_REQUIRED = True
+    #ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+    #ACCOUNT_EMAIL_VERIFICATION = True
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     ACCOUNT_EMAIL_REQUIRED = True
