@@ -5,8 +5,17 @@
 {% endblock %}
 {% load static %}
 {% load user_tags %}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "ckeditor/ckeditor/plugins/spoiler/spoiler.css" %}">
+    <style>
+        body {
+            background-image: url({% static "img/backgrounds/bg-light-4860.png" %})
+        }
+    </style>
+{% endblock %}
 {% block scripts %}
-
+     <script type="text/javascript" src="{% static "ckeditor/ckeditor/plugins/spoiler/spoiler.js" %}"></script>
     <!-- Аякс-скрипт проставления лайков-дизлайков к постам -->
     <script>
         function getCookie(name) {
