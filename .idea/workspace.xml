@@ -26,10 +26,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/logo2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/logo3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/Activate.ps1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/activate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/activate.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/chardetect.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/deactivate.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/django-admin.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/django-admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/easy_install-3.8.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/easy_install.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/gunicorn.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/iptest.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/iptest3.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/ipython.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/ipython3.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/markdown_py.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/pip.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/pip3.8.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/pip3.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/pygmentize.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/python.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/pythonw.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/Scripts/sqlformat.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/pyvenv.cfg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_env/share/man/man1/ipython.1.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/home.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,19 +106,19 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\haxball\haxball_site\ckeditor\ckeditor\plugins\images" />
-      <recent name="E:\haxball\haxball_site\static\img\ico" />
-      <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
-      <recent name="E:\haxball\haxball_site\static\img\svg" />
-      <recent name="E:\haxball\haxball_site\static\img" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\haxball\haxball_site\static\ckeditor\ckeditor\plugins\images" />
       <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
       <recent name="$PROJECT_DIR$/haxball_site/static/img/backgrounds" />
       <recent name="E:\haxball\haxball_site\static\img\ico" />
       <recent name="E:\haxball\haxball_site\core\static\jquery" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img\ico" />
+      <recent name="E:\haxball\haxball_site\ckeditor\ckeditor\plugins\images" />
+      <recent name="E:\haxball\haxball_site\static\img\ico" />
+      <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
+      <recent name="E:\haxball\haxball_site\static\img\svg" />
     </key>
   </component>
   <component name="RunManager">
@@ -159,7 +186,8 @@
       <workItem from="1597341865736" duration="1819000" />
       <workItem from="1597343705224" duration="1089000" />
       <workItem from="1597396273596" duration="1976000" />
-      <workItem from="1597398324296" duration="2601000" />
+      <workItem from="1597398324296" duration="7483000" />
+      <workItem from="1597411955956" duration="1259000" />
     </task>
     <servers />
   </component>
