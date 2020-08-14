@@ -17,11 +17,14 @@ register = template.Library()
 @register.inclusion_tag('core/include/profile/karma.html')
 def karma(profile):
     s = 0
+    samo = 0
     for comment in Comment.objects.filter(author=profile.name):
         s += comment.votes.sum_rating()
+        samo += comment.votes.filter(user=profile.name).count()
     for post in Post.objects.filter(author=profile.name):
         s += post.votes.sum_rating()
-    return {'k': s}
+        samo += post.votes.filter(user=profile.name).count()
+    return {'k': s-samo}
 
 # Упоролся и написал своё вычисление возраста 1 цифрой, т.к. встроенный
 # таймсинс обрезает с месяцами... хз, надо доработать будет, чтобы писало возраст красиво, но хз зачем так из-за такой
