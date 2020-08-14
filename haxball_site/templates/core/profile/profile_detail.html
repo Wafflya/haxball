@@ -81,7 +81,7 @@
                         </div>
                         <div class="col-sm-6">
                             <p class="m-b-10 f-w-600">Последний визит</p>
-                            <h6 class="text-muted f-w-400">{{ profile.name.last_login }}</h6>
+                            <h6 class="text-muted f-w-400">{% user_last_activity profile.name %}</h6>
                         </div>
                         <div class="col-sm-6">
                             <p class="m-b-10 f-w-600">Дата рождения</p>

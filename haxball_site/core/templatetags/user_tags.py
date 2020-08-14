@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.db.models import Count, Q
 from django.db.models import Max
 from django.utils import timezone
-
+from online_users.models import OnlineUserActivity
 from ..models import Post, Comment
 
 register = template.Library()
@@ -37,6 +37,15 @@ def age(born_date):
         return date.today().year - born_date.year
     else:
         return date.today().year - born_date.year - 1
+
+@register.simple_tag
+def user_last_activity(user):
+    try:
+        a = OnlineUserActivity.objects.get(user=user)
+    except:
+        return None
+    print(a.last_activity)
+    return a.last_activity
 
 
 # Тег для отображения последней активности на форуме

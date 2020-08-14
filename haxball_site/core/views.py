@@ -4,7 +4,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.db.models import F
+from django.db.models import F, Max
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView
@@ -65,7 +65,7 @@ class CategoryListView(DetailView):
     context_name = 'category'
 
     def get_context_data(self, **kwargs):
-        post_list = self.object.posts_in_category.all().order_by('-created')
+        post_list = self.object.posts_in_category.annotate(last_comment=Max('comments__created')).order_by('-last_comment')
         context = super().get_context_data(**kwargs)
         context['posts'] = post_list
         return context
