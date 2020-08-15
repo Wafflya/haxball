@@ -35,6 +35,10 @@
                             <div class="comment-text w-100">
                                 <a href="{{ comment.author.user_profile.get_absolute_url }}">
                                     <h5 class="m-0">
+                                        {% for icon in comment.author.user_profile.user_icon.all %}
+                                            <img src="{{ icon.image.url }}" width="16px" height="16px"
+                                                 title="{{ icon.description }}">
+                                        {% endfor %}
                                         {{ comment.author.username }}
                                         <span class="badge">
                                         {% karma comment.author.user_profile %}
@@ -50,7 +54,6 @@
                                 </span>
 
                                     {% include 'core/include/like_dislike_comment.html' %}
-
 
 
                                     <span class="action-icons">
@@ -97,6 +100,10 @@
                                 <div class="comment-text w-100">
                                     <a href="{{ children.author.user_profile.get_absolute_url }}">
                                         <h5 class="m-0">
+                                            {% for icon in children.author.user_profile.user_icon.all %}
+                                                <img src="{{ icon.image.url }}" width="16px" height="16px"
+                                                     title="{{ icon.description }}">
+                                            {% endfor %}
                                             {{ children.author.username }}
                                             <span class="badge">
                                         {% karma children.author.user_profile %}
@@ -112,9 +119,8 @@
                                     <!-- {{ children.created|timesince }} назад -->
                                 </span>
 
-                                    <!-- ВОТ ТУТА -->
+                                        <!-- ВОТ ТУТА -->
                                         {% include 'core/include/like_dislike_comment.html' with comment=children %}
-
 
 
                                         <span class="action-icons">

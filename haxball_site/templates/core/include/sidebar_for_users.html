@@ -6,15 +6,11 @@
         {% for user in users_online %}
                 <a class="list-group-item justify-content-between" href="{{ user.user_profile.get_absolute_url }}">
                     <i class="mr-1 fa fa-circle text-success" aria-hidden="true"></i>{{ user }}
-                    {% if user.is_superuser %}
-                        <img src="{% static "img/ico/my_crown_1.png" %}" height="16" width="16"
-                                    title="{% for group in user.groups.all %}{{ group.name }}{% endfor %}">
-                                    {% endif %}
-                    {% if user.is_staff and not user.is_superuser %}
-                        <img src="{% static "img/ico/sheriff_badge_1.png" %}" height="16" width="16"
-                            title="{% for group in user.groups.all %}{{ group.name }}{% endfor %}">
-                    {% endif %}
-
+                    <span>
+                    {% for icon in user.user_profile.user_icon.all %}
+                        <img src="{{ icon.image.url }}" width="16px" height="16px" title="{{ icon.description }}">
+                    {% endfor %}
+                    </span>
                 </a>
         {% endfor %}
     </ul>

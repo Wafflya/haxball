@@ -199,3 +199,15 @@ class Profile(models.Model):
     class Meta:
         verbose_name = 'Профиль'
         verbose_name_plural = 'Профили'
+
+
+class UserIcon(models.Model):
+    title = models.CharField('Название', max_length=256)
+    description = models.CharField('Описание(при наведении)', max_length=100, blank=True)
+    image = models.ImageField('Иконка', upload_to='user_icon/', blank=True, null=True)
+    user = models.ManyToManyField(Profile, related_name='user_icon', blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'Иконка'
+        verbose_name_plural = 'Иконки'
+

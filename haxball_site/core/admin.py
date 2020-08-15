@@ -32,13 +32,17 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 @admin.register(Themes)
-class ProfileAdmin(admin.ModelAdmin):
+class ThemesAdmin(admin.ModelAdmin):
     list_display = ('title',)
 
+@admin.register(UserIcon)
+class UserIconAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description',)
 
 @admin.register(Category)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'description', 'is_official', 'theme')
+    prepopulated_fields = {'slug': ('title',)}
 
 
 @admin.register(Comment)
