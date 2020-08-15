@@ -29,17 +29,21 @@
     <div class="carousel-item active">
         <div class="card mt-2">
             <div class="card-header text-center" style="border-radius: 20px 20px 0px 0;">
-                <h4 class="mb-0"><img src="{% static "img/ico/top_1.png" %}" height="37" width="37" style="vertical-align: top"
-                                      ; class="mr-1">Сегодня</h4>
+                <h4 class="mb-0"><!--<img src="{% static "img/ico/top_1.png" %}" height="37" width="37" style="vertical-align: top"
+                                      ; class="mr-1">--><i class="fa fa-thumbs-o-up text-success mr-1" aria-hidden="true"></i>Сегодня</h4>
             </div>
             <div class="btn-group-vertical">
                  {% for comment in top_comments_day %}
                     <a type="button" href="{{ comment.post.get_absolute_url }}#r{{ comment.id }}" class="btn btn-secondary btn-block text-right px-1"
                        data-toggle="tooltip" data-placement="right" title="от {{ comment.author }}">
                         <div class="d-flex justify-content-between">
-                            <div>
+                            <div class="float-left">
                                 <span class="badge badge-pill badge-success">{{comment.votes.likes.count}}</span>
-                                {{ comment.post.title|truncatechars:22 }}
+                                {% if comment.body|striptags  %}
+                                    {{ comment.body|striptags|truncatechars:20 }}
+                                {% else %}
+                                    <i>Картинка от</i> {{ comment.author }}
+                                {% endif %}
                             </div>
                             <img src="{% static "img/ico/reply.png" %}" height="30" width="30">
                         </div>
@@ -52,17 +56,20 @@
     <div class="carousel-item">
      <div class="card mt-2">
             <div class="card-header text-center">
-                <h4 class="mb-0"><img src="{% static "img/ico/top_1.png" %}" height="37" width="37" style="vertical-align: top"
-                                      ; class="mr-1">Месяц</h4>
+                <h4 class="mb-0"><i class="fa fa-thumbs-o-up text-success mr-1" aria-hidden="true"></i>Месяц</h4>
             </div>
             <div class="btn-group-vertical">
                  {% for comment in top_comments_month %}
                     <a type="button" href="{{ comment.post.get_absolute_url }}#r{{ comment.id }}" class="btn btn-secondary btn-block text-right px-1"
                        data-toggle="tooltip" data-placement="right" title="от {{ comment.author }}">
                         <div class="d-flex justify-content-between">
-                            <div>
+                            <div class="float-left">
                                 <span class="badge badge-pill badge-success">{{comment.votes.likes.count}}</span>
-                                {{ comment.post.title|truncatechars:22 }}
+                                {% if comment.body|striptags  %}
+                                    {{ comment.body|striptags|truncatechars:20 }}
+                                {% else %}
+                                    <i>Картинка от</i> {{ comment.author }}
+                                {% endif %}
                             </div>
                             <img src="{% static "img/ico/reply.png" %}" height="30" width="30">
                         </div>
@@ -74,17 +81,20 @@
     <div class="carousel-item">
            <div class="card mt-2">
             <div class="card-header text-center">
-                <h4 class="mb-0"><img src="{% static "img/ico/top_1.png" %}" height="37" width="37" style="vertical-align: top"
-                                      ; class="mr-1">Год</h4>
+                <h4 class="mb-0"><i class="fa fa-thumbs-o-up text-success mr-1" aria-hidden="true"></i>Год</h4>
             </div>
             <div class="btn-group-vertical">
                  {% for comment in top_comments_year %}
                     <a type="button" href="{{ comment.post.get_absolute_url }}#r{{ comment.id }}" class="btn btn-secondary btn-block text-right px-1"
                        data-toggle="tooltip" data-placement="right" title="от {{ comment.author }}">
                         <div class="d-flex justify-content-between">
-                            <div>
+                            <div class="float-left">
                                 <span class="badge badge-pill badge-success">{{comment.votes.likes.count}}</span>
-                                {{ comment.post.title|truncatechars:22 }}
+                                {% if comment.body|striptags  %}
+                                    {{ comment.body|striptags|truncatechars:20 }}
+                                {% else %}
+                                    <i>Картинка от</i> {{ comment.author }}
+                                {% endif %}
                             </div>
                             <img src="{% static "img/ico/reply.png" %}" height="30" width="30">
                         </div>
