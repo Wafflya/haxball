@@ -1,9 +1,11 @@
 {% load static %}
     <div class="alert alert-primary users-online" role="alert">
-        Последние обсуждения
+        Сейчас онлайн: ({{ users_online_count }})
     </div>
     <ul class="list-group list-group-flush">
         {% for user in users_online %}
-                <a class="list-group-item" href="{{ user.user_profile.get_absolute_url }}">{{ user }}</a>
+                <a class="list-group-item justify-content-between" href="{{ user.user_profile.get_absolute_url }}">
+                    <i class="mr-1 fa fa-circle text-success" aria-hidden="true"></i>{{ user }}
+                </a>
         {% endfor %}
     </ul>

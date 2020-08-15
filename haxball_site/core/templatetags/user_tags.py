@@ -38,14 +38,17 @@ def age(born_date):
     else:
         return date.today().year - born_date.year - 1
 
-@register.simple_tag
+
+@register.inclusion_tag('core/include/profile/last_actuvity.html')
 def user_last_activity(user):
     try:
         a = OnlineUserActivity.objects.get(user=user)
+        is_online = timezone.now()-a.last_activity < timezone.timedelta(minutes=15)
+        print(is_online)
     except:
         return None
-    print(a.last_activity)
-    return a.last_activity
+    return {'last_seen':a.last_activity,
+            'is_online':is_online}
 
 
 # Тег для отображения последней активности на форуме
@@ -68,9 +71,12 @@ def forum_last_activity(category):
 
 # Вообще, это ласт-реги, но надо будет сделать куррент онлайн
 @register.inclusion_tag('core/include/sidebar_for_users.html')
-def show_users_online(count=5):
-    users_online = User.objects.filter(is_active=True).order_by('-date_joined')[:count]
-    return {'users_online': users_online}
+def show_users_online(count):
+    user_activity_objects = OnlineUserActivity.get_user_activities()
+    users_online_count = user_activity_objects.count()
+    users_online = (user.user for user in user_activity_objects)
+    return {'users_online': users_online,
+            'users_online_count':users_online_count}
 
 
 # Сайд-бар для last activity (выводит последние оставленные комментарии

@@ -26,11 +26,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/profile/last_actuvity.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/sidebar_for_users.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/sidebar_for_users.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,8 +45,8 @@
       <list>
         <option value="JavaScript File" />
         <option value="Python Script" />
-        <option value="HTML File" />
         <option value="CSS File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -161,7 +161,7 @@
       <workItem from="1597343705224" duration="1089000" />
       <workItem from="1597396273596" duration="1976000" />
       <workItem from="1597398324296" duration="7483000" />
-      <workItem from="1597411955956" duration="9649000" />
+      <workItem from="1597411955956" duration="18168000" />
     </task>
     <servers />
   </component>
@@ -225,9 +225,10 @@
     </state>
     <state x="463" y="166" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594719779982" />
     <state x="405" y="190" key="SettingsEditor/1680.0.1680.1050/0.27.1680.1023@0.27.1680.1023" timestamp="1596015998764" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1597067431678">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="545" y="219" width="588" height="659" key="search.everywhere.popup" timestamp="1597448702431">
+      <screen x="0" y="0" width="1680" height="1010" />
     </state>
+    <state x="545" y="219" width="588" height="659" key="search.everywhere.popup/0.0.1680.1010/1680.0.1680.1010@0.0.1680.1010" timestamp="1597448702431" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597067431678" />
     <state x="545" y="248" width="672" height="667" key="search.everywhere.popup/1680.0.1680.1050/0.27.1680.1023@0.27.1680.1023" timestamp="1596034997041" />
   </component>
