@@ -1,5 +1,7 @@
 {% if is_online %}
     <i class="mr-1 fa fa-circle text-success" aria-hidden="true"></i>Сейчас на сайте
+{% elif last_seen %}
+    Был {{ last_seen|timesince }} назад
 {% else %}
-Был {{ last_seen|timesince }} назад
+    Неизвестно(
 {% endif %}
