@@ -15,6 +15,13 @@
     <script type="text/javascript" src="{% static "jquery/jquery-3.5.1.min.js" %}"></script>
     <script type="text/javascript" src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
 
+    <!-- Put this script tag to the <head> of your page -->
+    <script type="text/javascript" src="https://vk.com/js/api/openapi.js?168"></script>
+
+    <script type="text/javascript">
+        VK.init({apiId: 7568320, onlyWidgets: true});
+    </script>
+
     {% block scripts %} {% endblock %}
 </head>
 <body>
