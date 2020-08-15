@@ -61,7 +61,7 @@
             <div class="btn-group-vertical">
                  {% for comment in top_comments_month %}
                     <a type="button" href="{{ comment.post.get_absolute_url }}#r{{ comment.id }}" class="btn btn-secondary btn-block text-right px-1"
-                       data-toggle="tooltip" data-placement="right" title="от {{ comment.author }}">
+                       data-toggle="tooltip" data-placement="right" title="от {{ comment.author }} в {{ comment.post.title }}">
                         <div class="d-flex justify-content-between">
                             <div class="float-left">
                                 <span class="badge badge-pill badge-success">{{comment.votes.likes.count}}</span>
@@ -86,7 +86,7 @@
             <div class="btn-group-vertical">
                  {% for comment in top_comments_year %}
                     <a type="button" href="{{ comment.post.get_absolute_url }}#r{{ comment.id }}" class="btn btn-secondary btn-block text-right px-1"
-                       data-toggle="tooltip" data-placement="right" title="от {{ comment.author }}">
+                       data-toggle="tooltip" data-placement="right" title="от {{ comment.author }} в {{ comment.post.title }}">
                         <div class="d-flex justify-content-between">
                             <div class="float-left">
                                 <span class="badge badge-pill badge-success">{{comment.votes.likes.count}}</span>
