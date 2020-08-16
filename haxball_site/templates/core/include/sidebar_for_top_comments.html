@@ -69,7 +69,8 @@
                                     {% if comment.body|striptags %}
                                         {{ comment.body|striptags|truncatechars:20 }}
                                     {% else %}
-                                        <i>Картинка от</i> {{ comment.author }}
+                                        <i><img src="{% static "img/ico/image_48.png" %}" height="23" width="23"> от</i>
+                                        {{ comment.author }}
                                     {% endif %}
                                 </div>
                                 <img src="{% static "img/ico/reply.png" %}" height="30" width="30">
@@ -103,7 +104,8 @@
                                     {% if comment.body|striptags %}
                                         {{ comment.body|striptags|truncatechars:20 }}
                                     {% else %}
-                                        <i>Картинка от</i> {{ comment.author }}
+                                        <i><img src="{% static "img/ico/image_48.png" %}" height="23" width="23"> от</i>
+                                        {{ comment.author }}
                                     {% endif %}
                                 </div>
                                 <img src="{% static "img/ico/reply.png" %}" height="30" width="30">
