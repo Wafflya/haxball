@@ -40,6 +40,7 @@ else:
 
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -197,6 +198,10 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
 SITE_ID = 1
 
+# Grapelli config
+GRAPPELLI_ADMIN_TITLE = 'Административная панель сайта cis-haxball.com. Здесь могла быть ваша реклама!'
+
+# text-editors config
 SUMMERNOTE_THEME = 'bs3'
 
 SUMMERNOTE_CONFIG = {

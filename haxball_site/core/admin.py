@@ -21,6 +21,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'views', 'category', 'created', 'important')
     list_filter = ('created', 'publish', 'author')
     search_fields = ('title', 'body')
+    #slug = AutoSlugField(populate_from='title', unique_for_date='publish')
     prepopulated_fields = {'slug': ('title',)}
     raw_id_fields = ('author',)
     form = PostAdminForm
@@ -29,7 +30,7 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'slug')
-
+    list_filter = ('id', 'name')
 
 @admin.register(Themes)
 class ThemesAdmin(admin.ModelAdmin):
@@ -40,7 +41,7 @@ class UserIconAdmin(admin.ModelAdmin):
     list_display = ('title', 'description',)
 
 @admin.register(Category)
-class ProfileAdmin(admin.ModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'description', 'is_official', 'theme')
     prepopulated_fields = {'slug': ('title',)}
 

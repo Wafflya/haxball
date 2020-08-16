@@ -24,6 +24,10 @@ p {
 
 }
 
+.comment-body p img {
+    max-width: 100%;
+}
+
 .comment-widgets .comment-row {
     border-bottom: 1px solid rgba(120, 130, 140, 0.13);
     padding: 15px;

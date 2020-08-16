@@ -69,9 +69,9 @@
                                         {% endif %}
                                 </span>
                                 </div>
-                                <p class="m-b-5 m-t-10">
+                                <div class="comment-body">
                                     {{ comment.body|safe|linebreaks }}
-                                </p>
+                                </div>
 
                                 <div class="comment-footer">
                                     {% if comment.childs_count > 2 %}

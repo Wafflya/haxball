@@ -20,6 +20,7 @@ from django.urls import path, include
 
 
 urlpatterns = [
+    path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
     path('', include('core.urls', namespace='core')),
     path('ckeditor/', include('ckeditor_uploader.urls')),

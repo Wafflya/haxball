@@ -25,15 +25,14 @@
                     <label for="exampleInputEmail1" class="mb-1">{{ form.errors.username }}</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                            name="username">
-                    <small id="emailHelp" class="form-text text-muted">Ваш игровой никнейм <span
-                            class="text-danger"><strong>ИЗМЕНЕНИЕ - ПЛАТНО!</strong></span></small>
+                    <small id="emailHelp" class="form-text text-muted">Ваш игровой никнейм:</small>
                 </div>
                 <div class="form-group mb-1">
                     <label for="exampleInputEmail2" class="mb-1">Email-адрес</label>
                     <label for="exampleInputEmail2" class="mb-1">{{ form.errors.email }}</label>
                     <input type="email" class="form-control" id="exampleInputEmail2" name="email"
                            aria-describedby="emailHelp">
-
+                    <span class="text-danger">Будьте внимательны!</span>
                 </div>
                 <div class="form-group mb-1">
                     <label for="exampleInputPassword1" class="mb-1">{{ form.errors.password1 }}</label>
