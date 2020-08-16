@@ -1,4 +1,5 @@
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from django_summernote.fields import SummernoteTextFormField
 from django import forms
 from django.contrib import admin
 
@@ -13,6 +14,13 @@ class PostAdminForm(forms.ModelForm):
 
     class Meta:
         model = Post
+        fields = '__all__'
+
+class CommentAdminForm(forms.ModelForm):
+    body = SummernoteTextFormField(label='Комментарий')
+
+    class Meta:
+        model = Comment
         fields = '__all__'
 
 
@@ -49,6 +57,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('id','author', 'created', 'body', )
+    form = CommentAdminForm
 
 
 @admin.register(LikeDislike)

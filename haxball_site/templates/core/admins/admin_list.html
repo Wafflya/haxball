@@ -17,7 +17,9 @@
             {% for user in users %}
                     <h4><a href="{{ user.user_profile.get_absolute_url }}">
                         {% for icon in user.user_profile.user_icon.all %}
+                            {% if icon %}
                             <img src="{{ icon.image.url }}" width="20px" height="20px" title="{{ icon.description }}">
+                            {% endif %}
                         {% endfor %}{{ user.username }}
                     </a>
                         <span class="small text-muted">

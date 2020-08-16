@@ -199,7 +199,7 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 SITE_ID = 1
 
 # Grapelli config
-GRAPPELLI_ADMIN_TITLE = 'Административная панель сайта cis-haxball.com.'
+GRAPPELLI_ADMIN_TITLE = 'Административная панель сайта cis-haxball.com'
 
 # text-editors config
 SUMMERNOTE_THEME = 'bs3'

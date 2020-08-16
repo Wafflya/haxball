@@ -45,7 +45,7 @@
                     <p class="mb-0">
                         {% if profile.vk %}
                             <a href="https://vk.com/{{ profile.vk }}" target="_blank"><img
-                                    src="{% static "img/ico/vk_1.png" %}" height="41" width="41" title="vk"></a>
+                                    src="{% static "img/ico/vk_1.png" %}" height="41" width="41" title="{{ profile.vk }}"></a>
                         {% endif %}
                         {% if profile.discord %}
                             <img src="{% static "img/ico/discord_1.png" %}" onclick="myFunction()" id=discord
@@ -55,7 +55,7 @@
                         {% if profile.telegram %}
                             <a href="https://t.me/{{ profile.telegram }}" target="_blank"><img
                                     src="{% static "img/ico/tg_1.png" %}" height="41" width="41"
-                                    title="telegram"></a>
+                                    title="{{ profile.telegram }}"></a>
                         {% endif %}
                     </p>
                 </div>

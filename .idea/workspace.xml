@@ -20,9 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/core/js/like-dislike.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/image_48.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/admins/admin_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/admins/admin_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/sidebar_for_top_comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/sidebar_for_top_comments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/post/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/post/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,10 +42,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="Python Script" />
         <option value="CSS File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -73,9 +80,9 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\haxball\haxball_site\static\img\ico" />
       <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img\ico" />
       <recent name="E:\haxball\haxball_site\ckeditor\ckeditor\plugins\images" />
-      <recent name="E:\haxball\haxball_site\static\img\ico" />
       <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
       <recent name="E:\haxball\haxball_site\static\img\svg" />
     </key>
