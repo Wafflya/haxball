@@ -41,8 +41,12 @@ urlpatterns = [
 # Ссылка на создание нового поста на форуме
     path('forum/<slug:slug>/add_post', views.post_new, name='new_post'),
 
-# Редактирование профиля, если создан пользователем
+# Редактирование комментария
+    path('post/edit_comment/<int:pk>', views.comment_edit, name='edit_comment'),
+
+# Редактирование поста, если создан пользователем
     path('post/<slug:slug>/<int:pk>/edit', views.post_edit, name='post_edit'),
+
 
 # Путь на самописный апи для обработку лайка/дизлайка ПОСТА через Ажакс-запрос
     path('api/post/<int:id>/like/',

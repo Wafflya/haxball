@@ -1,6 +1,6 @@
 <head>{{ comment_form.media }}</head>
 
-<form action='{% url 'core:post_detail' post.id post.slug %}' method="post" id="addcomment" class="text-center">
+<form action="{% url 'core:post_detail' post.id post.slug %}" method="post" id="addcomment" class="text-center">
     {% csrf_token %}
     <!--<input type="hidden" name="page" value="{{ page }}">-->
     <input type="hidden" name="parent" id="contactparent" value="">

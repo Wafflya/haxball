@@ -8,12 +8,13 @@ from django.db.models import F, Max
 from django.db.models.functions import Coalesce
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
+from django.utils import timezone
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 from pytils.translit import slugify
 
 from .forms import CommentForm, EditProfileForm, PostForm
-from .models import Post, Profile, LikeDislike, Category, Themes
+from .models import Post, Profile, LikeDislike, Category, Themes, Comment
 
 
 # Вьюха для списка постов
@@ -107,6 +108,32 @@ def post_edit(request, slug, pk):
         else:
             return HttpResponse('Ошибка доступа')
     return render(request, 'core/forum/add_post.html', {'form': form})
+
+
+# edit comment
+def comment_edit(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.method == 'POST':
+        if request.user == comment.author and (
+                timezone.now() - comment.created < timezone.timedelta(minutes=15)) or request.user.is_superuser:
+            form = CommentForm(request.POST, instance=comment)
+        else:
+            return HttpResponse('Ошибка доступа или время истекло')
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.save()
+            return redirect(comment.post.get_absolute_url())
+        else:
+            comment.delete()
+            return redirect(comment.post.get_absolute_url())
+    else:
+        if request.user == comment.author and (
+                timezone.now() - comment.created < timezone.timedelta(minutes=15)) or request.user.is_superuser:
+            form = CommentForm(instance=comment)
+        else:
+            return HttpResponse('Ошибка доступа или время истекло')
+    return render(request, 'core/post/edit_comment.html', {'post': comment.post, 'comment_form': form})
 
 
 # Вьюха для фасткапов

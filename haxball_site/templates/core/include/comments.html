@@ -33,18 +33,34 @@
                             </span>
                             </div>
                             <div class="comment-text w-100">
-                                <a href="{{ comment.author.user_profile.get_absolute_url }}">
-                                    <h5 class="m-0">
-                                        {% for icon in comment.author.user_profile.user_icon.all %}
-                                            <img src="{{ icon.image.url }}" width="16px" height="16px"
-                                                 title="{{ icon.description }}">
-                                        {% endfor %}
-                                        {{ comment.author.username }}
-                                        <span class="badge">
+                                <div class="d-flex justify-content-between">
+                                    <a href="{{ comment.author.user_profile.get_absolute_url }}">
+                                        <h5 class="m-0">
+                                            {% for icon in comment.author.user_profile.user_icon.all %}
+                                                <img src="{{ icon.image.url }}" width="16px" height="16px"
+                                                     title="{{ icon.description }}">
+                                            {% endfor %}
+                                            {{ comment.author.username }}
+                                            <span class="badge">
                                         {% karma comment.author.user_profile %}
                                     </span>
-                                    </h5>
-                                </a>
+                                        </h5>
+                                    </a>
+                                    {% if user.is_superuser or comment.author == user and comment|can_edit %}
+                                        <span>
+
+                                            <a href="{% url 'core:edit_comment' comment.id %}"
+                                               class="text-warning" title="Редактировать">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
+
+                                            <!--<a href="#" class="text-danger">
+                                            <i class="fa fa-times" aria-hidden="true" style="font-size: 20px"></i>
+                                            </a>-->
+                                        </span>
+                                    {% endif %}
+                                </div>
+
                                 <div class="comment-footer">
                                 <span class="date text-muted small">
                                     <i class="fa fa-calendar text-primary"
@@ -98,18 +114,33 @@
                             </span>
                                 </div>
                                 <div class="comment-text w-100">
-                                    <a href="{{ children.author.user_profile.get_absolute_url }}">
-                                        <h5 class="m-0">
-                                            {% for icon in children.author.user_profile.user_icon.all %}
-                                                <img src="{{ icon.image.url }}" width="16px" height="16px"
-                                                     title="{{ icon.description }}">
-                                            {% endfor %}
-                                            {{ children.author.username }}
-                                            <span class="badge">
+                                    <div class="d-flex justify-content-between">
+                                        <a href="{{ children.author.user_profile.get_absolute_url }}">
+                                            <h5 class="m-0">
+                                                {% for icon in children.author.user_profile.user_icon.all %}
+                                                    <img src="{{ icon.image.url }}" width="16px" height="16px"
+                                                         title="{{ icon.description }}">
+                                                {% endfor %}
+                                                {{ children.author.username }}
+                                                <span class="badge">
                                         {% karma children.author.user_profile %}
                                     </span>
-                                        </h5>
-                                    </a>
+                                            </h5>
+                                        </a>
+                                        {% if user.is_superuser or children.author == user and children|can_edit %}
+                                            <span>
+
+                                            <a href="{% url 'core:edit_comment' children.id %}"
+                                               class="text-warning" title="Редактировать">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
+
+                                                <!--<a href="#" class="text-danger">
+                                                <i class="fa fa-times" aria-hidden="true" style="font-size: 20px"></i>
+                                                </a>-->
+                                        </span>
+                                        {% endif %}
+                                    </div>
                                     <div class="comment-footer">
                                 <span class="date text-muted small">
                                     <i class="fa fa-calendar text-primary"
