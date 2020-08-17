@@ -102,7 +102,10 @@ def post_edit(request, slug, pk):
             post.save()
             return redirect(post.get_absolute_url())
     else:
-        form = PostForm(instance=post)
+        if request.user == post.author:
+            form = PostForm(instance=post)
+        else:
+            return HttpResponse('Ошибка доступа')
     return render(request, 'core/forum/add_post.html', {'form': form})
 
 
