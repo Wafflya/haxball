@@ -102,7 +102,7 @@ def post_edit(request, slug, pk):
             post.save()
             return redirect(post.get_absolute_url())
     else:
-        if request.user == post.author:
+        if request.user == post.author or request.user.is_superuser:
             form = PostForm(instance=post)
         else:
             return HttpResponse('Ошибка доступа')
