@@ -56,8 +56,8 @@ class LikeDislike(models.Model):
     objects = LikeDislikeManager()
 
     class Meta:
-        verbose_name = 'Лайк/дизлайк элемент'
-        verbose_name_plural = "Лайк/дизлайк элементы"
+        verbose_name = 'Лайк/дизлайк голос'
+        verbose_name_plural = "Лайк/дизлайк голоса"
 
 
 # Огромный раздел форума в котором категории создаются админами
@@ -115,7 +115,7 @@ class Post(models.Model):
         return self.comments.annotate(Max('created'))
 
     def __str__(self):
-        return self.title
+        return 'Пост: {}'.format(self.title)
 
     class Meta:
         verbose_name = 'Пост'
@@ -138,7 +138,7 @@ class Comment(models.Model):
         ordering = ('-created',)
 
     def __str__(self):
-        return 'Комментарий от {}'.format(self.author)
+        return 'Комментарий от {} к {}'.format(self.author, self.post.title)
 
     def is_parent(self):
         return self.parent == None
