@@ -26,7 +26,7 @@ class CommentAdminForm(forms.ModelForm):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'views', 'category', 'created', 'important')
+    list_display = ('id', 'title', 'author', 'views', 'category', 'created', 'important')
     list_filter = ('created', 'publish', 'author')
     search_fields = ('title', 'body')
     #slug = AutoSlugField(populate_from='title', unique_for_date='publish')

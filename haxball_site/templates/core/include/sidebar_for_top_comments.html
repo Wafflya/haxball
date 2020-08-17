@@ -32,7 +32,7 @@
                                 <div class="float-left">
                                     <span class="badge badge-pill badge-success">{{ comment.votes.likes.count }}</span>
                                     {% if comment.body|striptags %}
-                                        {{ comment.body|striptags|truncatechars:20 }}
+                                        {{ comment.body|striptags|truncatechars:18 }}
                                     {% else %}
                                         <i><img src="{% static "img/ico/image_48.png" %}" height="23" width="23"> от</i>
                                         {{ comment.author }}
@@ -67,7 +67,7 @@
                                 <div class="float-left">
                                     <span class="badge badge-pill badge-success">{{ comment.votes.likes.count }}</span>
                                     {% if comment.body|striptags %}
-                                        {{ comment.body|striptags|truncatechars:20 }}
+                                        {{ comment.body|striptags|truncatechars:18 }}
                                     {% else %}
                                         <i><img src="{% static "img/ico/image_48.png" %}" height="23" width="23"> от</i>
                                         {{ comment.author }}
@@ -102,7 +102,7 @@
                                 <div class="float-left">
                                     <span class="badge badge-pill badge-success">{{ comment.votes.likes.count }}</span>
                                     {% if comment.body|striptags %}
-                                        {{ comment.body|striptags|truncatechars:20 }}
+                                        {{ comment.body|striptags|truncatechars:18 }}
                                     {% else %}
                                         <i><img src="{% static "img/ico/image_48.png" %}" height="23" width="23"> от</i>
                                         {{ comment.author }}
