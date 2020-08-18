@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'm_5m)8w^h+8avxko^()kmlr6fnp(r+m1^=(m!kldx$*47(-za6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 #try:
 #   HOSTNAME = socket.gethostname()
@@ -40,6 +40,7 @@ else:
 
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
+    'tournament.apps.TournamentConfig',
     'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',

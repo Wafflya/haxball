@@ -115,7 +115,7 @@ def comment_edit(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     if request.method == 'POST':
         if request.user == comment.author and (
-                timezone.now() - comment.created < timezone.timedelta(minutes=15)) or request.user.is_superuser:
+                timezone.now() - comment.created < timezone.timedelta(minutes=10)) or request.user.is_superuser:
             form = CommentForm(request.POST, instance=comment)
         else:
             return HttpResponse('Ошибка доступа или время истекло')

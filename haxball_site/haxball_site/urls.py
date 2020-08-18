@@ -23,6 +23,7 @@ urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
     path('', include('core.urls', namespace='core')),
+    path('championship/', include('tournament.urls', namespace='tournament')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('accounts/', include('allauth.urls')),
     #path('markdownx/', include('markdownx.urls')),
