@@ -17,7 +17,7 @@
 {% block profile_of_user %}
     <div class="card mb-2 mt-2" style="border-radius: 10px">
         <h2 class="text-center my-2"><i class="fa fa-search-plus text-success" aria-hidden="true"></i>
- Команды/свободных агентов</h2>
+            Команды/свободных агентов</h2>
         <div class="container-fluid p-0 mx-0">
             <div class="table-fix table-responsive">
                 <table class="table table-hover" style="max-width: 100%">
@@ -35,8 +35,9 @@
                         <tr>
                             <th scope="row" class="pl-2 pr-1">
                                 <div class="d-flex-inline"><img src="{{ agent.player.user_profile.avatar.url }}"
-                                     alt="{{ agent.player.username }}" width="28" style="border-radius: 100%">
-                                <a href="{{ agent.player.user_profile.get_absolute_url }}">{{ agent.player }}</a>
+                                                                alt="{{ agent.player.username }}" width="28"
+                                                                style="border-radius: 100%">
+                                    <a href="{{ agent.player.user_profile.get_absolute_url }}">{{ agent.player }}</a>
                                 </div>
                             </th>
                             <td class="text-center" style="font-size: 12px">{{ agent.position_main }}</td>
@@ -51,7 +52,6 @@
                                         <div><img src="{% static "img/ico/discord_1.png" %}"
                                                   onclick="navigator.clipboard.writeText({{ agent.player.user_profile.discord }});
                                                           alert('Скопировано ' + {{ agent.player.user_profile.discord }});"
-                                                  id=discord
                                                   height="20" width="20"
                                                   data-title="{{ agent.player.user_profile.discord }}"
                                                   title="{{ agent.player.user_profile.discord }}"
@@ -119,16 +119,24 @@
                 <div class="d-inline-flex justify-content-center bg-c-lite-unknown p-3" style="border-radius: 30px">
                     <form method="POST" action="{% url 'tournament:remove_entry' user.user_free_agent.id %}">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-primary mr-1">Снять заявку</button>
+                        <button type="submit" class="btn btn-primary mr-1">
+                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
+                            Снять заявку</button>
                     </form>
 
                     <form method="POST" action="{% url 'tournament:update_entry' user.user_free_agent.id %}">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-success ml-1"
-                                {% if not user|can_add_entry %}disabled
+                                {% if not user|can_add_entry %}
+                                disabled
                                 title="Сможете через {{ user|date_can|timeuntil }}"
-                                style="cursor: pointer" {% endif %}
-                        >Поднять заявку
+                                style="cursor: pointer"
+                                {% endif %}
+                        ><i class="fa fa-arrow-up text-warning" aria-hidden="true"
+                               {% if not user|can_add_entry %}onclick="alert('Вы не можете поднять заявку, т.к. только' +
+                                       ' недавно создали или подняли заявку. Следущее обновление возможно ' +
+                                       'через {{ user|date_can|timeuntil }}. Если вы снимете свою заявку, то создать новую будет возможно через это же время.');"{% endif %}></i>
+                            Поднять заявку
                         </button>
                     </form>
 
