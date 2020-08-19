@@ -5,12 +5,12 @@
     <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
 {% endblock %}
 {% block scripts %}
-<script>
-    function ChangeText(Element) {
-            if (Element.innerHTML=='<i class="fa fa-chevron-up"></i>Скрыть ответы') Element.innerHTML = '<i class="fa fa-chevron-down"></i>Показать ответы';
+    <script>
+        function ChangeText(Element) {
+            if (Element.innerHTML == '<i class="fa fa-chevron-up"></i>Скрыть ответы') Element.innerHTML = '<i class="fa fa-chevron-down"></i>Показать ответы';
             else Element.innerHTML = '<i class="fa fa-chevron-up"></i>Скрыть ответы';
         }
-</script>
+    </script>
 {% endblock %}
 
 
@@ -102,7 +102,8 @@
                                            aria-expanded="true"
                                            onclick="ChangeText(this)"
                                            aria-controls="commentcollapse{{ comment.id }}" class="small"><i
-                                                class="fa fa-chevron-up"></i>Скрыть ответы</a><small>({{ comment.childs_count }})</small>
+                                                class="fa fa-chevron-up"></i>Скрыть ответы</a>
+                                        <small>({{ comment.childs_count }})</small>
                                     {% endif %}
                                 </div>
                             </div>
@@ -122,18 +123,31 @@
                                 </div>
                                 <div class="comment-text w-100">
                                     <div class="d-flex justify-content-between">
-                                        <a href="{{ children.author.user_profile.get_absolute_url }}">
-                                            <h5 class="m-0">
-                                                {% for icon in children.author.user_profile.user_icon.all %}
-                                                    <img src="{{ icon.image.url }}" width="16px" height="16px"
-                                                         title="{{ icon.description }}">
-                                                {% endfor %}
-                                                {{ children.author.username }}
-                                                <span class="badge">
+                                        <div class="d-inline-flex">
+                                            <a href="{{ children.author.user_profile.get_absolute_url }}">
+                                                <h5 class="m-0">
+                                                    {% for icon in children.author.user_profile.user_icon.all %}
+                                                        <img src="{{ icon.image.url }}" width="16px" height="16px"
+                                                             title="{{ icon.description }}">
+                                                    {% endfor %}
+                                                    {{ children.author.username }}
+                                                    <span class="badge">
                                         {% karma children.author.user_profile %}
                                     </span>
-                                            </h5>
-                                        </a>
+                                                </h5>
+                                            </a>
+
+                                            <i style="align-self: flex-end; margin-bottom: 2px;"> ответил </i>
+                                            <a href="{{ children.parent.author.user_profile.get_absolute_url }}">
+                                                <h5 class="m-0 ml-2">
+                                                    {% for icon in children.parent.author.user_profile.user_icon.all %}
+                                                        <img src="{{ icon.image.url }}" width="16px" height="16px"
+                                                             title="{{ icon.description }}">
+                                                    {% endfor %}
+                                                    {{ children.parent.author.username }}
+                                                </h5>
+                                            </a>
+                                        </div>
                                         {% if user.is_superuser or children.author == user and children|can_edit %}
                                             <span>
 
