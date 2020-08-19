@@ -33,11 +33,11 @@
                     <tbody>
                     {% for agent in agents %}
                         <tr>
-                            <th scope="row">
-                                <span class="round">
-                                <img src="{{ agent.player.user_profile.avatar.url }}"
-                                     alt="{{ agent.player.username }}" width="30">
-                            </span><a href="{{ agent.player.user_profile.get_absolute_url }}">{{ agent.player }}</a>
+                            <th scope="row" class="pl-2 pr-1">
+                                <div class="d-flex-inline"><img src="{{ agent.player.user_profile.avatar.url }}"
+                                     alt="{{ agent.player.username }}" width="28" style="border-radius: 100%">
+                                <a href="{{ agent.player.user_profile.get_absolute_url }}">{{ agent.player }}</a>
+                                </div>
                             </th>
                             <td class="text-center" style="font-size: 12px">{{ agent.position_main }}</td>
                             <td>
@@ -83,7 +83,7 @@
 
     {% if user.is_authenticated %}
         {% if not user|user_in_agents and user|can_add_entry %}
-            <div class="card bg-c-lite-unknown" style="border-radius: 30px">
+            <div class="card bg-c-lite-unknown mb-2" style="border-radius: 30px">
                 <form method="POST" class="row p-3">
                     {% csrf_token %}
                     {{ form_create.as_p }}

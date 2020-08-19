@@ -26,24 +26,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/tournament/free_agent/free_agent_list.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/tournament/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/tournament/templatetags/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/haxball.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/haxball.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/static/core/profile/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/static/core/profile/profile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/account/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/account/signup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/post/edit_comment.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/post/edit_comment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/static/tournament/free_agent/free_agent_list.css" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/static/tournament/free_agent/free_agent_list.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/free_agent/free_agents_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/free_agent/free_agents_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

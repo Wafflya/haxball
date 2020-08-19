@@ -18,7 +18,7 @@ def user_in_agents(user):
 @register.filter
 def can_add_entry(user):
     try:
-        if timezone.now() - user.user_free_agent.created > timezone.timedelta(minutes=5):
+        if timezone.now() - user.user_free_agent.created > timezone.timedelta(hours=6):
             return True
         else:
             return False
@@ -27,4 +27,4 @@ def can_add_entry(user):
 
 @register.filter
 def date_can(user):
-    return user.user_free_agent.created + timezone.timedelta(minutes=5)
+    return user.user_free_agent.created + timezone.timedelta(hours=6)
