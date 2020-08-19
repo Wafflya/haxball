@@ -26,7 +26,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/comments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/free_agent/free_agents_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/free_agent/free_agents_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,19 +81,19 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\haxball\haxball_site\static\ckeditor\ckeditor\plugins\images" />
-      <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
-      <recent name="$PROJECT_DIR$/haxball_site/static/img/backgrounds" />
-      <recent name="E:\haxball\haxball_site\static\img\ico" />
-      <recent name="E:\haxball\haxball_site\core\static\jquery" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\media\users_avatars\default" />
       <recent name="E:\haxball\haxball_site\static\img\ico" />
       <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img\ico" />
       <recent name="E:\haxball\haxball_site\ckeditor\ckeditor\plugins\images" />
       <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\haxball\haxball_site\static\ckeditor\ckeditor\plugins\images" />
+      <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
+      <recent name="$PROJECT_DIR$/haxball_site/static/img/backgrounds" />
+      <recent name="E:\haxball\haxball_site\static\img\ico" />
+      <recent name="E:\haxball\haxball_site\core\static\jquery" />
     </key>
   </component>
   <component name="RunManager">
@@ -159,6 +164,7 @@
       <workItem from="1597398324296" duration="7483000" />
       <workItem from="1597411955956" duration="32396000" />
       <workItem from="1597721596616" duration="5264000" />
+      <workItem from="1597860512094" duration="3495000" />
     </task>
     <servers />
   </component>

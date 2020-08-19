@@ -29,7 +29,7 @@ class FreeAgent(models.Model):
         (ANY, 'Любая'),
     )
     position_main = models.CharField(max_length=20, choices=POSITION, default=ANY)
-    created = models.DateTimeField("Оставлена", auto_now_add=True)
+    created = models.DateTimeField("Оставлена", default=timezone.now)
     deleted = models.DateTimeField("Снята", auto_now_add= True)
     is_active = models.BooleanField("Активно", default=True)
 

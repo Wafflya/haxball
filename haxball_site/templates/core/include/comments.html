@@ -4,7 +4,14 @@
     <link rel="stylesheet" type="text/css" href="{% static "core/include/comments.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
 {% endblock %}
-
+{% block scripts %}
+<script>
+    function ChangeText(Element) {
+            if (Element.innerHTML=='<i class="fa fa-chevron-up"></i>Скрыть ответы') Element.innerHTML = '<i class="fa fa-chevron-down"></i>Показать ответы';
+            else Element.innerHTML = '<i class="fa fa-chevron-up"></i>Скрыть ответы';
+        }
+</script>
+{% endblock %}
 
 
 <div class="row">
@@ -93,16 +100,16 @@
                                     {% if comment.childs_count > 2 %}
                                         <a href="#commentcollapse{{ comment.id }}" data-toggle="collapse"
                                            aria-expanded="true"
-                                           aria-controls="commentcollapse{{ comment.id }}" class="small"><span
-                                                class="fa fa-chevron-up"> </span>Показать ответы
-                                            ({{ comment.childs_count }}) </a>
+                                           onclick="ChangeText(this)"
+                                           aria-controls="commentcollapse{{ comment.id }}" class="small"><i
+                                                class="fa fa-chevron-up"></i>Скрыть ответы</a><small>({{ comment.childs_count }})</small>
                                     {% endif %}
                                 </div>
                             </div>
                         </div>
                         {% if comment.has_childs %}
                             {% if comment.childs_count > 2 %}
-                                <div class="collapse" id="commentcollapse{{ comment.id }}">
+                                <div class="collapse show" id="commentcollapse{{ comment.id }}">
                             {% endif %}
                         {% for children in comment.all_childs %}
                             <div class="d-flex flex-row comment-row" style="padding-left: 100px"
