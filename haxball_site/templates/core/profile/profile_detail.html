@@ -50,7 +50,7 @@
                         {% if profile.discord %}
                             <img src="{% static "img/ico/discord_1.png" %}" onclick="myFunction()" id=discord
                                  height="41" width="41" data-title="{{ profile.discord }}"
-                                 title="{{ profile.discord }}">
+                                 title="{{ profile.discord }}" style="cursor: pointer;">
                         {% endif %}
                         {% if profile.telegram %}
                             <a href="https://t.me/{{ profile.telegram }}" target="_blank"><img

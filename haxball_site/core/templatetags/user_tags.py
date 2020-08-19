@@ -8,7 +8,10 @@ from django.utils import timezone
 from online_users.models import OnlineUserActivity
 from ..models import Post, Comment
 
+
 register = template.Library()
+
+
 
 
 # тег для поискса кармы юзера(профиля), будем писать в профиль

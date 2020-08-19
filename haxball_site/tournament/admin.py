@@ -8,5 +8,5 @@ from .models import FreeAgent
 class FreeAgentAdmin(admin.ModelAdmin):
     #def player_pos(self, instance):
     #    return instance.player_positions
-    list_display = ('id', 'player', 'position_main','position_second','description',)
+    list_display = ('id', 'player', 'position_main','description','is_active', 'created','deleted')
 

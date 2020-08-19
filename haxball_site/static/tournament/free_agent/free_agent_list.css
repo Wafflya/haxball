@@ -1,0 +1,11 @@
+.table-fix { overflow-y: auto; height: 600px; }
+.table-fix thead th { position: sticky; top: 0; }
+table  { border-collapse: collapse; width: 100%; }
+.table td, .table th {
+    vertical-align: middle;
+}
+
+.bg-c-lite-unknown {
+    background: -webkit-gradient(linear, left top, right top, from(#8d3e11), to(#3f6804));
+    background: linear-gradient(to right, #ea99d4, rgba(126, 255, 239, 0.49))
+}

@@ -1,28 +1,37 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 
 
 # Create your models here.
 
 class FreeAgent(models.Model):
-    player = models.OneToOneField(User, verbose_name='Игрок', on_delete=models.CASCADE)
-    description = models.TextField("Комментарий к заявке", blank=True)
-    TOP_FORWARD = 'FWD_T'
-    BOT_FORWARD = 'FWD_B'
-    DEF_MIDDLE = 'DM'
-    GOALKEEPER = 'GK'
-    ANY = 'ANY'
-    NO = 'NO'
+    player = models.OneToOneField(User, verbose_name='Игрок', on_delete=models.CASCADE, related_name = 'user_free_agent')
+    description = models.TextField("Комментарий к заявке", max_length = 200, blank=True)
+    TOP_FORWARD = 'Верхний нападающий'
+    BOT_FORWARD = 'Нижний нападающий'
+    FORWARD = 'Нападающий'
+    DEF_MIDDLE = 'Опорник'
+    GOALKEEPER = 'Вратарь'
+    BACK = 'Задняя линия'
+    GK_FWD = 'Нападающий/вратарь'
+    DM_FWD = 'Нападающий/опорник'
+    ANY = 'Любая'
     POSITION = (
         (TOP_FORWARD, 'Верхний нападающий'),
         (BOT_FORWARD, 'Нижний нападающий'),
+        (FORWARD, "Нападающий"),
         (DEF_MIDDLE, 'Опорник'),
         (GOALKEEPER, 'Вратарь'),
-        (ANY, 'Не важна'),
+        (BACK, "Задняя линия"),
+        (DM_FWD, 'Нападающий/Опорник'),
+        (GK_FWD, 'Нападающий/Вратарь'),
+        (ANY, 'Любая'),
     )
     position_main = models.CharField(max_length=20, choices=POSITION, default=ANY)
-    POSITION = POSITION + ((NO, 'Отсутствует'),)
-    position_second = models.CharField(max_length=20, choices=POSITION, default=NO)
+    created = models.DateTimeField("Оставлена", auto_now_add=True)
+    deleted = models.DateTimeField("Снята", auto_now_add= True)
+    is_active = models.BooleanField("Активно", default=True)
 
     def __str__(self):
         return 'CA {}'.format(self.player.username)
