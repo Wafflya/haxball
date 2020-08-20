@@ -1,14 +1,8 @@
 {% load static %}
 {% block styles %}
-    <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "core/include/sidebar_for_users.css" %}">
-
-    <style>
-        body {
-            background-image: url({% static "img/backgrounds/bg-light-4860.png" %})
-        }
-    </style>
 {% endblock %}
+
 <div class="card" style="border-radius: 20px 20px 0px 0;">
     <div class="card-header d-inline-flex mb-0 justify-content-center bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
             <h6 class="mb-0">Сейчас онлайн: {{ users_online_count }}</h6>
