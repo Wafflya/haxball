@@ -139,13 +139,13 @@
 
                                             <i style="align-self: flex-end; margin-bottom: 2px;"> ответил </i>
                                             <a href="{{ children.parent.author.user_profile.get_absolute_url }}">
-                                                <h6 class="m-0 ml-2">
+                                                <h5 class="m-0 ml-2">
                                                     {% for icon in children.parent.author.user_profile.user_icon.all %}
                                                         <img src="{{ icon.image.url }}" width="16px" height="16px"
                                                              title="{{ icon.description }}">
                                                     {% endfor %}
                                                     {{ children.parent.author.username }}
-                                                </h6>
+                                                </h5>
                                             </a>
                                         </div>
                                         {% if user.is_superuser or children.author == user and children|can_edit %}
