@@ -26,23 +26,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/haxball_site/polls/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/polls/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/polls/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/polls/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/polls/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/polls/templatetags/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/polls/templatetags/polls_extras.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/polls/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/polls/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/polls/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/polls/include/polls_list.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/templates/polls/include/polls_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/free_agent/free_agents_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/free_agent/free_agents_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/polls/include/polls_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/polls/include/polls_list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +162,7 @@
       <workItem from="1597411955956" duration="32396000" />
       <workItem from="1597721596616" duration="5264000" />
       <workItem from="1597860512094" duration="11999000" />
-      <workItem from="1597925459438" duration="22245000" />
+      <workItem from="1597925459438" duration="23269000" />
     </task>
     <servers />
   </component>
