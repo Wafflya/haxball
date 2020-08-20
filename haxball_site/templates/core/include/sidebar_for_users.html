@@ -1,10 +1,24 @@
 {% load static %}
-    <div class="alert alert-primary users-online m-0" role="alert">
-        Сейчас онлайн: {{ users_online_count }}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "core/include/sidebar_for_users.css" %}">
+
+    <style>
+        body {
+            background-image: url({% static "img/backgrounds/bg-light-4860.png" %})
+        }
+    </style>
+{% endblock %}
+<div class="card" style="border-radius: 20px 20px 0px 0;">
+    <div class="card-header d-inline-flex mb-0 justify-content-center bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
+            <h6 class="mb-0">Сейчас онлайн: {{ users_online_count }}</h6>
     </div>
-    <ul class="list-group list-group-flush">
-        {% for user in users_online %}
-                <a class="list-group-item justify-content-between" href="{{ user.user_profile.get_absolute_url }}">
+    <div class="card-body pr-0 py-1 pl-0 bg-for-online-body" style="position: relative; height: 250px; overflow: auto;">
+        <div class="btn-group-vertical w-100">
+            {% for user in users_online %}
+                <a type="button" class="btn btn-secondary btn-block text-left justify-content-between"
+                   href="{{ user.user_profile.get_absolute_url }}">
+
                     <i class="mr-1 fa fa-circle text-success" aria-hidden="true"></i>{{ user }}
                     <span>
                     {% for icon in user.user_profile.user_icon.all %}
@@ -12,5 +26,7 @@
                     {% endfor %}
                     </span>
                 </a>
-        {% endfor %}
-    </ul>
+            {% endfor %}
+        </div>
+    </div>
+</div>

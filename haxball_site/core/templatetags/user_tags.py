@@ -82,10 +82,10 @@ def forum_last_activity(category):
             return {'last_act': last_post.created}
 
 
-# Вообще, это ласт-реги, но надо будет сделать куррент онлайн
+# Сайдбар для пользователей онлайн(по дефолту 15 минут)
 @register.inclusion_tag('core/include/sidebar_for_users.html')
 def show_users_online(count):
-    user_activity_objects = OnlineUserActivity.get_user_activities()
+    user_activity_objects = OnlineUserActivity.get_user_activities(time_delta=timezone.timedelta(minutes=60))
     users_online_count = user_activity_objects.count()
     users_online = (user.user for user in user_activity_objects)
     return {'users_online': users_online,
@@ -104,7 +104,7 @@ def show_last_activity(count=10):
     return {'last_comments': last_com[:count]}
 
 
-# Чтобы топ по лайкам за период считал(!!!период добавить!!!)
+# Топ лайков за ТЕКУЩИЙ день, неделя, месяц, год
 @register.inclusion_tag('core/include/sidebar_for_top_comments.html')
 def show_top_comments(count=5, for_year=2020):
     my_date = datetime.now()
