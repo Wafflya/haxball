@@ -3,11 +3,11 @@
     <link rel="stylesheet" type="text/css" href="{% static "core/include/sidebar_for_users.css" %}">
 {% endblock %}
 
-<div class="card" style="border-radius: 20px 20px 0px 0;">
+<div class="card" style="border-radius: 20px 20px 20px 20px;">
     <div class="card-header d-inline-flex mb-0 justify-content-center bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
             <h6 class="mb-0" style="font-size: 1rem">Сейчас онлайн: {{ users_online_count }}</h6>
     </div>
-    <div class="card-body p-0 bg-for-online-body" style="position: relative; height: 250px; overflow: auto;">
+    <div class="card-body p-0 bg-for-online-body" style="position: relative; height: 250px; overflow: auto; border-radius: 0px 0px 20px 20px;">
         <div class="btn-group-vertical w-100">
             {% for user in users_online %}
                 <a type="button" class="btn btn-secondary btn-block text-left justify-content-between"

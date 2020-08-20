@@ -1,8 +1,8 @@
 .bg-for-online-head {
     background: -webkit-gradient(linear, left top, right top, from(#8d3e11), to(#3f6804));
-    background: linear-gradient(to right, rgba(241, 52, 80, 0.92), rgba(70, 123, 231, 0.78))
+    background: linear-gradient(to right, rgba(193, 243, 229, 0.7), rgba(91, 142, 241, 0.32))
 }
 .bg-for-online-body {
     background: -webkit-gradient(linear, left top, right top, from(#8d3e11), to(#3f6804));
-    background: linear-gradient(to right, #6f2f5e, rgba(3, 82, 79, 0.82))
+    background: linear-gradient(to right, #3e2238, rgba(32, 24, 62, 0.82))
 }
