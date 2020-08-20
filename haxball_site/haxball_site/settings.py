@@ -41,6 +41,7 @@ else:
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'tournament.apps.TournamentConfig',
+    'polls.apps.PollsConfig',
     'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',

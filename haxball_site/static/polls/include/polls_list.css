@@ -1,0 +1,8 @@
+.bg-for-online-head {
+    background: -webkit-gradient(linear, left top, right top, from(#8d3e11), to(#3f6804));
+    background: linear-gradient(to right, rgba(193, 243, 229, 0.7), rgba(91, 142, 241, 0.32))
+}
+
+h6 {
+    font-size: 1rem;
+}
