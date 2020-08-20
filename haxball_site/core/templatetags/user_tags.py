@@ -120,9 +120,18 @@ def show_top_comments(count=5, for_year=2020):
     top_com_year = Comment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(
         dislike_count=Count('votes', filter=Q(votes__vote__lt=0))).filter(created__year=year).order_by('-like_count')[
                     :count]
+
+    week_start = my_date-timezone.timedelta(days=day_of_week-1, hours=my_date.hour, minutes=my_date.minute)
+
+    week_end = my_date+timezone.timedelta(days=7-day_of_week, hours=23-my_date.hour, minutes=60-my_date.minute)
+    print(week_start, week_end)
+    top_com_week = Comment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(
+        dislike_count=Count('votes', filter=Q(votes__vote__lt=0))).filter(created__gt=week_start, created__lt=week_end).order_by('-like_count')[
+                   :count]
     return {'top_comments_day': top_com_today,
             'top_comments_month':top_com_month,
-            'top_comments_year':top_com_year}
+            'top_comments_year':top_com_year,
+            'top_comments_week':top_com_week,}
 
 
 # Сайд-бар для отображеня топа лайков постов за всё время
