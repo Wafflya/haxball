@@ -31,7 +31,7 @@
                     {% csrf_token %}
                     {% for choice in poll.choices.all %}
 
-                        <div class="form-check">
+                        <div class="form-check mb-2">
                             <input class="form-check-input" type="radio" name='{{ poll.id }}' id=c{{ choice.id }}
                                    value={{ choice.id }}>
                             <label class="form-check-label" for=c{{ choice.id }}>
