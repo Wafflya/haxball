@@ -37,7 +37,7 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'slug')
+    list_display = ('id', 'name', 'slug', 'background')
     list_filter = ('id', 'name')
 
 @admin.register(Themes)
