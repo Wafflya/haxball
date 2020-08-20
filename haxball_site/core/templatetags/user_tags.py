@@ -85,7 +85,7 @@ def forum_last_activity(category):
 # Сайдбар для пользователей онлайн(по дефолту 15 минут)
 @register.inclusion_tag('core/include/sidebar_for_users.html')
 def show_users_online(count):
-    user_activity_objects = OnlineUserActivity.get_user_activities()
+    user_activity_objects = OnlineUserActivity.get_user_activities(time_delta=timezone.timedelta(minutes=5))
     users_online_count = user_activity_objects.count()
     users_online = (user.user for user in user_activity_objects)
     return {'users_online': users_online,

@@ -1,12 +1,14 @@
 {% load static %}
-
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static "core/include/sidebar_for_top_comments.css" %}">
+{% endblock %}
 
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 
 
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <div class="card mt-2" style="border-radius: 20px 20px 0px 0;">
+            <div class="card mt-2 bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
 
                 <div class="card-header d-flex justify-content-between" style="border-radius: 20px 20px 0px 0;">
                     <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="prev"
@@ -48,7 +50,7 @@
         </div>
 
         <div class="carousel-item">
-            <div class="card mt-2" style="border-radius: 20px 20px 0px 0;">
+            <div class="card mt-2 bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
 
                 <div class="card-header d-flex justify-content-between" style="border-radius: 20px 20px 0px 0;">
                     <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="prev"
@@ -90,7 +92,7 @@
         </div>
 
         <div class="carousel-item">
-            <div class="card mt-2" style="border-radius: 20px 20px 0px 0;">
+            <div class="card mt-2 bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
                 <div class="card-header d-flex justify-content-between" style="border-radius: 20px 20px 0px 0;">
                     <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="prev">
                         <i class="fa fa-arrow-circle-left" aria-hidden="true" style="height: 100%; font-size: 24px;"></i>
@@ -125,7 +127,7 @@
             </div>
         </div>
         <div class="carousel-item">
-            <div class="card mt-2" style="border-radius: 20px 20px 0px 0;">
+            <div class="card mt-2 bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
                 <div class="card-header d-flex justify-content-between" style="border-radius: 20px 20px 0px 0;">
                     <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="prev">
                         <i class="fa fa-arrow-circle-left" aria-hidden="true" style="height: 100%; font-size: 24px;"></i>
