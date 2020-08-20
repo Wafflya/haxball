@@ -7,7 +7,7 @@
     <div class="card-header d-inline-flex mb-0 justify-content-center bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
             <h6 class="mb-0">Сейчас онлайн: {{ users_online_count }}</h6>
     </div>
-    <div class="card-body pr-0 py-1 pl-0 bg-for-online-body" style="position: relative; height: 250px; overflow: auto;">
+    <div class="card-body p-0 bg-for-online-body" style="position: relative; height: 250px; overflow: auto;">
         <div class="btn-group-vertical w-100">
             {% for user in users_online %}
                 <a type="button" class="btn btn-secondary btn-block text-left justify-content-between"
