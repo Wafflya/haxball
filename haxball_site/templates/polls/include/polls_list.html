@@ -33,7 +33,7 @@
 
                         <div class="form-check mb-2">
                             <input class="form-check-input" type="radio" name='{{ poll.id }}' id=c{{ choice.id }}
-                                   value={{ choice.id }}>
+                                   value="{{ choice.id }}" {% if forloop.counter == 1 %}checked{% endif %}>
                             <label class="form-check-label" for=c{{ choice.id }}>
                                 {{ choice.choice_text }}
                             </label>
