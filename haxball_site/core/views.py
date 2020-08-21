@@ -142,7 +142,7 @@ class FastcupView(ListView):
         category = Category.objects.get(slug='fastcups')
     except:
         category = None
-    queryset = Post.objects.filter(category=category)
+    queryset = Post.objects.filter(category=category).order_by('-created')
     context_object_name = 'posts'
     paginate_by = 5
     template_name = 'core/fastcups/fastcups_list.html'

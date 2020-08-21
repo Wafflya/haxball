@@ -18,13 +18,15 @@
                     <div class="mb-2">
                         {{ choice.choice_text }}<span class="ml-1">({{ choice.votes.count }})</span>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar"
+                            <div class="progress-bar {% if choice|percent_choices:poll > 50 %}bg-success{% endif %}" role="progressbar"
                                  style="width: {{ choice|percent_choices:poll }}%;"
                                  {% if not poll.anonymously %}
                                  title="{% for us in choice.votes.all %}{{ us.username }}
 {% endfor %}"{% else %}title="Опрос анонимен"{% endif %}
                                  aria-valuenow="{{ choice|percent_choices:poll }}"
-                                 aria-valuemin="0" aria-valuemax="100">{{ choice|percent_choices:poll }}%
+                                 aria-valuemin="0" aria-valuemax="100">
+                                <span class="text-dark"><strong><i>{{ choice|percent_choices:poll }}%</i></strong>
+                                </span>
                             </div>
                         </div>
                     </div>
