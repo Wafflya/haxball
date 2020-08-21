@@ -39,12 +39,21 @@
                     {% for agent in agents %}
                         <tr>
                             <th scope="row" class="pl-2 pr-1">
-                                <div class="d-inline">
-                                    <img src="{{ agent.player.user_profile.avatar.url }}"
-                                                                alt="{{ agent.player.username }}" width="28"
-                                                                style="border-radius: 100%">
-                                    <a href="{{ agent.player.user_profile.get_absolute_url }}">{{ agent.player }}</a>
+                                <div class="media">
+                                    <img src="{{ agent.player.user_profile.avatar.url }}" class="align-self-start mr-1"
+                                         alt="{{ agent.player.username }}" width="28" style="border-radius: 100%">
+                                    <div class="media-body">
+                                        <h6 class="mt-0"><a
+                                                href="{{ agent.player.user_profile.get_absolute_url }}">{{ agent.player }}</a>
+                                        </h6>
+                                    </div>
                                 </div>
+                                   <!-- <div class="d-inline">
+                                        <img src="{{ agent.player.user_profile.avatar.url }}"
+                                             alt="{{ agent.player.username }}" width="28"
+                                             style="border-radius: 100%">
+                                        <a href="{{ agent.player.user_profile.get_absolute_url }}">{{ agent.player }}</a>
+                                    </div>-->
                             </th>
                             <td class="text-center" style="font-size: 12px">{{ agent.position_main }}</td>
                             <td>
@@ -125,7 +134,8 @@
                         {% csrf_token %}
                         <button type="submit" class="btn btn-primary mr-1">
                             <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                            Снять заявку</button>
+                            Снять заявку
+                        </button>
                     </form>
 
                     <form method="POST" action="{% url 'tournament:update_entry' user.user_free_agent.id %}">
@@ -137,9 +147,9 @@
                                 style="cursor: pointer"
                                 {% endif %}
                         ><i class="fa fa-arrow-up text-warning" aria-hidden="true"
-                               {% if not user|can_add_entry %}onclick="alert('Вы не можете поднять заявку, т.к. только' +
-                                       ' недавно создали или подняли заявку. Следущее обновление возможно ' +
-                                       'через {{ user|date_can|timeuntil }}. Если вы снимете свою заявку, то создать новую будет возможно через это же время.');"{% endif %}></i>
+                            {% if not user|can_add_entry %}onclick="alert('Вы не можете поднять заявку, т.к. только' +
+                                    ' недавно создали или подняли заявку. Следущее обновление возможно ' +
+                                    'через {{ user|date_can|timeuntil }}. Если вы снимете свою заявку, то создать новую будет возможно через это же время.');"{% endif %}></i>
                             Поднять заявку
                         </button>
                     </form>
