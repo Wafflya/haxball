@@ -1,5 +1,5 @@
 from django import template
-from django.db.models import Count
+from django.db.models import Count, Max
 
 from ..models import Question, Choice
 
@@ -25,3 +25,8 @@ def user_in_poll(user, poll):
 def percent_choices(choice, poll):
     all = Question.objects.filter(id=poll.id).aggregate(all_votes = Count('choices__votes'))
     return round(100*choice.votes.count()/all['all_votes'])
+
+@register.filter
+def most_popular_choice(choice, poll):
+    most = Choice.objects.filter(question=poll).annotate(count = Count('votes')).aggregate(most_pop = Max('count'))
+    return choice.votes.count() == most['most_pop']

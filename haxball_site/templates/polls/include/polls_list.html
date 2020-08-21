@@ -18,7 +18,7 @@
                     <div class="mb-2">
                         {{ choice.choice_text }}<span class="ml-1">({{ choice.votes.count }})</span>
                         <div class="progress">
-                            <div class="progress-bar {% if choice|percent_choices:poll > 50 %}bg-success{% endif %}" role="progressbar"
+                            <div class="progress-bar {% if choice|most_popular_choice:poll %}bg-success{% endif %}" role="progressbar"
                                  style="width: {{ choice|percent_choices:poll }}%;"
                                  {% if not poll.anonymously %}
                                  title="{% for us in choice.votes.all %}{{ us.username }}
