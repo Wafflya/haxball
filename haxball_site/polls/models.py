@@ -10,6 +10,7 @@ class Question(models.Model):
     question_text = models.CharField('Текст вопроса', max_length=256)
     created = models.DateTimeField('Дата создания', default=timezone.now)
     is_active = models.BooleanField('Активен', default=False)
+    anonymously = models.BooleanField('Анонимный', default=True)
 
     def __str__(self):
         return self.title

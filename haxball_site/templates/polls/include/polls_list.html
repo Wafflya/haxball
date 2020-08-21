@@ -7,8 +7,9 @@
 
 {% for poll in active_polls %}
     <div class="card mt-2" style="border-radius: 20px 20px 20px 20px;">
-        <div class="card-header bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
+        <div class="card-header bg-for-online-head text-center" style="border-radius: 20px 20px 0px 0;">
             <h6 class="text-center mb-0" style="font-size: 1rem">{{ poll.question_text }}</h6>
+            {% if poll.anonymously %}<i>(анонимно)</i>{% endif %}
         </div>
 
         <div class="card-body py-2" style="border-radius: 0px 0px 20px 20px;">
@@ -19,6 +20,9 @@
                         <div class="progress">
                             <div class="progress-bar" role="progressbar"
                                  style="width: {{ choice|percent_choices:poll }}%;"
+                                 {% if not poll.anonymously %}
+                                 title="{% for us in choice.votes.all %}{{ us.username }}
+{% endfor %}"{% else %}title="Опрос анонимен"{% endif %}
                                  aria-valuenow="{{ choice|percent_choices:poll }}"
                                  aria-valuemin="0" aria-valuemax="100">{{ choice|percent_choices:poll }}%
                             </div>
