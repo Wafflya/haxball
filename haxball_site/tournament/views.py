@@ -35,7 +35,7 @@ class FreeAgentList(ListView):
                     fa.is_active = True
                     fa.save()
                     return redirect('tournament:free_agent')
-        #return render(request, 'tournament/free_agent/free_agents_list.html', {'agents':agents})
+        return redirect('tournament:free_agent')
 
 
 def remove_entry(request, pk):

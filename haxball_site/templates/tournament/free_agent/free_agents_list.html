@@ -39,7 +39,8 @@
                     {% for agent in agents %}
                         <tr>
                             <th scope="row" class="pl-2 pr-1">
-                                <div class="d-flex-inline"><img src="{{ agent.player.user_profile.avatar.url }}"
+                                <div class="d-inline">
+                                    <img src="{{ agent.player.user_profile.avatar.url }}"
                                                                 alt="{{ agent.player.username }}" width="28"
                                                                 style="border-radius: 100%">
                                     <a href="{{ agent.player.user_profile.get_absolute_url }}">{{ agent.player }}</a>
