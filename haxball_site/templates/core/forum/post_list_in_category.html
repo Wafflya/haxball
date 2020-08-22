@@ -3,120 +3,37 @@
 {% block scripts %}
 
     <!-- Аякс-скрипт проставления лайков-дизлайков к постам -->
-
-    <script>
-
-        function getCookie(name) {
-            var cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                var cookies = document.cookie.split(';');
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = jQuery.trim(cookies[i]);
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
-
-        // Настройка AJAX
-        $(function () {
-            $.ajaxSetup({
-                headers: {"X-CSRFToken": getCookie("csrftoken")}
-            });
-        });
-
-        var elClass = '.vote';
-
-        function like() {
-            var like = $(this);
-            var type = like.data('type');
-            var pk = like.data('id');
-            var action = like.data('action');
-            var dislike = like.next();
-
-            var l_id = 'l' + type + pk
-            var d_id = 'd' + type + pk
-            $('#' + l_id).toggleClass('text-success');
-            $('#' + d_id).removeClass('text-danger');
-
-            $.ajax({
-                url: "/api/" + type + "/" + pk + "/" + action + "/",
-                type: 'POST',
-                data: {'obj': pk},
-
-                success: function (json) {
-                    like.find("[data-count='like']").text(json.like_count);
-                    dislike.find("[data-count='dislike']").text(json.dislike_count);
-                }
-            });
-
-            return false;
-
-        }
-
-
-        function dislike() {
-            var dislike = $(this);
-            var type = dislike.data('type');
-            var pk = dislike.data('id');
-            var action = dislike.data('action');
-            var like = dislike.prev();
-
-            var l_id = 'l' + type + pk
-            var d_id = 'd' + type + pk
-            $('#' + d_id).toggleClass('text-danger');
-            $('#' + l_id).removeClass('text-success');
-
-
-            $.ajax({
-                url: "/api/" + type + "/" + pk + "/" + action + "/",
-                type: 'POST',
-                data: {'obj': pk},
-
-                success: function (json) {
-                    dislike.find("[data-count='dislike']").text(json.dislike_count);
-                    like.find("[data-count='like']").text(json.like_count);
-                }
-            });
-
-            return false;
-        }
-
-
-        // Подключение обработчиков
-        $(function () {
-            $('[data-action="like"]').click(like);
-            $('[data-action="dislike"]').click(dislike);
-
-
-        });
-
-
-    </script>
+    <script type="text/javascript" src="{% static "core/js/like-dislike.js" %}"></script>
 
 {% endblock %}
+{% block title %} Форум | {{ category }}    cis-haxball.com{% endblock %}
+
 {% block postlist %}
-<div class="card my-2"
-     style="border-radius: 25px; background-image: url({% static "img/backgrounds/background1.png" %})">
+    <div class="card my-2"
+         style="border-radius: 25px; background-image: url({% static "img/backgrounds/background1.png" %})">
 
-    <div class="card-body">
-        <h3 class="text-center mt-1 mb-0"><i class="fa fa-list-alt text-primary" aria-hidden="true"></i>
+        <div class="card-body">
+            <h3 class="text-center mt-1 mb-0"><i class="fa fa-list-alt text-primary" aria-hidden="true"></i>
 
-            {{ category }}
-        </h3>
-        <a href="{% url 'core:new_post' category.slug %}"> <i class="fa fa-pencil text-warning mr-1" aria-hidden="true"></i>Создать пост </a>
+                {{ category }}
+            </h3>
+            {% if user.is_authenticated %}
+                <a href="{% url 'core:new_post' category.slug %}"> <i class="fa fa-pencil text-warning mr-1"
+                                                                      aria-hidden="true"></i>Создать пост </a>
+            {% endif %}
+            <hr>
 
-        <hr>
-
-        {% for post in posts %}
+            {% for post in posts %}
                 {% include "core/include/post_important_in_list.html" with post=post %}
-        {% endfor %}
+            {% endfor %}
 
+
+        </div>
+
+        {% if category.posts_in_category.all.count > 6 %}
+        <div class="card-footer text-muted pb-0 pt-3">
+            {% include "core/include/pagination.html" with page=posts %}
+        </div>
+        {% endif %}
     </div>
-
-</div>
 {% endblock %}

@@ -6,7 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import F, Max
 from django.db.models.functions import Coalesce
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 from django.views.generic import ListView, DetailView
@@ -32,13 +32,6 @@ class AllPostView(ListView):
     context_object_name = 'posts'
     paginate_by = 7
     template_name = 'core/post/all_posts_list.html'
-
-
-def get_object_or_none(klass, *args, **kwargs):
-    try:
-        return klass._default_manager.get(*args, **kwargs)
-    except klass.DoesNotExist:
-        return None
 
 
 # Вьюха для трансляций
@@ -67,10 +60,25 @@ class CategoryListView(DetailView):
     context_name = 'category'
 
     def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         post_list = self.object.posts_in_category.annotate(
             last_activity=Coalesce(Max('comments__created'), 'created')).order_by('-last_activity')
-        context = super().get_context_data(**kwargs)
-        context['posts'] = post_list
+
+        paginat = Paginator(post_list, 6)
+        page = self.request.GET.get('page')
+
+        try:
+            posts = paginat.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer deliver the first page
+            posts = paginat.page(1)
+        except EmptyPage:
+            # If page is out of range deliver last page of results
+            posts = paginat.page(paginat.num_pages)
+
+        context['posts'] = posts
+        context['page'] = page
+
         return context
 
 
@@ -144,7 +152,7 @@ class FastcupView(ListView):
         category = None
     queryset = Post.objects.filter(category=category).order_by('-created')
     context_object_name = 'posts'
-    paginate_by = 5
+    paginate_by = 6
     template_name = 'core/fastcups/fastcups_list.html'
 
 
