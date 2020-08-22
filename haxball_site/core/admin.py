@@ -16,6 +16,7 @@ class PostAdminForm(forms.ModelForm):
         model = Post
         fields = '__all__'
 
+
 class CommentAdminForm(forms.ModelForm):
     body = SummernoteTextFormField(label='Комментарий')
 
@@ -24,29 +25,46 @@ class CommentAdminForm(forms.ModelForm):
         fields = '__all__'
 
 
+@admin.register(LikeDislike)
+class LikeDisLikeAdmin(admin.ModelAdmin):
+    list_display = ('id','vote', 'user', 'content_type', 'object_id', 'content_object')
+    list_filter = ('user',)
+    list_display_links = ('id',)
+    list_editable = ('vote',)
+
+
+class CommentInline(admin.StackedInline):
+    model = Comment
+
+
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'author', 'views', 'category', 'created', 'updated', 'important')
-    list_filter = ('created', 'publish', 'author')
+    list_filter = ('created', 'author')
     search_fields = ('title', 'body')
-    #slug = AutoSlugField(populate_from='title', unique_for_date='publish')
+    # slug = AutoSlugField(populate_from='title', unique_for_date='publish')
     prepopulated_fields = {'slug': ('title',)}
     raw_id_fields = ('author',)
     form = PostAdminForm
+    inlines = [CommentInline]
 
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'slug', 'background')
     list_filter = ('id', 'name')
+    list_display_links = ('name',)
+
 
 @admin.register(Themes)
 class ThemesAdmin(admin.ModelAdmin):
     list_display = ('title',)
 
+
 @admin.register(UserIcon)
 class UserIconAdmin(admin.ModelAdmin):
     list_display = ('title', 'description',)
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -56,10 +74,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('id','author', 'created', 'body', )
+    list_display = ('id', 'author', 'created', 'body',)
+    list_filter = ('created', 'author')
+    search_fields = ('body',)
     form = CommentAdminForm
-
-
-@admin.register(LikeDislike)
-class LikeDisLike(admin.ModelAdmin):
-    list_display = ('vote', 'user', 'content_type', 'object_id', 'content_object')

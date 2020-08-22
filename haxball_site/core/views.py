@@ -200,8 +200,8 @@ def post_detail(request, slug, id):
         post.save()
         comment_form = CommentForm()
 
-    comments_obj = post.comments.all()
-    paginat = Paginator(comments_obj, 25)
+    comments_obj = Comment.objects.filter(post=post, parent=None)
+    paginat = Paginator(comments_obj, 3)
     page = request.GET.get('page')
 
     try:
