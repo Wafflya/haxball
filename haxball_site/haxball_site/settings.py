@@ -160,8 +160,7 @@ USE_TZ = True
 
 
 if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
-    #ACCOUNT_EMAIL_REQUIRED = True
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'    #ACCOUNT_EMAIL_REQUIRED = True
     #ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
     #ACCOUNT_EMAIL_VERIFICATION = True
 else:
@@ -201,7 +200,7 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 SITE_ID = 1
 
 # Grapelli config
-GRAPPELLI_ADMIN_TITLE = 'Административная панель сайта cis-haxball.com'
+GRAPPELLI_ADMIN_TITLE = 'Петушиная банда здесь'
 
 # text-editors config
 SUMMERNOTE_THEME = 'bs3'

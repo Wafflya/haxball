@@ -171,7 +171,7 @@ def bfs(root):
 class Profile(models.Model):
     name = models.OneToOneField(User, verbose_name='Пользователь', on_delete=models.CASCADE,
                                 related_name='user_profile')
-    slug = AutoSlugField(populate_from='name')
+    slug = AutoSlugField(always_update=True, populate_from='name')
     avatar = models.ImageField('Аватар', upload_to='users_avatars/', default='users_avatars/default/default.png')
     background = models.ImageField('Фон профиля', upload_to='users_background/', blank=True, null=True)
     born_date = models.DateField('Дата рождения', blank=True, null=True)
