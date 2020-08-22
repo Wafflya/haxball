@@ -46,7 +46,7 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     raw_id_fields = ('author',)
     form = PostAdminForm
-    inlines = [CommentInline]
+    #inlines = [CommentInline]
 
 
 @admin.register(Profile)
