@@ -26,10 +26,6 @@ SECRET_KEY = 'm_5m)8w^h+8avxko^()kmlr6fnp(r+m1^=(m!kldx$*47(-za6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-#try:
-#   HOSTNAME = socket.gethostname()
-#except:
-#    HOSTNAME = 'localhost'
 
 if DEBUG:
     ALLOWED_HOSTS = []
@@ -160,7 +156,9 @@ USE_TZ = True
 
 
 if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'    #ACCOUNT_EMAIL_REQUIRED = True
+    #EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    #ACCOUNT_EMAIL_REQUIRED = True
     #ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
     #ACCOUNT_EMAIL_VERIFICATION = True
 else:
