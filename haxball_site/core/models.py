@@ -63,6 +63,7 @@ class LikeDislike(models.Model):
 # Огромный раздел форума в котором категории создаются админами
 class Themes(models.Model):
     title = models.CharField('Тема', max_length=256)
+
     def __str__(self):
         return self.title
 
@@ -78,9 +79,10 @@ class Category(models.Model):
     title = models.CharField('Категория', max_length=256)
     slug = models.SlugField(max_length=250, unique=True)
     description = models.TextField('Описание категории', blank=True)
-    is_official = models.BooleanField(default=True, verbose_name = 'Официальная')
+    is_official = models.BooleanField(default=True, verbose_name='Официальная')
     theme = models.ForeignKey(Themes, verbose_name='Тема на форуме', on_delete=models.CASCADE, blank=True, null=True,
                               related_name='category_in_theme')
+
     def __str__(self):
         return self.title
 
@@ -211,4 +213,3 @@ class UserIcon(models.Model):
     class Meta:
         verbose_name = 'Иконка'
         verbose_name_plural = 'Иконки'
-

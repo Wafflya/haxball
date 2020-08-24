@@ -22,6 +22,7 @@ from django.urls import path, include
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
+    path('chaining/', include('smart_selects.urls')),
     path('', include('core.urls', namespace='core')),
     path('championship/', include('tournament.urls', namespace='tournament')),
     path('polls/', include('polls.urls', namespace='polls')),

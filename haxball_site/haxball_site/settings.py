@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'tournament.apps.TournamentConfig',
     'polls.apps.PollsConfig',
+    'smart_selects',
     'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -89,6 +90,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'haxball_site.wsgi.application'
 
+
+USE_DJANGO_JQUERY = True
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 

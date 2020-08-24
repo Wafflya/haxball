@@ -40,3 +40,4 @@ traitlets==4.3.3
 urllib3==1.25.10
 wcwidth==0.2.5
 django-grappelli==2.14.2
+django-smart-selects==1.5.8
