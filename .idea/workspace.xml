@@ -28,11 +28,8 @@
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/tournament/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/tournament/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +164,8 @@
       <workItem from="1597721596616" duration="5264000" />
       <workItem from="1597860512094" duration="11999000" />
       <workItem from="1597925459438" duration="34781000" />
-      <workItem from="1598220361709" duration="12552000" />
+      <workItem from="1598220361709" duration="15899000" />
+      <workItem from="1598245588090" duration="7289000" />
     </task>
     <servers />
   </component>

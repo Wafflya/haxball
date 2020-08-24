@@ -26,12 +26,21 @@ class LeagueAdmin(admin.ModelAdmin):
 
 class GoalInline(admin.StackedInline):
     model = Goal
+    extra = 0
+
 
 class EventInline(admin.StackedInline):
     model = OtherEvents
+    extra = 0
 
 
 @admin.register(Match)
 class MatchAdmin(admin.ModelAdmin):
-    list_display = ('league', 'tour_num', 'team_home', 'team_guest')
+    list_display = ('league', 'tour_num', 'team_home', 'team_guest', 'is_played')
+    fields = ['is_played', 'league', 'tour_num', 'match_date', ('team_home', 'team_guest'), ('team_home_start', 'team_guest_start')]
     inlines = [GoalInline, EventInline]
+
+
+@admin.register(Goal)
+class GoalAdmin(admin.ModelAdmin):
+    list_display = ('match', 'author', 'assistent',)
