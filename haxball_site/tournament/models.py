@@ -120,17 +120,18 @@ class Match(models.Model):
     league = models.ForeignKey(League, verbose_name='В лиге', related_name='matches_in_league',
                                on_delete=models.CASCADE)
     tour_num = models.SmallIntegerField(verbose_name='Номер тура')
-    match_date = models.DateField(default=date.today)
+    match_date = models.DateField('Дата матча', default=date.today)
+    updated = models.DateTimeField('Обновлено', auto_now=True)
     team_home = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='home_matches', verbose_name='Хозяева')
     team_guest = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='guest_matches', verbose_name='Гости')
 
     team_home_start = ChainedManyToManyField(Player, related_name='player_in_start_home', horizontal=True,
                                              verbose_name='Состав хозяев', chained_field='team_home',
-                                             chained_model_field='team', )
+                                             chained_model_field='team', blank=True)
 
     team_guest_start = ChainedManyToManyField(Player, horizontal=True,
                                               verbose_name='Состав Гостей', chained_field='team_guest',
-                                              chained_model_field='team', )
+                                              chained_model_field='team', blank=True)
     is_played = models.BooleanField('Сыгран', default=False)
 
     def __str__(self):
@@ -139,6 +140,7 @@ class Match(models.Model):
     class Meta:
         verbose_name = 'Матч'
         verbose_name_plural = 'Матчи'
+        ordering = ['tour_num']
 
 
 class Goal(models.Model):
@@ -148,9 +150,6 @@ class Goal(models.Model):
     team = ChainedForeignKey(Team, chained_field='match', verbose_name='Команда забила',
                              chained_model_field='league__matches_in_league', null=True,
                              on_delete=models.SET_NULL)
-    # team = models.ForeignKey(Team, verbose_name='Команда забила',
-    #                         related_name='team_goals', null=True,
-    #                         on_delete=models.SET_NULL)
 
     author = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Автор гола',
                                related_name='goals', blank=True, null=True,
@@ -169,21 +168,40 @@ class Goal(models.Model):
         verbose_name_plural = 'Голы'
 
 
-"""
 class Substitution(models.Model):
-    match = models.ForeignKey(Match, verbose_name='Матч', related_name='match_substitution', null=True,
+    match = models.ForeignKey(Match, verbose_name='Матч', related_name='match_substitutions', null=True,
                               on_delete=models.SET_NULL)
-    player_out = ChainedForeignKey(Player, chained_field='match', chained_model_field='team', verbose_name='Игрок ушёл',
-                               related_name='', blank=True, null=True,
+
+    team = ChainedForeignKey(Team, chained_field='match', verbose_name='Замена в команде',
+                             chained_model_field='league__matches_in_league', null=True,
+                             on_delete=models.SET_NULL)
+
+    player_out = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Ушёл',
+                               related_name='replaced', blank=True, null=True,
                                on_delete=models.SET_NULL)
-    player_in = 
-   """
+    player_in = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Вышел',
+                                  related_name='join_game', blank=True, null=True,
+                                  on_delete=models.SET_NULL)
+    time_min = models.SmallIntegerField('Минута')
+    time_sec = models.SmallIntegerField('Секунда')
+
+    def __str__(self):
+        return 'Гол {} в {}'.format(self.author, self.match)
+
+    class Meta:
+        verbose_name = 'Замена'
+        verbose_name_plural = 'Замены'
+
 
 
 class OtherEvents(models.Model):
     match = models.ForeignKey(Match, verbose_name='Матч', related_name='match_event', null=True,
                               on_delete=models.SET_NULL)
-    author = models.ForeignKey(Player, verbose_name='Автор', related_name='event', null=True,
+    team = ChainedForeignKey(Team, chained_field='match', verbose_name='Команда',
+                             chained_model_field='league__matches_in_league', null=True,
+                             on_delete=models.SET_NULL)
+    author = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Автор',
+                               related_name='event', null=True,
                                on_delete=models.SET_NULL)
     time_min = models.SmallIntegerField('Минута')
     time_sec = models.SmallIntegerField('Секунда')

@@ -1,9 +1,7 @@
 # Register your models here.
-from django import forms
 from django.contrib import admin
-from django.db.models import Q
 
-from .models import FreeAgent, Player, League, Team, Match, Goal, OtherEvents
+from .models import FreeAgent, Player, League, Team, Match, Goal, OtherEvents, Substitution
 
 
 @admin.register(FreeAgent)
@@ -25,6 +23,7 @@ class TeamAdmin(admin.ModelAdmin):
 class LeagueAdmin(admin.ModelAdmin):
     list_display = ('title', 'is_active',)
 
+
 """
 class GoalAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -38,8 +37,14 @@ class GoalAdminForm(forms.ModelForm):
            # Q(home_matches=self.instance.match) | Q(guest_matches=self.instance.match))
 """
 
+
 class GoalInline(admin.StackedInline):
     model = Goal
+    extra = 3
+
+
+class SubstitutionInline(admin.StackedInline):
+    model = Substitution
     extra = 3
 
 
@@ -50,9 +55,23 @@ class EventInline(admin.StackedInline):
 
 @admin.register(Match)
 class MatchAdmin(admin.ModelAdmin):
-    list_display = ('league', 'tour_num', 'team_home', 'team_guest', 'is_played')
-    fields = ['is_played', 'league', 'tour_num', 'match_date', ('team_home', 'team_guest'), ('team_home_start', 'team_guest_start')]
-    inlines = [GoalInline, EventInline]
+    list_display = ('league', 'tour_num', 'team_home', 'team_guest', 'is_played', 'updated')
+    fieldsets = (
+        ('Основная инфа', {
+            'fields': (('league', 'tour_num', 'is_played', 'match_date'),)
+        }),
+        (None, {
+            'fields': (('team_home', 'team_guest'),)
+        }),
+        ('Составы', {
+            'classes': ('grp-collapse grp-closed',),
+            'fields': (('team_home_start', 'team_guest_start'),)
+        })
+    )
+    # fields = ['is_played', 'league', 'tour_num', 'match_date', ('team_home', 'team_guest'),
+    #          ('team_home_start', 'team_guest_start')]
+    inlines = [GoalInline, SubstitutionInline, EventInline]
+
 
 """
 @admin.register(Goal)
