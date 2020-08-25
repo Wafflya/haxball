@@ -70,7 +70,7 @@ class MatchAdmin(admin.ModelAdmin):
     )
     # fields = ['is_played', 'league', 'tour_num', 'match_date', ('team_home', 'team_guest'),
     #          ('team_home_start', 'team_guest_start')]
-    inlines = [SubstitutionInline, EventInline]
+    inlines = [GoalInline, SubstitutionInline, EventInline]
 
 
 """
