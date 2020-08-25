@@ -109,7 +109,7 @@ class Player(models.Model):
     role = models.CharField(max_length=2, choices=ROLES, default=JUST_PLAYER, )
 
     def __str__(self):
-        return 'Игрок {}'.format(self.name)
+        return '{}'.format(self.name)
 
     class Meta:
         verbose_name = 'Игрок'
@@ -161,11 +161,12 @@ class Goal(models.Model):
     time_sec = models.SmallIntegerField('Секунда')
 
     def __str__(self):
-        return 'Гол {} в {}'.format(self.author, self.match)
+        return 'на {}:{} от {} в {}'.format(self.time_min, self.time_sec, self.author, self.match)
 
     class Meta:
         verbose_name = 'Гол'
         verbose_name_plural = 'Голы'
+        ordering = ['time_min', 'time_sec']
 
 
 class Substitution(models.Model):
@@ -186,7 +187,7 @@ class Substitution(models.Model):
     time_sec = models.SmallIntegerField('Секунда')
 
     def __str__(self):
-        return 'Замена {} на {}'.format(self.player_out, self.player_in)
+        return 'в {}:{} {} на {}'.format(self.time_min, self.time_sec, self.player_out, self.player_in)
 
     class Meta:
         verbose_name = 'Замена'
@@ -218,7 +219,7 @@ class OtherEvents(models.Model):
     event = models.CharField(max_length=3, choices=EVENT, default=CLEAN_SHIT)
 
     def __str__(self):
-        return '{} в {}'.format(self.event, self.match)
+        return '{}:{} {} в {}'.format(self.time_min, self.time_sec, self.event, self.match)
 
     class Meta:
         verbose_name = 'Событие'
