@@ -122,8 +122,10 @@ class Match(models.Model):
     tour_num = models.SmallIntegerField(verbose_name='Номер тура')
     match_date = models.DateField('Дата матча', default=date.today)
     updated = models.DateTimeField('Обновлено', auto_now=True)
-    team_home = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='home_matches', verbose_name='Хозяева')
-    team_guest = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='guest_matches', verbose_name='Гости')
+    team_home = ChainedForeignKey(Team, chained_field='league', chained_model_field='league', on_delete=models.CASCADE,
+                                  related_name='home_matches', verbose_name='Хозяева')
+    team_guest = ChainedForeignKey(Team, chained_field='league', chained_model_field='league', on_delete=models.CASCADE,
+                                   related_name='guest_matches', verbose_name='Гости')
 
     team_home_start = ChainedManyToManyField(Player, related_name='player_in_start_home', horizontal=True,
                                              verbose_name='Состав хозяев', chained_field='team_home',
@@ -178,8 +180,8 @@ class Substitution(models.Model):
                              on_delete=models.SET_NULL)
 
     player_out = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Ушёл',
-                               related_name='replaced', blank=True, null=True,
-                               on_delete=models.SET_NULL)
+                                   related_name='replaced', blank=True, null=True,
+                                   on_delete=models.SET_NULL)
     player_in = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Вышел',
                                   related_name='join_game', blank=True, null=True,
                                   on_delete=models.SET_NULL)
@@ -192,7 +194,6 @@ class Substitution(models.Model):
     class Meta:
         verbose_name = 'Замена'
         verbose_name_plural = 'Замены'
-
 
 
 class OtherEvents(models.Model):
