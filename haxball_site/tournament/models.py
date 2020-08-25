@@ -186,7 +186,7 @@ class Substitution(models.Model):
     time_sec = models.SmallIntegerField('Секунда')
 
     def __str__(self):
-        return 'Гол {} в {}'.format(self.author, self.match)
+        return 'Замена {} на {}'.format(self.player_out, self.player_in)
 
     class Meta:
         verbose_name = 'Замена'
