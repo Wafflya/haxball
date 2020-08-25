@@ -6,6 +6,7 @@ from .models import Question, Choice
 
 class ChoiceInline(admin.StackedInline):
     model = Choice
+    filter_horizontal = ('votes',)
 
 
 @admin.register(Question)

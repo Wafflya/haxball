@@ -23,7 +23,7 @@ class Question(models.Model):
 class Choice(models.Model):
     question = models.ForeignKey(Question, related_name='choices', on_delete=models.CASCADE)
     choice_text = models.CharField('Вариант ответа', max_length=256)
-    votes = models.ManyToManyField(User, blank=True, related_name='user_votes')
+    votes = models.ManyToManyField(User, blank=True, related_name='user_votes',)
 
     def __str__(self):
         return self.choice_text
