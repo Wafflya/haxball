@@ -154,7 +154,7 @@ class Goal(models.Model):
                              on_delete=models.SET_NULL)
 
     author = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Автор гола',
-                               related_name='goals', blank=True, null=True,
+                               related_name='goals',
                                on_delete=models.SET_NULL)
     assistent = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Ассистент',
                                   related_name='assists', blank=True, null=True,
@@ -163,7 +163,7 @@ class Goal(models.Model):
     time_sec = models.SmallIntegerField('Секунда')
 
     def __str__(self):
-        return 'на {}:{} от {} в {}'.format(self.time_min, self.time_sec, self.author, self.match)
+        return 'на {}:{} от {}({}) в {}'.format(self.time_min, self.time_sec, self.author, self.assistent, self.match)
 
     class Meta:
         verbose_name = 'Гол'
@@ -208,13 +208,15 @@ class OtherEvents(models.Model):
     time_min = models.SmallIntegerField('Минута')
     time_sec = models.SmallIntegerField('Секунда')
 
-    YELLOW_CARD = 'YE'
+    YELLOW_CARD = 'YEL'
     RED_CARD = 'RED'
     CLEAN_SHIT = 'CLN'
+    OWN_GOALS = 'OG'
     EVENT = [
         (YELLOW_CARD, 'Жёлтая'),
         (RED_CARD, 'Красная'),
         (CLEAN_SHIT, 'Сухой матч'),
+        (OWN_GOALS, 'Автогол'),
     ]
 
     event = models.CharField(max_length=3, choices=EVENT, default=CLEAN_SHIT)
