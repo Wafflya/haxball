@@ -1,7 +1,7 @@
 # Register your models here.
 from django.contrib import admin
 
-from .models import FreeAgent, Player, League, Team, Match, Goal, OtherEvents, Substitution
+from .models import FreeAgent, Player, League, Team, Match, Goal, OtherEvents, Substitution, Season
 
 
 @admin.register(FreeAgent)
@@ -14,14 +14,24 @@ class PlayerAdmin(admin.ModelAdmin):
     list_display = ('name', 'team', 'nation', 'role',)
 
 
+class TeamInline(admin.StackedInline):
+    model = Team
+    extra = 3
+
+
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('title', 'short_title', 'owner', 'league')
 
+@admin.register(Season)
+class LeagueAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active', 'created')
+
 
 @admin.register(League)
 class LeagueAdmin(admin.ModelAdmin):
-    list_display = ('title', 'is_active',)
+    list_display = ('title', 'priority', 'created')
+    inlines = [TeamInline]
 
 
 """
@@ -61,11 +71,11 @@ class MatchAdmin(admin.ModelAdmin):
             'fields': (('league', 'tour_num', 'is_played', 'match_date'),)
         }),
         (None, {
-            'fields': (('team_home', 'team_guest'),)
+            'fields': (('team_home', 'team_guest', 'replay_link', 'inspector'),)
         }),
         ('Составы', {
             'classes': ('grp-collapse grp-closed',),
-            'fields': (('team_home_start', 'team_guest_start'),)
+            'fields': ('team_home_start', 'team_guest_start',)
         })
     )
     # fields = ['is_played', 'league', 'tour_num', 'match_date', ('team_home', 'team_guest'),

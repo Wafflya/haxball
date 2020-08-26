@@ -49,26 +49,45 @@ class FreeAgent(models.Model):
 #           Определние моделей для чемпионата (Чемпионат, команда, игрок, матч, событие )
 
 
-class League(models.Model):
-    title = models.CharField('Название лиги', max_length=128)
-    is_active = models.BooleanField('Сейчас активна')
+class Season(models.Model):
+    title = models.CharField('Название Розыгрыша', max_length=128)
+    is_active = models.BooleanField('Текущий')
+    created = models.DateTimeField('Создана', auto_now_add=True)
 
     def __str__(self):
         return self.title
 
     class Meta:
-        verbose_name = 'Лига'
-        verbose_name_plural = 'Лиги'
+        verbose_name = 'Сезон'
+        verbose_name_plural = 'Сезоны'
+
+
+class League(models.Model):
+    title = models.CharField('Название лиги', max_length=128)
+    priority = models.SmallIntegerField('Приоритет лиги', help_text='0-кубок, 1-высшая, 2-пердив, 3-втордив',)
+    slug = models.SlugField(max_length=250)
+    created = models.DateTimeField('Создана', auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Турнир'
+        verbose_name_plural = 'Турнир'
 
 
 class Team(models.Model):
     title = models.CharField('Название', max_length=128)
+    slug = models.SlugField('слаг', max_length=250)
+    date_found = models.DateField('Дата основания', default=date.today, )
     short_title = models.CharField('Сокращение', max_length=4)
     logo = models.ImageField('Логотип', upload_to='team_logos/', blank=True, null=True)
     owner = models.ForeignKey(User, verbose_name='Владелец', null=True, on_delete=models.SET_NULL,
                               related_name='team_owner')
     league = models.ForeignKey(League, verbose_name='Лига в которой играет', null=True, on_delete=models.SET_NULL,
                                related_name='teams_in_league', )
+    office_link = models.URLField('Офис', blank=True)
+    rating = models.SmallIntegerField('Рейтинг команды')
 
     def __str__(self):
         return 'Команда {}'.format(self.title)
@@ -120,7 +139,10 @@ class Match(models.Model):
     league = models.ForeignKey(League, verbose_name='В лиге', related_name='matches_in_league',
                                on_delete=models.CASCADE)
     tour_num = models.SmallIntegerField(verbose_name='Номер тура')
-    match_date = models.DateField('Дата матча', default=date.today)
+    match_date = models.DateField('Дата матча', default=None, blank=True)
+    replay_link = models.URLField('Ссылка на реплей', blank=True)
+    inspector = models.ForeignKey(User, verbose_name='Проверил', limit_choices_to={'is_staff': True},
+                                  on_delete=models.SET_NULL, null=True, )
     updated = models.DateTimeField('Обновлено', auto_now=True)
     team_home = ChainedForeignKey(Team, chained_field='league', chained_model_field='league', on_delete=models.CASCADE,
                                   related_name='home_matches', verbose_name='Хозяева')
@@ -154,7 +176,7 @@ class Goal(models.Model):
                              on_delete=models.SET_NULL)
 
     author = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Автор гола',
-                               related_name='goals',
+                               related_name='goals', null=True,
                                on_delete=models.SET_NULL)
     assistent = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Ассистент',
                                   related_name='assists', blank=True, null=True,
