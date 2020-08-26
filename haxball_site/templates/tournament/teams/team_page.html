@@ -107,7 +107,14 @@
                             <tbody>
                             {% for player in team.players_in_team.all %}
                                 <tr>
-                                    <td><a href="{{ player.name.user_profile.get_absolute_url }}">{{ player }}</a> </td>
+                                    <td>
+                                        {% if player.name %}
+                                            <a href="{{ player.name.user_profile.get_absolute_url }}">{{ player }}</a>
+                                        {% else %}
+                                            {{ player }}
+                                        {% endif %}
+
+                                    </td>
                                     {# player.player_in_start_home.count|add:player.player_in_start_guest.count #}
                                     <td>{{ player|matches_in_team:team }}</td>
                                     <td>{{ player|goals_in_team:team }}</td>

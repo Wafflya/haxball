@@ -107,8 +107,22 @@ class League(models.Model):
 
 
 class Player(models.Model):
-    name = models.OneToOneField(User, verbose_name='Никнейм игрока', null=True, on_delete=models.SET_NULL,
+    name = models.OneToOneField(User, verbose_name='Пользователь', null=True, blank=True, on_delete=models.SET_NULL,
                                 related_name='user_player')
+
+    nickname = models.CharField('Никнейм игрока', max_length=150,)
+
+
+    FORWARD = 'FW'
+    DEF_MIDDLE = 'DM'
+    GOALKEEPER = 'GK'
+    POSITIONS = (
+        (FORWARD, "Нападающий"),
+        (DEF_MIDDLE, 'Опорник'),
+        (GOALKEEPER, 'Вратарь'),
+    )
+    position = models.CharField("Позиция", max_length=2, choices=POSITIONS, null=True, blank=True)
+
     team = models.ForeignKey(Team, verbose_name='Команда', related_name='players_in_team', blank=True, null=True,
                              on_delete=models.SET_NULL)
     RUSSIA = 'RU'
@@ -123,7 +137,7 @@ class Player(models.Model):
         (BELARUS, 'Беларусь'),
         (LATVIA, 'Латвия'),
     ]
-    nation = models.CharField(max_length=2, choices=PLAYER_NATION, default=RUSSIA, )
+    nation = models.CharField("Нация", max_length=2, choices=PLAYER_NATION, default=RUSSIA, )
 
     JUST_PLAYER = 'PL'
     CAPTAIN = 'C'
@@ -134,10 +148,10 @@ class Player(models.Model):
         (ASSISTENT, 'Ассистент')
     ]
 
-    role = models.CharField(max_length=2, choices=ROLES, default=JUST_PLAYER, )
+    role = models.CharField("Должность", max_length=2, choices=ROLES, default=JUST_PLAYER, )
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return '{}'.format(self.nickname)
 
     class Meta:
         verbose_name = 'Игрок'
