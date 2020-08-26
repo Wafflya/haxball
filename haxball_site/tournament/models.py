@@ -168,8 +168,8 @@ class Match(models.Model):
 
 
 class Goal(models.Model):
-    match = models.ForeignKey(Match, verbose_name='Матч', related_name='match_goal',
-                              on_delete=models.SET_NULL)
+    match = models.ForeignKey(Match, verbose_name='Матч', related_name='match_goal', null=True,
+                              on_delete=models.CASCADE)
 
     team = ChainedForeignKey(Team, chained_field='match', verbose_name='Команда забила',
                              chained_model_field='league__matches_in_league', null=True,
