@@ -23,6 +23,7 @@ class TeamInline(admin.StackedInline):
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('title', 'short_title', 'owner', 'league')
 
+
 @admin.register(Season)
 class LeagueAdmin(admin.ModelAdmin):
     list_display = ('title', 'is_active', 'created')
@@ -81,6 +82,21 @@ class MatchAdmin(admin.ModelAdmin):
     # fields = ['is_played', 'league', 'tour_num', 'match_date', ('team_home', 'team_guest'),
     #          ('team_home_start', 'team_guest_start')]
     inlines = [GoalInline, SubstitutionInline, EventInline]
+
+
+@admin.register(Goal)
+class GoalAdmin(admin.ModelAdmin):
+    list_display = ('match', 'author', 'assistent')
+
+
+@admin.register(Substitution)
+class SubstitutionAdmin(admin.ModelAdmin):
+    list_display = ('match', 'player_out', 'player_in')
+
+
+@admin.register(OtherEvents)
+class OtherEventsAdmin(admin.ModelAdmin):
+    list_display = ('match', 'author',)
 
 
 """
