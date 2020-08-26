@@ -2,6 +2,7 @@ from datetime import date
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 # Create your models here.
 from smart_selects.db_fields import ChainedForeignKey, ChainedManyToManyField
@@ -62,11 +63,40 @@ class Season(models.Model):
         verbose_name_plural = 'Сезоны'
 
 
+class Team(models.Model):
+    title = models.CharField('Название', max_length=128)
+    slug = models.SlugField('слаг', max_length=250)
+    date_found = models.DateField('Дата основания', default=date.today, )
+    short_title = models.CharField('Сокращение', max_length=4)
+    logo = models.ImageField('Логотип', upload_to='team_logos/', default='team_logos/default.png')
+    owner = models.ForeignKey(User, verbose_name='Владелец', null=True, on_delete=models.SET_NULL,
+                              related_name='team_owner')
+    # league = models.ForeignKey(League, verbose_name='Лига в которой играет', null=True, on_delete=models.SET_NULL,
+    #                          related_name='teams_in_league', )
+    office_link = models.URLField('Офис', blank=True)
+    rating = models.SmallIntegerField('Рейтинг команды', blank=True, null=True)
+
+    def get_absolute_url(self):
+        return reverse('tournament:team_detail', args=[self.slug])
+
+
+    def __str__(self):
+        return 'Команда {}'.format(self.title)
+
+
+    class Meta:
+        verbose_name = 'Команда'
+        verbose_name_plural = 'Команды'
+
+
 class League(models.Model):
+    championship = models.ForeignKey(Season, verbose_name='Сезон', related_name='tournaments_in_season', null=True,
+                                     on_delete=models.CASCADE)
     title = models.CharField('Название лиги', max_length=128)
-    priority = models.SmallIntegerField('Приоритет лиги', help_text='0-кубок, 1-высшая, 2-пердив, 3-втордив',)
+    priority = models.SmallIntegerField('Приоритет лиги', help_text='0-кубок, 1-высшая, 2-пердив, 3-втордив', )
     slug = models.SlugField(max_length=250)
     created = models.DateTimeField('Создана', auto_now_add=True)
+    teams = models.ManyToManyField(Team, related_name='leagues', verbose_name='Команды в лиге')
 
     def __str__(self):
         return self.title
@@ -74,27 +104,6 @@ class League(models.Model):
     class Meta:
         verbose_name = 'Турнир'
         verbose_name_plural = 'Турнир'
-
-
-class Team(models.Model):
-    title = models.CharField('Название', max_length=128)
-    slug = models.SlugField('слаг', max_length=250)
-    date_found = models.DateField('Дата основания', default=date.today, )
-    short_title = models.CharField('Сокращение', max_length=4)
-    logo = models.ImageField('Логотип', upload_to='team_logos/', blank=True, null=True)
-    owner = models.ForeignKey(User, verbose_name='Владелец', null=True, on_delete=models.SET_NULL,
-                              related_name='team_owner')
-    league = models.ForeignKey(League, verbose_name='Лига в которой играет', null=True, on_delete=models.SET_NULL,
-                               related_name='teams_in_league', )
-    office_link = models.URLField('Офис', blank=True)
-    rating = models.SmallIntegerField('Рейтинг команды')
-
-    def __str__(self):
-        return 'Команда {}'.format(self.title)
-
-    class Meta:
-        verbose_name = 'Команда'
-        verbose_name_plural = 'Команды'
 
 
 class Player(models.Model):
@@ -144,16 +153,17 @@ class Match(models.Model):
     inspector = models.ForeignKey(User, verbose_name='Проверил', limit_choices_to={'is_staff': True},
                                   on_delete=models.SET_NULL, null=True, )
     updated = models.DateTimeField('Обновлено', auto_now=True)
-    team_home = ChainedForeignKey(Team, chained_field='league', chained_model_field='league', on_delete=models.CASCADE,
+    team_home = ChainedForeignKey(Team, chained_field='league', chained_model_field='leagues', on_delete=models.CASCADE,
                                   related_name='home_matches', verbose_name='Хозяева')
-    team_guest = ChainedForeignKey(Team, chained_field='league', chained_model_field='league', on_delete=models.CASCADE,
+    team_guest = ChainedForeignKey(Team, chained_field='league', chained_model_field='leagues',
+                                   on_delete=models.CASCADE,
                                    related_name='guest_matches', verbose_name='Гости')
 
     team_home_start = ChainedManyToManyField(Player, related_name='player_in_start_home', horizontal=True,
                                              verbose_name='Состав хозяев', chained_field='team_home',
                                              chained_model_field='team', blank=True)
 
-    team_guest_start = ChainedManyToManyField(Player, horizontal=True,
+    team_guest_start = ChainedManyToManyField(Player, related_name='player_in_start_guest', horizontal=True,
                                               verbose_name='Состав Гостей', chained_field='team_guest',
                                               chained_model_field='team', blank=True)
     is_played = models.BooleanField('Сыгран', default=False)
@@ -172,7 +182,7 @@ class Goal(models.Model):
                               on_delete=models.CASCADE)
 
     team = ChainedForeignKey(Team, chained_field='match', verbose_name='Команда забила',
-                             chained_model_field='league__matches_in_league', null=True,
+                             chained_model_field='leagues__matches_in_league', null=True,
                              on_delete=models.SET_NULL)
 
     author = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Автор гола',
@@ -198,7 +208,7 @@ class Substitution(models.Model):
                               on_delete=models.SET_NULL)
 
     team = ChainedForeignKey(Team, chained_field='match', verbose_name='Замена в команде',
-                             chained_model_field='league__matches_in_league', null=True,
+                             chained_model_field='leagues__matches_in_league', null=True,
                              on_delete=models.SET_NULL)
 
     player_out = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Ушёл',
@@ -222,7 +232,7 @@ class OtherEvents(models.Model):
     match = models.ForeignKey(Match, verbose_name='Матч', related_name='match_event', null=True,
                               on_delete=models.SET_NULL)
     team = ChainedForeignKey(Team, chained_field='match', verbose_name='Команда',
-                             chained_model_field='league__matches_in_league', null=True,
+                             chained_model_field='leagues__matches_in_league', null=True,
                              on_delete=models.SET_NULL)
     author = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Автор',
                                related_name='event', null=True,

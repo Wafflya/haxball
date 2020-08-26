@@ -38,14 +38,25 @@
                             <img src="{{ icon.image.url }}" width="16px" height="16px" title="{{ icon.description }}">
                         {% endfor %}
                     </h4>
-                    <p class="mb-1">Без команды</p>
+                    {% if profile.name.user_player.team %}
+                        <p class="mb-1">
+                            <a href="{{ profile.name.user_player.team.get_absolute_url }}" class="text-secondary">
+                                <img src="{{ profile.name.user_player.team.logo.url }}"
+                                     alt="{{ profile.name.user_player.team.title }}" style="width: 20px; height: 20px;">
+                                <span style="font-weight: bold; font-size: 14px;">{{ profile.name.user_player.team.title }}</span>
+                            </a>
+                        </p>
+                    {% else %}
+                        <p class="mb-1">Без команды</p>
+                    {% endif %}
                     <p class="mb-0">Репутация {% karma profile %}</p>
                     <p>Просмотров <i class="fa fa-eye text-warning" aria-hidden="true"></i>
                         {{ profile.views }}</p>
                     <p class="mb-0">
                         {% if profile.vk %}
                             <a href="https://vk.com/{{ profile.vk }}" target="_blank"><img
-                                    src="{% static "img/ico/vk_1.png" %}" height="41" width="41" title="{{ profile.vk }}"></a>
+                                    src="{% static "img/ico/vk_1.png" %}" height="41" width="41"
+                                    title="{{ profile.vk }}"></a>
                         {% endif %}
                         {% if profile.discord %}
                             <img src="{% static "img/ico/discord_1.png" %}" onclick="myFunction()" id=discord
@@ -62,7 +73,7 @@
             </div>
             <div class="col-sm-8"
                     {% if profile.background %}
-                        style="background-image:url({{ profile.background.url }}); background-size: cover;"
+                 style="background-image:url({{ profile.background.url }}); background-size: cover;"
                     {% endif %}>
                 <div class="card-block">
                     <h5 class="m-b-20 p-b-5 b-b-default f-w-600">Основная информация

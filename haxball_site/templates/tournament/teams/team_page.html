@@ -1,0 +1,178 @@
+{% extends "core/home.html" %}
+{% load static %}
+{% load tournament_extras %}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static "tournament/teams/team_page.css" %}">
+
+    <style>
+        body {
+            background-image: url({% static "img/backgrounds/bg-light-4860.png" %})
+        }
+    </style>
+{% endblock %}
+{% block title %}Чемпионат | Команды          cis-haxball.com {% endblock %}
+{% block profile_of_user %}
+    <div class="container-fluid emp-profile">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="{{ team.logo.url }}" alt="{{ team.title }}">
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        {{ team.title }}
+                    </h5>
+                    <h6>
+                        {% for leagues in team.leagues.all %}
+                            {{ leagues }}
+                        {% endfor %}
+                    </h6>
+                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                    <div class="p-2" style="position: absolute; bottom: 0;">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                   aria-controls="home" aria-selected="true">Состав</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                   aria-controls="profile" aria-selected="false">Timeline</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 ml-0">
+                <div class="profile-work">
+                    <p>Владелец</p>
+                    <div class="media">
+                        <img src="{{ team.owner.user_profile.avatar.url }}" class="align-self-start mr-1"
+                             alt="{{ team.owner.username }}" width="28" style="border-radius: 100%">
+                        <div class="media-body">
+                            <h6 class="mt-0"><a
+                                    href="{{ team.owner.user_profile.get_absolute_url }}">{{ team.owner }}</a>
+                            </h6>
+                        </div>
+                    </div>
+                    <a href="{{ team.office_link }}"><img
+                            src="{% static "img/ico/team_office.png" %}" height="28" width="28" title="Офис команды">
+                        Офис </a><br/>
+                    <a href="">Bootsnipp Profile</a><br/>
+                    <a href="">Bootply Profile</a>
+                    <p>SKILLS</p>
+                    <a href="">Web Designer</a><br/>
+                    <a href="">Web Developer</a><br/>
+                    <a href="">WordPress</a><br/>
+                    <a href="">WooCommerce</a><br/>
+                    <a href="">PHP, .Net</a><br/>
+                </div>
+            </div>
+            <div class="col-md-8 p-0">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <table class="table table-bordered table-sm">
+                            <thead>
+                            <tr>
+                                <th scope="col">Игрок</th>
+                                <th scope="col" class="text-center"><img
+                                        src="{% static "img/ico/matches_icon.png" %}" height="25" width="25"
+                                        title="Вышел в старте"></th>
+                                <th scope="col" class="text-center"><img
+                                        src="{% static "img/ico/goal_icon.png" %}" height="25" width="25"
+                                        title="Забито"></th>
+                                <th scope="col" class="text-center"><img
+                                        src="{% static "img/ico/assists_icon.png" %}" height="25" width="25"
+                                        title="Голевые передачи"></th>
+                                <th scope="col">Сухие</th>
+                                <th scope="col">ушёл</th>
+                                <th scope="col">вышел</th>
+                                <th scope="col">АГ</th>
+                                <th scope="col"><img
+                                        src="{% static "img/ico/yellow_card.png" %}" height="16" width="16"
+                                        title="Жёлтые карточки"></th>
+                                <th scope="col"><img
+                                        src="{% static "img/ico/red_card.png" %}" height="16" width="16"
+                                        title="Красные карточки"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for player in team.players_in_team.all %}
+                                <tr>
+                                    <td><a href="{{ player.name.user_profile.get_absolute_url }}">{{ player }}</a> </td>
+                                    {# player.player_in_start_home.count|add:player.player_in_start_guest.count #}
+                                    <td>{{ player|matches_in_team:team }}</td>
+                                    <td>{{ player|goals_in_team:team }}</td>
+                                    <td>{{ player|assists_in_team:team }}</td>
+                                    <td>{{ player|event_count:'CLN' }}</td>
+                                    <td>{{ player|replaced_in_team:team }}</td>
+                                    <td>{{ player|join_game_in_team:team }}</td>
+                                    <td>{{ player|event_count:'OG' }}</td>
+                                    <td>{{ player|event_count:'YEL' }}</td>
+                                    <td>{{ player|event_count:'RED' }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Experience</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Expert</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Hourly Rate</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>10$/hr</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Total Projects</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>230</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>English Level</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Expert</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Availability</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>6 months</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Your Bio</label><br/>
+                                <p>Your detail description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

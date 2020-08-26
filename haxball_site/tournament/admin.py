@@ -14,25 +14,23 @@ class PlayerAdmin(admin.ModelAdmin):
     list_display = ('name', 'team', 'nation', 'role',)
 
 
-class TeamInline(admin.StackedInline):
-    model = Team
-    extra = 3
+
 
 
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
-    list_display = ('title', 'short_title', 'owner', 'league')
+    list_display = ('title', 'short_title', 'owner',)
 
 
 @admin.register(Season)
-class LeagueAdmin(admin.ModelAdmin):
+class SeasonAdmin(admin.ModelAdmin):
     list_display = ('title', 'is_active', 'created')
 
 
 @admin.register(League)
 class LeagueAdmin(admin.ModelAdmin):
     list_display = ('title', 'priority', 'created')
-    inlines = [TeamInline]
+    filter_horizontal = ('teams',)
 
 
 """
