@@ -236,4 +236,8 @@
         document.getElementById('contactparent').value = id
         document.getElementById('contactcomment').innerText = `${name},`
     }
+
+    $('#addcomment').submit(function () {
+        $(this).find(':input[type=submit]').prop('disabled', true);
+    });
 </script>
