@@ -32,7 +32,7 @@
                            title="от {{ comment.author }} в {{ comment.post.title }}">
                             <div class="d-flex justify-content-between">
                                 <div class="float-left">
-                                    <span class="badge badge-pill badge-success">{{ comment.votes.likes.count }}</span>
+                                    <!--<span class="badge badge-pill badge-success">{{ comment.votes.likes.count }}</span>-->
                                     {% if comment.body|striptags %}
                                         {{ comment.body|striptags|truncatechars:18 }}
                                     {% else %}
