@@ -26,12 +26,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/clean_sheet1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/comments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/form_comment.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/form_comment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/team_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/team_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/polls/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/polls/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +167,7 @@
       <workItem from="1598324584212" duration="24544000" />
       <workItem from="1598428601914" duration="7700000" />
       <workItem from="1598438540944" duration="636000" />
-      <workItem from="1598439229444" duration="35705000" />
+      <workItem from="1598439229444" duration="36477000" />
     </task>
     <servers />
   </component>

@@ -31,6 +31,7 @@ class Choice(models.Model):
     class Meta:
         verbose_name = "Вариант"
         verbose_name_plural = "Варианты"
+        ordering = ['id']
 
 
 #class Votes(models.Model):
