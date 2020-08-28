@@ -27,7 +27,9 @@
                     </h5>
                     <h6>
                         {% for leagues in team.leagues.all %}
-                            {{ leagues }}
+                            {% if leagues.priority == 1 %}
+                                <a href="{% url 'tournament:premier_league' %}">{{ leagues }}</a>
+                            {% endif %}
                         {% endfor %}
                     </h6>
                     <p class="proile-rating">RANKINGS : <span>8/10</span></p>
@@ -39,7 +41,11 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                   aria-controls="profile" aria-selected="false">Timeline</a>
+                                   aria-controls="profile" aria-selected="false">Статистика</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab"
+                                   aria-controls="profile" aria-selected="false">Другое</a>
                             </li>
                         </ul>
                     </div>
@@ -84,10 +90,10 @@
                             <tr>
                                 <th scope="col">Игрок</th>
                                 <th scope="col" class="text-center"><img
-                                        src="{% static "img/ico/matches_icon.png" %}" height="25" width="25"
+                                        src="{% static "img/ico/matches_icon.png" %}" height="20" width="20"
                                         title="Вышел в старте"></th>
                                 <th scope="col" class="text-center"><img
-                                        src="{% static "img/ico/goal_icon.png" %}" height="25" width="25"
+                                        src="{% static "img/ico/ball_2.png" %}" height="20" width="20"
                                         title="Забито"></th>
                                 <th scope="col" class="text-center"><img
                                         src="{% static "img/ico/assists_icon.png" %}" height="25" width="25"
@@ -185,6 +191,9 @@
                                 <p>Your detail description</p>
                             </div>
                         </div>
+                    </div>
+                    <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
+                        <h1>Pidor</h1>
                     </div>
                 </div>
             </div>

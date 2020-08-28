@@ -26,9 +26,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/ball_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/match/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/premier_league/team_table.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/teams_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/sidebar_for_top_comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/sidebar_for_top_comments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/team_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/team_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +53,8 @@
       <list>
         <option value="JavaScript File" />
         <option value="Python Script" />
-        <option value="HTML File" />
         <option value="CSS File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -78,19 +88,19 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\haxball\haxball_site\static\img\ico" />
+      <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img\ico" />
+      <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\media\users_avatars\default" />
+      <recent name="E:\haxball\haxball_site\ckeditor\ckeditor\plugins\images" />
+      <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img\ico" />
       <recent name="E:\haxball\haxball_site\static\ckeditor\ckeditor\plugins\images" />
       <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
       <recent name="$PROJECT_DIR$/haxball_site/static/img/backgrounds" />
       <recent name="E:\haxball\haxball_site\static\img\ico" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img\ico" />
-      <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\media\users_avatars\default" />
-      <recent name="E:\haxball\haxball_site\static\img\ico" />
-      <recent name="E:\haxball\haxball_site\ckeditor\ckeditor\plugins\images" />
-      <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
     </key>
   </component>
   <component name="RunManager">

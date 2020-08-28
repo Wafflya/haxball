@@ -12,7 +12,7 @@ class FreeAgentAdmin(admin.ModelAdmin):
 @admin.register(Player)
 class PlayerAdmin(admin.ModelAdmin):
     list_display = ('name', 'nickname','team', 'nation', 'role',)
-    raw_id_fields = ('name',)
+
 
 
 
@@ -65,7 +65,7 @@ class EventInline(admin.StackedInline):
 
 @admin.register(Match)
 class MatchAdmin(admin.ModelAdmin):
-    list_display = ('league', 'tour_num', 'team_home', 'team_guest', 'is_played', 'updated')
+    list_display = ('league', 'tour_num', 'team_home', 'team_guest', 'is_played', 'updated', 'id')
     fieldsets = (
         ('Основная инфа', {
             'fields': (('league', 'tour_num', 'is_played', 'match_date'),)

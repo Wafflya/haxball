@@ -1,0 +1,78 @@
+{% extends "core/home.html" %}
+{% load static %}
+{% load tournament_extras %}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static "tournament/teams/team_page.css" %}">
+
+    <style>
+        body {
+            background-image: url({% static "img/backgrounds/bg-light-4860.png" %})
+        }
+    </style>
+{% endblock %}
+{% block title %}Чемпионат | {{ match }}          cis-haxball.com {% endblock %}
+
+{% block profile_of_user %}
+    <div class="card mb-4 mt-2" style="border-radius: 25px">
+        <div class="card-header text-center" style="border-radius: 25px">
+            <h4>{{ match.team_home.title }} - {{ match.team_guest.title }}</h4>
+            <h5><a href="{% url 'tournament:premier_league' %}">{{ match.league }}</a> </h5>
+            <h5> {{ match.tour_num }} Тур</h5>
+        </div>
+        <div class="card-body text-center">
+            <div class="row">
+                <div class="col-5">
+                    <h4>{{ match.team_home.title }}</h4>
+                    <img src="{{ match.team_home.logo.url }}" alt="{{ match.team_home.title }}" width="60%">
+                    {% if match.is_played %}
+                        <h5>Стартовый состав</h5>
+                        {% for player in match.team_home_start.all %}
+                            <h6>{{ player.nation }} {{ player }}</h6>
+                        {% endfor %}
+                        <h5>Голы</h5>
+                        {% for goal in match.match_goal.all %}
+                            {% if match.team_home == goal.team %}
+                                <h6>{{ goal.author }} {% if goal.assistent %}({{ goal.assistent }}){% endif %}</h6>
+                            {% endif %}
+                        {% endfor %}
+                        {% for og in match.match_event.all %}
+                            {% if og.event == 'OG' and match.team_guest == og.team %}
+                                <h6>(OG) {{ og.author }}</h6>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                </div>
+                <div class="col-2">
+                    {% if match.is_played %}
+                        <h5>{{ match|team_goals_in_match:match.team_home }}
+                            - {{ match|team_goals_in_match:match.team_guest }}</h5>
+                    {% else %}
+                        <h5>vs</h5>
+                    {% endif %}
+                </div>
+                <div class="col-5">
+                    <h4>{{ match.team_guest.title }}</h4>
+                    <img src="{{ match.team_guest.logo.url }}" alt="{{ match.team_guest.title }}" width="60%">
+                    {% if match.is_played %}
+                        <h5>Стартовый состав</h5>
+                        {% for player in match.team_guest_start.all %}
+                            <h6>{{ player.nation }} {{ player }}</h6>
+                        {% endfor %}
+                        <h5>Голы</h5>
+                        {% for goal in match.match_goal.all %}
+                            {% if match.team_guest == goal.team %}
+                                <h6>{{ goal.author }} {% if goal.assistent %}({{ goal.assistent }}){% endif %}</h6>
+                            {% endif %}
+                        {% endfor %}
+                        {% for og in match.match_event.all %}
+                            {% if og.event == 'OG' and match.team_home == og.team %}
+                                <h6>(OG) {{ og.author }}</h6>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -79,10 +79,8 @@ class Team(models.Model):
     def get_absolute_url(self):
         return reverse('tournament:team_detail', args=[self.slug])
 
-
     def __str__(self):
         return 'Команда {}'.format(self.title)
-
 
     class Meta:
         verbose_name = 'Команда'
@@ -93,7 +91,9 @@ class League(models.Model):
     championship = models.ForeignKey(Season, verbose_name='Сезон', related_name='tournaments_in_season', null=True,
                                      on_delete=models.CASCADE)
     title = models.CharField('Название лиги', max_length=128)
-    priority = models.SmallIntegerField('Приоритет лиги', help_text='0-кубок, 1-высшая, 2-пердив, 3-втордив', )
+    is_cup = models.BooleanField('Кубок', help_text='галочка, если кубок', default=False)
+    priority = models.SmallIntegerField('Приоритет лиги', help_text='1-высшая, 2-пердив, 3-втордив',
+                                        blank=True)
     slug = models.SlugField(max_length=250)
     created = models.DateTimeField('Создана', auto_now_add=True)
     teams = models.ManyToManyField(Team, related_name='leagues', verbose_name='Команды в лиге')
@@ -107,11 +107,11 @@ class League(models.Model):
 
 
 class Player(models.Model):
-    name = models.OneToOneField(User, verbose_name='Пользователь', null=True, blank=True, on_delete=models.SET_NULL,
+    name = models.OneToOneField(User, verbose_name='Пользователь', null=True, blank=True,
+                                limit_choices_to={'user_player': None}, on_delete=models.SET_NULL,
                                 related_name='user_player')
 
-    nickname = models.CharField('Никнейм игрока', max_length=150,)
-
+    nickname = models.CharField('Никнейм игрока', max_length=150, )
 
     FORWARD = 'FW'
     DEF_MIDDLE = 'DM'
@@ -162,10 +162,10 @@ class Match(models.Model):
     league = models.ForeignKey(League, verbose_name='В лиге', related_name='matches_in_league',
                                on_delete=models.CASCADE)
     tour_num = models.SmallIntegerField(verbose_name='Номер тура')
-    match_date = models.DateField('Дата матча', default=None, blank=True)
+    match_date = models.DateField('Дата матча', default=None, blank=True, null=True)
     replay_link = models.URLField('Ссылка на реплей', blank=True)
     inspector = models.ForeignKey(User, verbose_name='Проверил', limit_choices_to={'is_staff': True},
-                                  on_delete=models.SET_NULL, null=True, )
+                                  on_delete=models.SET_NULL, null=True, blank=True)
     updated = models.DateTimeField('Обновлено', auto_now=True)
     team_home = ChainedForeignKey(Team, chained_field='league', chained_model_field='leagues', on_delete=models.CASCADE,
                                   related_name='home_matches', verbose_name='Хозяева')
@@ -183,7 +183,7 @@ class Match(models.Model):
     is_played = models.BooleanField('Сыгран', default=False)
 
     def __str__(self):
-        return 'Матч между {} и {}'.format(self.team_home, self.team_guest)
+        return 'Матч между {} и {}'.format(self.team_home.title, self.team_guest.title)
 
     class Meta:
         verbose_name = 'Матч'
@@ -195,7 +195,7 @@ class Goal(models.Model):
     match = models.ForeignKey(Match, verbose_name='Матч', related_name='match_goal', null=True, blank=True,
                               on_delete=models.CASCADE)
 
-    team = ChainedForeignKey(Team, chained_field='match', verbose_name='Команда забила',
+    team = ChainedForeignKey(Team, chained_field='match', verbose_name='Команда забила', related_name='team_goals',
                              chained_model_field='leagues__matches_in_league', null=True,
                              on_delete=models.SET_NULL)
 

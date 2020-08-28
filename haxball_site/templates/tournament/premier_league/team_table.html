@@ -1,0 +1,56 @@
+{% extends "core/home.html" %}
+{% load static %}
+{% load tournament_extras %}
+{% block styles %}
+    <!-- <link rel="stylesheet" type="text/css" href="{% static "tournament/teams/team_page.css" %}"> -->
+
+    <style>
+        body {
+            background-image: url({% static "img/backgrounds/bg-light-4860.png" %})
+        }
+    </style>
+{% endblock %}
+{% block title %}Чемпионат | Команды          cis-haxball.com {% endblock %}
+{% block profile_of_user %}
+    <div class="card mb-4 mt-2" style="border-radius: 25px">
+        <div class="card-header" style="border-radius: 25px">
+            <h4>Команды</h4>
+        </div>
+        <div class="card-body text-center">
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Команда</th>
+                    <th scope="col">И</th>
+                    <th scope="col">В</th>
+                    <th scope="col">Н</th>
+                    <th scope="col">П</th>
+                    <th scope="col">ЗМ</th>
+                    <th scope="col">ПМ</th>
+                    <th scope="col">+/-</th>
+                    <th scope="col">O</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for team in teams %}
+                    <tr>
+
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td><a href="{{ team.get_absolute_url }}" class="h5">{{ team.title }}</a></td>
+                        <td>{{ team|matches_in_league }}</td>
+                        <td>{{ team|res_in_league:'w' }}</td>
+                        <td>{{ team|res_in_league:'d' }}</td>
+                        <td>{{ team|res_in_league:'l' }}</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>{{ team|res_in_league:'p' }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

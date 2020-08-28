@@ -232,7 +232,6 @@ class ProfileDetail(DetailView):
         prof = context['profile']
         prof.views = prof.views + 1
         prof.save()
-        print(prof.views)
         return context
 
 

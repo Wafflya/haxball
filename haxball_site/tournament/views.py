@@ -1,13 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render, redirect
-from django.views.generic import ListView, DetailView
-from .models import FreeAgent, Team
-from .forms import FreeAgentForm
+from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
-from datetime import datetime
-from django.views.decorators.http import require_POST
-from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.views.generic import ListView, DetailView
+
+from .forms import FreeAgentForm
+from .models import FreeAgent, Team, Match, League
 
 
 class FreeAgentList(ListView):
@@ -70,3 +67,25 @@ class TeamDetail(DetailView):
     model = Team
     context_object_name = 'team'
     template_name = 'tournament/teams/team_page.html'
+
+
+class TeamList(ListView):
+    queryset = Team.objects.all().order_by('-title')
+    context_object_name = 'teams'
+    template_name = 'tournament/teams/teams_list.html'
+
+
+class PremierLeague(ListView):
+    try:
+        league = League.objects.get(is_cup=False, championship__is_active=True, priority=1)
+    except:
+        league = None
+    queryset = Team.objects.filter(leagues=league)
+    context_object_name = 'teams'
+    template_name = 'tournament/premier_league/team_table.html'
+
+
+class MatchDetail(DetailView):
+    model = Match
+    context_object_name = 'match'
+    template_name = 'tournament/match/detail.html'
