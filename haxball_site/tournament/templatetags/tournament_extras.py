@@ -96,12 +96,15 @@ def res_in_league(team, res):
     except:
         return None
     matches = Match.objects.filter((Q(team_home=team) | Q(team_guest=team)), league=league, is_played=True)
-    score_team = 0
-    score_opp = 0
+
     win_count = 0
     draw_count = 0
     loose_count = 0
+    goals_scores_all = 0
+    goals_consided_all = 0
     for m in matches:
+        score_team = 0
+        score_opp = 0
         for g in m.match_goal.all():
             if g.team == team:
                 score_team += 1
@@ -112,7 +115,8 @@ def res_in_league(team, res):
                 score_opp += 1
             else:
                 score_team += 1
-        print(score_team, score_opp)
+        goals_scores_all += score_team
+        goals_consided_all += score_opp
         if score_team > score_opp:
             win_count += 1
         elif score_team == score_opp:
@@ -126,5 +130,13 @@ def res_in_league(team, res):
         return draw_count
     elif res == 'l':
         return loose_count
+    elif res == 's':
+        return goals_scores_all
+    elif res == 'c':
+        return goals_consided_all
+    elif res == 'dif':
+        return goals_scores_all-goals_consided_all
     elif res == 'p':
         return win_count * 3 + draw_count * 1
+
+

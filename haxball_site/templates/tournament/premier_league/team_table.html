@@ -14,22 +14,29 @@
 {% block profile_of_user %}
     <div class="card mb-4 mt-2" style="border-radius: 25px">
         <div class="card-header" style="border-radius: 25px">
-            <h4>Команды</h4>
+            <h4>
+                {% for league in teams.leagues.all %}
+                    {{ league }}
+                    {% if league.championship.is_active and league.priority == 1 %}
+                        {{ league.title }}
+                    {% endif %}
+                {% endfor %}
+            </h4>
         </div>
-        <div class="card-body text-center">
+        <div class="card-body text-center p-0">
             <table class="table table-dark">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Команда</th>
-                    <th scope="col">И</th>
-                    <th scope="col">В</th>
-                    <th scope="col">Н</th>
-                    <th scope="col">П</th>
+                    <th scope="col">&nbspИ&nbsp</th>
+                    <th scope="col">&nbspВ&nbsp</th>
+                    <th scope="col">&nbsp;Н&nbsp;</th>
+                    <th scope="col">&nbsp;П&nbsp;</th>
                     <th scope="col">ЗМ</th>
                     <th scope="col">ПМ</th>
                     <th scope="col">+/-</th>
-                    <th scope="col">O</th>
+                    <th scope="col">&nbsp;O&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,14 +44,15 @@
                     <tr>
 
                         <th scope="row">{{ forloop.counter }}</th>
-                        <td><a href="{{ team.get_absolute_url }}" class="h5">{{ team.title }}</a></td>
+                        <td class="text-left"><a href="{{ team.get_absolute_url }}" class="h5"><img
+                                src="{{ team.logo.url }}" alt="{{ team.title }}" width="12%">{{ team.title }}</a></td>
                         <td>{{ team|matches_in_league }}</td>
                         <td>{{ team|res_in_league:'w' }}</td>
                         <td>{{ team|res_in_league:'d' }}</td>
                         <td>{{ team|res_in_league:'l' }}</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td>{{ team|res_in_league:'s' }}</td>
+                        <td>{{ team|res_in_league:'c' }}</td>
+                        <td>{{ team|res_in_league:'dif' }}</td>
                         <td>{{ team|res_in_league:'p' }}</td>
                     </tr>
                 {% endfor %}

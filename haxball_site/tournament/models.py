@@ -111,7 +111,7 @@ class Player(models.Model):
                                 limit_choices_to={'user_player': None}, on_delete=models.SET_NULL,
                                 related_name='user_player')
 
-    nickname = models.CharField('Никнейм игрока', max_length=150, )
+    nickname = models.CharField('Никнейм игрока', max_length=150,)
 
     FORWARD = 'FW'
     DEF_MIDDLE = 'DM'
