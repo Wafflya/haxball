@@ -82,6 +82,9 @@ class Team(models.Model):
     def __str__(self):
         return 'Команда {}'.format(self.title)
 
+    def points(self):
+        return self.id
+
     class Meta:
         verbose_name = 'Команда'
         verbose_name_plural = 'Команды'

@@ -1,3 +1,4 @@
+from django.db.models import Count, F
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
@@ -80,7 +81,11 @@ class PremierLeague(ListView):
         league = League.objects.get(is_cup=False, championship__is_active=True, priority=1)
     except:
         league = None
-    queryset = Team.objects.filter(leagues=league)
+    print('sds', Team.objects.filter(leagues=league).annotate(
+        matchs=Count('home_matches__is_played') + Count('guest_matches__is_played')))
+
+    queryset = Team.objects.filter(leagues=league).annotate(
+        played_matchs=(Count('home_matches', filter=F('home_matches__is_played')) + Count('guest_matches', filter=F('guest_matches__is_played')))).order_by('-played_matchs')
     context_object_name = 'teams'
     template_name = 'tournament/premier_league/team_table.html'
 
