@@ -24,13 +24,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'm_5m)8w^h+8avxko^()kmlr6fnp(r+m1^=(m!kldx$*47(-za6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
+DEBUG = True
 
 if DEBUG:
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = ['185.7.145.91','cis-haxball.com', '127.0.0.1']
+    ALLOWED_HOSTS = ['185.7.145.91', 'cis-haxball.com', '127.0.0.1']
 
 # Application definition
 
@@ -52,7 +51,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     # text-editors testing
-    #'markdownx',
+    # 'markdownx',
     'ckeditor',
     'django_summernote',
     'froala_editor',
@@ -90,7 +89,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'haxball_site.wsgi.application'
 
-
 USE_DJANGO_JQUERY = True
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -102,20 +100,22 @@ if DEBUG:
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'OPTIONS': {
+                'timeout': 30
+            }
         }
     }
 else:
     DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                'NAME': 'hax_db',
-                'USER': 'kikimor24',
-                'PASSWORD': 'gibby4mopolnoye322',
-                'HOST': 'localhost',
-                'PORT': '5432',
-            }
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'hax_db',
+            'USER': 'kikimor24',
+            'PASSWORD': 'gibby4mopolnoye322',
+            'HOST': 'localhost',
+            'PORT': '5432',
         }
-
+    }
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -157,13 +157,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 if DEBUG:
-    #EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+    # EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    #ACCOUNT_EMAIL_REQUIRED = True
-    #ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
-    #ACCOUNT_EMAIL_VERIFICATION = True
+    # ACCOUNT_EMAIL_REQUIRED = True
+    # ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+    # ACCOUNT_EMAIL_VERIFICATION = True
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     ACCOUNT_EMAIL_REQUIRED = True
@@ -184,7 +183,7 @@ if DEBUG:
     STATIC_URL = '/static/'
     STATIC_DIR = os.path.join(BASE_DIR, 'static')
     STATICFILES_DIRS = [STATIC_DIR]
-    #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 else:
@@ -221,7 +220,7 @@ SUMMERNOTE_CONFIG = {
             'theme': 'monokai',
         },
         'toolbar': [
-            #['style', ['style']],
+            # ['style', ['style']],
             ['font', ['bold', 'underline', 'clear']],
             ['insert', ['link', 'picture', 'video']],
             # ['fontname', ['fontname']],
@@ -246,7 +245,6 @@ SUMMERNOTE_CONFIG = {
         'lineNumbers': 'true',
     },
     'lazy': False,
-
 
 }
 

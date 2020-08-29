@@ -16,61 +16,124 @@
     <div class="card mb-4 mt-2" style="border-radius: 25px">
         <div class="card-header text-center" style="border-radius: 25px">
             <h4>{{ match.team_home.title }} - {{ match.team_guest.title }}</h4>
-            <h5><a href="{% url 'tournament:premier_league' %}">{{ match.league }}</a> </h5>
+            <h5><a href="{% url 'tournament:premier_league' %}">{{ match.league }}</a></h5>
             <h5> {{ match.tour_num }} Тур</h5>
         </div>
         <div class="card-body text-center">
             <div class="row">
                 <div class="col-5">
-                    <h4>{{ match.team_home.title }}</h4>
+                    <h4 class="mb-3">{{ match.team_home.title }}</h4>
                     <img src="{{ match.team_home.logo.url }}" alt="{{ match.team_home.title }}" width="60%">
-                    {% if match.is_played %}
-                        <h5>Стартовый состав</h5>
-                        {% for player in match.team_home_start.all %}
-                            <h6>{{ player.nation }} {{ player }}</h6>
-                        {% endfor %}
-                        <h5>Голы</h5>
-                        {% for goal in match.match_goal.all %}
-                            {% if match.team_home == goal.team %}
-                                <h6>{{ goal.author }} {% if goal.assistent %}({{ goal.assistent }}){% endif %}</h6>
-                            {% endif %}
-                        {% endfor %}
-                        {% for og in match.match_event.all %}
-                            {% if og.event == 'OG' and match.team_guest == og.team %}
-                                <h6>(OG) {{ og.author }}</h6>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
+
 
                 </div>
                 <div class="col-2">
                     {% if match.is_played %}
                         <h5>{{ match|team_goals_in_match:match.team_home }}
                             - {{ match|team_goals_in_match:match.team_guest }}</h5>
+                        <h6>{{ match.match_date|date:"SHORT_DATE_FORMAT" }}</h6>
                     {% else %}
                         <h5>vs</h5>
                     {% endif %}
                 </div>
                 <div class="col-5">
-                    <h4>{{ match.team_guest.title }}</h4>
+                    <h4 class="mb-3">{{ match.team_guest.title }}</h4>
                     <img src="{{ match.team_guest.logo.url }}" alt="{{ match.team_guest.title }}" width="60%">
-                    {% if match.is_played %}
-                        <h5>Стартовый состав</h5>
-                        {% for player in match.team_guest_start.all %}
-                            <h6>{{ player.nation }} {{ player }}</h6>
-                        {% endfor %}
-                        <h5>Голы</h5>
-                        {% for goal in match.match_goal.all %}
-                            {% if match.team_guest == goal.team %}
-                                <h6>{{ goal.author }} {% if goal.assistent %}({{ goal.assistent }}){% endif %}</h6>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mb-3">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="squad-tab" data-toggle="tab" href="#start_squad" role="tab"
+                           aria-controls="start_squad-tab" aria-selected="true">Стартовый состав</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="detail-tab" data-toggle="tab" href="#detail_stat" role="tab"
+                           aria-controls="detail_stat-tab" aria-selected="false">Протокол</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="info_about" data-toggle="tab" href="#info" role="tab"
+                           aria-controls="info-tab" aria-selected="false" style="width: 164px">Информация</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tab-content start_squad" id="myTabContent">
+                <div class="tab-pane fade show active" id="start_squad" role="tabpanel"
+                     aria-labelledby="start_squad-tab">
+
+                    <div class="row">
+                        <div class="col-5">
+                            {% if match.is_played %}
+                                {% for player in match.team_home_start.all %}
+                                    <h6>{{ player.nation }} {{ player }}</h6>
+                                {% endfor %}
+
                             {% endif %}
-                        {% endfor %}
-                        {% for og in match.match_event.all %}
-                            {% if og.event == 'OG' and match.team_home == og.team %}
-                                <h6>(OG) {{ og.author }}</h6>
+                        </div>
+                        <div class="col-2">
+
+                        </div>
+                        <div class="col-5">
+                            {% if match.is_played %}
+                                {% for player in match.team_guest_start.all %}
+                                    <h6>{{ player.nation }} {{ player }}</h6>
+                                {% endfor %}
+
                             {% endif %}
-                        {% endfor %}
-                    {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="detail_stat" role="tabpanel" aria-labelledby="detail_stat-tab">
+                    {% for goal in match|goals_sorted %}
+                        <div class="row">
+                            <div class="col-5">
+                                {% if match.team_home == goal.team and goal.event != 'OG' %}
+                                    <h6>
+                                        <img src="{% static "img/ico/ball_2.png" %}" height="16" width="16"
+                                             title="Гол" class="mr-1">{{ goal.author }}{% if goal.assistent %}
+                                        ({{ goal.assistent }})
+                                    {% endif %}
+                                    </h6>
+                                {% endif %}
+                                {% if goal.event == 'OG' and match.team_guest == goal.team %}
+                                    <h6>(OG) {{ goal.author }}</h6>
+                                {% endif %}
+
+                            </div>
+                            <div class="col-2">
+                                <h6>{{ goal.time_min|add:1 }}'</h6>
+                            </div>
+                            <div class="col-5">
+                                {% if match.team_guest == goal.team and goal.event != 'OG'%}
+                                    <h6>
+                                        <img src="{% static "img/ico/ball_2.png" %}" height="16" width="16"
+                                             title="Гол" class="mr-1">{{ goal.author }}{% if goal.assistent %}
+                                        ({{ goal.assistent }})
+                                    {% endif %}
+                                    </h6>
+                                {% endif %}
+                                    {% if goal.event == 'OG' and match.team_home == goal.team %}
+                                        <h6>(OG) {{ goal.author }}</h6>
+                                    {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <h6>
+                                Реплей: {{ match.replay_link }}
+                            </h6>
+                            <h6>
+                                Инспектор: {{ match.inspector }}
+                            </h6>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>

@@ -85,7 +85,7 @@ class MatchAdmin(admin.ModelAdmin):
 
 @admin.register(Goal)
 class GoalAdmin(admin.ModelAdmin):
-    list_display = ('match', 'author', 'assistent')
+    list_display = ('match', 'author', 'assistent', 'id')
 
 
 @admin.register(Substitution)

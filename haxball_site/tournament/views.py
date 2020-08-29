@@ -1,4 +1,4 @@
-from django.db.models import Count, F
+from django.db.models import Count, F, Q, Sum
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
@@ -77,17 +77,77 @@ class TeamList(ListView):
 
 
 class PremierLeague(ListView):
-    try:
-        league = League.objects.get(is_cup=False, championship__is_active=True, priority=1)
-    except:
-        league = None
-    print('sds', Team.objects.filter(leagues=league).annotate(
-        matchs=Count('home_matches__is_played') + Count('guest_matches__is_played')))
-
-    queryset = Team.objects.filter(leagues=league).annotate(
-        played_matchs=(Count('home_matches', filter=F('home_matches__is_played')) + Count('guest_matches', filter=F('guest_matches__is_played')))).order_by('-played_matchs')
     context_object_name = 'teams'
     template_name = 'tournament/premier_league/team_table.html'
+
+    """
+    a = Team.objects.values('title').filter(leagues=league).annotate(
+        points=(
+                Count(F('guest_matches'), distinct=True,
+                      filter=Q(guest_matches__league=league, guest_matches__is_played=True), ) +
+                Count(F('home_matches'), distinct=True,
+                      filter=Q(home_matches__league=league, home_matches__is_played=True))
+        )
+    ).order_by('-points')
+    print(a.query)
+    for i in a:
+        print(i)
+"""
+
+    #    works_query = Team.objects.filter(leagues=league).annotate(
+    #        played_matchs=(Count('home_matches', filter=F('home_matches__is_played')) + Count('guest_matches', filter=F(
+    #            'guest_matches__is_played')))).order_by('-played_matchs')
+    #   Попробуем по-тупому, раз через запросик к Джанго-Орм кишка тонка(((((((
+    def get_queryset(self):
+        try:
+            league = League.objects.get(is_cup=False, championship__is_active=True, priority=1)
+        except:
+            league = None
+
+        b = list(Team.objects.filter(leagues=league))
+        points = [0 for _ in range(len(b))]
+        diffrence = [0 for _ in range(len(b))]
+        scores = [0 for _ in range(len(b))]
+        for i, team in enumerate(b):
+            matches = Match.objects.filter((Q(team_home=team) | Q(team_guest=team)), league=league, is_played=True)
+            win_count = 0
+            draw_count = 0
+            loose_count = 0
+            goals_scores_all = 0
+            goals_consided_all = 0
+            for m in matches:
+                score_team = 0
+                score_opp = 0
+                for g in m.match_goal.all():
+                    if g.team == team:
+                        score_team += 1
+                    else:
+                        score_opp += 1
+                for og in m.match_event.filter(event='OG'):
+                    if og.team == team:
+                        score_opp += 1
+                    else:
+                        score_team += 1
+
+                goals_scores_all += score_team
+                goals_consided_all += score_opp
+
+                if score_team > score_opp:
+                    win_count += 1
+                elif score_team == score_opp:
+                    draw_count += 1
+            points[i] = win_count * 3 + draw_count * 1
+            diffrence[i] = goals_scores_all - goals_consided_all
+            scores[i] = goals_scores_all
+
+        l = zip(b, points, diffrence, scores)
+
+        s1 = sorted(l, key=lambda x: x[3], reverse=True)
+        s2 = sorted(s1, key=lambda x: x[2], reverse=True)
+        ls = sorted(s2, key=lambda x: x[1], reverse=True)
+        lit = [i[0] for i in ls]
+        queryset = lit
+        return queryset
 
 
 class MatchDetail(DetailView):

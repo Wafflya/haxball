@@ -59,8 +59,8 @@ def join_game_in_team(player, team):
 
 @register.filter
 def matches_in_team(player, team):
-    print(Match.objects.filter(team_guest=team, team_guest_start=player))
-    print(Match.objects.filter(team_home=team, team_home_start=player))
+    # print(Match.objects.filter(team_guest=team, team_guest_start=player))
+    # print(Match.objects.filter(team_home=team, team_home_start=player))
     return Match.objects.filter(team_guest=team, team_guest_start=player).count() + Match.objects.filter(
         team_home=team, team_home_start=player).count()
 
@@ -71,18 +71,29 @@ def matches_in_team(player, team):
 @register.filter
 def team_goals_in_match(match, team):
     if team == match.team_home:
-        return Goal.objects.filter(match=match, team=team).count() + OtherEvents.objects.filter(event='OG',
+        return Goal.objects.filter(match=match, team=team).count() + OtherEvents.objects.filter(event='OG', match=match,
                                                                                                 team=match.team_guest).count()
-    else:
-        return Goal.objects.filter(match=match, team=team).count() + OtherEvents.objects.filter(event='OG',
+    elif team == match.team_guest:
+        return Goal.objects.filter(match=match, team=team).count() + OtherEvents.objects.filter(event='OG', match=match,
                                                                                                 team=match.team_home).count()
+
+
+@register.filter
+def goals_sorted(match):
+    events = match.match_event.filter(event='OG')
+    goals = list(match.match_goal.all())
+    for e in events:
+        goals.append(e)
+    g1 = sorted(goals, key=lambda time: time.time_sec)
+    g2 = sorted(g1, key=lambda time: time.time_min)
+    return g2
 
 
 #   Фильтры для таблички лиги
 @register.filter
 def matches_in_league(team):
     try:
-        league = League.objects.get(is_cup=False, championship__is_active=True)
+        league = League.objects.get(is_cup=False, championship__is_active=True, priority=1)
     except:
         return None
     return Match.objects.filter(team_guest=team, league=league, is_played=True).count() + Match.objects.filter(
@@ -92,7 +103,7 @@ def matches_in_league(team):
 @register.filter
 def res_in_league(team, res):
     try:
-        league = League.objects.get(is_cup=False, championship__is_active=True)
+        league = League.objects.get(is_cup=False, championship__is_active=True, teams=team)
     except:
         return None
     matches = Match.objects.filter((Q(team_home=team) | Q(team_guest=team)), league=league, is_played=True)
@@ -135,8 +146,6 @@ def res_in_league(team, res):
     elif res == 'c':
         return goals_consided_all
     elif res == 'dif':
-        return goals_scores_all-goals_consided_all
+        return goals_scores_all - goals_consided_all
     elif res == 'p':
         return win_count * 3 + draw_count * 1
-
-
