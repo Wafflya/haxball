@@ -52,6 +52,7 @@ class FreeAgent(models.Model):
 
 class Season(models.Model):
     title = models.CharField('Название Розыгрыша', max_length=128)
+    number = models.SmallIntegerField('Номер сезона')
     is_active = models.BooleanField('Текущий')
     created = models.DateTimeField('Создана', auto_now_add=True)
 
@@ -81,7 +82,6 @@ class Team(models.Model):
 
     def __str__(self):
         return 'Команда {}'.format(self.title)
-
 
     class Meta:
         verbose_name = 'Команда'
@@ -115,7 +115,7 @@ class Player(models.Model):
                                 on_delete=models.SET_NULL,
                                 related_name='user_player')
 
-    nickname = models.CharField('Никнейм игрока', max_length=150,)
+    nickname = models.CharField('Никнейм игрока', max_length=150, )
 
     FORWARD = 'FW'
     DEF_MIDDLE = 'DM'
@@ -134,12 +134,18 @@ class Player(models.Model):
     KAZAKHSTAN = 'KZ'
     BELARUS = 'BY'
     LATVIA = 'LV'
+    AZERBAJAN = 'AZ'
+    KYRGYZSTAN = 'KG'
+    FRANCE = 'FR'
     PLAYER_NATION = [
         (RUSSIA, 'Россия'),
-        (UKRAINE, 'Украинка'),
+        (UKRAINE, 'Украина'),
         (KAZAKHSTAN, 'Казахстан'),
         (BELARUS, 'Беларусь'),
         (LATVIA, 'Латвия'),
+        (AZERBAJAN, 'Азербайджан'),
+        (KYRGYZSTAN, 'Киргизия'),
+        (FRANCE, 'Франзузики'),
     ]
     nation = models.CharField("Нация", max_length=2, choices=PLAYER_NATION, default=RUSSIA, )
 
@@ -188,6 +194,9 @@ class Match(models.Model):
 
     def __str__(self):
         return 'Матч между {} и {}'.format(self.team_home.title, self.team_guest.title)
+
+    def get_absolute_url(self):
+        return reverse('tournament:match_detail', args=[self.id])
 
     class Meta:
         verbose_name = 'Матч'
@@ -265,7 +274,7 @@ class OtherEvents(models.Model):
     EVENT = [
         (YELLOW_CARD, 'Жёлтая'),
         (RED_CARD, 'Красная'),
-        (CLEAN_SHIT, 'Сухой матч'),
+        (CLEAN_SHIT, 'Сухой тайм'),
         (OWN_GOALS, 'Автогол'),
     ]
 
@@ -277,3 +286,22 @@ class OtherEvents(models.Model):
     class Meta:
         verbose_name = 'Событие'
         verbose_name_plural = 'События'
+
+
+class PlayerTransfer(models.Model):
+    trans_player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='teams_all', verbose_name='Игрок')
+    to_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_transfers', verbose_name='В команду')
+    date_join = models.DateField(default=None)
+    season_join = models.ForeignKey(Season, on_delete=models.CASCADE, verbose_name='В каком сезоне')
+
+    def save(self, *args, **kwargs):
+        self.trans_player.team = self.to_team
+        self.trans_player.save()
+        super(PlayerTransfer, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return 'Переход {} в команду {}'.format(self.trans_player, self.to_team)
+
+    class Meta:
+        verbose_name = 'Трансфер'
+        verbose_name_plural = 'Трансферы'

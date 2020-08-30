@@ -16,7 +16,7 @@
     <div class="card mb-4 mt-2" style="border-radius: 25px">
         <div class="card-header text-center" style="border-radius: 25px">
             <h4>{{ match.team_home.title }} - {{ match.team_guest.title }}</h4>
-            <h5><a href="{% url 'tournament:premier_league' %}">{{ match.league }}</a></h5>
+            <h5><a href="{% url 'tournament:league' 'premier_league' %}">{{ match.league }}</a></h5>
             <h5> {{ match.tour_num }} Тур</h5>
         </div>
         <div class="card-body text-center">
@@ -98,7 +98,12 @@
                                     </h6>
                                 {% endif %}
                                 {% if goal.event == 'OG' and match.team_guest == goal.team %}
-                                    <h6>(OG) {{ goal.author }}</h6>
+                                    <h6><img src="{% static "img/ico/ball_2_og.png" %}" height="16" width="16"
+                                             title="Гол" class="mr-1"> {{ goal.author }}</h6>
+                                {% endif %}
+
+                                {% if goal.event == 'CLN' and match.team_home == goal.team %}
+                                    <h6>(ПЕРЧАТКА!) {{ goal.author }}</h6>
                                 {% endif %}
 
                             </div>
@@ -106,7 +111,7 @@
                                 <h6>{{ goal.time_min|add:1 }}'</h6>
                             </div>
                             <div class="col-5">
-                                {% if match.team_guest == goal.team and goal.event != 'OG'%}
+                                {% if match.team_guest == goal.team and goal.event != 'OG' and goal.event != 'CLN' %}
                                     <h6>
                                         <img src="{% static "img/ico/ball_2.png" %}" height="16" width="16"
                                              title="Гол" class="mr-1">{{ goal.author }}{% if goal.assistent %}
@@ -114,9 +119,15 @@
                                     {% endif %}
                                     </h6>
                                 {% endif %}
-                                    {% if goal.event == 'OG' and match.team_home == goal.team %}
-                                        <h6>(OG) {{ goal.author }}</h6>
-                                    {% endif %}
+                                {% if goal.event == 'OG' and match.team_home == goal.team %}
+                                    <h6><img src="{% static "img/ico/ball_2_og.png" %}" height="16" width="16"
+                                             title="Гол" class="mr-1"> {{ goal.author }}</h6>
+                                {% endif %}
+
+                                {% if goal.event == 'CLN' and match.team_guest == goal.team %}
+                                    <h6><img src="{% static "img/ico/clean_sheet1.png" %}" height="20" width="20"
+                                             title="Сухие матчи"> {{ goal.author }}</h6>
+                                {% endif %}
                             </div>
                         </div>
                     {% endfor %}

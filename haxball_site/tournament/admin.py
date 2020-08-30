@@ -1,7 +1,7 @@
 # Register your models here.
 from django.contrib import admin
 
-from .models import FreeAgent, Player, League, Team, Match, Goal, OtherEvents, Substitution, Season
+from .models import FreeAgent, Player, League, Team, Match, Goal, OtherEvents, Substitution, Season, PlayerTransfer
 
 
 @admin.register(FreeAgent)
@@ -11,11 +11,14 @@ class FreeAgentAdmin(admin.ModelAdmin):
 
 @admin.register(Player)
 class PlayerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'nickname','team', 'nation', 'role',)
+    list_display = ('name', 'nickname', 'team', 'nation', 'role',)
     raw_id_fields = ('name',)
+    readonly_fields = ('team',)
 
 
-
+@admin.register(PlayerTransfer)
+class PlayerTransferAdmin(admin.ModelAdmin):
+    list_display = ('trans_player', 'to_team', 'date_join', 'season_join')
 
 
 @admin.register(Team)
@@ -32,20 +35,6 @@ class SeasonAdmin(admin.ModelAdmin):
 class LeagueAdmin(admin.ModelAdmin):
     list_display = ('title', 'priority', 'created')
     filter_horizontal = ('teams',)
-
-
-"""
-class GoalAdminForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(GoalAdminForm, self).__init__(*args, **kwargs)
-        print(kwargs)
-        if self.instance.match:
-            self.fields['team'].queryset = Team.objects.filter(
-            Q(home_matches=self.instance.match) | Q(guest_matches=self.instance.match))
-
-           # Team.objects.filter(
-           # Q(home_matches=self.instance.match) | Q(guest_matches=self.instance.match))
-"""
 
 
 class GoalInline(admin.StackedInline):
@@ -95,7 +84,7 @@ class SubstitutionAdmin(admin.ModelAdmin):
 
 @admin.register(OtherEvents)
 class OtherEventsAdmin(admin.ModelAdmin):
-    list_display = ('match', 'author',)
+    list_display = ('event', 'match', 'author',)
 
 
 """

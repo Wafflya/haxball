@@ -80,7 +80,7 @@ def team_goals_in_match(match, team):
 
 @register.filter
 def goals_sorted(match):
-    events = match.match_event.filter(event='OG')
+    events = match.match_event.all()
     goals = list(match.match_goal.all())
     for e in events:
         goals.append(e)

@@ -10,6 +10,14 @@
         }
     </style>
 {% endblock %}
+{% block scripts %}
+    <script>
+        function myFunction(Element) {
+            navigator.clipboard.writeText(Element.title);
+            alert("Скопировано " + Element.title);
+        }
+    </script>
+{% endblock %}
 {% block title %}Чемпионат | Команды          cis-haxball.com {% endblock %}
 {% block profile_of_user %}
     <div class="container-fluid emp-profile">
@@ -93,7 +101,8 @@
             <div class="col-md-12 py-4">
                 <div class="tab-content profile-tab" id="myTabContent">
                     <div class="tab-pane fade show active pr-2" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <table class="table table-bordered table-hover text-center" bgcolor="#ffd756" style="color: black; font-weight: bold;">
+                        <table class="table table-bordered table-hover text-center" bgcolor="#ffd756"
+                               style="color: black; font-weight: bold;">
                             <thead>
                             <tr>
                                 <th scope="col">Игрок</th>
@@ -158,37 +167,12 @@
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row">
-                            <div class="col-md-6">
-                                <label>Experience</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Expert</p>
+                            <div class="col-12">
+                                <h4 class="text-warning text-center">Каминг сун</h4>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Hourly Rate</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>10$/hr</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Total Projects</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>230</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>English Level</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Expert</p>
-                            </div>
-                        </div>
+                        <!--
+
                         <div class="row">
                             <div class="col-md-6">
                                 <label>Availability</label>
@@ -203,9 +187,70 @@
                                 <p>Your detail description</p>
                             </div>
                         </div>
+                        -->
                     </div>
                     <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
-                        <h1>Pidor</h1>
+                        <div class="row">
+                            <div class="col-2">
+
+                            </div>
+
+                            <div class="col-8 justify-content-center">
+
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td><span class="h5 text-secondary">Владелец</span></td>
+                                        <td>
+                                            <a class="h5" href="{{ team.owner.user_profile.get_absolute_url }}">{{ team.owner }}</a>
+                                        </td>
+                                        <td>
+                                            {% if team.owner.user_profile.vk %}
+                                                <a href="https://vk.com/{{ team.owner.user_profile.vk }}"
+                                                   target="_blank"><img
+                                                        src="{% static "img/ico/vk_1.png" %}" height="30" width="30"
+                                                        title="{{ team.owner.user_profile.vk }}"></a>
+                                            {% endif %}
+                                            {% if team.owner.user_profile.discord %}
+                                                <img src='{% static "img/ico/discord_1.png" %}'
+                                                     onclick="myFunction(this)"
+                                                     height="30" width="30"
+                                                     title="{{ team.owner.user_profile.discord }}"
+                                                     style="cursor: pointer;">
+                                            {% endif %}
+                                            {% if team.owner.user_profile.telegram %}
+                                                <a href="https://t.me/{{ agent.player.user_profile.telegram }}"
+                                                   target="_blank"><img
+                                                        src="{% static "img/ico/tg_1.png" %}" height="30" width="30"
+                                                        title="{{ team.owner.user_profile.telegram }}"></a>
+                                            {% endif %}
+                                            {% if not team.owner.user_profile.vk and not team.owner.user_profile.discord and not team.owner.user_profile.telegram %}
+                                                <i class="fa fa-minus text-danger text-center" aria-hidden="true"></i>
+                                            {% endif %}
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="h5 text-secondary">Капитан</span></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="h5 text-secondary">Ассистент</span></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+
+                            <div class="col-2">
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
