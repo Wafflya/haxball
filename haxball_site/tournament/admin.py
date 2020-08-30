@@ -12,7 +12,7 @@ class FreeAgentAdmin(admin.ModelAdmin):
 @admin.register(Player)
 class PlayerAdmin(admin.ModelAdmin):
     list_display = ('name', 'nickname','team', 'nation', 'role',)
-
+    raw_id_fields = ('name',)
 
 
 

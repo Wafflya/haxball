@@ -1,8 +1,8 @@
 from django import template
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.utils import timezone
 
-from ..models import FreeAgent, OtherEvents, Goal, Match, Substitution, League
+from ..models import FreeAgent, OtherEvents, Goal, Match, Substitution, League, Team, Player
 
 register = template.Library()
 
@@ -149,3 +149,72 @@ def res_in_league(team, res):
         return goals_scores_all - goals_consided_all
     elif res == 'p':
         return win_count * 3 + draw_count * 1
+
+
+@register.filter
+def sort_teams(league):
+    b = list(Team.objects.filter(leagues=league))
+    points = [0 for _ in range(len(b))]
+    diffrence = [0 for _ in range(len(b))]
+    scores = [0 for _ in range(len(b))]
+    for i, team in enumerate(b):
+        matches = Match.objects.filter((Q(team_home=team) | Q(team_guest=team)), league=league, is_played=True)
+        win_count = 0
+        draw_count = 0
+        loose_count = 0
+        goals_scores_all = 0
+        goals_consided_all = 0
+        for m in matches:
+            score_team = 0
+            score_opp = 0
+            for g in m.match_goal.all():
+                if g.team == team:
+                    score_team += 1
+                else:
+                    score_opp += 1
+            for og in m.match_event.filter(event='OG'):
+                if og.team == team:
+                    score_opp += 1
+                else:
+                    score_team += 1
+
+            goals_scores_all += score_team
+            goals_consided_all += score_opp
+
+            if score_team > score_opp:
+                win_count += 1
+            elif score_team == score_opp:
+                draw_count += 1
+        points[i] = win_count * 3 + draw_count * 1
+        diffrence[i] = goals_scores_all - goals_consided_all
+        scores[i] = goals_scores_all
+
+    l = zip(b, points, diffrence, scores)
+
+    s1 = sorted(l, key=lambda x: x[3], reverse=True)
+    s2 = sorted(s1, key=lambda x: x[2], reverse=True)
+    ls = sorted(s2, key=lambda x: x[1], reverse=True)
+    lit = [i[0] for i in ls]
+    queryset = lit
+    return queryset
+
+
+@register.filter
+def top_goalscorers(league):
+    players = Player.objects.filter(goals__match__league=league).annotate(
+        goals_c=Count('goals__match__league')).order_by('-goals_c')
+    return players
+
+
+@register.filter
+def top_assistent(league):
+    players = Player.objects.filter(assists__match__league=league).annotate(
+        ass_c=Count('assists__match__league')).order_by('-ass_c')
+    return players
+
+
+@register.filter
+def top_clean_sheets(league):
+    players = Player.objects.filter(event__match__league=league, event__event='CLN').annotate(
+        event_c=Count('event__match__league')).order_by('-event_c')
+    return players

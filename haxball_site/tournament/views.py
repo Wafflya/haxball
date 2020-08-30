@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.views.generic import ListView, DetailView
 
 from .forms import FreeAgentForm
-from .models import FreeAgent, Team, Match, League
+from .models import FreeAgent, Team, Match, League, Player
 
 
 class FreeAgentList(ListView):
@@ -76,8 +76,9 @@ class TeamList(ListView):
     template_name = 'tournament/teams/teams_list.html'
 
 
-class PremierLeague(ListView):
-    context_object_name = 'teams'
+class LeagueDetail(DetailView):
+    context_object_name = 'league'
+    queryset = League.objects.filter(is_cup=False, priority=1, championship__is_active=True)
     template_name = 'tournament/premier_league/team_table.html'
 
     """
@@ -98,7 +99,7 @@ class PremierLeague(ListView):
     #        played_matchs=(Count('home_matches', filter=F('home_matches__is_played')) + Count('guest_matches', filter=F(
     #            'guest_matches__is_played')))).order_by('-played_matchs')
     #   Попробуем по-тупому, раз через запросик к Джанго-Орм кишка тонка(((((((
-    def get_queryset(self):
+    """def get_queryset(self):
         try:
             league = League.objects.get(is_cup=False, championship__is_active=True, priority=1)
         except:
@@ -148,6 +149,7 @@ class PremierLeague(ListView):
         lit = [i[0] for i in ls]
         queryset = lit
         return queryset
+"""
 
 
 class MatchDetail(DetailView):

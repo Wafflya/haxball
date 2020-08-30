@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import FreeAgentList, remove_entry, update_entry, TeamDetail, TeamList, PremierLeague, MatchDetail
+from .views import FreeAgentList, remove_entry, update_entry, TeamDetail, TeamList, LeagueDetail, MatchDetail
 
 app_name = 'tournament'
 
@@ -10,6 +10,6 @@ urlpatterns = [
     path('free_agents/update/<int:pk>', update_entry, name='update_entry'),
     path('team/<slug:slug>', TeamDetail.as_view(), name='team_detail'),
     path('teams/', TeamList.as_view(), name='team_list'),
-    path('premier_league/', PremierLeague.as_view(), name='premier_league'),
+    path('<slug:slug>', LeagueDetail.as_view(), name='league'),
     path('match/<int:pk>', MatchDetail.as_view(), name='match_detail'),
 ]

@@ -102,6 +102,9 @@ class League(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('tournament:league', args=[self.slug])
+
     class Meta:
         verbose_name = 'Турнир'
         verbose_name_plural = 'Турнир'
@@ -109,7 +112,7 @@ class League(models.Model):
 
 class Player(models.Model):
     name = models.OneToOneField(User, verbose_name='Пользователь', null=True, blank=True,
-                                limit_choices_to={'user_player': None}, on_delete=models.SET_NULL,
+                                on_delete=models.SET_NULL,
                                 related_name='user_player')
 
     nickname = models.CharField('Никнейм игрока', max_length=150,)
