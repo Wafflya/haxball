@@ -65,7 +65,8 @@
 
                                 <td class="text-left">
 
-                                    <a class="text-dark font-weight-bold h5" href="{{ team.get_absolute_url }}" class="h5"><img
+                                    <a class="text-dark font-weight-bold h5" href="{{ team.get_absolute_url }}"
+                                       class="h5"><img
                                             src="{{ team.logo.url }}" alt="{{ team.title }}" width="35" height="35"
                                             class="mr-1">{{ team.title }}</a>
                                 </td>
@@ -75,7 +76,8 @@
                                 <td>{{ team|res_in_league:'l' }}</td>
                                 <td>{{ team|res_in_league:'s' }}</td>
                                 <td>{{ team|res_in_league:'c' }}</td>
-                                <td {% if team|res_in_league:'dif' > 0 %} class="text-success"{% elif team|res_in_league:'dif' < 0 %}class="text-danger"{% endif %}>{{ team|res_in_league:'dif' }}</td>
+                                <td {% if team|res_in_league:'dif' > 0 %} class="text-success"
+                                                                          {% elif team|res_in_league:'dif' < 0 %}class="text-danger"{% endif %}>{{ team|res_in_league:'dif' }}</td>
                                 <td>{{ team|res_in_league:'p' }}</td>
                             </tr>
                         {% endfor %}
@@ -180,15 +182,51 @@
                 </div>
                 <div class="tab-pane fade" id="matches" role="tabpanel"
                      aria-labelledby="matches-tab">
-                    <div class="row">
-                        <div class="col-12">
-                            {% for match in league.matches_in_league.all %}
-                                <h6>Тур {{ match.tour_num }}</h6>
-                                <a class="h6" href="{{ match.get_absolute_url }}">{{ match.team_home.title }}
-                                    - {{ match.team_guest.title }}</a>
-                            {% endfor %}
+
+
+                    {% for tour in league|tours_count_in_league %}
+                        <div class="row">
+
+                            <div class="col-12">
+                                <p>
+                                    <button class="btn btn-primary" type="button" data-toggle="collapse"
+                                            data-target="#tour{{ tour }}" aria-expanded="false"
+                                            aria-controls="tour{{ tour }}">
+                                        Тур {{ tour }}
+                                    </button>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                        <div class="collapse" id="tour{{ tour }}">
+
+                            {% for match in league|tour_matches_in_league:tour %}
+                                <div class="row">
+
+                                    <div class="col-5 text-right">
+                                        <h5>{{ match.team_home.title }}</h5>
+                                    </div>
+                                    <div class="col-2">
+                                        {% if not match.is_played %}
+                                            <a href="{{ match.get_absolute_url }}"><span class="h5">vs</span> </a>
+                                        {% else %}
+                                            <a href="{{ match.get_absolute_url }}"
+                                               class="h5">{{ match|team_goals_in_match:match.team_home }}
+                                                : {{ match|team_goals_in_match:match.team_guest }}</a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-5 text-left">
+                                        <h5>{{ match.team_guest.title }}</h5>
+                                    </div>
+
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+
+
+                    {% endfor %}
+
                 </div>
             </div>
         </div>

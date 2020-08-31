@@ -1,5 +1,5 @@
 from django import template
-from django.db.models import Q, Count
+from django.db.models import Q, Count, Max
 from django.utils import timezone
 
 from ..models import FreeAgent, OtherEvents, Goal, Match, League, Team, Player, Substitution
@@ -245,11 +245,19 @@ def current_position(team):
     a = list(sort_teams(leag))
     return a.index(team) + 1
 
+
 @register.filter
 def teams_in_league_count(team):
     try:
         leag = current_league(team).first()
-        print(leag.teams.count())
         return leag.teams.count()
     except:
         return '-'
+
+@register.filter
+def tours_count_in_league(league):
+    return range(1, Match.objects.filter(league=league).aggregate(Max('tour_num'))['tour_num__max']+1)
+
+@register.filter
+def tour_matches_in_league(league, tour):
+    return Match.objects.filter(league=league, tour_num=tour)

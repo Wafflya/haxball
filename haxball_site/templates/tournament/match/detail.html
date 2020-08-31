@@ -58,22 +58,25 @@
                 </div>
             </div>
 
-            <div class="row justify-content-center mb-3">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="squad-tab" data-toggle="tab" href="#start_squad" role="tab"
-                           aria-controls="start_squad-tab" aria-selected="true">Стартовый состав</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="detail-tab" data-toggle="tab" href="#detail_stat" role="tab"
-                           aria-controls="detail_stat-tab" aria-selected="false">Протокол</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="info_about" data-toggle="tab" href="#info" role="tab"
-                           aria-controls="info-tab" aria-selected="false" style="width: 164px">Информация</a>
-                    </li>
-                </ul>
-            </div>
+            {% if match.is_played %}
+
+                <div class="row justify-content-center mb-3">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="squad-tab" data-toggle="tab" href="#start_squad" role="tab"
+                               aria-controls="start_squad-tab" aria-selected="true">Стартовый состав</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="detail-tab" data-toggle="tab" href="#detail_stat" role="tab"
+                               aria-controls="detail_stat-tab" aria-selected="false">Протокол</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="info_about" data-toggle="tab" href="#info" role="tab"
+                               aria-controls="info-tab" aria-selected="false" style="width: 164px">Информация</a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
 
             <div class="tab-content start_squad" id="myTabContent">
                 <div class="tab-pane fade show active" id="start_squad" role="tabpanel"
@@ -84,33 +87,31 @@
 
                         </div>
                         <div class="col-sm-4">
-                            {% if match.is_played %}
-                                <table class="table table-borderless ml-4">
-                                    <tbody>
-                                    {% for player in match.team_home_start.all %}
+                            <table class="table table-borderless ml-4">
+                                <tbody>
+                                {% for player in match.team_home_start.all %}
 
-                                        <tr>
-                                            <td class="p-1" style="width: 40px">
-                                                {% if player.nation == 'RU' %}
-                                                    <img src="{% static "img/ico/russia.png" %}" width="24">
-                                                {% elif player.nation == 'UA' %}
-                                                    <img src="{% static "img/ico/ukraine.png" %}" width="24">
-                                                {% endif %}
-                                            </td>
-                                            <td class="text-left pl-0 font-weight-bold">
-                                                {% if player.name %}
-                                                    <a class="text-dark"
-                                                       href="{{ player.name.user_profile.get_absolute_url }}">{{ player }}</a>
-                                                {% else %}
-                                                    <span class="text-secondary">{{ player }}</span>
-                                                {% endif %}
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
+                                    <tr>
+                                        <td class="p-1" style="width: 40px">
+                                            {% if player.nation == 'RU' %}
+                                                <img src="{% static "img/ico/russia.png" %}" width="24">
+                                            {% elif player.nation == 'UA' %}
+                                                <img src="{% static "img/ico/ukraine.png" %}" width="24">
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-left pl-0 font-weight-bold">
+                                            {% if player.name %}
+                                                <a class="text-dark"
+                                                   href="{{ player.name.user_profile.get_absolute_url }}">{{ player }}</a>
+                                            {% else %}
+                                                <span class="text-secondary">{{ player }}</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
 
-                                    </tbody>
-                                </table>
-                            {% endif %}
+                                </tbody>
+                            </table>
                         </div>
                         <div class="col-sm-3">
 
