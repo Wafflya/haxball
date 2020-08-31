@@ -80,9 +80,12 @@ def team_goals_in_match(match, team):
 @register.filter
 def goals_sorted(match):
     events = match.match_event.all()
+    substit = match.match_substitutions.all()
     goals = list(match.match_goal.all())
     for e in events:
         goals.append(e)
+    for s in substit:
+        goals.append(s)
     g1 = sorted(goals, key=lambda time: time.time_sec)
     g2 = sorted(g1, key=lambda time: time.time_min)
     return g2

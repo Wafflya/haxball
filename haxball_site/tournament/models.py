@@ -197,7 +197,7 @@ class Match(models.Model):
     comment = models.CharField('Комментарий к матчу', max_length=1024, blank=True, null=True)
 
     def __str__(self):
-        return 'Матч между {} и {}'.format(self.team_home.title, self.team_guest.title)
+        return 'Матч {} Тур {} и {}'.format(self.tour_num, self.team_home.title, self.team_guest.title)
 
     def get_absolute_url(self):
         return reverse('tournament:match_detail', args=[self.id])

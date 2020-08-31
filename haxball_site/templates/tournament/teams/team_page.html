@@ -20,7 +20,8 @@
 {% endblock %}
 {% block title %}Чемпионат | Команда {{ team.title }}         cis-haxball.com {% endblock %}
 {% block profile_of_user %}
-    <div class="container-fluid emp-profile" style="background:linear-gradient(to right, {{ team.color_1 }}, {{ team.color_2 }})">
+    <div class="container-fluid emp-profile"
+         style="background:linear-gradient(to right, {{ team.color_1 }}, {{ team.color_2 }})">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
@@ -120,17 +121,18 @@
                                         title="Сухие матчи"></th>
                                 <th scope="col">
                                     <div class="h-75 text-center">
-                                        <i class="fa fa-arrow-down text-danger" aria-hidden="true"
+                                        <i class="fa fa-arrow-down text-danger" title="Заменён" aria-hidden="true"
                                            style="font-size: 21px"></i>
                                     </div>
                                 </th>
                                 <th scope="col">
                                     <div class="h-75 text-center">
-                                        <i class="fa fa-arrow-up text-success" aria-hidden="true"
+                                        <i class="fa fa-arrow-up text-success" title="Вышел на поле" aria-hidden="true"
                                            style="font-size: 21px"></i>
                                     </div>
                                 </th>
-                                <th scope="col">АГ</th>
+                                <th scope="col"><img src="{% static "img/ico/ball_2_og.png" %}" height="20" width="20"
+                                                     title="Автоголы"></th>
                                 <th scope="col" class="text-center"><img
                                         src="{% static "img/ico/yellow_card.png" %}" height="20" width="20"
                                         title="Жёлтые карточки"></th>
@@ -169,7 +171,8 @@
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row">
                             <div class="col-12">
-                                <h4 class="text-warning text-center">Каминг сун</h4>
+                                <img src="{% static "img/backgrounds/coming-soon.jpg" %}" height="100%" width="100%"
+                                     style="border-radius: 25px">
                             </div>
                         </div>
                         <!--
