@@ -1,10 +1,10 @@
 from datetime import date
 
+from colorfield.fields import ColorField
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from colorfield.fields import ColorField
 from smart_selects.db_fields import ChainedForeignKey, ChainedManyToManyField
 
 
@@ -100,6 +100,8 @@ class League(models.Model):
     slug = models.SlugField(max_length=250)
     created = models.DateTimeField('Создана', auto_now_add=True)
     teams = models.ManyToManyField(Team, related_name='leagues', verbose_name='Команды в лиге')
+    actual_tour_num_1 = models.SmallIntegerField('Актуальный тур с', blank=True, null=True)
+    actual_tour_num_2 = models.SmallIntegerField('Актуальный тур по', blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -293,14 +295,20 @@ class OtherEvents(models.Model):
 
 
 class PlayerTransfer(models.Model):
-    trans_player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='teams_all', verbose_name='Игрок')
-    to_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_transfers', verbose_name='В команду')
+    trans_player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='teams_all', verbose_name='Игрок', )
+    to_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_transfers', verbose_name='В команду',
+                                blank=True, null=True)
     date_join = models.DateField(default=None)
     season_join = models.ForeignKey(Season, on_delete=models.CASCADE, verbose_name='В каком сезоне')
 
     def save(self, *args, **kwargs):
-        self.trans_player.team = self.to_team
-        self.trans_player.save()
+        if self.to_team:
+            self.trans_player.team = self.to_team
+            self.trans_player.save()
+        else:
+            print(self.trans_player)
+            self.trans_player.team = None
+            self.trans_player.save()
         super(PlayerTransfer, self).save(*args, **kwargs)
 
     def __str__(self):
