@@ -249,23 +249,23 @@
                                             </td>
                                             <td class="text-center">
                                                 {% if cap.name.user_profile.vk %}
-                                                    <a href="https://vk.com/{{ team.owner.user_profile.vk }}"
+                                                    <a href="https://vk.com/{{ cap.name.user_profile.vk }}"
                                                        target="_blank"><img
                                                             src="{% static "img/ico/vk_1.png" %}" height="30" width="30"
-                                                            title="{{ team.owner.user_profile.vk }}"></a>
+                                                            title="{{ cap.name.user_profile.vk }}"></a>
                                                 {% endif %}
                                                 {% if cap.name.user_profile.discord %}
                                                     <img src='{% static "img/ico/discord_1.png" %}'
                                                          onclick="myFunction(this)"
                                                          height="30" width="30"
-                                                         title="{{ team.owner.user_profile.discord }}"
+                                                         title="{{ cap.name.user_profile.discord }}"
                                                          style="cursor: pointer;">
                                                 {% endif %}
                                                 {% if cap.name.user_profile.telegram %}
-                                                    <a href="https://t.me/{{ agent.player.user_profile.telegram }}"
+                                                    <a href="https://t.me/{{ cap.name.user_profile.telegram }}"
                                                        target="_blank"><img
                                                             src="{% static "img/ico/tg_1.png" %}" height="30" width="30"
-                                                            title="{{ team.owner.user_profile.telegram }}"></a>
+                                                            title="{{ cap.name.user_profile.telegram }}"></a>
                                                 {% endif %}
                                                 {% if not cap.name.user_profile.vk and not cap.name.user_profile.discord and not cap.name.user_profile.telegram %}
                                                     <i class="fa fa-minus text-danger text-center"
@@ -293,20 +293,20 @@
                                                     <a href="https://vk.com/{{ team.owner.user_profile.vk }}"
                                                        target="_blank"><img
                                                             src="{% static "img/ico/vk_1.png" %}" height="30" width="30"
-                                                            title="{{ team.owner.user_profile.vk }}"></a>
+                                                            title="{{ cap.name.user_profile.vk }}"></a>
                                                 {% endif %}
                                                 {% if cap.name.user_profile.discord %}
                                                     <img src='{% static "img/ico/discord_1.png" %}'
                                                          onclick="myFunction(this)"
                                                          height="30" width="30"
-                                                         title="{{ team.owner.user_profile.discord }}"
+                                                         title="{{ cap.name.user_profile.discord }}"
                                                          style="cursor: pointer;">
                                                 {% endif %}
                                                 {% if cap.name.user_profile.telegram %}
-                                                    <a href="https://t.me/{{ agent.player.user_profile.telegram }}"
+                                                    <a href="https://t.me/{{ cap.name.user_profile.telegram }}"
                                                        target="_blank"><img
                                                             src="{% static "img/ico/tg_1.png" %}" height="30" width="30"
-                                                            title="{{ team.owner.user_profile.telegram }}"></a>
+                                                            title="{{ cap.name.user_profile.telegram }}"></a>
                                                 {% endif %}
                                                 {% if not cap.name.user_profile.vk and not cap.name.user_profile.discord and not cap.name.user_profile.telegram %}
                                                     <i class="fa fa-minus text-danger text-center"
