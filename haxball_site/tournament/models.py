@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-# Create your models here.
+from colorfield.fields import ColorField
 from smart_selects.db_fields import ChainedForeignKey, ChainedManyToManyField
 
 
@@ -70,6 +70,8 @@ class Team(models.Model):
     date_found = models.DateField('Дата основания', default=date.today, )
     short_title = models.CharField('Сокращение', max_length=4)
     logo = models.ImageField('Логотип', upload_to='team_logos/', default='team_logos/default.png')
+    color_1 = ColorField(default='#FFFFFF', verbose_name='Цвет 1')
+    color_2 = ColorField(default='#FFFFFF', verbose_name='Цвет 2')
     owner = models.ForeignKey(User, verbose_name='Владелец', null=True, on_delete=models.SET_NULL,
                               related_name='team_owner')
     # league = models.ForeignKey(League, verbose_name='Лига в которой играет', null=True, on_delete=models.SET_NULL,

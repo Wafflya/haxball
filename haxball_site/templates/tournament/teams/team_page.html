@@ -20,7 +20,7 @@
 {% endblock %}
 {% block title %}Чемпионат | Команда {{ team.title }}         cis-haxball.com {% endblock %}
 {% block profile_of_user %}
-    <div class="container-fluid emp-profile">
+    <div class="container-fluid emp-profile" style="background:linear-gradient(to right, {{ team.color_1 }}, {{ team.color_2 }})">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
@@ -34,10 +34,11 @@
                     </h3>
                     <h6>
                         {% for leagues in team|current_league %}
-                                <a href="{{ leagues.get_absolute_url }}">{{ leagues }}</a>
+                            <a href="{{ leagues.get_absolute_url }}">{{ leagues }}</a>
                         {% endfor %}
                     </h6>
-                    <p class="profile-rating" style="font-weight: bold;">Позиция : <span>{{ team|current_position }}/{{ team|teams_in_league_count }}</span></p>
+                    <p class="profile-rating" style="font-weight: bold;">Позиция :
+                        <span>{{ team|current_position }}/{{ team|teams_in_league_count }}</span></p>
                     <p>
                         <a href="{{ team.office_link }}" style="color: #671af1; font-weight: bold;">
                             Офис

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'smart_selects',
     'grappelli',
+    'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
