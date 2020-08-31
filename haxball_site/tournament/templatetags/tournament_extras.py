@@ -256,7 +256,10 @@ def teams_in_league_count(team):
 
 @register.filter
 def tours_count_in_league(league):
-    return range(1, Match.objects.filter(league=league).aggregate(Max('tour_num'))['tour_num__max']+1)
+    try:
+        return range(1, Match.objects.filter(league=league).aggregate(Max('tour_num'))['tour_num__max']+1)
+    except:
+        return None
 
 @register.filter
 def tour_matches_in_league(league, tour):
