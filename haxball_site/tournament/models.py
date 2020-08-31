@@ -172,10 +172,24 @@ class Player(models.Model):
         verbose_name_plural = 'Игроки'
 
 
+class TourNumber(models.Model):
+    number = models.SmallIntegerField('Номер тура')
+    date_from = models.DateField('Дата тура с', default=None)
+    date_to = models.DateField('Дата тура по', default=None)
+    league = models.ForeignKey(League, verbose_name='В какой лиге', related_name='tours', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return 'Тур {}'.format(self.number)
+
+    class Meta:
+        verbose_name = 'Тур'
+        verbose_name_plural = 'Туры'
+
+
 class Match(models.Model):
     league = models.ForeignKey(League, verbose_name='В лиге', related_name='matches_in_league',
                                on_delete=models.CASCADE)
-    tour_num = models.SmallIntegerField(verbose_name='Номер тура')
+    numb_tour = models.ForeignKey(TourNumber, verbose_name='Номер тура', related_name='tour_matches', on_delete=models.CASCADE)
     match_date = models.DateField('Дата матча', default=None, blank=True, null=True)
     replay_link = models.URLField('Ссылка на реплей', blank=True)
     inspector = models.ForeignKey(User, verbose_name='Проверил', limit_choices_to={'is_staff': True},
@@ -199,7 +213,7 @@ class Match(models.Model):
     comment = models.CharField('Комментарий к матчу', max_length=1024, blank=True, null=True)
 
     def __str__(self):
-        return 'Матч {} Тур {} и {}'.format(self.tour_num, self.team_home.title, self.team_guest.title)
+        return 'Матч {} Тур {} и {}'.format(self.numb_tour, self.team_home.title, self.team_guest.title)
 
     def get_absolute_url(self):
         return reverse('tournament:match_detail', args=[self.id])
@@ -207,7 +221,7 @@ class Match(models.Model):
     class Meta:
         verbose_name = 'Матч'
         verbose_name_plural = 'Матчи'
-        ordering = ['tour_num']
+        ordering = ['match_date']
 
 
 class Goal(models.Model):

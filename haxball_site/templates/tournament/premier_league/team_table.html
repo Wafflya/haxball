@@ -184,27 +184,27 @@
                      aria-labelledby="matches-tab">
 
 
-                    {% for tour in league|tours_count_in_league %}
+                    {% for tour in league.tours.all %}
                         <div class="row">
 
                             <div class="col-12">
                                 <p class="mb-0">
                                     <button class="btn btn-secondary mt-2 {% if forloop.last %}mb-3{% elif forloop.first %}mt-3{% endif %}"
                                             type="button" data-toggle="collapse"
-                                            data-target="#tour{{ tour }}" aria-expanded="false"
-                                            aria-controls="tour{{ tour }}" style="width: 90%">
-                                        <span class="h5">Тур {{ tour }}</span>
+                                            data-target="#tour{{ tour.number }}" aria-expanded="false"
+                                            aria-controls="tour{{ tour.number }}" style="width: 90%">
+                                        <span class="h5">Тур {{ tour.number }} ({{ tour.date_from|date:"SHORT_DATE_FORMAT" }} - {{ tour.date_to|date:"SHORT_DATE_FORMAT" }})</span>
                                     </button>
                                 </p>
                             </div>
                         </div>
                         <div class="collapse
-                                {% if tour >= league.actual_tour_num_1 and tour <= league.actual_tour_num_2 %}
+                                {% if tour.number >= league.actual_tour_num_1 and tour.number <= league.actual_tour_num_2 %}
                                 show
                                 {% endif %}
-                                {% if forloop.last %}mt-0 mb-3{% else %}mt-3{% endif %}" id="tour{{ tour }}">
+                                {% if forloop.last %}mt-0 mb-3{% else %}mt-3{% endif %}" id="tour{{ tour.number }}">
 
-                            {% for match in league|tour_matches_in_league:tour %}
+                            {% for match in tour.tour_matches.all %}
                                 <div class="row">
 
                                     <div class="col-5 text-right">

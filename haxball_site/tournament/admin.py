@@ -1,7 +1,8 @@
 # Register your models here.
 from django.contrib import admin
 
-from .models import FreeAgent, Player, League, Team, Match, Goal, OtherEvents, Substitution, Season, PlayerTransfer
+from .models import FreeAgent, Player, League, Team, Match, Goal, OtherEvents, Substitution, Season, PlayerTransfer, \
+    TourNumber
 
 
 @admin.register(FreeAgent)
@@ -54,10 +55,10 @@ class EventInline(admin.StackedInline):
 
 @admin.register(Match)
 class MatchAdmin(admin.ModelAdmin):
-    list_display = ('league', 'tour_num', 'team_home', 'team_guest', 'is_played', 'updated', 'id')
+    list_display = ('league', 'team_home', 'team_guest', 'is_played', 'updated', 'id')
     fieldsets = (
         ('Основная инфа', {
-            'fields': (('league', 'tour_num', 'is_played', 'match_date'),)
+            'fields': (('league', 'is_played', 'match_date','numb_tour'),)
         }),
         (None, {
             'fields': (('team_home', 'team_guest', 'replay_link', 'inspector'),)
@@ -89,6 +90,11 @@ class SubstitutionAdmin(admin.ModelAdmin):
 @admin.register(OtherEvents)
 class OtherEventsAdmin(admin.ModelAdmin):
     list_display = ('event', 'match', 'author',)
+
+
+@admin.register(TourNumber)
+class MatchTourAdmin(admin.ModelAdmin):
+    list_display = ('number', 'league',)
 
 
 """
