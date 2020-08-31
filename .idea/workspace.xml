@@ -26,13 +26,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/boot_ass_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/boot_ass_3.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/match/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/match/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/team_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/team_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,11 +85,11 @@
       <recent name="E:\haxball\haxball_site\static\img\ico" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
       <recent name="E:\haxball\haxball_site\static\img\ico" />
       <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img\ico" />
       <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\media\users_avatars\default" />
       <recent name="E:\haxball\haxball_site\ckeditor\ckeditor\plugins\images" />
-      <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
     </key>
   </component>
   <component name="RunManager">
@@ -174,7 +168,7 @@
       <workItem from="1598428601914" duration="7700000" />
       <workItem from="1598438540944" duration="636000" />
       <workItem from="1598439229444" duration="39273000" />
-      <workItem from="1598791247146" duration="45810000" />
+      <workItem from="1598791247146" duration="46676000" />
     </task>
     <servers />
   </component>

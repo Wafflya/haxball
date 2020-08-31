@@ -247,6 +247,9 @@ def current_position(team):
 
 @register.filter
 def teams_in_league_count(team):
-    leag = current_league(team).first()
-    print(leag.teams.count())
-    return leag.teams.count()
+    try:
+        leag = current_league(team).first()
+        print(leag.teams.count())
+        return leag.teams.count()
+    except:
+        return '-'
