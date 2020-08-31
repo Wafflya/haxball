@@ -2,7 +2,7 @@ from django import template
 from django.db.models import Q, Count
 from django.utils import timezone
 
-from ..models import FreeAgent, OtherEvents, Goal, Match, Substitution, League, Team, Player
+from ..models import FreeAgent, OtherEvents, Goal, Match, League, Team, Player, Substitution
 
 register = template.Library()
 
@@ -59,10 +59,9 @@ def join_game_in_team(player, team):
 
 @register.filter
 def matches_in_team(player, team):
-    # print(Match.objects.filter(team_guest=team, team_guest_start=player))
-    # print(Match.objects.filter(team_home=team, team_home_start=player))
     return Match.objects.filter(team_guest=team, team_guest_start=player).count() + Match.objects.filter(
-        team_home=team, team_home_start=player).count()
+        team_home=team, team_home_start=player).count() + Match.objects.filter(match_substitutions__team=team,
+                                                                               match_substitutions__player_in=player, ).distinct().count()
 
 
 # return Match.objects.filter(Q(team_home=team, team_home_start=player) | Q(team_guest=team, team_guest_start=player)).count()
@@ -218,3 +217,33 @@ def top_clean_sheets(league):
     players = Player.objects.filter(event__match__league=league, event__event='CLN').annotate(
         event_c=Count('event__match__league')).order_by('-event_c')
     return players
+
+
+#  Капитан и ассистент для профиля команды(контактов)
+@register.filter
+def get_captain(team):
+    return Player.objects.filter(team=team, role='C')
+
+
+@register.filter
+def get_team_assistent(team):
+    return Player.objects.filter(team=team, role='AC')
+
+
+#       Получаем текущую "Лигу" команды
+@register.filter
+def current_league(team):
+    return League.objects.filter(teams=team, championship__is_active=True, is_cup=False)
+
+
+@register.filter
+def current_position(team):
+    leag = current_league(team).first()
+    a = list(sort_teams(leag))
+    return a.index(team) + 1
+
+@register.filter
+def teams_in_league_count(team):
+    leag = current_league(team).first()
+    print(leag.teams.count())
+    return leag.teams.count()

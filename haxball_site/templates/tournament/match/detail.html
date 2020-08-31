@@ -15,29 +15,45 @@
 {% block profile_of_user %}
     <div class="card mb-4 mt-2" style="border-radius: 25px">
         <div class="card-header text-center" style="border-radius: 25px">
-            <h4>{{ match.team_home.title }} - {{ match.team_guest.title }}</h4>
-            <h5><a href="{% url 'tournament:league' 'premier_league' %}">{{ match.league }}</a></h5>
-            <h5> {{ match.tour_num }} Тур</h5>
+
+            <h5>
+                <a href="{% url 'tournament:league' 'premier_league' %}">{{ match.league }}</a>
+            </h5>
+            <h5>Тур {{ match.tour_num }}</h5>
+            <div class="row">
+
+                <div class="col-5 pr-0">
+                    <a class="h4 text-dark"
+                       href="{{ match.team_home.get_absolute_url }}">{{ match.team_home.title }}</a>
+                </div>
+                <div class="col-2 p-0">
+                    <h4>—</h4>
+                </div>
+                <div class="col-5 pl-0">
+                    <a class="h4 text-dark"
+                       href="{{ match.team_guest.get_absolute_url }}">{{ match.team_guest.title }}</a>
+                </div>
+            </div>
         </div>
         <div class="card-body text-center">
             <div class="row">
                 <div class="col-5">
-                    <h4 class="mb-3">{{ match.team_home.title }}</h4>
                     <img src="{{ match.team_home.logo.url }}" alt="{{ match.team_home.title }}" width="60%">
 
 
                 </div>
                 <div class="col-2">
-                    {% if match.is_played %}
-                        <h5>{{ match|team_goals_in_match:match.team_home }}
-                            - {{ match|team_goals_in_match:match.team_guest }}</h5>
-                        <h6>{{ match.match_date|date:"SHORT_DATE_FORMAT" }}</h6>
-                    {% else %}
-                        <h5>vs</h5>
-                    {% endif %}
+                    <div class="mt-5">
+                        {% if match.is_played %}
+                            <h5 class="font-weight-bold">{{ match|team_goals_in_match:match.team_home }}
+                                : {{ match|team_goals_in_match:match.team_guest }}</h5>
+                            <h6 class="mt-3">{{ match.match_date|date:"SHORT_DATE_FORMAT" }}</h6>
+                        {% else %}
+                            <h5>vs</h5>
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="col-5">
-                    <h4 class="mb-3">{{ match.team_guest.title }}</h4>
                     <img src="{{ match.team_guest.logo.url }}" alt="{{ match.team_guest.title }}" width="60%">
                 </div>
             </div>
@@ -64,24 +80,66 @@
                      aria-labelledby="start_squad-tab">
 
                     <div class="row">
-                        <div class="col-5">
-                            {% if match.is_played %}
-                                {% for player in match.team_home_start.all %}
-                                    <h6>{{ player.nation }} {{ player }}</h6>
-                                {% endfor %}
+                        <div class="col-sm-1">
 
+                        </div>
+                        <div class="col-sm-4">
+                            {% if match.is_played %}
+                                <table class="table table-borderless ml-4">
+                                    <tbody>
+                                    {% for player in match.team_home_start.all %}
+
+                                        <tr>
+                                            <td class="p-1" style="width: 40px">
+                                                {% if player.nation == 'RU' %}
+                                                    <img src="{% static "img/ico/russia.png" %}" width="24">
+                                                {% elif player.nation == 'UA' %}
+                                                    <img src="{% static "img/ico/ukraine.png" %}" width="24">
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-left pl-0 font-weight-bold">
+                                                {% if player.name %}
+                                                    <a class="text-dark"
+                                                       href="{{ player.name.user_profile.get_absolute_url }}">{{ player }}</a>
+                                                {% else %}
+                                                    <span class="text-secondary">{{ player }}</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
                             {% endif %}
                         </div>
-                        <div class="col-2">
+                        <div class="col-sm-3">
 
                         </div>
-                        <div class="col-5">
-                            {% if match.is_played %}
+                        <div class="col-sm-4">
+                            <table class="table table-borderless">
+                                <tbody>
                                 {% for player in match.team_guest_start.all %}
-                                    <h6>{{ player.nation }} {{ player }}</h6>
+                                    <tr>
+                                        <td class="p-1" style="width: 40px">
+                                            {% if player.nation == 'RU' %}
+                                                <img src="{% static "img/ico/russia.png" %}" width="24">
+                                            {% elif player.nation == 'UA' %}
+                                                <img src="{% static "img/ico/ukraine.png" %}" width="24">
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-left pl-0 font-weight-bold">
+                                            {% if player.name %}
+                                                <a class="text-dark"
+                                                   href="{{ player.name.user_profile.get_absolute_url }}">{{ player }}</a>
+                                            {% else %}
+                                                <span class="text-secondary">{{ player }}</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
                                 {% endfor %}
+                                </tbody>
+                            </table>
 
-                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -137,11 +195,15 @@
 
                         <div class="col-12">
                             <h6>
-                                Реплей: {{ match.replay_link }}
+                                <a href="{{ match.replay_link }}">Реплей</a>
                             </h6>
                             <h6>
                                 Инспектор: {{ match.inspector }}
                             </h6>
+                            {% if match.comment %}
+                                <h6>Комментарий:</h6>
+                                <p>{{ match.comment }}</p>
+                            {% endif %}
                         </div>
 
                     </div>

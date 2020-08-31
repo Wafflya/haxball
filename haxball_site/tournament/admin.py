@@ -65,6 +65,10 @@ class MatchAdmin(admin.ModelAdmin):
         ('Составы', {
             'classes': ('grp-collapse grp-closed',),
             'fields': ('team_home_start', 'team_guest_start',)
+        }),
+        ('Комментарий:', {
+            'classes': ('grp-collapse grp-closed',),
+            'fields': ('comment',)
         })
     )
     # fields = ['is_played', 'league', 'tour_num', 'match_date', ('team_home', 'team_guest'),

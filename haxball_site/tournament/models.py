@@ -192,6 +192,8 @@ class Match(models.Model):
                                               chained_model_field='team', blank=True)
     is_played = models.BooleanField('Сыгран', default=False)
 
+    comment = models.CharField('Комментарий к матчу', max_length=1024, blank=True, null=True)
+
     def __str__(self):
         return 'Матч между {} и {}'.format(self.team_home.title, self.team_guest.title)
 

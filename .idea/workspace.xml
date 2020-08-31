@@ -26,9 +26,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/ball_2_og.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/kazakhstan.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/russia.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/ukraine.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/static/img/ico/ball_2_og.png" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/static/img/ico/ball_2_og.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/post_important_in_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/post_important_in_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/match/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/match/detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/premier_league/team_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/premier_league/team_table.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/team_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/team_page.html" afterDir="false" />
@@ -175,7 +179,7 @@
       <workItem from="1598428601914" duration="7700000" />
       <workItem from="1598438540944" duration="636000" />
       <workItem from="1598439229444" duration="39273000" />
-      <workItem from="1598791247146" duration="27106000" />
+      <workItem from="1598791247146" duration="39519000" />
     </task>
     <servers />
   </component>

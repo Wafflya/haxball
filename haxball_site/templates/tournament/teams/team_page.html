@@ -18,7 +18,7 @@
         }
     </script>
 {% endblock %}
-{% block title %}Чемпионат | Команды          cis-haxball.com {% endblock %}
+{% block title %}Чемпионат | Команда {{ team.title }}         cis-haxball.com {% endblock %}
 {% block profile_of_user %}
     <div class="container-fluid emp-profile">
         <div class="row">
@@ -33,15 +33,13 @@
                         {{ team.title }}
                     </h3>
                     <h6>
-                        {% for leagues in team.leagues.all %}
-                            {% if leagues.priority == 1 %}
+                        {% for leagues in team|current_league %}
                                 <a href="{{ leagues.get_absolute_url }}">{{ leagues }}</a>
-                            {% endif %}
                         {% endfor %}
                     </h6>
-                    <p class="profile-rating" style="font-weight: bold;">Позиция : <span>8/10</span></p>
+                    <p class="profile-rating" style="font-weight: bold;">Позиция : <span>{{ team|current_position }}/{{ team|teams_in_league_count }}</span></p>
                     <p>
-                        <a href="{{ team.office_link }}" style="color: #671af1">
+                        <a href="{{ team.office_link }}" style="color: #671af1; font-weight: bold;">
                             Офис
                             <img src="{% static "img/ico/team_office.png" %}" height="28" width="28"
                                  title="Офис команды">
@@ -67,7 +65,8 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit">
+                <!-- <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit"> -->
+                <img src="{% static "img/ico/best_logo.png" %}" width="100%">
             </div>
         </div>
         <div class="row">
@@ -105,7 +104,7 @@
                                style="color: black; font-weight: bold;">
                             <thead>
                             <tr>
-                                <th scope="col">Игрок</th>
+                                <th scope="col"><span class="h5">Игрок</span></th>
                                 <th scope="col" class="text-center"><img
                                         src="{% static "img/ico/matches_icon.png" %}" height="20" width="20"
                                         title="Вышел в старте"></th>
@@ -144,9 +143,10 @@
                                 <tr>
                                     <td>
                                         {% if player.name %}
-                                            <a href="{{ player.name.user_profile.get_absolute_url }}">{{ player }}</a>
+                                            <a class="text-dark"
+                                               href="{{ player.name.user_profile.get_absolute_url }}">{{ player }}</a>
                                         {% else %}
-                                            {{ player }}
+                                            <span class="text-secondary">{{ player }}</span>
                                         {% endif %}
 
                                     </td>
@@ -202,9 +202,10 @@
                                     <tr>
                                         <td><span class="h5 text-secondary">Владелец</span></td>
                                         <td>
-                                            <a class="h5" href="{{ team.owner.user_profile.get_absolute_url }}">{{ team.owner }}</a>
+                                            <a class="h5"
+                                               href="{{ team.owner.user_profile.get_absolute_url }}">{{ team.owner.user_player }}</a>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             {% if team.owner.user_profile.vk %}
                                                 <a href="https://vk.com/{{ team.owner.user_profile.vk }}"
                                                    target="_blank"><img
@@ -230,16 +231,89 @@
 
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td><span class="h5 text-secondary">Капитан</span></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="h5 text-secondary">Ассистент</span></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                    {% for cap in team|get_captain %}
+                                        <tr>
+                                            <td><span class="h5 text-secondary">Капитан</span></td>
+                                            <td>
+                                                {% if cap.name %}
+                                                    <a class="h5"
+                                                       href="{{ cap.name.user_profile.get_absolute_url }}">{{ cap }}</a>
+                                                {% else %}
+                                                    <span class="text-secondary h5">{{ cap }}</span>
+
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-center">
+                                                {% if cap.name.user_profile.vk %}
+                                                    <a href="https://vk.com/{{ team.owner.user_profile.vk }}"
+                                                       target="_blank"><img
+                                                            src="{% static "img/ico/vk_1.png" %}" height="30" width="30"
+                                                            title="{{ team.owner.user_profile.vk }}"></a>
+                                                {% endif %}
+                                                {% if cap.name.user_profile.discord %}
+                                                    <img src='{% static "img/ico/discord_1.png" %}'
+                                                         onclick="myFunction(this)"
+                                                         height="30" width="30"
+                                                         title="{{ team.owner.user_profile.discord }}"
+                                                         style="cursor: pointer;">
+                                                {% endif %}
+                                                {% if cap.name.user_profile.telegram %}
+                                                    <a href="https://t.me/{{ agent.player.user_profile.telegram }}"
+                                                       target="_blank"><img
+                                                            src="{% static "img/ico/tg_1.png" %}" height="30" width="30"
+                                                            title="{{ team.owner.user_profile.telegram }}"></a>
+                                                {% endif %}
+                                                {% if not cap.name.user_profile.vk and not cap.name.user_profile.discord and not cap.name.user_profile.telegram %}
+                                                    <i class="fa fa-minus text-danger text-center"
+                                                       aria-hidden="true"></i>
+                                                {% endif %}
+
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    {% for cap in team|get_team_assistent %}
+                                        <tr>
+                                            <td><span class="h5 text-secondary">Ассистент</span></td>
+                                            <td>
+                                                {% if cap.name %}
+                                                    <a class="h5"
+                                                       href="{{ cap.name.user_profile.get_absolute_url }}">{{ cap }}</a>
+                                                {% else %}
+                                                    <span class="text-secondary h5">{{ cap }}</span>
+
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-center">
+                                                {% if cap.name.user_profile.vk %}
+                                                    <a href="https://vk.com/{{ team.owner.user_profile.vk }}"
+                                                       target="_blank"><img
+                                                            src="{% static "img/ico/vk_1.png" %}" height="30" width="30"
+                                                            title="{{ team.owner.user_profile.vk }}"></a>
+                                                {% endif %}
+                                                {% if cap.name.user_profile.discord %}
+                                                    <img src='{% static "img/ico/discord_1.png" %}'
+                                                         onclick="myFunction(this)"
+                                                         height="30" width="30"
+                                                         title="{{ team.owner.user_profile.discord }}"
+                                                         style="cursor: pointer;">
+                                                {% endif %}
+                                                {% if cap.name.user_profile.telegram %}
+                                                    <a href="https://t.me/{{ agent.player.user_profile.telegram }}"
+                                                       target="_blank"><img
+                                                            src="{% static "img/ico/tg_1.png" %}" height="30" width="30"
+                                                            title="{{ team.owner.user_profile.telegram }}"></a>
+                                                {% endif %}
+                                                {% if not cap.name.user_profile.vk and not cap.name.user_profile.discord and not cap.name.user_profile.telegram %}
+                                                    <i class="fa fa-minus text-danger text-center"
+                                                       aria-hidden="true"></i>
+                                                {% endif %}
+
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+
                                     </tbody>
                                 </table>
 

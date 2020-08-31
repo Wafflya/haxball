@@ -38,7 +38,7 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="table" role="tabpanel"
                      aria-labelledby="league-table-tab">
-                    <table class="table table-dark">
+                    <table class="table table-hover">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -55,14 +55,18 @@
                         </thead>
                         <tbody>
                         {% for team in league|sort_teams %}
-                            <tr>
+                            <tr {% if forloop.counter == 1 %}bgcolor="#ffe000"{% endif %}
+                                {% if forloop.counter == 2 %}bgcolor="silver"{% endif %}
+                                {% if forloop.counter == 3 %}bgcolor="#ffa81c"{% endif %}
+                                class="font-weight-bold"
+                            >
 
                                 <th scope="row">{{ forloop.counter }}</th>
 
                                 <td class="text-left">
 
-                                    <a href="{{ team.get_absolute_url }}" class="h5"><img
-                                            src="{{ team.logo.url }}" alt="{{ team.title }}" width="12%"
+                                    <a class="text-dark font-weight-bold h5" href="{{ team.get_absolute_url }}" class="h5"><img
+                                            src="{{ team.logo.url }}" alt="{{ team.title }}" width="35" height="35"
                                             class="mr-1">{{ team.title }}</a>
                                 </td>
                                 <td>{{ team|matches_in_league }}</td>
@@ -71,7 +75,7 @@
                                 <td>{{ team|res_in_league:'l' }}</td>
                                 <td>{{ team|res_in_league:'s' }}</td>
                                 <td>{{ team|res_in_league:'c' }}</td>
-                                <td>{{ team|res_in_league:'dif' }}</td>
+                                <td {% if team|res_in_league:'dif' > 0 %} class="text-success"{% elif team|res_in_league:'dif' < 0 %}class="text-danger"{% endif %}>{{ team|res_in_league:'dif' }}</td>
                                 <td>{{ team|res_in_league:'p' }}</td>
                             </tr>
                         {% endfor %}

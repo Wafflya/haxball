@@ -4,7 +4,7 @@
 <div class="card mx-1 my-2" style="border-radius:20px;">
 
     <a href="{{ post.get_absolute_url }}" type="button"
-       class="button btn btn-outline-dark btn-lg btn-block" style="border-radius:20px 20px 0px 0px;">
+       class="button btn btn-outline-danger btn-lg btn-block" style="border-radius:20px 20px 0px 0px;">
 
         {{ post.title }}
         {% if post.created|is_fresh:5 %}
