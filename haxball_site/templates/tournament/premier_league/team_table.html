@@ -205,7 +205,7 @@
                                             type="button" data-toggle="collapse"
                                             data-target="#tour{{ tour.number }}" aria-expanded="false"
                                             aria-controls="tour{{ tour.number }}" style="width: 90%">
-                                        <span class="h5">Тур {{ tour.number }} ({{ tour.date_from|date:"SHORT_DATE_FORMAT" }} - {{ tour.date_to|date:"SHORT_DATE_FORMAT" }})</span>
+                                        <span class="h5">Тур {{ tour.number }} ({{ tour.date_from|date:"d.m" }} - {{ tour.date_to|date:"d.m" }})</span>
                                     </button>
                                 </p>
                             </div>

@@ -102,7 +102,7 @@ class League(models.Model):
     teams = models.ManyToManyField(Team, related_name='leagues', verbose_name='Команды в лиге')
 
     def __str__(self):
-        return '{} {}'.format(self.title, self.championship)
+        return '{}, {}'.format(self.title, self.championship)
 
     def get_absolute_url(self):
         return reverse('tournament:league', args=[self.slug])
