@@ -17,9 +17,9 @@
         <div class="card-header text-center" style="border-radius: 25px">
 
             <h5>
-                <a href="{% url 'tournament:league' 'premier_league' %}">{{ match.league }}</a>
+                <a href="{{ match.league.get_absolute_url }}">{{ match.league }}</a>
             </h5>
-            <h5>Тур {{ match.tour_num }}</h5>
+            <h5>Тур {{ match.numb_tour.number }}</h5>
             <div class="row">
 
                 <div class="col-5 pr-0">
@@ -93,11 +93,8 @@
 
                                     <tr>
                                         <td class="p-1" style="width: 40px">
-                                            {% if player.nation == 'RU' %}
-                                                <img src="{% static "img/ico/russia.png" %}" width="24">
-                                            {% elif player.nation == 'UA' %}
-                                                <img src="{% static "img/ico/ukraine.png" %}" width="24">
-                                            {% endif %}
+                                                <img src="{{ player.player_nation.flag.url }}" width="24" height="24">
+
                                         </td>
                                         <td class="text-left pl-0 font-weight-bold">
                                             {% if player.name %}
@@ -122,11 +119,9 @@
                                 {% for player in match.team_guest_start.all %}
                                     <tr>
                                         <td class="p-1" style="width: 40px">
-                                            {% if player.nation == 'RU' %}
-                                                <img src="{% static "img/ico/russia.png" %}" width="24">
-                                            {% elif player.nation == 'UA' %}
-                                                <img src="{% static "img/ico/ukraine.png" %}" width="24">
-                                            {% endif %}
+
+                                                <img src="{{ player.player_nation.flag.url }}" width="24">
+
                                         </td>
                                         <td class="text-left pl-0 font-weight-bold">
                                             {% if player.name %}
@@ -160,7 +155,7 @@
                                     {% elif goal.event == 'RED' %}
                                         <h6><img src="{% static "img/ico/red_card.png" %}" height="20" width="20"
                                                  title="Красная"> {{ goal.author }}</h6>
-                                    {% elif goal.player_out %}
+                                    {% elif goal.player_out or goal.player_in %}
                                         <h6>
                                             <i class="fa fa-arrow-up text-success" aria-hidden="true"
                                                style="font-size: 16px"></i>

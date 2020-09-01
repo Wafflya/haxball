@@ -2,7 +2,7 @@
 from django.contrib import admin
 
 from .models import FreeAgent, Player, League, Team, Match, Goal, OtherEvents, Substitution, Season, PlayerTransfer, \
-    TourNumber
+    TourNumber, Nation
 
 
 @admin.register(FreeAgent)
@@ -12,7 +12,7 @@ class FreeAgentAdmin(admin.ModelAdmin):
 
 @admin.register(Player)
 class PlayerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'nickname', 'team', 'nation', 'role',)
+    list_display = ('name', 'nickname', 'team', 'player_nation', 'role',)
     raw_id_fields = ('name',)
     readonly_fields = ('team',)
 
@@ -36,6 +36,11 @@ class SeasonAdmin(admin.ModelAdmin):
 class LeagueAdmin(admin.ModelAdmin):
     list_display = ('title', 'priority', 'created')
     filter_horizontal = ('teams',)
+
+
+@admin.register(Nation)
+class NationAdmin(admin.ModelAdmin):
+    list_display = ('country',)
 
 
 class GoalInline(admin.StackedInline):

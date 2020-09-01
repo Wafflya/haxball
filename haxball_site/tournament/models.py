@@ -112,6 +112,18 @@ class League(models.Model):
         verbose_name_plural = 'Турнир'
 
 
+class Nation(models.Model):
+    country = models.CharField('Страна', max_length=100, )
+    flag = models.ImageField('Флаг', upload_to='country_flag/')
+
+    def __str__(self):
+        return self.country
+
+    class Meta:
+        verbose_name = 'Страна'
+        verbose_name_plural = 'Страны'
+
+
 class Player(models.Model):
     name = models.OneToOneField(User, verbose_name='Пользователь', null=True, blank=True,
                                 on_delete=models.SET_NULL,
@@ -131,26 +143,8 @@ class Player(models.Model):
 
     team = models.ForeignKey(Team, verbose_name='Команда', related_name='players_in_team', blank=True, null=True,
                              on_delete=models.SET_NULL)
-    RUSSIA = 'RU'
-    UKRAINE = 'UA'
-    KAZAKHSTAN = 'KZ'
-    BELARUS = 'BY'
-    LATVIA = 'LV'
-    AZERBAJAN = 'AZ'
-    KYRGYZSTAN = 'KG'
-    FRANCE = 'FR'
-    PLAYER_NATION = [
-        (RUSSIA, 'Россия'),
-        (UKRAINE, 'Украина'),
-        (KAZAKHSTAN, 'Казахстан'),
-        (BELARUS, 'Беларусь'),
-        (LATVIA, 'Латвия'),
-        (AZERBAJAN, 'Азербайджан'),
-        (KYRGYZSTAN, 'Киргизия'),
-        (FRANCE, 'Франзузики'),
-    ]
-    nation = models.CharField("Нация", max_length=2, choices=PLAYER_NATION, default=RUSSIA, )
 
+    player_nation = models.ForeignKey(Nation, related_name='country_players', null=True, on_delete=models.SET_NULL)
     JUST_PLAYER = 'PL'
     CAPTAIN = 'C'
     ASSISTENT = 'AC'
@@ -188,7 +182,8 @@ class TourNumber(models.Model):
 class Match(models.Model):
     league = models.ForeignKey(League, verbose_name='В лиге', related_name='matches_in_league',
                                on_delete=models.CASCADE)
-    numb_tour = models.ForeignKey(TourNumber, verbose_name='Номер тура', related_name='tour_matches', on_delete=models.CASCADE, null=True)
+    numb_tour = models.ForeignKey(TourNumber, verbose_name='Номер тура', related_name='tour_matches',
+                                  on_delete=models.CASCADE, null=True)
     match_date = models.DateField('Дата матча', default=None, blank=True, null=True)
     replay_link = models.URLField('Ссылка на реплей', blank=True)
     inspector = models.ForeignKey(User, verbose_name='Проверил', limit_choices_to={'is_staff': True},
