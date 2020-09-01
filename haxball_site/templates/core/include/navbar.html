@@ -1,7 +1,7 @@
 {% load static %}
 
 <nav class="navbar navbar-light navbar_color nav-fill"
-                                     style="background-image:url({% static "img/backgrounds/back_niqo3.png" %}); height: 100px; background-position: center; ">
+     style="background-image:url({% static "img/backgrounds/back_niqo3.png" %}); height: 100px; background-position: center; ">
 
     <!--
     <form class="form-inline">
@@ -26,18 +26,21 @@
         <!-- Links -->
         <ul class="navbar-nav mr-auto bd-highlight">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle font-weight-bold mx-1" href="#" id="navbardrop" data-toggle="dropdown">
+                <a class="nav-link dropdown-toggle font-weight-bold mx-1" href="#" id="navbardrop"
+                   data-toggle="dropdown">
                     Чемпионат
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'tournament:league' 'premier_league' %}">Высшая лига</a>
-                    <a class="dropdown-item" href="#">Первый дивизион</a>
+                    <a class="dropdown-item" href="{% url 'tournament:league' 'premier_league' %}">Единая лига</a>
                     <a class="dropdown-item" href="#">Кубок России</a>
+                    <a class="dropdown-item" href="#">Результаты</a>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/86/reglament">Регламент</a>
                     <a class="dropdown-item" href="#">Бронь хоста</a>
                     <a class="dropdown-item" href="#">Переносы</a>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/104/transfers">Трансферы</a>
                     <a class="dropdown-item" href="{% url 'tournament:free_agent' %}">Свободные агенты</a>
+                    <a class="dropdown-item" href="#">Стол заявок</a>
+
                 </div>
             </li>
             <li class="nav-item">

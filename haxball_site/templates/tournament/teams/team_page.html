@@ -33,7 +33,7 @@
                     <h3>
                         {{ team.title }}
                         {% if team.owner == user or user.is_superuser %}
-                        <a href="{% url 'tournament:edit_team' team.slug %}"
+                            <a href="{% url 'tournament:edit_team' team.slug %}"
                                class="text-warning small text-right"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                         {% endif %}
                     </h3>
@@ -131,7 +131,8 @@
                                 </th>
                                 <th scope="col">
                                     <div class="h-75 text-center">
-                                        <i class="fa fa-arrow-up text-success" title="Вышел на замену" aria-hidden="true"
+                                        <i class="fa fa-arrow-up text-success" title="Вышел на замену"
+                                           aria-hidden="true"
                                            style="font-size: 21px"></i>
                                     </div>
                                 </th>
@@ -148,11 +149,15 @@
                             <tbody>
                             {% for player in team.players_in_team.all %}
                                 <tr>
-                                    <td>
+                                    <td class="text-left">
                                         {% if player.name %}
+                                            <img src="{{ player.player_nation.flag.url }}" width="24" height="24"
+                                                 title="{{ player.player_nation.country }}">
                                             <a class="text-dark"
                                                href="{{ player.name.user_profile.get_absolute_url }}">{{ player }}</a>
                                         {% else %}
+                                            <img src="{{ player.player_nation.flag.url }}" width="24" height="24"
+                                                 title="{{ player.player_nation.country }}">
                                             <span class="text-secondary">{{ player }}</span>
                                         {% endif %}
 
