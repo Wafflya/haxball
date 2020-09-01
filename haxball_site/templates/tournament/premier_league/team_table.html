@@ -19,15 +19,15 @@
             </h3>
             <div class="row">
                 <ul class="nav nav-pills nav-fill" id="myTab" style="width: 100%;">
-                    <li class="nav-item">
+                    <li class="nav-item" style="width: 33%;">
                         <a class="nav-link h5 active" id="table-tab" data-toggle="tab" href="#table" role="tab"
                            aria-controls="league-table-tab" aria-selected="true">Таблица</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" style="width: 33%;">
                         <a class="nav-link h5" id="detail-tab" data-toggle="tab" href="#detail_stat" role="tab"
                            aria-controls="detail_stat-tab" aria-selected="false">Статистика</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" style="width: 33%;">
                         <a class="nav-link h5" data-toggle="tab" href="#matches" role="tab"
                            aria-controls="matches-tab" aria-selected="false">Матчи</a>
                     </li>
@@ -86,106 +86,135 @@
                 </div>
                 <div class="tab-pane fade" id="detail_stat" role="tabpanel"
                      aria-labelledby="detail_stat-tab">
-                    <div class="row mt-3">
 
-                        <div class="col-4 pr-0">
-                            <div class="card ml-3" style="border-radius: 25px;">
-                                <div class="card-header px-1"
-                                     style="background: linear-gradient(to right, rgba(193, 243, 229, 0.7), rgba(91, 142, 241, 0.32)); border-radius: 25px 25px 0 0;">
+                    <div class="container-fluid px-0">
 
+                        <div class="row mt-3">
 
-                                    <h4 class="mb-0 font-weight-bold">Бомбардиры <img src="{% static "img/ico/ball_2.png" %}" height="24"
-                                                                     width="24"
-                                                                     title="Забито"></h4>
-                                </div>
-                                <div class="card-body p-0" style="position: relative; height: 300px; overflow: auto;">
-
-                                    <table class="table table-hover mb-0" style="border-radius: 25px">
-                                        <tbody style="border-radius: 25px;">
-                                        {% for pl in league|top_goalscorers %}
-                                            <tr style="border-radius: 25px;">
-                                                <td class="px-1" style="border-radius: 15px 0 0 15px;"><img
-                                                        src="{{ pl.team.logo.url }}" width="25px" height="25px"></td>
-                                                <td class="text-left pl-0">
-                                                    {% if pl.name %}
-                                                        <a class="text-dark h5"
-                                                           href="{{ pl.name.user_profile.get_absolute_url }}">{{ pl.nickname }}</a>
-                                                    {% else %}
-                                                        <span class="text-secondary h5">{{ pl.nickname }}</span>
-                                                    {% endif %}
-                                                </td>
-                                                <td style="border-radius: 0 15px 15px 0;"><span class="font-weight-bold h5">{{ pl.goals_c }}</span>
-                                                </td>
-
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-4">
-                            <div class="card" style="border-radius: 25px;">
-                                <div class="card-header"
-                                     style="background: linear-gradient(to right, rgba(193, 243, 229, 0.7), rgba(91, 142, 241, 0.32)); border-radius: 25px 25px 0 0;">
+                            <div class="col-4 pr-0">
+                                <div class="card ml-1" style="border-radius: 25px;">
+                                    <div class="card-header px-1"
+                                         style="background: linear-gradient(to right, rgba(193, 243, 229, 0.7), rgba(91, 142, 241, 0.32)); border-radius: 25px 25px 0 0;">
 
 
-                                    <h5 class="mb-0">Ассистенты
-                                        <img src="{% static "img/ico/boot_ass_2.png" %}" height="28"
-                                             width="28"
-                                             title="Передач"></h5>
-                                </div>
-                                <div class="card-body p-0" style="">
-                                    <table class="table table-hover mb-0">
-                                        <tbody>
-                                        {% for pl in league|top_assistent %}
-                                            <tr style="border-radius: 25px;">
+                                        <h5 class="mb-0 font-weight-bold">Бомбардиры <img
+                                                src="{% static "img/ico/ball_2.png" %}" height="24"
+                                                width="24"
+                                                title="Забито"></h5>
+                                    </div>
+                                    <div class="card-body p-0"
+                                         style="position: relative; height: 300px; overflow: auto;">
 
-                                                <td {% if forloop.last %}
-                                                    style="border-radius: 0 0 0 25px;" {% endif %}>{{ pl.nickname }}</td>
-                                                <td {% if forloop.last %}
-                                                    style="border-radius: 0 0 25px 0;" {% endif %}>{{ pl.ass_c }}
-                                                </td>
+                                        <table class="table table-hover mb-0" style="border-radius: 25px">
+                                            <tbody style="border-radius: 25px;">
+                                            {% for pl in league|top_goalscorers %}
+                                                <tr style="border-radius: 25px;">
+                                                    <td class="px-1" style="border-radius: 15px 0 0 15px;"><img
+                                                            src="{{ pl.team.logo.url }}" width="25px" height="25px">
+                                                    </td>
+                                                    <td class="text-left pl-1">
+                                                        {% if pl.name %}
+                                                            <a class="text-dark h6"
+                                                               href="{{ pl.name.user_profile.get_absolute_url }}">{{ pl.nickname }}</a>
+                                                        {% else %}
+                                                            <span class="text-secondary h6">{{ pl.nickname }}</span>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td style="border-radius: 0 15px 15px 0;"><span
+                                                            class="font-weight-bold h6">{{ pl.goals_c }}</span>
+                                                    </td>
 
-                                            </tr>
-                                        {% endfor %}
-
-                                        </tbody>
-                                    </table>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
 
-                        </div>
-
-                        <div class="col-4 pl-0">
-                            <div class="card mr-3" style="border-radius: 25px;">
-                                <div class="card-header"
-                                     style="background: linear-gradient(to right, rgba(193, 243, 229, 0.7), rgba(91, 142, 241, 0.32)); border-radius: 25px 25px 0 0;">
+                            <div class="col-4 px-1">
+                                <div class="card mx-1" style="border-radius: 25px;">
+                                    <div class="card-header"
+                                         style="background: linear-gradient(to right, rgba(193, 243, 229, 0.7), rgba(91, 142, 241, 0.32)); border-radius: 25px 25px 0 0;">
 
 
-                                    <h5 class="mb-0">Сухие таймы<img src="{% static "img/ico/clean_sheet1.png" %}"
-                                                                     height="28"
-                                                                     width="28"
-                                                                     title="Сухие"></h5>
+                                        <h5 class="mb-0 font-weight-bold">Ассистенты
+                                            <img src="{% static "img/ico/boot_ass_2.png" %}" height="25"
+                                                 width="25"
+                                                 title="Передач"></h5>
+                                    </div>
+                                    <div class="card-body p-0"
+                                         style="position: relative; height: 300px; overflow: auto;">
+
+                                        <table class="table table-hover mb-0" style="border-radius: 25px">
+                                            <tbody style="border-radius: 25px;">
+                                            {% for pl in league|top_assistent %}
+                                                <tr style="border-radius: 25px;">
+                                                    <td class="px-1" style="border-radius: 15px 0 0 15px;"><img
+                                                            src="{{ pl.team.logo.url }}" width="25px" height="25px">
+                                                    </td>
+                                                    <td class="text-left pl-1">
+                                                        {% if pl.name %}
+                                                            <a class="text-dark h6"
+                                                               href="{{ pl.name.user_profile.get_absolute_url }}">{{ pl.nickname }}</a>
+                                                        {% else %}
+                                                            <span class="text-secondary h6">{{ pl.nickname }}</span>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td style="border-radius: 0 15px 15px 0;"><span
+                                                            class="font-weight-bold h6">{{ pl.ass_c }}</span>
+                                                    </td>
+
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div class="card-body p-0" style="">
-                                    <table class="table table-hover mb-0">
-                                        <tbody>
-                                        {% for pl in league|top_clean_sheets %}
-                                            <tr style="border-radius: 25px;">
 
-                                                <td {% if forloop.last %}
-                                                    style="border-radius: 0 0 0 25px;" {% endif %}>{{ pl.nickname }}</td>
-                                                <td {% if forloop.last %}
-                                                    style="border-radius: 0 0 25px 0;" {% endif %}>{{ pl.event_c }}
-                                                </td>
+                            </div>
 
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
+                            <div class="col-4 pl-0">
+                                <div class="card mr-1" style="border-radius: 25px;">
+                                    <div class="card-header"
+                                         style="background: linear-gradient(to right, rgba(193, 243, 229, 0.7), rgba(91, 142, 241, 0.32)); border-radius: 25px 25px 0 0;">
+
+
+                                        <h5 class="mb-0 font-weight-bold">Сухие таймы<img
+                                                src="{% static "img/ico/clean_sheet1.png" %}"
+                                                height="25"
+                                                width="25"
+                                                title="Сухие"></h5>
+                                    </div>
+                                    <div class="card-body p-0"
+                                         style="position: relative; height: 300px; overflow: auto;">
+
+                                        <table class="table table-hover mb-0" style="border-radius: 25px">
+                                            <tbody style="border-radius: 25px;">
+                                            {% for pl in league|top_clean_sheets %}
+                                                <tr style="border-radius: 25px;">
+                                                    <td class="px-1" style="border-radius: 15px 0 0 15px;"><img
+                                                            src="{{ pl.team.logo.url }}" width="25px" height="25px">
+                                                    </td>
+                                                    <td class="text-left pl-1">
+                                                        {% if pl.name %}
+                                                            <a class="text-dark h6"
+                                                               href="{{ pl.name.user_profile.get_absolute_url }}">{{ pl.nickname }}</a>
+                                                        {% else %}
+                                                            <span class="text-secondary h6">{{ pl.nickname }}</span>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td style="border-radius: 0 15px 15px 0;"><span
+                                                            class="font-weight-bold h6">{{ pl.event_c }}</span>
+                                                    </td>
+
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
+
                             </div>
 
                         </div>
@@ -220,7 +249,11 @@
                                 <div class="row">
 
                                     <div class="col-5 text-right">
-                                        <h5>{{ match.team_home.title }}</h5>
+                                        <h5><a class="text-dark" href="{{ match.team_home.get_absolute_url }}"
+                                               class="h5"><img
+                                                src="{{ match.team_home.logo.url }}" alt="{{ match.team_home.title }}"
+                                                width="25" height="25"
+                                                class="mr-1">{{ match.team_home.title }}</a></h5>
                                     </div>
                                     <div class="col-2">
                                         {% if not match.is_played %}
@@ -232,7 +265,14 @@
                                         {% endif %}
                                     </div>
                                     <div class="col-5 text-left">
-                                        <h5>{{ match.team_guest.title }}</h5>
+                                        <h5>
+                                            <a class="text-dark" href="{{ match.team_home.get_absolute_url }}"
+                                               class="h5"><img
+                                                    src="{{ match.team_guest.logo.url }}"
+                                                    alt="{{ match.team_guest.title }}" width="25" height="25"
+                                                    class="mr-1">{{ match.team_guest.title }}
+                                            </a>
+                                        </h5>
                                     </div>
 
                                 </div>
