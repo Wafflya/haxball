@@ -88,27 +88,33 @@
                      aria-labelledby="detail_stat-tab">
                     <div class="row mt-3">
 
-                        <div class="col-4">
+                        <div class="col-4 pr-0">
                             <div class="card ml-3" style="border-radius: 25px;">
-                                <div class="card-header"
+                                <div class="card-header px-1"
                                      style="background: linear-gradient(to right, rgba(193, 243, 229, 0.7), rgba(91, 142, 241, 0.32)); border-radius: 25px 25px 0 0;">
 
 
-                                    <h5 class="mb-0">Бомбардиры <img src="{% static "img/ico/ball_2.png" %}" height="14"
-                                                                     width="14"
-                                                                     title="Забито"></h5>
+                                    <h4 class="mb-0 font-weight-bold">Бомбардиры <img src="{% static "img/ico/ball_2.png" %}" height="24"
+                                                                     width="24"
+                                                                     title="Забито"></h4>
                                 </div>
-                                <div class="card-body p-0" style="">
+                                <div class="card-body p-0" style="position: relative; height: 300px; overflow: auto;">
 
                                     <table class="table table-hover mb-0" style="border-radius: 25px">
                                         <tbody style="border-radius: 25px;">
                                         {% for pl in league|top_goalscorers %}
                                             <tr style="border-radius: 25px;">
-
-                                                <td {% if forloop.last %}
-                                                    style="border-radius: 0 0 0 25px;" {% endif %}>{{ pl.nickname }}</td>
-                                                <td {% if forloop.last %}
-                                                    style="border-radius: 0 0 25px 0;" {% endif %}>{{ pl.goals_c }}
+                                                <td class="px-1" style="border-radius: 15px 0 0 15px;"><img
+                                                        src="{{ pl.team.logo.url }}" width="25px" height="25px"></td>
+                                                <td class="text-left pl-0">
+                                                    {% if pl.name %}
+                                                        <a class="text-dark h5"
+                                                           href="{{ pl.name.user_profile.get_absolute_url }}">{{ pl.nickname }}</a>
+                                                    {% else %}
+                                                        <span class="text-secondary h5">{{ pl.nickname }}</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td style="border-radius: 0 15px 15px 0;"><span class="font-weight-bold h5">{{ pl.goals_c }}</span>
                                                 </td>
 
                                             </tr>
@@ -125,7 +131,10 @@
                                      style="background: linear-gradient(to right, rgba(193, 243, 229, 0.7), rgba(91, 142, 241, 0.32)); border-radius: 25px 25px 0 0;">
 
 
-                                    <h5 class="mb-0">Ассистенты</h5>
+                                    <h5 class="mb-0">Ассистенты
+                                        <img src="{% static "img/ico/boot_ass_2.png" %}" height="28"
+                                             width="28"
+                                             title="Передач"></h5>
                                 </div>
                                 <div class="card-body p-0" style="">
                                     <table class="table table-hover mb-0">
@@ -149,13 +158,16 @@
 
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-4 pl-0">
                             <div class="card mr-3" style="border-radius: 25px;">
                                 <div class="card-header"
                                      style="background: linear-gradient(to right, rgba(193, 243, 229, 0.7), rgba(91, 142, 241, 0.32)); border-radius: 25px 25px 0 0;">
 
 
-                                    <h5 class="mb-0">Сухие таймы</h5>
+                                    <h5 class="mb-0">Сухие таймы<img src="{% static "img/ico/clean_sheet1.png" %}"
+                                                                     height="28"
+                                                                     width="28"
+                                                                     title="Сухие"></h5>
                                 </div>
                                 <div class="card-body p-0" style="">
                                     <table class="table table-hover mb-0">

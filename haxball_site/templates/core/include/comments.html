@@ -133,9 +133,9 @@
                                                              title="{{ icon.description }}">
                                                     {% endfor %}
                                                     {{ children.author.username }}
-                                                    <span class="badge p-0">
+                                                    <span class="badge p-0 mr-2">
                                                         <span class="badge badge-pill
-                                                            {% if comment.author.user_profile.karma >= 0 %}badge-success{% else %}badge-danger{% endif %}">{{ comment.author.user_profile.karma }}
+                                                            {% if children.author.user_profile.karma >= 0 %}badge-success{% else %}badge-danger{% endif %}">{{ children.author.user_profile.karma }}
                                                         </span>
                                                     </span>
 
