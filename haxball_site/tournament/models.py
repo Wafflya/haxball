@@ -100,11 +100,9 @@ class League(models.Model):
     slug = models.SlugField(max_length=250)
     created = models.DateTimeField('Создана', auto_now_add=True)
     teams = models.ManyToManyField(Team, related_name='leagues', verbose_name='Команды в лиге')
-    actual_tour_num_1 = models.SmallIntegerField('Актуальный тур с', blank=True, null=True)
-    actual_tour_num_2 = models.SmallIntegerField('Актуальный тур по', blank=True, null=True)
 
     def __str__(self):
-        return self.title
+        return '{} {}'.format(self.title, self.championship)
 
     def get_absolute_url(self):
         return reverse('tournament:league', args=[self.slug])
@@ -177,6 +175,7 @@ class TourNumber(models.Model):
     date_from = models.DateField('Дата тура с', default=None)
     date_to = models.DateField('Дата тура по', default=None)
     league = models.ForeignKey(League, verbose_name='В какой лиге', related_name='tours', on_delete=models.CASCADE)
+    is_actual = models.BooleanField('Актуальный', default=False)
 
     def __str__(self):
         return 'Тур {}'.format(self.number)

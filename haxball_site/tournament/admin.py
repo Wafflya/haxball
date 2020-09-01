@@ -58,7 +58,7 @@ class MatchAdmin(admin.ModelAdmin):
     list_display = ('league', 'team_home', 'team_guest', 'is_played', 'updated', 'id')
     fieldsets = (
         ('Основная инфа', {
-            'fields': (('league', 'is_played', 'match_date','numb_tour'),)
+            'fields': (('league', 'is_played', 'match_date', 'numb_tour'),)
         }),
         (None, {
             'fields': (('team_home', 'team_guest', 'replay_link', 'inspector'),)
@@ -94,7 +94,9 @@ class OtherEventsAdmin(admin.ModelAdmin):
 
 @admin.register(TourNumber)
 class MatchTourAdmin(admin.ModelAdmin):
-    list_display = ('number', 'league',)
+    list_display = ('number', 'league', 'is_actual')
+    list_editable = ('is_actual',)
+    list_filter = ('league',)
 
 
 """

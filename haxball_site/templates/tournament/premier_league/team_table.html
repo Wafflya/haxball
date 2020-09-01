@@ -199,7 +199,7 @@
                             </div>
                         </div>
                         <div class="collapse
-                                {% if tour.number >= league.actual_tour_num_1 and tour.number <= league.actual_tour_num_2 %}
+                                {% if tour.is_actual %}
                                 show
                                 {% endif %}
                                 {% if forloop.last %}mt-0 mb-3{% else %}mt-3{% endif %}" id="tour{{ tour.number }}">
