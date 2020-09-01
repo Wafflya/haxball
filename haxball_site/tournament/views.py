@@ -1,10 +1,10 @@
 from django.db.models import Count, F, Q, Sum
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.views.generic import ListView, DetailView
 
-from .forms import FreeAgentForm
+from .forms import FreeAgentForm, EditTeamProfileForm
 from .models import FreeAgent, Team, Match, League, Player
 
 
@@ -62,6 +62,22 @@ def update_entry(request, pk):
             return HttpResponse('Ошибка доступа')
     else:
         redirect('tournament:free_agent')
+
+
+def edit_team_profile(request, slug):
+    team = get_object_or_404(Team, slug=slug)
+    if request.method == "POST" and (request.user == team.owner or request.user.is_superuser):
+        form = EditTeamProfileForm(request.POST, instance=team)
+        if form.is_valid():
+            team = form.save(commit=False)
+            team.save()
+            return redirect(team.get_absolute_url())
+    else:
+        if request.user == team.owner or request.user.is_superuser:
+            form = EditTeamProfileForm(instance=team)
+        else:
+            return HttpResponse('Ошибка доступа')
+    return render(request, 'tournament/teams/edit_team.html', {'form': form})
 
 
 class TeamDetail(DetailView):

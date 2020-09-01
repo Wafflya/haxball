@@ -1,0 +1,38 @@
+{% extends "core/home.html" %}
+{% load static %}
+{% load tournament_extras %}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static "tournament/teams/team_page.css" %}">
+
+    <style>
+        body {
+            background-image: url({% static "img/backgrounds/bg-light-4860.png" %})
+        }
+    </style>
+{% endblock %}
+
+{% block title %}Чемпионат | Редактировать команду {{ team.title }}         cis-haxball.com {% endblock %}
+{% block profile_of_user %}
+    {% if user.is_authenticated %}
+
+        <div class="card mt-2">
+            <div class="card-header">
+                <h5>Изменить команду</h5> {{ team.title }}
+            </div>
+            <div class="card-body">
+                {{ form.media }}
+                <form method="POST">
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-primary" type="submit">Отправить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    {% endif %}
+
+{% endblock %}

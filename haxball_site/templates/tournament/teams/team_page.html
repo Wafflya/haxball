@@ -32,6 +32,10 @@
                 <div class="profile-head">
                     <h3>
                         {{ team.title }}
+                        {% if team.owner == user or user.is_superuser %}
+                        <a href="{% url 'tournament:edit_team' team.slug %}"
+                               class="text-warning small text-right"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        {% endif %}
                     </h3>
                     <h6>
                         {% for leagues in team|current_league %}
