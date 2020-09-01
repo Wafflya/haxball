@@ -32,7 +32,13 @@
                                class="text-warning small text-right"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                         {% endif %}
                     </span>
-                    <span class="text-right"><span class="font-italic h6">В теме</span> <a href="{{ post.category.get_absolute_url }}" class="h5">{{ post.category.title }}</a></span>
+                    {% if post.category %}
+                        <span class="text-right"><span class="font-italic h6">В теме</span> <a
+                                href="{{ post.category.get_absolute_url }}"
+                                class="h5">{{ post.category.title }}</a></span>
+                    {% else %}
+                        <span></span>
+                    {% endif %}
                 </div>
             </h4>
             <small class="text-muted">
