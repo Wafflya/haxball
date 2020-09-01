@@ -26,6 +26,9 @@ def karma(profile):
         s += post.votes.sum_rating()
         samo += post.votes.filter(user=profile.name, vote=1).count() - post.votes.filter(user=profile.name,
                                                                                          vote=-1).count()
+    print(profile.karma)
+    profile.karma = s - samo
+    profile.save(update_fields=['karma'])
     return {'k': s - samo}
 
 

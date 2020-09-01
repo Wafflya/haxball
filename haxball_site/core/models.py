@@ -183,6 +183,7 @@ class Profile(models.Model):
     telegram = models.CharField(max_length=100, blank=True)
     discord = models.CharField(max_length=100, blank=True)
     views = models.PositiveIntegerField(default=0)
+    karma = models.SmallIntegerField(default=0)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):

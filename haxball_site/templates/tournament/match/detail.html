@@ -93,8 +93,8 @@
 
                                     <tr>
                                         <td class="p-1" style="width: 40px">
-                                                <img src="{{ player.player_nation.flag.url }}" width="24" height="24">
-
+                                            <img src="{{ player.player_nation.flag.url }}" width="24" height="24"
+                                                 title="{{ player.player_nation.country }}">
                                         </td>
                                         <td class="text-left pl-0 font-weight-bold">
                                             {% if player.name %}
@@ -120,7 +120,8 @@
                                     <tr>
                                         <td class="p-1" style="width: 40px">
 
-                                                <img src="{{ player.player_nation.flag.url }}" width="24">
+                                            <img src="{{ player.player_nation.flag.url }}" width="24" height="24"
+                                                 title="{{ player.player_nation.country }}">
 
                                         </td>
                                         <td class="text-left pl-0 font-weight-bold">
