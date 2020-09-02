@@ -60,7 +60,7 @@ class EventInline(admin.StackedInline):
 
 @admin.register(Match)
 class MatchAdmin(admin.ModelAdmin):
-    list_display = ('league', 'team_home', 'team_guest', 'is_played', 'updated', 'id')
+    list_display = ('league','numb_tour', 'team_home', 'team_guest', 'is_played', 'updated', 'id')
     fieldsets = (
         ('Основная инфа', {
             'fields': (('league', 'is_played', 'match_date', 'numb_tour'),)

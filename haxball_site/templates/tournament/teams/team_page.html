@@ -154,11 +154,12 @@
                                             <img src="{{ player.player_nation.flag.url }}" width="24" height="24"
                                                  title="{{ player.player_nation.country }}">
                                             <a class="text-dark"
-                                               href="{{ player.name.user_profile.get_absolute_url }}">{{ player }}</a>
+                                               href="{{ player.name.user_profile.get_absolute_url }}"
+                                               style="vertical-align: middle;">{{ player }}</a>
                                         {% else %}
                                             <img src="{{ player.player_nation.flag.url }}" width="24" height="24"
                                                  title="{{ player.player_nation.country }}">
-                                            <span class="text-secondary">{{ player }}</span>
+                                            <span class="text-secondary" style="vertical-align: middle;">{{ player }}</span>
                                         {% endif %}
 
                                     </td>

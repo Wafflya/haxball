@@ -166,18 +166,18 @@ class Player(models.Model):
 
 class TourNumber(models.Model):
     number = models.SmallIntegerField('Номер тура')
-    date_from = models.DateField('Дата тура с', default=None)
-    date_to = models.DateField('Дата тура по', default=None)
+    date_from = models.DateField('Дата тура с', default=date.today, blank=True, null=True)
+    date_to = models.DateField('Дата тура по', default=date.today, blank=True, null=True)
     league = models.ForeignKey(League, verbose_name='В какой лиге', related_name='tours', on_delete=models.CASCADE)
     is_actual = models.BooleanField('Актуальный', default=False)
 
     def __str__(self):
-        return 'Тур {}'.format(self.number)
+        return '{}'.format(self.number)
 
     class Meta:
         verbose_name = 'Тур'
         verbose_name_plural = 'Туры'
-
+        ordering = ('number',)
 
 class Match(models.Model):
     league = models.ForeignKey(League, verbose_name='В лиге', related_name='matches_in_league',
