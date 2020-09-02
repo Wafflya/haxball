@@ -144,7 +144,8 @@ class Player(models.Model):
     team = models.ForeignKey(Team, verbose_name='Команда', related_name='players_in_team', blank=True, null=True,
                              on_delete=models.SET_NULL)
 
-    player_nation = models.ForeignKey(Nation, verbose_name='Национальность', related_name='country_players', null=True, on_delete=models.SET_NULL)
+    player_nation = models.ForeignKey(Nation, verbose_name='Национальность', related_name='country_players', null=True,
+                                      on_delete=models.SET_NULL)
     JUST_PLAYER = 'PL'
     CAPTAIN = 'C'
     ASSISTENT = 'AC'
@@ -178,6 +179,7 @@ class TourNumber(models.Model):
         verbose_name = 'Тур'
         verbose_name_plural = 'Туры'
         ordering = ('number',)
+
 
 class Match(models.Model):
     league = models.ForeignKey(League, verbose_name='В лиге', related_name='matches_in_league',

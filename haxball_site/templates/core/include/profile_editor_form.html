@@ -20,7 +20,14 @@
                                      width="16" title="Король ёпт"></h4>
                             {% endif %}
                         <p class="mb-1">Без команды</p>
-                        <p>Рейтинг {% karma profile %}</p>
+                        <p>Рейтинг <span class="badge badge-pill {% if profile.karma >= 0 %}
+                                                            badge-success
+                                                        {% else %}
+                                                            badge-danger
+                                                        {% endif %}">
+                            {{ profile.karma }}
+                        </span>
+                        </p>
                     </div>
                 </div>
                 <div class="col-sm-8">
@@ -49,7 +56,7 @@
                             <div class="col-sm-6">
                                 <p class="m-b-10 f-w-600">Город</p>
                                 <h6 class="text-muted f-w-400">
-                                <input type="text" class="form-control" name="city" value="{{ profile.city }}">
+                                    <input type="text" class="form-control" name="city" value="{{ profile.city }}">
                                 </h6>
                             </div>
                         </div>
