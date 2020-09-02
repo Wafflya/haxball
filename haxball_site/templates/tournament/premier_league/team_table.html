@@ -259,8 +259,8 @@
                                             <a href="{{ match.get_absolute_url }}"><span class="h5">vs</span> </a>
                                         {% else %}
                                             <a href="{{ match.get_absolute_url }}"
-                                               class="h5">{{ match|team_goals_in_match:match.team_home }}
-                                                : {{ match|team_goals_in_match:match.team_guest }}</a>
+                                               class="h5">{{ match.score_home }}
+                                                : {{ match.score_guest }}</a>
                                         {% endif %}
                                     </div>
                                     <div class="col-5 text-left">

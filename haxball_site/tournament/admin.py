@@ -64,7 +64,7 @@ class MatchAdmin(admin.ModelAdmin):
     readonly_fields = ('score_home', 'score_guest',)
     fieldsets = (
         ('Основная инфа', {
-            'fields': (('league', 'is_played', 'match_date', 'numb_tour'),)
+            'fields': (('league', 'is_played', 'match_date', 'numb_tour','score_home', 'score_guest',),)
         }),
         (None, {
             'fields': (('team_home', 'team_guest', 'replay_link', 'inspector'),)

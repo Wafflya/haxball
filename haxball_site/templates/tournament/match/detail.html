@@ -22,14 +22,14 @@
             <h5>Тур {{ match.numb_tour.number }}</h5>
             <div class="row">
 
-                <div class="col-5 pr-0">
+                <div class="col-5 px-0">
                     <a class="h4 text-dark"
                        href="{{ match.team_home.get_absolute_url }}">{{ match.team_home.title }}</a>
                 </div>
                 <div class="col-2 p-0">
                     <h4>—</h4>
                 </div>
-                <div class="col-5 pl-0">
+                <div class="col-5 px-0">
                     <a class="h4 text-dark"
                        href="{{ match.team_guest.get_absolute_url }}">{{ match.team_guest.title }}</a>
                 </div>
@@ -45,11 +45,11 @@
                 <div class="col-2">
                     <div class="mt-5">
                         {% if match.is_played %}
-                            <h5 class="font-weight-bold">{{ match|team_goals_in_match:match.team_home }}
-                                : {{ match|team_goals_in_match:match.team_guest }}</h5>
+                            <h3 class="font-weight-bold">{{ match.score_home }}
+                                : {{ match.score_guest }}</h3>
                             <h6 class="mt-3">{{ match.match_date|date:"SHORT_DATE_FORMAT" }}</h6>
                         {% else %}
-                            <h5>vs</h5>
+                            <h3>vs</h3>
                         {% endif %}
                     </div>
                 </div>

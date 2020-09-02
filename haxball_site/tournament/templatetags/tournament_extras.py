@@ -1,5 +1,5 @@
 from django import template
-from django.db.models import Q, Count, Max
+from django.db.models import Q, Count
 from django.utils import timezone
 
 from ..models import FreeAgent, OtherEvents, Goal, Match, League, Team, Player, Substitution
@@ -67,6 +67,7 @@ def matches_in_team(player, team):
 # return Match.objects.filter(Q(team_home=team, team_home_start=player) | Q(team_guest=team, team_guest_start=player)).count()
 
 #   Для детальной статы матча
+"""
 @register.filter
 def team_goals_in_match(match, team):
     if team == match.team_home:
@@ -74,7 +75,8 @@ def team_goals_in_match(match, team):
                                                                                                 team=match.team_guest).count()
     elif team == match.team_guest:
         return Goal.objects.filter(match=match, team=team).count() + OtherEvents.objects.filter(event='OG', match=match,
-                                                                                                team=match.team_home).count()
+                                                                                              team=match.team_home).count()
+"""
 
 
 @register.filter
