@@ -250,10 +250,10 @@
 
                                     <div class="col-5 text-right">
                                         <h5><a class="text-dark" href="{{ match.team_home.get_absolute_url }}"
-                                               class="h5"><img
-                                                src="{{ match.team_home.logo.url }}" alt="{{ match.team_home.title }}"
+                                               class="h5">{{ match.team_home.title }}
+                                            <img src="{{ match.team_home.logo.url }}" alt="{{ match.team_home.title }}"
                                                 width="25" height="25"
-                                                class="mr-1">{{ match.team_home.title }}</a></h5>
+                                                class="ml-1"></a></h5>
                                     </div>
                                     <div class="col-2">
                                         {% if not match.is_played %}
@@ -266,7 +266,7 @@
                                     </div>
                                     <div class="col-5 text-left">
                                         <h5>
-                                            <a class="text-dark" href="{{ match.team_home.get_absolute_url }}"
+                                            <a class="text-dark" href="{{ match.team_guest.get_absolute_url }}"
                                                class="h5"><img
                                                     src="{{ match.team_guest.logo.url }}"
                                                     alt="{{ match.team_guest.title }}" width="25" height="25"
