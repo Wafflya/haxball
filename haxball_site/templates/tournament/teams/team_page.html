@@ -110,7 +110,7 @@
                     <a href="">PHP, .Net</a><br/>
                 </div>
             </div> -->
-            <div class="col-md-12 py-4">
+            <div class="col-md-12 py-2">
                 <div class="tab-content profile-tab" id="myTabContent">
                     <div class="tab-pane fade show active pr-2" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <table class="table table-bordered table-hover text-center" bgcolor="{{ team.color_table }}"
@@ -187,7 +187,7 @@
                         </table>
                     </div>
 
-                <!--
+                    <!--
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row">
                             <div class="col-12">
@@ -200,8 +200,58 @@
                     <div class="tab-pane fade" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
                         <div class="row">
                             <div class="col-12">
-                                <h5>{{ team.get_active_leagues }}</h5>
+                                {% for league in team|current_league %}
+                                    <p class="text-center mb-0">
+                                        <a href="{{ league.get_absolute_url }}"
+                                           class="h5 text-center">{{ league.title }}</a>
+                                    </p>
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                        {% for match in team|team_matches_in_league:league %}
+                                            <tr>
+                                                <td class="text-left h6">Тур {{ match.numb_tour }}</td>
+                                                <td class="text-right">
+                                                    {% if team == match.team_home %}
+                                                        <span class="text-dark font-weight-bold h6">{{ match.team_home.title }}</span>
+                                                    {% else %}
+                                                        <a class="text-dark"
+                                                           href="{{ match.team_home.get_absolute_url }}">
+                                                            {{ match.team_home.title }}</a>
+                                                    {% endif %}
+                                                </td>
+                                                <td class="text-center">
+                                                    {% if not match.is_played %}
+
+                                                        <a href="{{ match.get_absolute_url }}"><span
+                                                                class="h6">vs</span>
+                                                        </a>
+                                                    {% else %}
+                                                        <a href="{{ match.get_absolute_url }}"
+                                                           class="h6">{{ match.score_home }}
+                                                            : {{ match.score_guest }}</a>
+                                                    {% endif %}
+                                                </td>
+                                                <td class="text-left">
+                                                    {% if team == match.team_guest %}
+                                                        <span class="text-dark font-weight-bold h6">{{ match.team_guest.title }}</span>
+                                                    {% else %}
+                                                        <a class="text-dark"
+                                                           href="{{ match.team_guest.get_absolute_url }}"
+                                                           class="h6">{{ match.team_guest.title }}</a>
+                                                    {% endif %}
+                                                </td>
+                                                <td style="width: 13.1%">
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                {% endfor %}
                             </div>
+
+
                         </div>
 
                     </div>

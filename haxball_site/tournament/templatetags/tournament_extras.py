@@ -262,4 +262,4 @@ def tour_matches_in_league(league, tour):
 
 @register.filter
 def team_matches_in_league(team, league):
-    return Match.objects.filter((Q(team_home=team) | Q(team_guest=team)), league=league)
+    return Match.objects.filter((Q(team_home=team) | Q(team_guest=team)), league=league).order_by('numb_tour')
