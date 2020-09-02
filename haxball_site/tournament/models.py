@@ -72,6 +72,7 @@ class Team(models.Model):
     logo = models.ImageField('Логотип', upload_to='team_logos/', default='team_logos/default.png')
     color_1 = ColorField(default='#FFFFFF', verbose_name='Цвет 1')
     color_2 = ColorField(default='#FFFFFF', verbose_name='Цвет 2')
+    color_table = ColorField(default='#FFFFFF', verbose_name='Цвет Таблички')
     owner = models.ForeignKey(User, verbose_name='Владелец', null=True, on_delete=models.SET_NULL,
                               related_name='team_owner')
     # league = models.ForeignKey(League, verbose_name='Лига в которой играет', null=True, on_delete=models.SET_NULL,
@@ -81,6 +82,9 @@ class Team(models.Model):
 
     def get_absolute_url(self):
         return reverse('tournament:team_detail', args=[self.slug])
+
+    def get_active_leagues(self):
+        return self.leagues.filter(championship__is_active=True)
 
     def __str__(self):
         return 'Команда {}'.format(self.title)
@@ -197,6 +201,8 @@ class Match(models.Model):
                                    on_delete=models.CASCADE,
                                    related_name='guest_matches', verbose_name='Гости')
 
+    score_home = models.SmallIntegerField('Забито хозявами', default=0)
+    score_guest = models.SmallIntegerField('Забито гостями', default=0)
     team_home_start = ChainedManyToManyField(Player, related_name='player_in_start_home', horizontal=True,
                                              verbose_name='Состав хозяев', chained_field='team_home',
                                              chained_model_field='team', blank=True)
@@ -236,6 +242,15 @@ class Goal(models.Model):
                                   on_delete=models.SET_NULL)
     time_min = models.SmallIntegerField('Минута')
     time_sec = models.SmallIntegerField('Секунда')
+
+    def save(self, *args, **kwargs):
+        if self.match.team_home == self.team:
+            self.match.score_home += 1
+            self.match.save(update_fields=['score_home'])
+        elif self.team == self.match.team_guest:
+            self.match.score_guest += 1
+            self.match.save(update_fields=['score_guest'])
+        super(Goal, self).save(*args, **kwargs)
 
     def __str__(self):
         return 'на {}:{} от {}({}) в {}'.format(self.time_min, self.time_sec, self.author, self.assistent, self.match)
@@ -295,6 +310,15 @@ class OtherEvents(models.Model):
     ]
 
     event = models.CharField(max_length=3, choices=EVENT, default=CLEAN_SHIT)
+
+    def save(self, *args, **kwargs):
+        if self.match.team_home == self.team and self.event == 'OG':
+            self.match.score_guest += 1
+            self.match.save(update_fields=['score_guest'])
+        elif self.team == self.match.team_guest and self.event == 'OG':
+            self.match.score_home += 1
+            self.match.save(update_fields=['score_home'])
+        super(OtherEvents, self).save(*args, **kwargs)
 
     def __str__(self):
         return '{}:{} {} в {}'.format(self.time_min, self.time_sec, self.event, self.match)

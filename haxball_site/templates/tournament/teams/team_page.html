@@ -28,7 +28,7 @@
                     <img src="{{ team.logo.url }}" alt="{{ team.title }}">
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <div class="profile-head">
                     <h3>
                         {{ team.title }}
@@ -57,10 +57,17 @@
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                                    aria-controls="home" aria-selected="true">Состав</a>
                             </li>
+                            <!--
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                                    aria-controls="profile" aria-selected="false">Статистика</a>
                             </li>
+                             -->
+                            <li class="nav-item">
+                                <a class="nav-link" id="match-tab" data-toggle="tab" href="#calendar" role="tab"
+                                   aria-controls="calendar-tab" aria-selected="false">Матчи</a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab"
                                    aria-controls="profile" aria-selected="false">Контакты</a>
@@ -70,7 +77,7 @@
 
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <!-- <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit"> -->
                 <img src="{% static "img/ico/best_logo.png" %}" width="100%">
             </div>
@@ -106,7 +113,7 @@
             <div class="col-md-12 py-4">
                 <div class="tab-content profile-tab" id="myTabContent">
                     <div class="tab-pane fade show active pr-2" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <table class="table table-bordered table-hover text-center" bgcolor="#ffd756"
+                        <table class="table table-bordered table-hover text-center" bgcolor="{{ team.color_table }}"
                                style="color: black; font-weight: bold;">
                             <thead>
                             <tr>
@@ -159,7 +166,8 @@
                                         {% else %}
                                             <img src="{{ player.player_nation.flag.url }}" width="24" height="24"
                                                  title="{{ player.player_nation.country }}">
-                                            <span class="text-secondary" style="vertical-align: middle;">{{ player }}</span>
+                                            <span class="text-secondary"
+                                                  style="vertical-align: middle;">{{ player }}</span>
                                         {% endif %}
 
                                     </td>
@@ -178,6 +186,8 @@
                             </tbody>
                         </table>
                     </div>
+
+                <!--
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row">
                             <div class="col-12">
@@ -185,24 +195,18 @@
                                      style="border-radius: 25px">
                             </div>
                         </div>
-                        <!--
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Availability</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>6 months</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>Your Bio</label><br/>
-                                <p>Your detail description</p>
-                            </div>
-                        </div>
-                        -->
                     </div>
+                -->
+                    <div class="tab-pane fade" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
+                        <div class="row">
+                            <div class="col-12">
+                                <h5>{{ team.get_active_leagues }}</h5>
+                            </div>
+                        </div>
+
+                    </div>
+
+
                     <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
                         <div class="row">
                             <div class="col-2">
