@@ -209,8 +209,8 @@
                                         <tbody>
                                         {% for match in team|team_matches_in_league:league %}
                                             <tr>
-                                                <td class="text-left h6">Тур {{ match.numb_tour }}</td>
-                                                <td class="text-right">
+                                                <td class="text-left h6" style="width: 10%;">Тур {{ match.numb_tour }}</td>
+                                                <td class="text-right" style="width: 35%;">
                                                     {% if team == match.team_home %}
                                                         <span class="text-dark font-weight-bold h6">{{ match.team_home.title }}</span>
                                                     {% else %}
@@ -219,7 +219,7 @@
                                                             {{ match.team_home.title }}</a>
                                                     {% endif %}
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="text-center" style="width: 10%;">
                                                     {% if not match.is_played %}
 
                                                         <a href="{{ match.get_absolute_url }}"><span
@@ -231,7 +231,7 @@
                                                             : {{ match.score_guest }}</a>
                                                     {% endif %}
                                                 </td>
-                                                <td class="text-left">
+                                                <td class="text-left" style="width: 35%;">
                                                     {% if team == match.team_guest %}
                                                         <span class="text-dark font-weight-bold h6">{{ match.team_guest.title }}</span>
                                                     {% else %}
@@ -240,7 +240,7 @@
                                                            class="h6">{{ match.team_guest.title }}</a>
                                                     {% endif %}
                                                 </td>
-                                                <td style="width: 12.5%;">
+                                                <td style="width: 10%;">
 
                                                 </td>
                                             </tr>
