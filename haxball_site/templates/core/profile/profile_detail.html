@@ -35,21 +35,31 @@
                                              class="img-radius" alt="User-Profile-Image"></div>
                     <h3 class="f-w-600">{{ profile.name }}
                         {% for icon in profile.user_icon.all %}
-                            <img src="{{ icon.image.url }}" width="25px" height="25px" title="{{ icon.description }}" class="mb-1">
+                            <img src="{{ icon.image.url }}" width="25px" height="25px" title="{{ icon.description }}"
+                                 class="mb-1">
                         {% endfor %}
                     </h3>
                     {% if profile.name.user_player.team %}
                         <p class="mb-1">
                             <a href="{{ profile.name.user_player.team.get_absolute_url }}" class="text-white">
                                 <img src="{{ profile.name.user_player.team.logo.url }}"
-                                     alt="{{ profile.name.user_player.team.title }}" class="mb-1" style="width: 28px; height: 28px;">
+                                     alt="{{ profile.name.user_player.team.title }}" class="mb-1"
+                                     style="width: 28px; height: 28px;">
                                 <span style="font-weight: bold; font-size: 17px;">{{ profile.name.user_player.team.title }}</span>
                             </a>
                         </p>
                     {% else %}
                         <p class="mb-1">Без команды</p>
                     {% endif %}
-                    <p class="mb-0">Репутация {% karma profile %}</p>
+                    <p class="mb-0">Репутация
+                        <span class="badge badge-pill {% if profile.karma >= 0 %}
+                                                            badge-success
+                                                        {% else %}
+                                                            badge-danger
+                                                        {% endif %}">
+                            {{ profile.karma }}
+                        </span>
+                    </p>
                     <p>Просмотров <i class="fa fa-eye text-warning" aria-hidden="true"></i>
                         {{ profile.views }}</p>
                     <p class="mb-0">
