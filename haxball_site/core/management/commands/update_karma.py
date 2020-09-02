@@ -7,10 +7,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         print('Обновляем карму всем пользователям')
-        s = 0
-        samo = 0
         a = Profile.objects.all()
         for profile in a:
+            s = 0
+            samo = 0
             for comment in Comment.objects.filter(author=profile.name):
                 s += comment.votes.sum_rating()
                 samo += comment.votes.filter(user=profile.name, vote=1).count() - comment.votes.filter(user=profile.name,
@@ -19,8 +19,8 @@ class Command(BaseCommand):
                 s += post.votes.sum_rating()
                 samo += post.votes.filter(user=profile.name, vote=1).count() - post.votes.filter(user=profile.name,
                                                                                                  vote=-1).count()
-            print('{} установлена карма {}'.format(profile.name,profile.karma))
             profile.karma = s - samo
             profile.save(update_fields=['karma'])
+            print('{} установлена карма {}'.format(profile.name,profile.karma))
 
 

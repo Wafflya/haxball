@@ -25,16 +25,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/haxball_site/core/management/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/core/management/commands/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/haxball_site/core/management/commands/update_karma.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/post/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/post/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" afterDir="false" />
-    </list>
+    <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -177,7 +168,7 @@
       <workItem from="1598439229444" duration="39273000" />
       <workItem from="1598791247146" duration="63074000" />
       <workItem from="1599038839065" duration="2728000" />
-      <workItem from="1599053284407" duration="1415000" />
+      <workItem from="1599053284407" duration="1854000" />
     </task>
     <servers />
   </component>
