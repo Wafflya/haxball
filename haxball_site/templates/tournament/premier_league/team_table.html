@@ -38,51 +38,8 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="table" role="tabpanel"
                      aria-labelledby="league-table-tab">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Команда</th>
-                            <th scope="col">&nbspИ&nbsp</th>
-                            <th scope="col">&nbspВ&nbsp</th>
-                            <th scope="col">&nbsp;Н&nbsp;</th>
-                            <th scope="col">&nbsp;П&nbsp;</th>
-                            <th scope="col">ЗМ</th>
-                            <th scope="col">ПМ</th>
-                            <th scope="col">+/-</th>
-                            <th scope="col">&nbsp;O&nbsp;</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for team in league|sort_teams %}
-                            <tr {% if forloop.counter == 1 %}bgcolor="#ffe000"{% endif %}
-                                {% if forloop.counter == 2 %}bgcolor="silver"{% endif %}
-                                {% if forloop.counter == 3 %}bgcolor="#ffa81c"{% endif %}
-                                class="font-weight-bold"
-                            >
+                    {% league_table league %}
 
-                                <th scope="row">{{ forloop.counter }}</th>
-
-                                <td class="text-left">
-
-                                    <a class="text-dark font-weight-bold h5" href="{{ team.get_absolute_url }}"
-                                       class="h5"><img
-                                            src="{{ team.logo.url }}" alt="{{ team.title }}" width="35" height="35"
-                                            class="mr-1">{{ team.title }}</a>
-                                </td>
-                                <td>{{ team|matches_in_league }}</td>
-                                <td>{{ team|res_in_league:'w' }}</td>
-                                <td>{{ team|res_in_league:'d' }}</td>
-                                <td>{{ team|res_in_league:'l' }}</td>
-                                <td>{{ team|res_in_league:'s' }}</td>
-                                <td>{{ team|res_in_league:'c' }}</td>
-                                <td {% if team|res_in_league:'dif' > 0 %} class="text-success"
-                                                                          {% elif team|res_in_league:'dif' < 0 %}class="text-danger"{% endif %}>{{ team|res_in_league:'dif' }}</td>
-                                <td>{{ team|res_in_league:'p' }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
                 </div>
                 <div class="tab-pane fade" id="detail_stat" role="tabpanel"
                      aria-labelledby="detail_stat-tab">
@@ -109,7 +66,7 @@
                                             <tbody style="border-radius: 25px;">
                                             {% for pl in league|top_goalscorers %}
                                                 <tr style="border-radius: 25px;">
-                                                    <td class="px-1" style="border-radius: 15px 0 0 15px;"><img
+                                                    <td width="16%" class="px-1" style="border-radius: 15px 0 0 15px;"><img
                                                             src="{{ pl.team.logo.url }}" width="25px" height="25px">
                                                     </td>
                                                     <td class="text-left pl-1">
@@ -120,7 +77,7 @@
                                                             <span class="text-secondary h6">{{ pl.nickname }}</span>
                                                         {% endif %}
                                                     </td>
-                                                    <td style="border-radius: 0 15px 15px 0;"><span
+                                                    <td width="16%" style="border-radius: 0 15px 15px 0;"><span
                                                             class="font-weight-bold h6">{{ pl.goals_c }}</span>
                                                     </td>
 
@@ -150,10 +107,10 @@
                                             <tbody style="border-radius: 25px;">
                                             {% for pl in league|top_assistent %}
                                                 <tr style="border-radius: 25px;">
-                                                    <td class="px-1" style="border-radius: 15px 0 0 15px;"><img
+                                                    <td width="16%" class="px-1" style="border-radius: 15px 0 0 15px;"><img
                                                             src="{{ pl.team.logo.url }}" width="25px" height="25px">
                                                     </td>
-                                                    <td class="text-left pl-1">
+                                                    <td width="68%" class="text-left pl-1">
                                                         {% if pl.name %}
                                                             <a class="text-dark h6"
                                                                href="{{ pl.name.user_profile.get_absolute_url }}">{{ pl.nickname }}</a>
@@ -161,7 +118,7 @@
                                                             <span class="text-secondary h6">{{ pl.nickname }}</span>
                                                         {% endif %}
                                                     </td>
-                                                    <td style="border-radius: 0 15px 15px 0;"><span
+                                                    <td width="16%" style="border-radius: 0 15px 15px 0;"><span
                                                             class="font-weight-bold h6">{{ pl.ass_c }}</span>
                                                     </td>
 
@@ -193,7 +150,7 @@
                                             <tbody style="border-radius: 25px;">
                                             {% for pl in league|top_clean_sheets %}
                                                 <tr style="border-radius: 25px;">
-                                                    <td class="px-1" style="border-radius: 15px 0 0 15px;"><img
+                                                    <td class="px-1" width="16%" style="border-radius: 15px 0 0 15px;"><img
                                                             src="{{ pl.team.logo.url }}" width="25px" height="25px">
                                                     </td>
                                                     <td class="text-left pl-1">
@@ -204,7 +161,7 @@
                                                             <span class="text-secondary h6">{{ pl.nickname }}</span>
                                                         {% endif %}
                                                     </td>
-                                                    <td style="border-radius: 0 15px 15px 0;"><span
+                                                    <td width="16%" style="border-radius: 0 15px 15px 0;"><span
                                                             class="font-weight-bold h6">{{ pl.event_c }}</span>
                                                     </td>
 

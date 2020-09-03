@@ -21,20 +21,16 @@ class Command(BaseCommand):
 
         date_cr_2 = datetime.date(2020, 10, 26)
 
-        time.sleep(2)
         print('         Команды участницы:')
         for team in teams:
-            time.sleep(1)
             print('     {}'.format(team.title))
         print()
         print('     Перемешиваем')
         random.shuffle(teams)
         for team in teams:
-            time.sleep(1)
             print('     {}'.format(team.title))
 
         for i in range(1, len(teams)):
-            time.sleep(1)
             tour = TourNumber.objects.create(number=i, league=league, date_from=cr_date, date_to=cr_date + time_delta)
             cr_date = cr_date + time_delta + datetime.timedelta(days=1)
             tour_reverse = TourNumber.objects.create(number=i + n - 1, league=league, date_from=date_cr_2,
@@ -44,7 +40,7 @@ class Command(BaseCommand):
             for j in range(half):
                 match = Match.objects.create(team_home=teams[j], team_guest=teams[n - 1 - j], numb_tour=tour,
                                              league=league)
-                match_reverse = Match.objects.create(team_home=teams[j], team_guest=teams[n - 1 - j],
+                match_reverse = Match.objects.create(team_guest=teams[j], team_home=teams[n - 1 - j],
                                                      numb_tour=tour_reverse,
                                                      league=league)
                 print('          {}  -  {}'.format(match.team_home.title, match.team_guest.title))

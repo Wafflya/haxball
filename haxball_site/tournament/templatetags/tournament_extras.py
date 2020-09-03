@@ -94,68 +94,125 @@ def goals_sorted(match):
 
 
 #   Фильтры для таблички лиги
-@register.filter
-def matches_in_league(team):
-    try:
-        league = League.objects.get(is_cup=False, championship__is_active=True, priority=1)
-    except:
-        return None
-    return Match.objects.filter(team_guest=team, league=league, is_played=True).count() + Match.objects.filter(
-        team_home=team, league=league, is_played=True).count()
+#   и теги
 
+@register.inclusion_tag('tournament/include/league_table.html')
+def league_table(league):
+    b = list(Team.objects.filter(leagues=league))
+    c = len(b)
+    points = [0 for _ in range(c)]  # Количество очков
+    diffrence = [0 for _ in range(c)]  # Разница мячей
+    scores = [0 for _ in range(c)]  # Мячей забито
+    consided = [0 for _ in range(c)]  # Мячей пропущено
+    matches_played = [0 for _ in range(c)]  # Игр сыграно
+    wins = [0 for _ in range(c)]  # Побед
+    draws = [0 for _ in range(c)]  # Ничей
+    looses = [0 for _ in range(c)]  # Поражений
+    last_matches = [[] for _ in range(c)]
+    for i, team in enumerate(b):
+        matches = Match.objects.filter((Q(team_home=team) | Q(team_guest=team)), league=league, is_played=True)
+        matches_played[i] = matches.count()
+        # last_matches[i] = [(m, 0) for m in matches]
+        win_count = 0
+        draw_count = 0
+        loose_count = 0
+        goals_scores_all = 0
+        goals_consided_all = 0
+        for m in matches:
 
-@register.filter
-def res_in_league(team, res):
-    try:
-        league = League.objects.get(is_cup=False, championship__is_active=True, teams=team)
-    except:
-        return None
-    matches = Match.objects.filter((Q(team_home=team) | Q(team_guest=team)), league=league, is_played=True)
-
-    win_count = 0
-    draw_count = 0
-    loose_count = 0
-    goals_scores_all = 0
-    goals_consided_all = 0
-    for m in matches:
-        score_team = 0
-        score_opp = 0
-        for g in m.match_goal.all():
-            if g.team == team:
-                score_team += 1
+            if team == m.team_home:
+                score_team = m.score_home
+                score_opp = m.score_guest
+            elif team == m.team_guest:
+                score_team = m.score_guest
+                score_opp = m.score_home
             else:
-                score_opp += 1
-        for og in m.match_event.filter(event='OG'):
-            if og.team == team:
-                score_opp += 1
-            else:
-                score_team += 1
-        goals_scores_all += score_team
-        goals_consided_all += score_opp
-        if score_team > score_opp:
-            win_count += 1
-        elif score_team == score_opp:
-            draw_count += 1
-        else:
-            loose_count += 1
+                print('Match is broke')
+                return None
+            """
+            score_team = 0
+            score_opp = 0
+            for g in m.match_goal.all():
+                if g.team == team:
+                    score_team += 1
+                else:
+                    score_opp += 1
+            for og in m.match_event.filter(event='OG'):
+                if og.team == team:
+                    score_opp += 1
+                else:
+                    score_team += 1
+            """
+            goals_scores_all += score_team
+            goals_consided_all += score_opp
 
-    if res == 'w':
-        return win_count
-    elif res == 'd':
-        return draw_count
-    elif res == 'l':
-        return loose_count
-    elif res == 's':
-        return goals_scores_all
-    elif res == 'c':
-        return goals_consided_all
-    elif res == 'dif':
-        return goals_scores_all - goals_consided_all
-    elif res == 'p':
-        return win_count * 3 + draw_count * 1
+            if score_team > score_opp:
+                win_count += 1
+                last_matches[i].append((m, 1))
+            elif score_team == score_opp:
+                draw_count += 1
+                last_matches[i].append((m, 0))
+            else:
+                loose_count += 1
+                last_matches[i].append((m, -1))
+
+        last_matches[i] = last_matches[i][-5:]
+        points[i] = win_count * 3 + draw_count * 1
+        diffrence[i] = goals_scores_all - goals_consided_all
+        scores[i] = goals_scores_all
+        consided[i] = goals_consided_all
+        wins[i] = win_count
+        looses[i] = loose_count
+        draws[i] = draw_count
+
+    l = zip(b, matches_played, wins, draws, looses, scores, consided, diffrence, points, last_matches)
+    s1 = sorted(l, key=lambda x: x[5], reverse=True)
+    s2 = sorted(s1, key=lambda x: x[7], reverse=True)
+    ls = sorted(s2, key=lambda x: x[8], reverse=True)
+    return {'teams': ls}
+
+
+# Конец тегов и фильтров для таблицы лиги
 
 
 @register.filter
+def top_goalscorers(league):
+    players = Player.objects.filter(goals__match__league=league).annotate(
+        goals_c=Count('goals__match__league')).order_by('-goals_c')
+    return players
+
+
+@register.filter
+def top_assistent(league):
+    players = Player.objects.filter(assists__match__league=league).annotate(
+        ass_c=Count('assists__match__league')).order_by('-ass_c')
+    return players
+
+
+@register.filter
+def top_clean_sheets(league):
+    players = Player.objects.filter(event__match__league=league, event__event='CLN').annotate(
+        event_c=Count('event__match__league')).order_by('-event_c')
+    return players
+
+
+#  Капитан и ассистент для профиля команды(контактов)
+@register.filter
+def get_captain(team):
+    return Player.objects.filter(team=team, role='C')
+
+
+@register.filter
+def get_team_assistent(team):
+    return Player.objects.filter(team=team, role='AC')
+
+
+#       Получаем текущую "Лигу" команды
+@register.filter
+def current_league(team):
+    return League.objects.filter(teams=team, championship__is_active=True, is_cup=False)
+
+
 def sort_teams(league):
     b = list(Team.objects.filter(leagues=league))
     points = [0 for _ in range(len(b))]
@@ -201,44 +258,6 @@ def sort_teams(league):
     lit = [i[0] for i in ls]
     queryset = lit
     return queryset
-
-
-@register.filter
-def top_goalscorers(league):
-    players = Player.objects.filter(goals__match__league=league).annotate(
-        goals_c=Count('goals__match__league')).order_by('-goals_c')
-    return players
-
-
-@register.filter
-def top_assistent(league):
-    players = Player.objects.filter(assists__match__league=league).annotate(
-        ass_c=Count('assists__match__league')).order_by('-ass_c')
-    return players
-
-
-@register.filter
-def top_clean_sheets(league):
-    players = Player.objects.filter(event__match__league=league, event__event='CLN').annotate(
-        event_c=Count('event__match__league')).order_by('-event_c')
-    return players
-
-
-#  Капитан и ассистент для профиля команды(контактов)
-@register.filter
-def get_captain(team):
-    return Player.objects.filter(team=team, role='C')
-
-
-@register.filter
-def get_team_assistent(team):
-    return Player.objects.filter(team=team, role='AC')
-
-
-#       Получаем текущую "Лигу" команды
-@register.filter
-def current_league(team):
-    return League.objects.filter(teams=team, championship__is_active=True, is_cup=False)
 
 
 @register.filter

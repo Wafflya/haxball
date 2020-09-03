@@ -182,14 +182,14 @@ class TourNumber(models.Model):
     class Meta:
         verbose_name = 'Тур'
         verbose_name_plural = 'Туры'
-        ordering = ('number',)
+        ordering = ['number']
 
 
 class Match(models.Model):
     league = models.ForeignKey(League, verbose_name='В лиге', related_name='matches_in_league',
                                on_delete=models.CASCADE)
     numb_tour = models.ForeignKey(TourNumber, verbose_name='Номер тура', related_name='tour_matches',
-                                  on_delete=models.CASCADE, null=True)
+                                  on_delete=models.CASCADE, null=True,)
     match_date = models.DateField('Дата матча', default=None, blank=True, null=True)
     replay_link = models.URLField('Ссылка на реплей', blank=True)
     inspector = models.ForeignKey(User, verbose_name='Проверил', limit_choices_to={'is_staff': True},
@@ -223,7 +223,7 @@ class Match(models.Model):
     class Meta:
         verbose_name = 'Матч'
         verbose_name_plural = 'Матчи'
-        ordering = ['match_date']
+        ordering = ['numb_tour']
 
 
 class Goal(models.Model):
@@ -309,7 +309,7 @@ class OtherEvents(models.Model):
         (OWN_GOALS, 'Автогол'),
     ]
 
-    event = models.CharField(max_length=3, choices=EVENT, default=CLEAN_SHIT)
+    event = models.CharField(max_length=3, choices=EVENT, default=CLEAN_SHIT, verbose_name='Тип события')
 
     def save(self, *args, **kwargs):
         if self.match.team_home == self.team and self.event == 'OG':

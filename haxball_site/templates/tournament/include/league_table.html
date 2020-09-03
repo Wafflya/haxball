@@ -1,0 +1,69 @@
+<style>
+    .team-form a:hover {
+        font-size: 18px;
+        text-decoration: none;
+    }
+
+</style>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Команда</th>
+        <th scope="col">И</th>
+        <th scope="col">В</th>
+        <th scope="col">Н</th>
+        <th scope="col">П</th>
+        <th scope="col">ЗМ</th>
+        <th scope="col">ПМ</th>
+        <th scope="col">+/-</th>
+        <th scope="col">O</th>
+        <th scope="col">Форма</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for team in teams %}
+        <tr {% if forloop.counter == 1 %}bgcolor="#ffe000"{% endif %}
+            {% if forloop.counter == 2 %}bgcolor="silver"{% endif %}
+            {% if forloop.counter == 3 %}bgcolor="#ffa81c"{% endif %}
+            class="font-weight-bold"
+        >
+
+            <th scope="row" width="5%">{{ forloop.counter }}</th>
+
+            <td class="text-left" width="32%">
+
+                <a class="text-dark font-weight-bold h5" href="{{ team.0.get_absolute_url }}"
+                   class="h5"><img
+                        src="{{ team.0.logo.url }}" alt="{{ team.0.title }}" width="35" height="35"
+                        class="mr-1">{% if team.0.title|length < 15 %}{{ team.0.title }}{% else %}
+                    {{ team.0.short_title }}{% endif %}</a>
+            </td>
+            <td width="6%">{{ team.1 }}</td>
+            <td width="6%">{{ team.2 }}</td>
+            <td width="6%">{{ team.3 }}</td>
+            <td width="6%">{{ team.4 }}</td>
+            <td width="6%">{{ team.5 }}</td>
+            <td width="6%">{{ team.6 }}</td>
+            <td width="6%" {% if team.7 > 0 %} class="text-success"
+                                    {% elif team.7 < 0 %}class="text-danger"{% endif %}>{{ team.7 }}</td>
+            <td width="6%">{{ team.8 }}</td>
+            <td class="team-form" width="15%">{% for result in team.9 %}
+                <a href="{{ result.0.get_absolute_url }}" class="fa fa-circle{% if result.1 == 1 %}
+                                                                       text-success
+                                                                                  {% elif result.1 == -1 %}
+                                                                                         text-danger
+                                                                           {% elif result.1 == 0 %}
+                                                                                    text-secondary
+                                                                                   {% endif %}" title="
+                     Тур {{ result.0.numb_tour }}
+{{ result.0.team_home.title }} {{ result.0.score_home }} : {{ result.0.score_guest }} {{ result.0.team_guest.title }}">
+                    <!--<i class=" aria-hidden="true"></i>-->
+                </a>
+            {% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
