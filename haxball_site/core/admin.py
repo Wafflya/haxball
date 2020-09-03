@@ -65,6 +65,7 @@ class ThemesAdmin(admin.ModelAdmin):
 @admin.register(UserIcon)
 class UserIconAdmin(admin.ModelAdmin):
     list_display = ('title', 'description',)
+    filter_horizontal = ('user',)
 
 
 @admin.register(Category)
