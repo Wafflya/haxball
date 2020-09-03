@@ -68,7 +68,7 @@ class Team(models.Model):
     title = models.CharField('Название', max_length=128)
     slug = models.SlugField('слаг', max_length=250)
     date_found = models.DateField('Дата основания', default=date.today, )
-    short_title = models.CharField('Сокращение', max_length=4)
+    short_title = models.CharField('Сокращение', help_text='До 10 символов', max_length=11)
     logo = models.ImageField('Логотип', upload_to='team_logos/', default='team_logos/default.png')
     color_1 = ColorField(default='#FFFFFF', verbose_name='Цвет 1')
     color_2 = ColorField(default='#FFFFFF', verbose_name='Цвет 2')
