@@ -240,10 +240,10 @@ class Goal(models.Model):
 
     author = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Автор гола',
                                related_name='goals', null=True,
-                               on_delete=models.SET_NULL)
+                               on_delete=models.CASCADE)
     assistent = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Ассистент',
                                   related_name='assists', blank=True, null=True,
-                                  on_delete=models.SET_NULL)
+                                  on_delete=models.CASCADE)
     time_min = models.SmallIntegerField('Минута')
     time_sec = models.SmallIntegerField('Секунда')
 
@@ -276,7 +276,7 @@ class Goal(models.Model):
 
 class Substitution(models.Model):
     match = models.ForeignKey(Match, verbose_name='Матч', related_name='match_substitutions', null=True,
-                              on_delete=models.SET_NULL)
+                              on_delete=models.CASCADE)
 
     team = ChainedForeignKey(Team, chained_field='match', verbose_name='Замена в команде',
                              chained_model_field='leagues__matches_in_league', null=True,
@@ -284,10 +284,10 @@ class Substitution(models.Model):
 
     player_out = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Ушёл',
                                    related_name='replaced', null=True,
-                                   on_delete=models.SET_NULL)
+                                   on_delete=models.CASCADE)
     player_in = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Вышел',
                                   related_name='join_game', null=True,
-                                  on_delete=models.SET_NULL)
+                                  on_delete=models.CASCADE)
     time_min = models.SmallIntegerField('Минута')
     time_sec = models.SmallIntegerField('Секунда')
 
@@ -301,13 +301,13 @@ class Substitution(models.Model):
 
 class OtherEvents(models.Model):
     match = models.ForeignKey(Match, verbose_name='Матч', related_name='match_event', null=True,
-                              on_delete=models.SET_NULL)
+                              on_delete=models.CASCADE)
     team = ChainedForeignKey(Team, chained_field='match', verbose_name='Команда',
                              chained_model_field='leagues__matches_in_league', null=True,
                              on_delete=models.SET_NULL)
     author = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Автор',
                                related_name='event', null=True,
-                               on_delete=models.SET_NULL)
+                               on_delete=models.CASCADE)
     time_min = models.SmallIntegerField('Минута')
     time_sec = models.SmallIntegerField('Секунда')
 
