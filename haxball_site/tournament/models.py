@@ -189,7 +189,7 @@ class Match(models.Model):
     league = models.ForeignKey(League, verbose_name='В лиге', related_name='matches_in_league',
                                on_delete=models.CASCADE)
     numb_tour = models.ForeignKey(TourNumber, verbose_name='Номер тура', related_name='tour_matches',
-                                  on_delete=models.CASCADE, null=True,)
+                                  on_delete=models.CASCADE, null=True, )
     match_date = models.DateField('Дата матча', default=None, blank=True, null=True)
     replay_link = models.URLField('Ссылка на реплей', blank=True)
     inspector = models.ForeignKey(User, verbose_name='Проверил', limit_choices_to={'is_staff': True},
@@ -203,13 +203,17 @@ class Match(models.Model):
 
     score_home = models.SmallIntegerField('Забито хозявами', default=0)
     score_guest = models.SmallIntegerField('Забито гостями', default=0)
-    team_home_start = ChainedManyToManyField(Player, related_name='player_in_start_home', horizontal=True,
-                                             verbose_name='Состав хозяев', chained_field='team_home',
-                                             chained_model_field='team', blank=True)
+    team_home_start = models.ManyToManyField(Player, related_name='player_in_start_home',
+                                             verbose_name='Состав хозяев', blank=True)
 
-    team_guest_start = ChainedManyToManyField(Player, related_name='player_in_start_guest', horizontal=True,
-                                              verbose_name='Состав Гостей', chained_field='team_guest',
-                                              chained_model_field='team', blank=True)
+    # chained_field = 'team_home',
+    # chained_model_field = 'team',
+
+    team_guest_start = models.ManyToManyField(Player, related_name='player_in_start_guest',
+                                              verbose_name='Состав Гостей', blank=True)
+
+    # chained_field='team_guest',
+    #                                               chained_model_field='team',
     is_played = models.BooleanField('Сыгран', default=False)
 
     comment = models.CharField('Комментарий к матчу', max_length=1024, blank=True, null=True)
@@ -252,6 +256,15 @@ class Goal(models.Model):
             self.match.save(update_fields=['score_guest'])
         super(Goal, self).save(*args, **kwargs)
 
+    def delete(self, *args, **kwargs):
+        if self.match.team_home == self.team:
+            self.match.score_home -= 1
+            self.match.save(update_fields=['score_home'])
+        elif self.team == self.match.team_guest:
+            self.match.score_guest -= 1
+            self.match.save(update_fields=['score_guest'])
+        super(Goal, self).delete(*args, **kwargs)
+
     def __str__(self):
         return 'на {}:{} от {}({}) в {}'.format(self.time_min, self.time_sec, self.author, self.assistent, self.match)
 
@@ -270,10 +283,10 @@ class Substitution(models.Model):
                              on_delete=models.SET_NULL)
 
     player_out = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Ушёл',
-                                   related_name='replaced', blank=True, null=True,
+                                   related_name='replaced', null=True,
                                    on_delete=models.SET_NULL)
     player_in = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Вышел',
-                                  related_name='join_game', blank=True, null=True,
+                                  related_name='join_game', null=True,
                                   on_delete=models.SET_NULL)
     time_min = models.SmallIntegerField('Минута')
     time_sec = models.SmallIntegerField('Секунда')
