@@ -3,7 +3,9 @@
         font-size: 18px;
         text-decoration: none;
     }
+    .main-col {
 
+    }
 </style>
 
 <table class="table table-hover">
@@ -32,12 +34,11 @@
 
             <th scope="row" width="5%">{{ forloop.counter }}</th>
 
-            <td class="text-left px-0" width="32%">
+            <td class="text-left px-0" width="34%">
 
-                <a class="text-dark font-weight-bold h5" href="{{ team.0.get_absolute_url }}"
-                   class="h5"><img
-                        src="{{ team.0.logo.url }}" alt="{{ team.0.title }}" width="35" height="35"
-                        class="mr-1">{% if team.0.title|length < 18 %}{{ team.0.title }}{% else %}{{ team.0.short_title }}{% endif %}</a>
+                <a class="text-dark font-weight-bold h5" href="{{ team.0.get_absolute_url }}"><img
+                        src="{{ team.0.logo.url }}" alt="{{ team.0.title }}" width="30" height="30"
+                        class="mr-1">{% if team.0.title|length < 20 %}{{ team.0.title }}{% else %}{{ team.0.short_title }}{% endif %}</a>
             </td>
             <td width="6%">{{ team.1 }}</td>
             <td width="6%">{{ team.2 }}</td>
@@ -48,7 +49,7 @@
             <td width="6%" {% if team.7 > 0 %} class="text-success"
                                     {% elif team.7 < 0 %}class="text-danger"{% endif %}>{{ team.7 }}</td>
             <td width="6%">{{ team.8 }}</td>
-            <td class="team-form" width="15%">{% for result in team.9 %}
+            <td class="team-form p-1" width="13%">{% for result in team.9 %}
                 <a href="{{ result.0.get_absolute_url }}" class="fa fa-circle{% if result.1 == 1 %}
                                                                        text-success
                                                                                   {% elif result.1 == -1 %}
