@@ -14,7 +14,7 @@ from django.views.generic.base import View
 from pytils.translit import slugify
 
 from .forms import CommentForm, EditProfileForm, PostForm
-from .models import Post, Profile, LikeDislike, Category, Themes, Comment
+from .models import Post, Profile, LikeDislike, Category, Themes, Comment, NewComment
 
 
 # Вьюха для списка постов
@@ -232,6 +232,9 @@ class ProfileDetail(DetailView):
         prof = context['profile']
         prof.views = prof.views + 1
         prof.save()
+        comments = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Profile))
+        context['comments'] = comments
+        print(comments)
         return context
 
 

@@ -157,10 +157,8 @@
     </div>
 
 
-
-
-
-
-
 {% endblock %}
 
+{% block comments %}
+    {% include 'core/include/new_comments.html' with object=profile comments=comments %}
+{% endblock %}

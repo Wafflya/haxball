@@ -1,0 +1,252 @@
+{% load static %}
+{% load user_tags %}
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static "core/include/comments.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
+{% endblock %}
+{% block scripts %}
+    <script>
+        function ChangeText(Element) {
+            if (Element.innerHTML == '<i class="fa fa-chevron-up"></i>Скрыть ответы') Element.innerHTML = '<i class="fa fa-chevron-down"></i>Показать ответы';
+            else Element.innerHTML = '<i class="fa fa-chevron-up"></i>Скрыть ответы';
+        }
+    </script>
+{% endblock %}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-5" style="border-radius: 20px 20px 0px 0px">
+            {% if profile.commentable %}
+                <div class="card-body card-body-comment">
+                    {% if comments.count > 0 %}
+                        <h4 class="card-title">Последние комментарии </h4>
+                    {% elif profile.commentable %}
+                        <h6 class="card-subtitle">Здесь пока пусто, не хочешь быть первым?</h6>
+                    {% endif %}
+                    <!-- <h6 class="card-subtitle">Комментарии</h6> -->
+                </div>
+            {% endif %}
+            <div class="comment-widgets m-b-20">
+                {% for comment in comments %}
+
+                    <!-- Непосредственно комментарий -->
+                    {% if comment.is_parent %}
+                        <div class="d-flex flex-row comment-row" id="r{{ comment.id }}">
+                            <div class="p-2">
+                            <span class="round">
+                                <a href="{{ comment.author.user_profile.get_absolute_url }}">
+                                <img src="{{ comment.author.user_profile.avatar.url }}"
+                                     alt="{{ comment.author.username }}" width="50">
+                                </a>
+                            </span>
+                            </div>
+                            <div class="comment-text w-100">
+                                <div class="d-flex justify-content-between">
+                                    <a href="{{ comment.author.user_profile.get_absolute_url }}">
+                                        <h5 class="m-0">
+                                            {% for icon in comment.author.user_profile.user_icon.all %}
+                                                <img src="{{ icon.image.url }}" width="16px" height="16px"
+                                                     title="{{ icon.description }}">
+                                            {% endfor %}
+                                            {{ comment.author.username }}
+                                            <span class="badge p-0">
+                                            <span class="badge badge-pill
+                            {% if comment.author.user_profile.karma >= 0 %}badge-success{% else %}badge-danger{% endif %}">{{ comment.author.user_profile.karma }}
+                                            </span>
+                                            </span>
+                                        </h5>
+                                    </a>
+                                    {% if user.is_superuser or comment.author == user and comment|can_edit %}
+                                        <span>
+
+                                            <a href="{% url 'core:edit_comment' comment.id %}"
+                                               class="text-warning" title="Редактировать">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
+
+                                            <!--<a href="#" class="text-danger">
+                                            <i class="fa fa-times" aria-hidden="true" style="font-size: 20px"></i>
+                                            </a>-->
+                                        </span>
+                                    {% endif %}
+                                </div>
+
+                                <div class="comment-footer">
+                                <span class="date text-muted small">
+                                    <i class="fa fa-calendar text-primary"
+                                       aria-hidden="true"></i>  {{ comment.created|date:"SHORT_DATE_FORMAT" }}
+                                    <i class="fa fa-clock-o text-primary"
+                                       aria-hidden="true"></i>{{ comment.created|time:"H:i" }}
+                                </span>
+
+                                    {% include 'core/include/like_dislike_comment.html' %}
+
+
+                                    <span class="action-icons">
+                                        {% if user.is_authenticated %}
+                                            <a href="#addcomment"
+                                               onclick="addComment('{{ comment.author.username }}','{{ comment.id }}')">
+                                                <i class="fa fa-reply"></i>
+                                            </a>
+                                        {% else %}
+                                            <a data-toggle="modal" data-target="#loginModal" style="cursor: pointer">
+                                                <i class="fa fa-reply"></i>
+                                            </a>
+                                        {% endif %}
+                                </span>
+                                </div>
+                                <div class="comment-body">
+                                    {{ comment.body|safe|linebreaks }}
+                                </div>
+
+                                <div class="comment-footer">
+                                    {% if comment.childs_count > 2 %}
+                                        <a href="#commentcollapse{{ comment.id }}" data-toggle="collapse"
+                                           aria-expanded="true"
+                                           onclick="ChangeText(this)"
+                                           aria-controls="commentcollapse{{ comment.id }}" class="small"><i
+                                                class="fa fa-chevron-up"></i>Скрыть ответы</a>
+                                        <small>({{ comment.childs_count }})</small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% if comment.has_childs %}
+                            {% if comment.childs_count > 2 %}
+                                <div class="collapse show" id="commentcollapse{{ comment.id }}">
+                            {% endif %}
+                        {% for children in comment.all_childs %}
+                            <div class="d-flex flex-row comment-row" style="padding-left: 100px"
+                                 id="r{{ children.id }}">
+                                <div class="p-2">
+                            <span class="round">
+                                <a href="{{ children.author.user_profile.get_absolute_url }}">
+                                <img src="{{ children.author.user_profile.avatar.url }}"
+                                     alt="{{ children.author.username }}" width="50">
+                                </a>
+                            </span>
+                                </div>
+                                <div class="comment-text w-100">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-inline-flex">
+                                            <a href="{{ children.author.user_profile.get_absolute_url }}">
+                                                <h5 class="m-0">
+                                                    {% for icon in children.author.user_profile.user_icon.all %}
+                                                        <img src="{{ icon.image.url }}" width="16px" height="16px"
+                                                             title="{{ icon.description }}">
+                                                    {% endfor %}
+                                                    {{ children.author.username }}
+                                                    <span class="badge p-0 mr-2">
+                                                        <span class="badge badge-pill
+                                                            {% if children.author.user_profile.karma >= 0 %}badge-success{% else %}badge-danger{% endif %}">{{ children.author.user_profile.karma }}
+                                                        </span>
+                                                    </span>
+
+                                                </h5>
+                                            </a>
+
+                                            <i style="align-self: flex-end; margin-bottom: 2px;"> ответил </i>
+                                            <a href="{{ children.parent.author.user_profile.get_absolute_url }}">
+                                                <h5 class="m-0 ml-2">
+                                                    {% for icon in children.parent.author.user_profile.user_icon.all %}
+                                                        <img src="{{ icon.image.url }}" width="16px" height="16px"
+                                                             title="{{ icon.description }}">
+                                                    {% endfor %}
+                                                    {{ children.parent.author.username }}
+                                                </h5>
+                                            </a>
+                                        </div>
+                                        {% if user.is_superuser or children.author == user and children|can_edit %}
+                                            <span>
+
+                                            <a href="{% url 'core:edit_comment' children.id %}"
+                                               class="text-warning" title="Редактировать">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
+
+                                                <!--<a href="#" class="text-danger">
+                                                <i class="fa fa-times" aria-hidden="true" style="font-size: 20px"></i>
+                                                </a>-->
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="comment-footer">
+                                <span class="date text-muted small">
+                                    <i class="fa fa-calendar text-primary"
+                                       aria-hidden="true"></i>  {{ children.created|date:"SHORT_DATE_FORMAT" }}
+                                    <i class="fa fa-clock-o text-primary"
+                                       aria-hidden="true"></i>{{ children.created|time:"H:i" }}
+                                    <!-- {{ children.created|timesince }} назад -->
+                                </span>
+
+                                        <!-- ВОТ ТУТА -->
+                                        {% include 'core/include/like_dislike_comment.html' with comment=children %}
+
+
+                                        <span class="action-icons">
+                                                {% if user.is_authenticated %}
+                                                    <a href="#addcomment"
+                                                       onclick="addComment('{{ children.author.username }}','{{ children.id }}')">
+                                                            <i class="fa fa-reply"></i>
+                                                        </a>
+                                                {% else %}
+                                                    <a data-toggle="modal" data-target="#loginModal"
+                                                       style="cursor: pointer">
+                                                                    <i class="fa fa-reply"></i>
+                                                    </a>
+                                                {% endif %}
+
+
+
+                                </span>
+                                    </div>
+                                    <div class="comment-body">
+                                        {{ children.body|safe|linebreaks }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        {% if comment.childs_count > 2 %}
+                            </div>
+                        {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+
+            </div>
+            {% if user.is_authenticated and profile.commentable %}
+                {#  include 'core/include/form_comment.html' #}
+            {% elif profile.commentable %}
+                <h6 class="text-center">
+                    <a class="text-primary" data-toggle="modal" data-target="#loginModal" style="cursor: pointer">
+                        Войдите</a>, чтобы оставить комментарий
+                </h6>
+            {% endif %}
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+
+{% if object.comments.count > 2 %}
+    {% include "core/include/pagination.html" with page=comments %}
+{% endif %}
+
+<script>
+    function addComment(name, id) {
+        document.getElementById('contactparent').value = id
+        document.getElementById('contactcomment').innerText = `${name},`
+    }
+
+    $('#addcomment').submit(function () {
+        $(this).find(':input[type=submit]').prop('disabled', true);
+    });
+</script>

@@ -80,3 +80,11 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ('created', 'author')
     search_fields = ('body',)
     form = CommentAdminForm
+
+
+@admin.register(NewComment)
+class NewCommentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'author', 'created', 'body', 'content_type', 'object_id', 'content_object')
+    list_filter = ('created', 'author')
+    search_fields = ('body',)
+    form = CommentAdminForm

@@ -124,6 +124,38 @@ class Post(models.Model):
         verbose_name_plural = 'Посты'
 
 
+# Модель для "правильных" комментариев
+class NewComment(models.Model):
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey()
+    author = models.ForeignKey(User, verbose_name='Автор', related_name='n_comments_by_user', on_delete=models.CASCADE)
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    parent = models.ForeignKey('self', verbose_name='Родитель', on_delete=models.SET_NULL, blank=True, null=True,
+                               related_name="n_childs")
+    votes = GenericRelation(LikeDislike, related_query_name='n_comments')
+
+    class Meta:
+        verbose_name = 'Комментарий 2'
+        verbose_name_plural = 'Комментарии'
+        ordering = ('-created',)
+
+    def __str__(self):
+        return 'Комментарий от {} к {}'.format(self.author, self.content_type)
+
+    def is_parent(self):
+        return self.parent == None
+
+    def has_childs(self):
+        return self.n_childs.count() > 0
+
+    def all_childs(self):
+        return sorted(list(bfs(self)), key=lambda x: x.created)
+
+    def childs_count(self):
+        return len(list(bfs(self)))
+
 # Модель для комментария
 class Comment(models.Model):
     post = models.ForeignKey(Post, verbose_name='Место', related_name='comments', on_delete=models.CASCADE)
@@ -184,6 +216,8 @@ class Profile(models.Model):
     discord = models.CharField(max_length=100, blank=True)
     views = models.PositiveIntegerField(default=0)
     karma = models.SmallIntegerField(default=0)
+    comments = GenericRelation(NewComment, related_query_name='profile_comments')
+    commentable = models.BooleanField("Комментируемый профиль", default=True)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
