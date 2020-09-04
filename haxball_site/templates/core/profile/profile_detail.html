@@ -11,6 +11,7 @@
     </style>
 {% endblock %}
 {% block scripts %}
+    <script type="text/javascript" src="{% static "core/js/like-dislike.js" %}"></script>
     <script>
 
         function myFunction() {
@@ -130,7 +131,7 @@
                     <div class="row">
                         <div class="col-sm-4 text-center">
                             <p class="m-b-10 f-w-600"><img src="{% static "img/ico/comment_1.png" %}"></p>
-                            <h6 class="text-primary f-w-400">{{ profile.name.comments_by_user.count }}</h6>
+                            <h6 class="text-primary f-w-400">{{ profile.name.n_comments_by_user.count }}</h6>
                         </div>
                         <div class="col-sm-4 text-center">
                             <p class="m-b-10 f-w-600"><img src="{% static "img/ico/like_1.png" %}"></p>

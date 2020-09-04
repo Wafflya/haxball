@@ -2,10 +2,15 @@ from datetime import date
 
 from colorfield.fields import ColorField
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from smart_selects.db_fields import ChainedForeignKey, ChainedManyToManyField
+
+#from django.db.models import
+
+from core.models import NewComment
 
 
 class FreeAgent(models.Model):
@@ -104,6 +109,8 @@ class League(models.Model):
     slug = models.SlugField(max_length=250)
     created = models.DateTimeField('Создана', auto_now_add=True)
     teams = models.ManyToManyField(Team, related_name='leagues', verbose_name='Команды в лиге')
+    comments = GenericRelation(NewComment, related_query_name='league_comments')
+    commentable = models.BooleanField("Комментируемый турнир", default=True)
 
     def __str__(self):
         return '{}, {}'.format(self.title, self.championship)

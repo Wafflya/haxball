@@ -11,9 +11,9 @@
 
     <div class="btn-group-vertical">
         {% for comment in last_comments %}
-            <a type="button" href="{{ comment.post.get_absolute_url }}#r{{ comment.id }}" class="btn btn-secondary btn-block text-right"
+            <a type="button" href="{{ comment.content_object.get_absolute_url }}#r{{ comment.id }}" class="btn btn-secondary btn-block text-right"
                data-toggle="tooltip" data-placement="right" title="от {{ comment.author }}">
-                <div class="d-flex justify-content-between">{{ comment.post.title|truncatechars:22 }} <img
+                <div class="d-flex justify-content-between">{{ comment.content_object|truncatechars:22 }} <img
                         src="{% static "img/ico/reply.png" %}" height="30" width="30"></div>
             </a>
 

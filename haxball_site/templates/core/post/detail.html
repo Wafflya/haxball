@@ -18,7 +18,6 @@
     <script type="text/javascript" src="{% static "ckeditor/ckeditor/plugins/spoiler/spoiler.js" %}"></script>
     <!-- Аякс-скрипт проставления лайков-дизлайков к постам -->
     <script type="text/javascript" src="{% static "core/js/like-dislike.js" %}"></script>
-
 {% endblock %}
 {% block post %}
 
@@ -57,7 +56,7 @@
             </p>
         </div>
         <div class="card-footer d-inline-flex justify-content-between" style="cursor: pointer">
-            <span class="text-muted"> Комментариев: {{ post.comments.count }} </span>
+            <span class="text-muted"> Комментариев: {{ comments.count }} </span>
 
             <div>
 
@@ -83,6 +82,7 @@
 {% endblock %}
 
 {% block comments %}
-    {% include 'core/include/comments.html' with object=post comments=post_comments %}
+    {% include 'core/include/new_comments.html' with object=post comments=comments %}
 {% endblock %}
+
 

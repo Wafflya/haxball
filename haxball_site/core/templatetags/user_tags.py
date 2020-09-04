@@ -1,14 +1,19 @@
 from datetime import date, datetime
 
 from django import template
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Count, Q
-from django.db.models import Max
 from django.utils import timezone
 from online_users.models import OnlineUserActivity
 
-from ..models import Post, Comment
+from ..models import Post, NewComment
 
 register = template.Library()
+
+
+@register.filter
+def get_class(value):
+    return value.__class__.__name__
 
 
 # тег для поискса кармы юзера(профиля), будем писать в профиль
@@ -32,6 +37,7 @@ def karma(profile):
     profile.save(update_fields=['karma'])
     return {'k': s - samo}
 """
+
 
 # Упоролся и написал своё вычисление возраста 1 цифрой, т.к. встроенный
 # таймсинс обрезает с месяцами... хз, надо доработать будет, чтобы писало возраст красиво, но хз зачем так из-за такой
@@ -71,7 +77,11 @@ def user_last_activity(user):
 @register.inclusion_tag('core/include/forum/last_activity_in_category.html')
 def forum_last_activity(category):
     last_post = Post.objects.filter(category=category).order_by('-created').first()
-    last_comment = Comment.objects.filter(post__category=category).order_by('-created').first()
+    # obj = ContentType.objects.get_for_model(obj)
+    last_comment = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Post),
+                                             post_comments__category=category).order_by('-created').first()
+
+
     if last_comment == None and last_post == None:
         return {'last_act': None}
     elif last_comment == None:
@@ -83,6 +93,7 @@ def forum_last_activity(category):
             return {'last_act': last_comment.created}
         else:
             return {'last_act': last_post.created}
+
 
 
 # Сайдбар для пользователей онлайн(по дефолту 15 минут)
@@ -99,12 +110,36 @@ def show_users_online(count):
 # но максимум 1 для каждого поста(если 3 коммента в одном посте были последними - выведет 1)
 @register.inclusion_tag('core/include/sidebar_for_last_activity.html')
 def show_last_activity(count=10):
+    # Последняя активность ваще везде-везде
+    a = NewComment.objects.order_by('-created')[:150]
+    content = set()
+    last = []
+    for com in a:
+        if len(content) >= count:
+            break
+
+        if com.content_object in content:
+            continue
+        else:
+            last.append(com)
+            content.add(com.content_object)
+
+    return {'last_comments': last}
+    # print(len(content))
+    # last = list(content).sort(key=lambda x: x.created)
+    # print(last)
+    # a = NewComment.objects.values(content_object).distinct()
+    # print(a)
+
+
+"""
     last_com = []
     last_comments = Post.objects.annotate(last_comment=Max('comments__created')).order_by('-last_comment')
     for i in last_comments:
         if len(i.comments.all()) > 0:
             last_com.append(i.comments.order_by('created').last())
     return {'last_comments': last_com[:count]}
+"""
 
 
 # Топ лайков за ТЕКУЩИЙ день, неделя, месяц, год
@@ -114,23 +149,22 @@ def show_top_comments(count=5, for_year=2020):
     year, week, day_of_week = my_date.isocalendar()
     day = my_date.day
     month = my_date.month
-    top_com_today = Comment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(
+    top_com_today = NewComment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(
         dislike_count=Count('votes', filter=Q(votes__vote__lt=0))).filter(created__year=year, created__month=month,
                                                                           created__day=day).order_by('-like_count')[
                     :count]
-    top_com_month = Comment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(
+    top_com_month = NewComment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(
         dislike_count=Count('votes', filter=Q(votes__vote__lt=0))).filter(created__year=year,
                                                                           created__month=month).order_by('-like_count')[
                     :count]
-    top_com_year = Comment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(
+    top_com_year = NewComment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(
         dislike_count=Count('votes', filter=Q(votes__vote__lt=0))).filter(created__year=year).order_by('-like_count')[
                    :count]
 
     week_start = my_date - timezone.timedelta(days=day_of_week - 1, hours=my_date.hour, minutes=my_date.minute)
 
     week_end = my_date + timezone.timedelta(days=7 - day_of_week, hours=23 - my_date.hour, minutes=60 - my_date.minute)
-    print(week_start, week_end)
-    top_com_week = Comment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(
+    top_com_week = NewComment.objects.annotate(like_count=Count('votes', filter=Q(votes__vote__gt=0))).annotate(
         dislike_count=Count('votes', filter=Q(votes__vote__lt=0))).filter(created__gt=week_start,
                                                                           created__lt=week_end).order_by('-like_count')[
                    :count]

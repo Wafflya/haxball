@@ -6,14 +6,14 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import F, Max
 from django.db.models.functions import Coalesce
-from django.http import HttpResponse, request
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 from pytils.translit import slugify
 
-from .forms import CommentForm, EditProfileForm, PostForm
+from .forms import CommentForm, EditProfileForm, PostForm, NewCommentForm
 from .models import Post, Profile, LikeDislike, Category, Themes, Comment, NewComment
 
 
@@ -120,28 +120,29 @@ def post_edit(request, slug, pk):
 
 # edit comment
 def comment_edit(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
+    comment = get_object_or_404(NewComment, pk=pk)
+    obj = comment.content_type.get_object_for_this_type(pk=comment.object_id)
     if request.method == 'POST':
         if request.user == comment.author and (
                 timezone.now() - comment.created < timezone.timedelta(minutes=10)) or request.user.is_superuser:
-            form = CommentForm(request.POST, instance=comment)
+            form = NewCommentForm(request.POST, instance=comment)
         else:
             return HttpResponse('Ошибка доступа или время истекло')
 
         if form.is_valid():
             comment = form.save(commit=False)
             comment.save()
-            return redirect(comment.post.get_absolute_url())
+            return redirect(obj.get_absolute_url())
         else:
             comment.delete()
-            return redirect(comment.post.get_absolute_url())
+            return redirect(obj.get_absolute_url())
     else:
         if request.user == comment.author and (
                 timezone.now() - comment.created < timezone.timedelta(minutes=15)) or request.user.is_superuser:
-            form = CommentForm(instance=comment)
+            form = NewCommentForm(instance=comment)
         else:
             return HttpResponse('Ошибка доступа или время истекло')
-    return render(request, 'core/post/edit_comment.html', {'post': comment.post, 'comment_form': form})
+    return render(request, 'core/post/edit_comment.html', {'comment_form': form})
 
 
 # Вьюха для фасткапов
@@ -177,12 +178,7 @@ class TournamentsView(ListView):
 
 # Вьюха для поста и комментариев к нему.
 # С одной стороны удобно одним методом, с другой-хезе как правильно надо)
-# Учитывая, что потом пост-комменты будут использоваться для форума.. Такие дела
-def post_detail(request, slug, id):
-    post = get_object_or_404(Post, slug=slug,
-                             id=id)
-    # List of active comments for this post
-
+"""
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
         page = request.POST.get('page')
@@ -199,26 +195,41 @@ def post_detail(request, slug, id):
         post.views = F('views') + 1
         post.save()
         comment_form = CommentForm()
+        """
+# Учитывая, что потом пост-комменты будут использоваться для форума.. Такие дела
+class PostDetailView(DetailView):
+    model = Post
+    context_object_name = 'post'
+    template_name = 'core/post/detail.html'
 
-    comments_obj = Comment.objects.filter(post=post, parent=None)
-    paginat = Paginator(comments_obj, 25)
-    page = request.GET.get('page')
 
-    try:
-        post_comments = paginat.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer deliver the first page
-        post_comments = paginat.page(1)
-    except EmptyPage:
-        # If page is out of range deliver last page of results
-        post_comments = paginat.page(paginat.num_pages)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        post = context['post']
+        post.views = post.views + 1
+        post.save()
+        comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Post), object_id=post.id,
+                                             parent=None)
 
-    return render(request,
-                  'core/post/detail.html',
-                  {'post': post,
-                   'post_comments': post_comments,
-                   'page': page,
-                   'comment_form': comment_form})
+        print(comments_obj)
+        paginate = Paginator(comments_obj, 5)
+        page = self.request.GET.get('page')
+
+        try:
+            comments = paginate.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer deliver the first page
+            comments = paginate.page(1)
+        except EmptyPage:
+            # If page is out of range deliver last page of results
+            comments = paginate.page(paginate.num_pages)
+
+        context['page'] = page
+        context['comments'] = comments
+        comment_form = NewCommentForm()
+        context['comment_form'] = comment_form
+        return context
+
 
 
 # Вьюха для профиля пользователя MultipleObjectMixin
@@ -232,14 +243,44 @@ class ProfileDetail(DetailView):
         prof = context['profile']
         prof.views = prof.views + 1
         prof.save()
-        comments = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Profile))
+        comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Profile), object_id=prof.id,
+                                             parent=None)
+
+        paginate = Paginator(comments_obj, 5)
+        page = self.request.GET.get('page')
+
+        try:
+            comments = paginate.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer deliver the first page
+            comments = paginate.page(1)
+        except EmptyPage:
+            # If page is out of range deliver last page of results
+            comments = paginate.page(paginate.num_pages)
+
+        context['page'] = page
         context['comments'] = comments
-        print(comments)
+        comment_form = NewCommentForm()
+        context['comment_form'] = comment_form
         return context
 
 
-# class AddPost(DetailView):
-#    def post(self, request, ):
+class AddCommentView(View):
+    model = None
+
+    def post(self, request, pk):
+        obj = self.model.objects.get(id=pk)
+        if request.method == 'POST':
+            comment_form = NewCommentForm(data=request.POST)
+            new_com = comment_form.save(commit=False)
+            if request.POST.get("parent", None):
+                new_com.parent_id = int(request.POST.get('parent'))
+            new_com.object_id = obj.id
+            new_com.author = request.user
+            new_com.content_type = ContentType.objects.get_for_model(obj)
+            new_com.save()
+            return redirect(obj.get_absolute_url())
+
 
 
 class EditMyProfile(DetailView, View):
@@ -263,6 +304,7 @@ class VotesView(View):
 
     def post(self, request, id):
         obj = self.model.objects.get(id=id)
+        print(obj)
         author_profile = obj.author.user_profile
         # GenericForeignKey не поддерживает метод get_or_create
         try:

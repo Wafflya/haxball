@@ -10,6 +10,9 @@
         }
     </style>
 {% endblock %}
+{% block scripts %}
+    <script type="text/javascript" src="{% static "core/js/like-dislike.js" %}"></script>
+{% endblock %}
 {% block title %}Чемпионат | {{ league.title }}          cis-haxball.com {% endblock %}
 {% block profile_of_user %}
     <div class="card mb-4 mt-2" style="border-radius: 25px">
@@ -66,8 +69,9 @@
                                             <tbody style="border-radius: 25px;">
                                             {% for pl in league|top_goalscorers %}
                                                 <tr style="border-radius: 25px;">
-                                                    <td width="16%" class="px-1" style="border-radius: 15px 0 0 15px;"><img
-                                                            src="{{ pl.team.logo.url }}" width="25px" height="25px">
+                                                    <td width="16%" class="px-1" style="border-radius: 15px 0 0 15px;">
+                                                        <img
+                                                                src="{{ pl.team.logo.url }}" width="25px" height="25px">
                                                     </td>
                                                     <td class="text-left pl-1">
                                                         {% if pl.name %}
@@ -107,8 +111,9 @@
                                             <tbody style="border-radius: 25px;">
                                             {% for pl in league|top_assistent %}
                                                 <tr style="border-radius: 25px;">
-                                                    <td width="16%" class="px-1" style="border-radius: 15px 0 0 15px;"><img
-                                                            src="{{ pl.team.logo.url }}" width="25px" height="25px">
+                                                    <td width="16%" class="px-1" style="border-radius: 15px 0 0 15px;">
+                                                        <img
+                                                                src="{{ pl.team.logo.url }}" width="25px" height="25px">
                                                     </td>
                                                     <td width="68%" class="text-left pl-1">
                                                         {% if pl.name %}
@@ -150,8 +155,9 @@
                                             <tbody style="border-radius: 25px;">
                                             {% for pl in league|top_clean_sheets %}
                                                 <tr style="border-radius: 25px;">
-                                                    <td class="px-1" width="16%" style="border-radius: 15px 0 0 15px;"><img
-                                                            src="{{ pl.team.logo.url }}" width="25px" height="25px">
+                                                    <td class="px-1" width="16%" style="border-radius: 15px 0 0 15px;">
+                                                        <img
+                                                                src="{{ pl.team.logo.url }}" width="25px" height="25px">
                                                     </td>
                                                     <td class="text-left pl-1">
                                                         {% if pl.name %}
@@ -207,7 +213,8 @@
 
                                     <div class="col-5 text-right">
                                         <h5><a class="text-dark" href="{{ match.team_home.get_absolute_url }}"
-                                               class="h5">{{ match.team_home.title }}<img src="{{ match.team_home.logo.url }}" alt="{{ match.team_home.title }}"
+                                               class="h5">{{ match.team_home.title }}<img
+                                                src="{{ match.team_home.logo.url }}" alt="{{ match.team_home.title }}"
                                                 width="25" height="25"
                                                 class="ml-1"></a></h5>
                                     </div>
@@ -244,4 +251,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block comments %}
+    {% include 'core/include/new_comments.html' with object=league comments=comments %}
 {% endblock %}

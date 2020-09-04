@@ -11,17 +11,19 @@
             else Element.innerHTML = '<i class="fa fa-chevron-up"></i>Скрыть ответы';
         }
     </script>
+
+
 {% endblock %}
 
 
-<div class="row">
+<div class="row mt-4">
     <div class="col-md-12">
         <div class="card mb-5" style="border-radius: 20px 20px 0px 0px">
-            {% if profile.commentable %}
+            {% if object.commentable %}
                 <div class="card-body card-body-comment">
-                    {% if comments.count > 0 %}
-                        <h4 class="card-title">Последние комментарии </h4>
-                    {% elif profile.commentable %}
+                    {% if object.comments.count > 0 %}
+                        <h4 class="card-title">Последние комментарии ({{ object.comments.count }})</h4>
+                    {% elif object.commentable %}
                         <h6 class="card-subtitle">Здесь пока пусто, не хочешь быть первым?</h6>
                     {% endif %}
                     <!-- <h6 class="card-subtitle">Комментарии</h6> -->
@@ -217,9 +219,15 @@
 
 
             </div>
-            {% if user.is_authenticated and profile.commentable %}
-                {#  include 'core/include/form_comment.html' #}
-            {% elif profile.commentable %}
+            {% if user.is_authenticated and object.commentable %}
+                {% if object|get_class == 'Profile' %}
+                    {% include 'core/include/new_form_comment.html' %}
+                {% elif object|get_class == 'League' %}
+                    {% include 'core/include/new_form_comment_league.html' %}
+                {% elif object|get_class == 'Post' %}
+                    {% include 'core/include/new_form_comment_post.html' %}
+                {% endif %}
+            {% elif object.commentable %}
                 <h6 class="text-center">
                     <a class="text-primary" data-toggle="modal" data-target="#loginModal" style="cursor: pointer">
                         Войдите</a>, чтобы оставить комментарий

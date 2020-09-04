@@ -1,3 +1,5 @@
+from django.contrib.contenttypes.models import ContentType
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Count, F, Q, Sum
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -6,6 +8,8 @@ from django.views.generic import ListView, DetailView
 
 from .forms import FreeAgentForm, EditTeamProfileForm
 from .models import FreeAgent, Team, Match, League, Player
+from core.forms import NewCommentForm
+from core.models import NewComment, Profile
 
 
 class FreeAgentList(ListView):
@@ -97,75 +101,30 @@ class LeagueDetail(DetailView):
     queryset = League.objects.filter(is_cup=False, priority=1, championship__is_active=True)
     template_name = 'tournament/premier_league/team_table.html'
 
-    """
-    a = Team.objects.values('title').filter(leagues=league).annotate(
-        points=(
-                Count(F('guest_matches'), distinct=True,
-                      filter=Q(guest_matches__league=league, guest_matches__is_played=True), ) +
-                Count(F('home_matches'), distinct=True,
-                      filter=Q(home_matches__league=league, home_matches__is_played=True))
-        )
-    ).order_by('-points')
-    print(a.query)
-    for i in a:
-        print(i)
-"""
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        league = context['league']
 
-    #    works_query = Team.objects.filter(leagues=league).annotate(
-    #        played_matchs=(Count('home_matches', filter=F('home_matches__is_played')) + Count('guest_matches', filter=F(
-    #            'guest_matches__is_played')))).order_by('-played_matchs')
-    #   Попробуем по-тупому, раз через запросик к Джанго-Орм кишка тонка(((((((
-    """def get_queryset(self):
+        comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(League), object_id=league.id,
+                                             parent=None)
+        print(comments_obj)
+        paginate = Paginator(comments_obj, 5)
+        page = self.request.GET.get('page')
+
         try:
-            league = League.objects.get(is_cup=False, championship__is_active=True, priority=1)
-        except:
-            league = None
+            comments = paginate.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer deliver the first page
+            comments = paginate.page(1)
+        except EmptyPage:
+            # If page is out of range deliver last page of results
+            comments = paginate.page(paginate.num_pages)
 
-        b = list(Team.objects.filter(leagues=league))
-        points = [0 for _ in range(len(b))]
-        diffrence = [0 for _ in range(len(b))]
-        scores = [0 for _ in range(len(b))]
-        for i, team in enumerate(b):
-            matches = Match.objects.filter((Q(team_home=team) | Q(team_guest=team)), league=league, is_played=True)
-            win_count = 0
-            draw_count = 0
-            loose_count = 0
-            goals_scores_all = 0
-            goals_consided_all = 0
-            for m in matches:
-                score_team = 0
-                score_opp = 0
-                for g in m.match_goal.all():
-                    if g.team == team:
-                        score_team += 1
-                    else:
-                        score_opp += 1
-                for og in m.match_event.filter(event='OG'):
-                    if og.team == team:
-                        score_opp += 1
-                    else:
-                        score_team += 1
-
-                goals_scores_all += score_team
-                goals_consided_all += score_opp
-
-                if score_team > score_opp:
-                    win_count += 1
-                elif score_team == score_opp:
-                    draw_count += 1
-            points[i] = win_count * 3 + draw_count * 1
-            diffrence[i] = goals_scores_all - goals_consided_all
-            scores[i] = goals_scores_all
-
-        l = zip(b, points, diffrence, scores)
-
-        s1 = sorted(l, key=lambda x: x[3], reverse=True)
-        s2 = sorted(s1, key=lambda x: x[2], reverse=True)
-        ls = sorted(s2, key=lambda x: x[1], reverse=True)
-        lit = [i[0] for i in ls]
-        queryset = lit
-        return queryset
-"""
+        context['page'] = page
+        context['comments'] = comments
+        comment_form = NewCommentForm()
+        context['comment_form'] = comment_form
+        return context
 
 
 class MatchDetail(DetailView):

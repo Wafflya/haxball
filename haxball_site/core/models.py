@@ -94,6 +94,39 @@ class Category(models.Model):
         verbose_name_plural = 'Категории'
 
 
+# Модель для "правильных" комментариев
+class NewComment(models.Model):
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey()
+    author = models.ForeignKey(User, verbose_name='Автор', related_name='n_comments_by_user', on_delete=models.CASCADE)
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    parent = models.ForeignKey('self', verbose_name='Родитель', on_delete=models.SET_NULL, blank=True, null=True,
+                               related_name="childs")
+    votes = GenericRelation(LikeDislike, related_query_name='n_comments')
+
+    class Meta:
+        verbose_name = 'Комментарий 2'
+        verbose_name_plural = 'Комментарии 2'
+        ordering = ('-created',)
+
+    def __str__(self):
+        return 'Комментарий от {} к {}'.format(self.author, self.content_type)
+
+    def is_parent(self):
+        return self.parent == None
+
+    def has_childs(self):
+        return self.childs.count() > 0
+
+    def all_childs(self):
+        return sorted(list(bfs(self)), key=lambda x: x.created)
+
+    def childs_count(self):
+        return len(list(bfs(self)))
+
+
 # Модель для поста
 class Post(models.Model):
     title = models.CharField('Заголовок', max_length=256)
@@ -109,6 +142,7 @@ class Post(models.Model):
     votes = GenericRelation(LikeDislike, related_query_name='posts')
     views = models.PositiveIntegerField(default=0)
     commentable = models.BooleanField("Комментируемая запись", default=True)
+    comments = GenericRelation(NewComment, related_query_name='post_comments')
 
     def get_absolute_url(self):
         return reverse('core:post_detail', args=[self.id, self.slug])
@@ -124,41 +158,9 @@ class Post(models.Model):
         verbose_name_plural = 'Посты'
 
 
-# Модель для "правильных" комментариев
-class NewComment(models.Model):
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey()
-    author = models.ForeignKey(User, verbose_name='Автор', related_name='n_comments_by_user', on_delete=models.CASCADE)
-    body = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
-    parent = models.ForeignKey('self', verbose_name='Родитель', on_delete=models.SET_NULL, blank=True, null=True,
-                               related_name="n_childs")
-    votes = GenericRelation(LikeDislike, related_query_name='n_comments')
-
-    class Meta:
-        verbose_name = 'Комментарий 2'
-        verbose_name_plural = 'Комментарии'
-        ordering = ('-created',)
-
-    def __str__(self):
-        return 'Комментарий от {} к {}'.format(self.author, self.content_type)
-
-    def is_parent(self):
-        return self.parent == None
-
-    def has_childs(self):
-        return self.n_childs.count() > 0
-
-    def all_childs(self):
-        return sorted(list(bfs(self)), key=lambda x: x.created)
-
-    def childs_count(self):
-        return len(list(bfs(self)))
-
 # Модель для комментария
 class Comment(models.Model):
-    post = models.ForeignKey(Post, verbose_name='Место', related_name='comments', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, verbose_name='Место', on_delete=models.CASCADE)
     author = models.ForeignKey(User, verbose_name='Автор', related_name='comments_by_user', on_delete=models.CASCADE)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
@@ -232,7 +234,7 @@ class Profile(models.Model):
         return reverse('core:profile_detail', args=[self.id, self.slug])
 
     def __str__(self):
-        return self.name.username
+        return 'Профиль {}'.format(self.name.username)
 
     class Meta:
         verbose_name = 'Профиль'
@@ -243,7 +245,7 @@ class UserIcon(models.Model):
     title = models.CharField('Название', max_length=256)
     description = models.CharField('Описание(при наведении)', max_length=100, blank=True)
     image = models.ImageField('Иконка', upload_to='user_icon/', blank=True, null=True)
-    user = models.ManyToManyField(Profile, related_name='user_icon', blank=True,)
+    user = models.ManyToManyField(Profile, related_name='user_icon', blank=True, )
 
     class Meta:
         verbose_name = 'Иконка'
