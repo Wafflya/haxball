@@ -211,8 +211,7 @@ class PostDetailView(DetailView):
         comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Post), object_id=post.id,
                                              parent=None)
 
-        print(comments_obj)
-        paginate = Paginator(comments_obj, 5)
+        paginate = Paginator(comments_obj, 25)
         page = self.request.GET.get('page')
 
         try:
@@ -246,7 +245,7 @@ class ProfileDetail(DetailView):
         comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Profile), object_id=prof.id,
                                              parent=None)
 
-        paginate = Paginator(comments_obj, 5)
+        paginate = Paginator(comments_obj, 25)
         page = self.request.GET.get('page')
 
         try:

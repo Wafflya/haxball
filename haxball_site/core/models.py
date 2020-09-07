@@ -101,7 +101,8 @@ class NewComment(models.Model):
     content_object = GenericForeignKey()
     author = models.ForeignKey(User, verbose_name='Автор', related_name='n_comments_by_user', on_delete=models.CASCADE)
     body = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
+    #auto_now_add=True
+    created = models.DateTimeField(default=timezone.now)
     parent = models.ForeignKey('self', verbose_name='Родитель', on_delete=models.SET_NULL, blank=True, null=True,
                                related_name="childs")
     votes = GenericRelation(LikeDislike, related_query_name='n_comments')
@@ -151,7 +152,7 @@ class Post(models.Model):
         return self.comments.annotate(Max('created'))
 
     def __str__(self):
-        return 'Пост: {}'.format(self.title)
+        return '{}: {}'.format(self.category, self.title)
 
     class Meta:
         verbose_name = 'Пост'
@@ -160,7 +161,7 @@ class Post(models.Model):
 
 # Модель для комментария
 class Comment(models.Model):
-    post = models.ForeignKey(Post, verbose_name='Место', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, verbose_name='Место', on_delete=models.CASCADE, related_name='post_old_comments')
     author = models.ForeignKey(User, verbose_name='Автор', related_name='comments_by_user', on_delete=models.CASCADE)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)

@@ -98,7 +98,7 @@ class TeamList(ListView):
 
 class LeagueDetail(DetailView):
     context_object_name = 'league'
-    queryset = League.objects.filter(is_cup=False, priority=1, championship__is_active=True)
+    queryset = League.objects.filter(is_cup=False, championship__is_active=True)
     template_name = 'tournament/premier_league/team_table.html'
 
     def get_context_data(self, **kwargs):
@@ -108,7 +108,7 @@ class LeagueDetail(DetailView):
         comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(League), object_id=league.id,
                                              parent=None)
         print(comments_obj)
-        paginate = Paginator(comments_obj, 5)
+        paginate = Paginator(comments_obj, 25)
         page = self.request.GET.get('page')
 
         try:
