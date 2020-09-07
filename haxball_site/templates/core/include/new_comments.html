@@ -234,6 +234,8 @@
                     <a class="text-primary" data-toggle="modal" data-target="#loginModal" style="cursor: pointer">
                         Войдите</a>, чтобы оставить комментарий
                 </h6>
+            {% elif not object.commentable and object|get_class == 'Profile' %}
+                <h5 class="text-center">Пользователь закрыл свой профиль</h5>
             {% endif %}
         </div>
 

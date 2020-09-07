@@ -28,6 +28,11 @@
                             {{ profile.karma }}
                         </span>
                         </p>
+                        <p>
+                            <input type="checkbox" class="form-check-input" id="commentableCheck" name="commentable"
+                                    {% if profile.commentable %}checked{% endif %}>
+                            <label class="form-check-label" for="commentableCheck">Разрешено комментировать</label>
+                        </p>
                     </div>
                 </div>
                 <div class="col-sm-8">

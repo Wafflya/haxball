@@ -6,6 +6,7 @@
     .main-col {
 
     }
+
 </style>
 
 <table class="table table-hover">
@@ -37,7 +38,7 @@
             <td class="text-left px-0" width="34%">
 
                 <a class="text-dark font-weight-bold h5" href="{{ team.0.get_absolute_url }}"><img
-                        src="{{ team.0.logo.url }}" alt="{{ team.0.title }}" width="30" height="30"
+                        src="{{ team.0.logo.url }}" alt="{{ team.0.title }}" width="28" height="28"
                         class="mr-1">{% if team.0.title|length < 20 %}{{ team.0.title }}{% else %}{{ team.0.short_title }}{% endif %}</a>
             </td>
             <td width="6%">{{ team.1 }}</td>
