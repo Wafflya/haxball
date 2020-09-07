@@ -10,6 +10,10 @@
         }
     </style>
 {% endblock %}
+{% block scripts %}
+    <!-- Аякс-скрипт проставления лайков-дизлайков к постам -->
+    <script type="text/javascript" src="{% static "core/js/like-dislike.js" %}"></script>
+{% endblock %}
 {% block title %}Чемпионат | {{ match }}          cis-haxball.com {% endblock %}
 
 {% block profile_of_user %}
@@ -259,4 +263,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block comments %}
+    {% include 'core/include/new_comments.html' with object=match comments=comments %}
 {% endblock %}

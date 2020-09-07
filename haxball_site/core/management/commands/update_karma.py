@@ -1,4 +1,4 @@
-from core.models import Profile, Comment, Post
+from core.models import Profile, NewComment, Post
 from django.core.management.base import BaseCommand
 
 
@@ -11,7 +11,7 @@ class Command(BaseCommand):
         for profile in a:
             s = 0
             samo = 0
-            for comment in Comment.objects.filter(author=profile.name):
+            for comment in NewComment.objects.filter(author=profile.name):
                 s += comment.votes.sum_rating()
                 samo += comment.votes.filter(user=profile.name, vote=1).count() - comment.votes.filter(user=profile.name,
                                                                                                        vote=-1).count()

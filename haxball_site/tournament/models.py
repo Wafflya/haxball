@@ -212,6 +212,8 @@ class Match(models.Model):
     score_guest = models.SmallIntegerField('Забито гостями', default=0)
     team_home_start = models.ManyToManyField(Player, related_name='player_in_start_home',
                                              verbose_name='Состав хозяев', blank=True)
+    comments = GenericRelation(NewComment, related_query_name='match_comments')
+    commentable = models.BooleanField("Комментируемый матч", default=True)
 
     # chained_field = 'team_home',
     # chained_model_field = 'team',
@@ -226,7 +228,7 @@ class Match(models.Model):
     comment = models.CharField('Комментарий к матчу', max_length=1024, blank=True, null=True)
 
     def __str__(self):
-        return 'Матч {} Тур {} и {}'.format(self.numb_tour, self.team_home.title, self.team_guest.title)
+        return 'Матч {} - {}, {} тур'.format(self.team_home.short_title, self.team_guest.short_title, self.numb_tour)
 
     def get_absolute_url(self):
         return reverse('tournament:match_detail', args=[self.id])

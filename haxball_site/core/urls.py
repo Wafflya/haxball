@@ -3,7 +3,7 @@ from django.urls import path
 
 from . import views
 from .models import Post, LikeDislike, Comment, Profile, NewComment
-from tournament.models import League
+from tournament.models import League, Match
 
 app_name = 'core'
 
@@ -46,6 +46,8 @@ urlpatterns = [
     path('add_comment/league/<int:pk>', views.AddCommentView.as_view(model=League), name='add_comment_league'),
     # Создание нового "Правильного комментария" к посту
     path('add_comment/post/<int:pk>', views.AddCommentView.as_view(model=Post), name='add_comment_post'),
+    # Создание нового "Правильного комментария" к матчу
+    path('add_comment/match/<int:pk>', views.AddCommentView.as_view(model=Match), name='add_comment_match'),
 
     # Редактирование комментария
     path('post/edit_comment/<int:pk>', views.comment_edit, name='edit_comment'),

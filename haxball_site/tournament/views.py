@@ -131,3 +131,28 @@ class MatchDetail(DetailView):
     model = Match
     context_object_name = 'match'
     template_name = 'tournament/match/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        match = context['match']
+
+        comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Match), object_id=match.id,
+                                             parent=None)
+        print(comments_obj)
+        paginate = Paginator(comments_obj, 25)
+        page = self.request.GET.get('page')
+
+        try:
+            comments = paginate.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer deliver the first page
+            comments = paginate.page(1)
+        except EmptyPage:
+            # If page is out of range deliver last page of results
+            comments = paginate.page(paginate.num_pages)
+
+        context['page'] = page
+        context['comments'] = comments
+        comment_form = NewCommentForm()
+        context['comment_form'] = comment_form
+        return context

@@ -226,6 +226,8 @@
                     {% include 'core/include/new_form_comment_league.html' %}
                 {% elif object|get_class == 'Post' %}
                     {% include 'core/include/new_form_comment_post.html' %}
+                {% elif object|get_class == 'Match' %}
+                    {% include 'core/include/new_form_comment_match.html' %}
                 {% endif %}
             {% elif object.commentable %}
                 <h6 class="text-center">
