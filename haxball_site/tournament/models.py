@@ -345,10 +345,10 @@ class OtherEvents(models.Model):
     def delete(self, *args, **kwargs):
         if self.match.team_home == self.team and self.event == 'OG':
             self.match.score_guest -= 1
-            self.match.save(update_fields=['score_home'])
+            self.match.save(update_fields=['score_guest'])
         elif self.team == self.match.team_guest and self.event == 'OG':
             self.match.score_home -= 1
-            self.match.save(update_fields=['score_guest'])
+            self.match.save(update_fields=['score_home'])
         super(OtherEvents, self).delete(*args, **kwargs)
 
 
