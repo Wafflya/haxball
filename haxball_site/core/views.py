@@ -35,7 +35,7 @@ class PostListView(ListView):
             ip_a = self.request.META.get('HTTP_X_REAL_IP')
 
         try:
-            ipp = IPAdress.objects.get(name=self.request.user)
+            ipp = IPAdress.objects.get(name=self.request.user, ip=ip_a)
             ipp.update = timezone.now()
             ipp.save(update_fields=['update'])
         except:

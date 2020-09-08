@@ -92,3 +92,4 @@ class NewCommentAdmin(admin.ModelAdmin):
 @admin.register(IPAdress)
 class IPAdressAdmin(admin.ModelAdmin):
     list_display = ('ip', 'name', 'created', 'update')
+    list_filter = ('ip','name')
