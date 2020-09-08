@@ -27,6 +27,8 @@
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,6 +179,7 @@
       <workItem from="1599213726878" duration="22798000" />
       <workItem from="1599453424761" duration="1831000" />
       <workItem from="1599455730692" duration="15989000" />
+      <workItem from="1599538294031" duration="1068000" />
     </task>
     <servers />
   </component>
@@ -245,6 +248,10 @@
     </state>
     <state x="463" y="166" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1599213854178" />
     <state x="405" y="190" key="SettingsEditor/1680.0.1680.1050/0.27.1680.1023@0.27.1680.1023" timestamp="1596015998764" />
+    <state x="449" y="414" width="372" height="161" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599538426253">
+      <screen x="0" y="0" width="1280" height="997" />
+    </state>
+    <state x="449" y="414" width="372" height="161" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.997@0.0.1280.997" timestamp="1599538426253" />
     <state x="415" y="216" width="672" height="650" key="search.everywhere.popup" timestamp="1599461736109">
       <screen x="0" y="0" width="1280" height="997" />
     </state>
