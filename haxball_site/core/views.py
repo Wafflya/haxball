@@ -28,18 +28,19 @@ class PostListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         #print(context)
-        x_forwarded_for = self.request.META.get('HTTP_X_FORWARDED_FOR')
-        if x_forwarded_for:
-            ip_a = x_forwarded_for
-        else:
-            ip_a = self.request.META.get('HTTP_X_REAL_IP')
+        if self.request.user.is_authenticated:
+            x_forwarded_for = self.request.META.get('HTTP_X_FORWARDED_FOR')
+            if x_forwarded_for:
+                ip_a = x_forwarded_for
+            else:
+                ip_a = self.request.META.get('HTTP_X_REAL_IP')
 
-        try:
-            ipp = IPAdress.objects.get(name=self.request.user, ip=ip_a)
-            ipp.update = timezone.now()
-            ipp.save(update_fields=['update'])
-        except:
-            IPAdress.objects.create(ip=ip_a, name=self.request.user)
+            try:
+                ipp = IPAdress.objects.get(name=self.request.user, ip=ip_a)
+                ipp.update = timezone.now()
+                ipp.save(update_fields=['update'])
+            except:
+                IPAdress.objects.create(ip=ip_a, name=self.request.user)
 
         return context
 
