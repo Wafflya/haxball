@@ -33,7 +33,7 @@ class PostListView(ListView):
         if x_forwarded_for:
             ip_a = x_forwarded_for
         else:
-            ip_a = self.request.META.get('REMOTE_ADDR')
+            ip_a = self.request.META.get('X-Real-IP')
 
         try:
             ipp = IPAdress.objects.get(name=self.request.user)
