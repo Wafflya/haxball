@@ -243,8 +243,11 @@ class Goal(models.Model):
     match = models.ForeignKey(Match, verbose_name='Матч', related_name='match_goal', null=True, blank=True,
                               on_delete=models.CASCADE)
 
-    team = ChainedForeignKey(Team, chained_field='match', verbose_name='Команда забила', related_name='team_goals',
-                             chained_model_field='leagues__matches_in_league', null=True,
+    #team = ChainedForeignKey(Team, chained_field='match', verbose_name='Команда забила', related_name='team_goals',
+    #                         chained_model_field='leagues__matches_in_league', null=True,
+    #                         on_delete=models.SET_NULL)
+
+    team = models.ForeignKey(Team, verbose_name='Команда забила', related_name='team_goals', null=True,
                              on_delete=models.SET_NULL)
 
     author = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Автор гола',
@@ -287,8 +290,11 @@ class Substitution(models.Model):
     match = models.ForeignKey(Match, verbose_name='Матч', related_name='match_substitutions', null=True,
                               on_delete=models.CASCADE)
 
-    team = ChainedForeignKey(Team, chained_field='match', verbose_name='Замена в команде',
-                             chained_model_field='leagues__matches_in_league', null=True,
+    #team = ChainedForeignKey(Team, chained_field='match', verbose_name='Замена в команде',
+    #                         chained_model_field='leagues__matches_in_league', null=True,
+    #                         on_delete=models.SET_NULL)
+
+    team = models.ForeignKey(Team, verbose_name='Замена в команде', related_name='team_substitution', null=True,
                              on_delete=models.SET_NULL)
 
     player_out = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Ушёл',
@@ -311,9 +317,13 @@ class Substitution(models.Model):
 class OtherEvents(models.Model):
     match = models.ForeignKey(Match, verbose_name='Матч', related_name='match_event', null=True,
                               on_delete=models.CASCADE)
-    team = ChainedForeignKey(Team, chained_field='match', verbose_name='Команда',
-                             chained_model_field='leagues__matches_in_league', null=True,
+    #team = ChainedForeignKey(Team, chained_field='match', verbose_name='Команда',
+    #                         chained_model_field='leagues__matches_in_league', null=True,
+    #                         on_delete=models.SET_NULL)
+
+    team = models.ForeignKey(Team, verbose_name='Команда', related_name='team_events', null=True,
                              on_delete=models.SET_NULL)
+
     author = ChainedForeignKey(Player, chained_field='team', chained_model_field='team', verbose_name='Автор',
                                related_name='event', null=True,
                                on_delete=models.CASCADE)
