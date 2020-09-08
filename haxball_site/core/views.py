@@ -14,7 +14,7 @@ from django.views.generic.base import View
 from pytils.translit import slugify
 
 from .forms import CommentForm, EditProfileForm, PostForm, NewCommentForm
-from .models import Post, Profile, LikeDislike, Category, Themes, Comment, NewComment
+from .models import Post, Profile, LikeDislike, Category, Themes, Comment, NewComment, IPAdress
 
 
 # Вьюха для списка постов
@@ -24,6 +24,25 @@ class PostListView(ListView):
     context_object_name = 'posts'
     paginate_by = 6
     template_name = 'core/post/list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        #print(context)
+        print(self.request.user)
+        x_forwarded_for = self.request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip_a = x_forwarded_for
+        else:
+            ip_a = self.request.META.get('REMOTE_ADDR')
+
+        try:
+            ipp = IPAdress.objects.get(name=self.request.user)
+            ipp.update = timezone.now()
+            ipp.save(update_fields=['update'])
+        except IPAdress.DoesNotExist:
+            IPAdress.objects.create(ip=ip_a, name=self.request.user)
+        print(ip_a)
+        return context
 
 
 # Смотреть все новости

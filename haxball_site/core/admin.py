@@ -88,3 +88,7 @@ class NewCommentAdmin(admin.ModelAdmin):
     list_filter = ('created', 'author')
     search_fields = ('body',)
     form = CommentAdminForm
+
+@admin.register(IPAdress)
+class IPAdressAdmin(admin.ModelAdmin):
+    list_display = ('ip', 'name', 'created', 'update')

@@ -101,7 +101,7 @@ class NewComment(models.Model):
     content_object = GenericForeignKey()
     author = models.ForeignKey(User, verbose_name='Автор', related_name='n_comments_by_user', on_delete=models.CASCADE)
     body = models.TextField()
-    #auto_now_add=True
+    # auto_now_add=True
     created = models.DateTimeField(default=timezone.now)
     parent = models.ForeignKey('self', verbose_name='Родитель', on_delete=models.SET_NULL, blank=True, null=True,
                                related_name="childs")
@@ -201,6 +201,19 @@ def bfs(root):
                 visited.add(neighbour)
                 queue.append(neighbour)
     return visited
+
+    # Модель ip-адресов пользователя
+
+
+class IPAdress(models.Model):
+    name = models.ForeignKey(User, verbose_name='', related_name='user_ips', on_delete=models.SET_NULL, null=True)
+    ip = models.GenericIPAddressField()
+    created = models.DateTimeField('Первый заход', auto_now_add=True)
+    update = models.DateTimeField('Последний заход', default=timezone.now)
+
+    class Meta:
+        verbose_name = 'IP-Адрес'
+        verbose_name_plural = 'IP-Адреса'
 
     # Модель для профиля пользователя
 
