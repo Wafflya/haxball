@@ -25,9 +25,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -177,7 +175,7 @@
       <workItem from="1599213726878" duration="22798000" />
       <workItem from="1599453424761" duration="1831000" />
       <workItem from="1599455730692" duration="15989000" />
-      <workItem from="1599538294031" duration="5052000" />
+      <workItem from="1599538294031" duration="5363000" />
     </task>
     <servers />
   </component>

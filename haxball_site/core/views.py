@@ -39,7 +39,7 @@ class PostListView(ListView):
             ipp = IPAdress.objects.get(name=self.request.user)
             ipp.update = timezone.now()
             ipp.save(update_fields=['update'])
-        except IPAdress.DoesNotExist:
+        except:
             IPAdress.objects.create(ip=ip_a, name=self.request.user)
         print(ip_a)
         return context
