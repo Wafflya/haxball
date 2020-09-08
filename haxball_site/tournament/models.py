@@ -342,6 +342,16 @@ class OtherEvents(models.Model):
             self.match.save(update_fields=['score_home'])
         super(OtherEvents, self).save(*args, **kwargs)
 
+    def delete(self, *args, **kwargs):
+        if self.match.team_home == self.team and self.event == 'OG':
+            self.match.score_home -= 1
+            self.match.save(update_fields=['score_home'])
+        elif self.team == self.match.team_guest and self.event == 'OG':
+            self.match.score_guest -= 1
+            self.match.save(update_fields=['score_guest'])
+        super(OtherEvents, self).delete(*args, **kwargs)
+
+
     def __str__(self):
         return '{}:{} {} в {}'.format(self.time_min, self.time_sec, self.event, self.match)
 
