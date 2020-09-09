@@ -211,6 +211,7 @@ class IPAdress(models.Model):
     ip = models.GenericIPAddressField()
     created = models.DateTimeField('Первый заход', auto_now_add=True)
     update = models.DateTimeField('Последний заход', default=timezone.now)
+    suspicious = models.BooleanField('Подозрительный', default=False)
 
     class Meta:
         verbose_name = 'IP-Адрес'

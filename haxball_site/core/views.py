@@ -15,6 +15,7 @@ from pytils.translit import slugify
 
 from .forms import CommentForm, EditProfileForm, PostForm, NewCommentForm
 from .models import Post, Profile, LikeDislike, Category, Themes, Comment, NewComment, IPAdress
+from haxball_site import settings
 
 
 # Вьюха для списка постов
@@ -33,7 +34,10 @@ class PostListView(ListView):
             if x_forwarded_for:
                 ip_a = x_forwarded_for
             else:
-                ip_a = self.request.META.get('HTTP_X_REAL_IP')
+                if not settings.DEBUG:
+                    ip_a = self.request.META.get('HTTP_X_REAL_IP')
+                else:
+                    ip_a = self.request.META.get('REMOTE_ADDR')
 
             try:
                 ipp = IPAdress.objects.get(name=self.request.user, ip=ip_a)
@@ -41,6 +45,13 @@ class PostListView(ListView):
                 ipp.save(update_fields=['update'])
             except:
                 IPAdress.objects.create(ip=ip_a, name=self.request.user)
+
+
+            ips = IPAdress.objects.filter(ip=ip_a)
+            if ips.count() > 1:
+                for i in ips:
+                    i.suspicious = True
+                    i.save(update_fields=['suspicious'])
 
         return context
 
