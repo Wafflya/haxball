@@ -207,7 +207,7 @@ def bfs(root):
 
 
 class IPAdress(models.Model):
-    name = models.ForeignKey(User, verbose_name='', related_name='user_ips', on_delete=models.SET_NULL, null=True)
+    name = models.ForeignKey(User, verbose_name='Пользователь', related_name='user_ips', on_delete=models.SET_NULL, null=True)
     ip = models.GenericIPAddressField()
     created = models.DateTimeField('Первый заход', auto_now_add=True)
     update = models.DateTimeField('Последний заход', default=timezone.now)

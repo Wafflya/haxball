@@ -73,14 +73,15 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'description', 'is_official', 'theme')
     prepopulated_fields = {'slug': ('title',)}
 
-
+# Старые комменты
+"""
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('id', 'author', 'created', 'body',)
     list_filter = ('created', 'author')
     search_fields = ('body',)
     form = CommentAdminForm
-
+"""
 
 @admin.register(NewComment)
 class NewCommentAdmin(admin.ModelAdmin):

@@ -52,6 +52,9 @@ urlpatterns = [
     # Редактирование комментария
     path('post/edit_comment/<int:pk>', views.comment_edit, name='edit_comment'),
 
+    # Удаление комментария
+    path('delete_comment/<int:pk>', views.delete_comment, name='delete_comment'),
+
     # Редактирование поста, если создан пользователем
     path('post/<slug:slug>/<int:pk>/edit', views.post_edit, name='post_edit'),
 

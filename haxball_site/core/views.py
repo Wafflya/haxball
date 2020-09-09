@@ -175,6 +175,18 @@ def comment_edit(request, pk):
     return render(request, 'core/post/edit_comment.html', {'comment_form': form})
 
 
+# Удаление комментария
+def delete_comment(request, pk):
+    comment = get_object_or_404(NewComment, pk=pk)
+    obj = comment.content_object
+    if request.method == 'POST' and \
+            ((request.user == comment.author and timezone.now() - comment.created < timezone.timedelta(minutes=10)) or request.user.is_superuser):
+        comment.delete()
+        return redirect(obj.get_absolute_url())
+    else:
+        return HttpResponse('Ошибка доступа или время истекло')
+
+
 # Вьюха для фасткапов
 class FastcupView(ListView):
     try:
