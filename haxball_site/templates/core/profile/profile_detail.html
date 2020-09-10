@@ -8,6 +8,7 @@
         body {
             background-image: url({% static "img/backgrounds/bg-light-4860.png" %})
         }
+
     </style>
 {% endblock %}
 {% block scripts %}
@@ -82,9 +83,9 @@
                     </p>
                 </div>
             </div>
-            <div class="col-sm-8"
+            <div class="col-sm-8 bg-profile"
                     {% if profile.background %}
-                 style="background-image:url({{ profile.background.url }}); background-size: cover;"
+                 style="background-image:url({{ profile.background.url }}); background-size: cover"
                     {% endif %}>
                 <div class="card-block">
                     <h5 class="m-b-20 p-b-5 b-b-default f-w-600">Основная информация

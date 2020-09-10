@@ -13,6 +13,14 @@ from django.urls import reverse
 from django.utils import timezone
 
 
+
+class MyQuerySet(models.query.QuerySet):
+
+    def delete(self):
+        for obj in self:
+            obj.delete()
+
+
 # Менеджер модели лайк-дизлайк
 class LikeDislikeManager(models.Manager):
     use_for_related_fields = True
@@ -35,6 +43,10 @@ class LikeDislikeManager(models.Manager):
     def comments(self):
         return self.get_queryset().filter(content_type__model='comment').order_by('-comments__pub_date')
 
+    def get_queryset(self):
+        return MyQuerySet(self.model, using=self._db)
+
+
 
 # Модель для лайк-дизлайк системы
 class LikeDislike(models.Model):
@@ -54,6 +66,15 @@ class LikeDislike(models.Model):
     content_object = GenericForeignKey()
 
     objects = LikeDislikeManager()
+
+    def delete(self, *args, **kwargs):
+        if self.user != self.content_object.author:
+            self.content_object.author.user_profile.karma -= self.vote
+            self.content_object.author.user_profile.save(update_fields=['karma'])
+        super(LikeDislike, self).delete(*args, **kwargs)
+
+    def get_query_set(self):
+        return MyQuerySet(self.model)
 
     class Meta:
         verbose_name = 'Лайк/дизлайк голос'
@@ -236,6 +257,7 @@ class Profile(models.Model):
     karma = models.SmallIntegerField(default=0)
     comments = GenericRelation(NewComment, related_query_name='profile_comments')
     commentable = models.BooleanField("Комментируемый профиль", default=True)
+    can_vote = models.BooleanField('Может голосовать', default=True)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):

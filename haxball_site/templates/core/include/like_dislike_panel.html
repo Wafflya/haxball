@@ -1,6 +1,6 @@
 {% load user_tags %}
 
-{% if user.is_authenticated %}
+{% if user.is_authenticated and user.user_profile.can_vote %}
     <ul class="list-group list-group-horizontal-md d-inline-flex">
         <li class="action-like fa fa-thumbs-up {% if post.votes.likes.all|user_in:user %}text-success{% endif %}"
             data-id="{{ post.id }}" data-type="post" data-action="like" id="lpost{{ post.id }}" title="Нравится" style="cursor: pointer">
@@ -10,6 +10,16 @@
         <li class="action-dislike fa fa-thumbs-down {% if post.votes.dislikes.all|user_in:user %}text-danger{% endif %}"
             data-id="{{ post.id }}" data-type="post" data-action="dislike" id="dpost{{ post.id }}" title="Не нравится" style="cursor: pointer">
 
+            <span data-count="dislike">{{ post.votes.dislikes.count }}</span>
+        </li>
+    </ul>
+{% elif user.is_authenticated and not user.user_profile.can_vote %}
+    <ul class="list-group list-group-horizontal-md d-inline-flex">
+        <li class="action-like fa fa-thumbs-up" onclick="alert('iks запретил вам голосовать!')">
+            <span data-count="like">{{ post.votes.likes.count }}</span>
+        </li>
+
+        <li class="action-dislike fa fa-thumbs-down" onclick="alert('iks запретил вам голосовать!')">
             <span data-count="dislike">{{ post.votes.dislikes.count }}</span>
         </li>
     </ul>

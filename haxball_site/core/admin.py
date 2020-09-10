@@ -1,4 +1,5 @@
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from django.core.exceptions import PermissionDenied
 from django_summernote.fields import SummernoteTextFormField
 from django import forms
 from django.contrib import admin
@@ -24,6 +25,19 @@ class CommentAdminForm(forms.ModelForm):
         model = Comment
         fields = '__all__'
 
+
+
+"""
+def delete_selected(modeladmin, request, queryset):
+    if not modeladmin.has_delete_permission(request):
+        raise PermissionDenied
+    if request.POST.get('post'):
+        for obj in queryset:
+            obj.delete()
+    else:
+        return delete_selected(modeladmin, request, queryset)
+delete_selected.short_description = "Delete selected objects"
+"""
 
 @admin.register(LikeDislike)
 class LikeDisLikeAdmin(admin.ModelAdmin):

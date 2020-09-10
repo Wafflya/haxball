@@ -27,11 +27,14 @@
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/like_dislike_comment.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/like_dislike_comment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/like_dislike_panel.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/like_dislike_panel.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/new_comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/new_comments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/profile/profile_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +186,8 @@
       <workItem from="1599453424761" duration="1831000" />
       <workItem from="1599455730692" duration="15989000" />
       <workItem from="1599538294031" duration="8598000" />
-      <workItem from="1599640205405" duration="5304000" />
+      <workItem from="1599640205405" duration="7824000" />
+      <workItem from="1599720307650" duration="3999000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,6 @@
 {% load user_tags %}
 
-{% if user.is_authenticated %}
+{% if user.is_authenticated and user.user_profile.can_vote %}
 <ul class="list-group list-group-horizontal-md d-inline-flex">
     <li class="action-like fa fa-thumbs-up {% if comment.votes.likes.all|user_in:user %}text-success{% endif %}"
         data-id="{{ comment.id }}"
@@ -15,6 +15,16 @@
         <span data-count="dislike">{{ comment.votes.dislikes.count }}</span>
     </li>
 </ul>
+{% elif user.is_authenticated and not user.user_profile.can_vote %}
+    <ul class="list-group list-group-horizontal-md d-inline-flex">
+        <li class="action-like fa fa-thumbs-up" onclick="alert('iks запретил вам голосовать!')">
+            <span data-count="like">{{ comment.votes.likes.count }}</span>
+        </li>
+
+        <li class="action-dislike fa fa-thumbs-down" onclick="alert('iks запретил вам голосовать!')">
+            <span data-count="dislike">{{ comment.votes.dislikes.count }}</span>
+        </li>
+    </ul>
 {% else %}
     <ul class="list-group list-group-horizontal-md d-inline-flex">
         <li class="action-like fa fa-thumbs-up" data-toggle="modal" data-target="#loginModal" style="cursor: pointer">

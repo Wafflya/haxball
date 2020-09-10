@@ -345,7 +345,6 @@ class VotesView(View):
 
     def post(self, request, id):
         obj = self.model.objects.get(id=id)
-        print(obj)
         author_profile = obj.author.user_profile
         # GenericForeignKey не поддерживает метод get_or_create
         try:
@@ -363,12 +362,12 @@ class VotesView(View):
                 likedislike.save(update_fields=['vote'])
                 result = True
             else:
-                if obj.author != request.user:
-                    author_profile.karma -= likedislike.vote
-                    author_profile.save(update_fields=['karma'])
-
+                #if obj.author != request.user:
+                #    author_profile.karma -= likedislike.vote
+                #    author_profile.save(update_fields=['karma'])
                 likedislike.delete()
                 result = False
+
         except LikeDislike.DoesNotExist:
             obj.votes.create(user=request.user, vote=self.vote_type)
             if obj.author != request.user:
