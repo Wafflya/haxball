@@ -40,11 +40,11 @@
 
             <th scope="row" class="px-1 h6" width="4%">{{ forloop.counter }}</th>
 
-            <td class="text-left px-0" width="34%">
+            <td class="text-left px-0 font-weight-bold" width="34%">
 
                 <a class="text-dark h6" href="{{ team.0.get_absolute_url }}"><img
                         src="{{ team.0.logo.url }}" alt="{{ team.0.title }}" width="22" height="22"
-                        class="mr-1">{% if team.0.title|length < 20 %}{{ team.0.title }}{% else %}{{ team.0.short_title }}{% endif %}</a>
+                        class="mr-2">{% if team.0.title|length < 20 %}{{ team.0.title }}{% else %}{{ team.0.short_title }}{% endif %}</a>
             </td>
             <td width="6%">{{ team.1 }}</td>
             <td width="6%">{{ team.2 }}</td>
