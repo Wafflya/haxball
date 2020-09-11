@@ -143,7 +143,7 @@ class NewComment(models.Model):
         if self in b:
             return self.get_parent().get_absolute_url()
         ind = a.index(self)
-        page = (ind//5)+1
+        page = (ind//25)+1
         return '{}?page={}#r{}'.format(obj.get_absolute_url(), page, self.id)
 
     def get_parent(self):
