@@ -3,7 +3,10 @@
 {% load tournament_extras %}
 {% block styles %}
     <!-- <link rel="stylesheet" type="text/css" href="{# static "tournament/teams/team_page.css" #}"> -->
+    <!--
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&display=swap" rel="stylesheet">
+    -->
     <style>
         body {
             background-image: url({% static "img/backgrounds/bg-light-4860.png" %})
@@ -41,7 +44,11 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="table" role="tabpanel"
                      aria-labelledby="league-table-tab">
-                    {% league_table league %}
+                    {% if not league.is_cup %}
+                        {% league_table league %}
+                    {% else %}
+                        {% include 'tournament/include/cup_table.html' %}
+                    {% endif %}
 
                 </div>
                 <div class="tab-pane fade" id="detail_stat" role="tabpanel"
@@ -197,7 +204,7 @@
                                             type="button" data-toggle="collapse"
                                             data-target="#tour{{ tour.number }}" aria-expanded="false"
                                             aria-controls="tour{{ tour.number }}" style="width: 90%">
-                                        <span class="h5">Тур {{ tour.number }} ({{ tour.date_from|date:"d.m" }} - {{ tour.date_to|date:"d.m" }})</span>
+                                        <span class="h5">{% if not league.is_cup %}Тур{% else %}Раунд{% endif %} {{ tour.number }} ({{ tour.date_from|date:"d.m" }} - {{ tour.date_to|date:"d.m" }})</span>
                                     </button>
                                 </p>
                             </div>

@@ -1,0 +1,12 @@
+<style>
+    
+</style>
+<div class="container">
+<div class="row">
+{% for tour in league.tours.all %}
+    <div class="col">
+        <h5>{{ tour.number }} раунд</h5>
+    </div>
+{% endfor %}
+</div>
+</div>

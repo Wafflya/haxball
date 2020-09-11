@@ -1,4 +1,5 @@
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600&display=swap');
 
     .team-form a:hover {
         font-size: 18px;
@@ -6,10 +7,17 @@
     }
     .team-rows {
         font-family: 'Roboto Slab', serif;
+        font-weight: 400;
+    }
+
+    .team-name{
+        font-family: 'Roboto Slab', serif;
+        font-weight: 500;
+        font-size: 20px;
     }
     .team-table-league td {
-        padding-bottom: 1px;
-        padding-top: 1px;
+        padding-bottom: 7px;
+        padding-top: 7px;
     }
 
 </style>
@@ -38,12 +46,12 @@
             class="team-rows py-1"
         >
 
-            <th scope="row" class="px-1 h6" width="4%">{{ forloop.counter }}</th>
+            <th scope="row" class="px-1 h6" width="4%" style="font-weight: 600;">{{ forloop.counter }}</th>
 
-            <td class="text-left px-0 font-weight-bold" width="34%">
+            <td class="team-name text-left px-0" width="34%">
 
-                <a class="text-dark h6" href="{{ team.0.get_absolute_url }}"><img
-                        src="{{ team.0.logo.url }}" alt="{{ team.0.title }}" width="22" height="22"
+                <a class="text-dark" href="{{ team.0.get_absolute_url }}"><img
+                        src="{{ team.0.logo.url }}" alt="{{ team.0.title }}" width="28" height="28"
                         class="mr-2">{% if team.0.title|length < 20 %}{{ team.0.title }}{% else %}{{ team.0.short_title }}{% endif %}</a>
             </td>
             <td width="6%">{{ team.1 }}</td>
@@ -62,7 +70,7 @@
                                                                                          text-danger
                                                                            {% elif result.1 == 0 %}
                                                                                     text-secondary
-                                                                                   {% endif %}" title="         Тур {{ result.0.numb_tour }}
+                                                                                   {% endif %}" title="Тур {{ result.0.numb_tour }}
 {{ result.0.team_home.title }} {{ result.0.score_home }} : {{ result.0.score_guest }} {{ result.0.team_guest.title }}">
                     <!--<i class=" aria-hidden="true"></i>-->
                 </a>

@@ -98,7 +98,8 @@ class TeamList(ListView):
 
 class LeagueDetail(DetailView):
     context_object_name = 'league'
-    queryset = League.objects.filter(is_cup=False, championship__is_active=True)
+    model = League
+    #queryset = League.objects.filter(is_cup=False, championship__is_active=True)
     template_name = 'tournament/premier_league/team_table.html'
 
     def get_context_data(self, **kwargs):

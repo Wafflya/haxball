@@ -60,8 +60,9 @@ def join_game_in_team(player, team):
 @register.filter
 def matches_in_team(player, team):
     return Match.objects.filter(team_guest=team, team_guest_start=player).count() + Match.objects.filter(
-        team_home=team, team_home_start=player).count() + Match.objects.filter(match_substitutions__team=team,
-                                                                               match_substitutions__player_in=player, ).distinct().count()
+        team_home=team, team_home_start=player).count() + Match.objects.filter(~(Q(team_guest_start=player) | Q(team_home_start=player)), match_substitutions__team=team,
+                                                                               match_substitutions__player_in=player
+                                                                               ).distinct().count()
 
 
 # return Match.objects.filter(Q(team_home=team, team_home_start=player) | Q(team_guest=team, team_guest_start=player)).count()
