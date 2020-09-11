@@ -253,7 +253,7 @@ class PostDetailView(DetailView):
         comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Post), object_id=post.id,
                                              parent=None)
 
-        paginate = Paginator(comments_obj, 25)
+        paginate = Paginator(comments_obj, 5)
         page = self.request.GET.get('page')
 
         try:

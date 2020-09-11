@@ -6,7 +6,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.db.models import Sum, Max
+from django.db.models import Sum, Max, Q
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
@@ -135,6 +135,22 @@ class NewComment(models.Model):
 
     def __str__(self):
         return 'Комментарий от {} к {}'.format(self.author, self.content_type)
+
+    def get_absolute_url(self):
+        obj = self.content_object
+        a = list(self.content_object.comments.filter(parent = None))
+        b = list(self.content_object.comments.filter(~Q(parent = None)))
+        if self in b:
+            return self.get_parent().get_absolute_url()
+        ind = a.index(self)
+        page = (ind//5)+1
+        return '{}?page={}#r{}'.format(obj.get_absolute_url(), page, self.id)
+
+    def get_parent(self):
+        obj = self
+        while obj.parent != None:
+            obj = obj.parent
+        return obj
 
     def is_parent(self):
         return self.parent == None

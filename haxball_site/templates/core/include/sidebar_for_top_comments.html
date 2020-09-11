@@ -28,7 +28,7 @@
 
                 <div class="btn-group-vertical">
                     {% for comment in top_comments_day %}
-                        <a type="button" href="{{ comment.content_object.get_absolute_url }}#r{{ comment.id }}"
+                        <a type="button" href="{{ comment.get_absolute_url }}"
                            class="btn btn-secondary btn-block text-right px-1"
                            data-toggle="tooltip" data-placement="right"
                            title="от {{ comment.author }} в {{ comment.content_object }}">
@@ -72,7 +72,7 @@
 
                 <div class="btn-group-vertical">
                     {% for comment in top_comments_week %}
-                        <a type="button" href="{{ comment.content_object.get_absolute_url }}#r{{ comment.id }}"
+                        <a type="button" href="{{ comment.get_absolute_url }}"
                            class="btn btn-secondary btn-block text-right px-1"
                            data-toggle="tooltip" data-placement="right"
                            title="от {{ comment.author }} в {{ comment.content_object }}">
@@ -110,7 +110,7 @@
                 </div>
                 <div class="btn-group-vertical">
                     {% for comment in top_comments_month %}
-                        <a type="button" href="{{ comment.content_object.get_absolute_url }}#r{{ comment.id }}"
+                        <a type="button" href="{{ comment.get_absolute_url }}"
                            class="btn btn-secondary btn-block text-right px-1"
                            data-toggle="tooltip" data-placement="right"
                            title="от {{ comment.author }} в {{ comment.content_object }}">
@@ -147,7 +147,7 @@
                 </div>
                 <div class="btn-group-vertical">
                     {% for comment in top_comments_year %}
-                        <a type="button" href="{{ comment.content_object.get_absolute_url }}#r{{ comment.id }}"
+                        <a type="button" href="{{ comment.get_absolute_url }}"
                            class="btn btn-secondary btn-block text-right px-1"
                            data-toggle="tooltip" data-placement="right"
                            title="от {{ comment.author }} в {{ comment.content_object }}">

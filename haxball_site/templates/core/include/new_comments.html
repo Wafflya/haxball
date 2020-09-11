@@ -22,7 +22,7 @@
             {% if object.commentable %}
                 <div class="card-body card-body-comment">
                     {% if object.comments.count > 0 %}
-                        <h4 class="card-title">Последние комментарии ({{ object.comments.count }})</h4>
+                        <h4 class="card-title">Последние комментарии ({{ object.comments.count }}) {{ comments.number }}</h4>
                     {% elif object.commentable %}
                         <h6 class="card-subtitle">Здесь пока пусто, не хочешь быть первым?</h6>
                     {% endif %}
