@@ -25,15 +25,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/templatetags/user_tags.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/new_comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/new_comments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/post/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/include/league_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/include/league_table.html" afterDir="false" />
-    </list>
+    <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -187,7 +179,7 @@
       <workItem from="1599640205405" duration="7824000" />
       <workItem from="1599720307650" duration="8992000" />
       <workItem from="1599803912628" duration="7635000" />
-      <workItem from="1600071669846" duration="1947000" />
+      <workItem from="1600071669846" duration="2340000" />
     </task>
     <servers />
   </component>

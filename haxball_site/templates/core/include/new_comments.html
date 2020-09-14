@@ -184,10 +184,11 @@
                                                 </h5>
                                             </a>
                                         </div>
-                                        {% if user.is_superuser or children.author == user and children|can_edit %}
                                             <span>
                                             <a href="{{ object.get_absolute_url }}?page={{ comments.number }}#r{{ children.id }}">#{{ children.id }}</a>
-                                            <a href="{% url 'core:edit_comment' children.id %}"
+                                                {% if user.is_superuser or children.author == user and children|can_edit %}
+
+                                                <a href="{% url 'core:edit_comment' children.id %}"
                                                class="text-warning" title="Редактировать">
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
                                             </a>
@@ -219,8 +220,9 @@
                                                     </div>
                                                   </div>
                                                 </div>
+                                                {% endif %}
+
                                         </span>
-                                        {% endif %}
                                     </div>
                                     <div class="comment-footer">
                                 <span class="date text-muted small">
