@@ -16,6 +16,11 @@ def get_class(value):
     return value.__class__.__name__
 
 
+@register.filter
+def subtract(value, arg):
+    return value - arg
+
+
 # тег для поискса кармы юзера(профиля), будем писать в профиль
 # !!Пока что ищет ток по комментам карму, хз, могу допилить и по постам!
 # ! Добавил и по постам
@@ -81,7 +86,6 @@ def forum_last_activity(category):
     last_comment = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Post),
                                              post_comments__category=category).order_by('-created').first()
 
-
     if last_comment == None and last_post == None:
         return {'last_act': None}
     elif last_comment == None:
@@ -93,7 +97,6 @@ def forum_last_activity(category):
             return {'last_act': last_comment.created}
         else:
             return {'last_act': last_post.created}
-
 
 
 # Сайдбар для пользователей онлайн(по дефолту 15 минут)

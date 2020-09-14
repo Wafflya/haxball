@@ -22,7 +22,7 @@
             {% if object.commentable %}
                 <div class="card-body card-body-comment">
                     {% if object.comments.count > 0 %}
-                        <h4 class="card-title">Последние комментарии ({{ object.comments.count }}) {{ comments.number }}</h4>
+                        <h4 class="card-title">Последние комментарии ({{ object.comments.count }})</h4>
                     {% elif object.commentable %}
                         <h6 class="card-subtitle">Здесь пока пусто, не хочешь быть первым?</h6>
                     {% endif %}
@@ -59,9 +59,9 @@
                                             </span>
                                         </h5>
                                     </a>
-                                    {% if user.is_superuser or comment.author == user and comment|can_edit %}
                                         <span>
-
+                                            <a href="{{ object.get_absolute_url }}?page={{ comments.number }}#r{{ comment.id }}">#{{ comment.id }}</a>
+                                            {% if user.is_superuser or comment.author == user and comment|can_edit %}
                                             <a href="{% url 'core:edit_comment' comment.id %}"
                                                class="text-warning" title="Редактировать">
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -80,8 +80,9 @@
                                                           <!--
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                           <span aria-hidden="true">&times;</span>
-                                                          -->
+
                                                         </button>
+                                                        -->
                                                       </div>
                                                       <div class="modal-footer justify-content-center">
                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Нет, подождите</button>
@@ -93,8 +94,9 @@
                                                     </div>
                                                   </div>
                                                 </div>
+                                            {% endif %}
+
                                         </span>
-                                    {% endif %}
                                 </div>
 
                                 <div class="comment-footer">
@@ -184,7 +186,7 @@
                                         </div>
                                         {% if user.is_superuser or children.author == user and children|can_edit %}
                                             <span>
-
+                                            <a href="{{ object.get_absolute_url }}?page={{ comments.number }}#r{{ children.id }}">#{{ children.id }}</a>
                                             <a href="{% url 'core:edit_comment' children.id %}"
                                                class="text-warning" title="Редактировать">
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -203,8 +205,9 @@
                                                           <!--
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                           <span aria-hidden="true">&times;</span>
-                                                          -->
+
                                                         </button>
+                                                        -->
                                                       </div>
                                                       <div class="modal-footer justify-content-center">
                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Нет, подождите</button>

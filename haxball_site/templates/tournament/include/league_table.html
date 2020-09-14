@@ -19,7 +19,9 @@
         padding-bottom: 7px;
         padding-top: 7px;
     }
-
+    .bg-for-first {
+        background: linear-gradient(to right, rgb(255, 245, 47), rgb(253, 207, 73))
+    }
 </style>
 
 <table class="table table-hover team-table-league">
@@ -40,13 +42,13 @@
     </thead>
     <tbody>
     {% for team in teams %}
-        <tr {% if forloop.counter == 1 %}bgcolor="#ffe000"{% endif %}
+        <tr {% if forloop.counter == 1 %}class="bg-for-first"{% endif %}
             {% if forloop.counter == 2 %}bgcolor="silver"{% endif %}
             {% if forloop.counter == 3 %}bgcolor="#ffa81c"{% endif %}
             class="team-rows py-1"
         >
 
-            <th scope="row" class="px-1 h6" width="4%" style="font-weight: 600;">{{ forloop.counter }}</th>
+            <th scope="row" class="px-1 h6" width="4%" style="font-weight: 600; font-size: 20px;">{{ forloop.counter }}</th>
 
             <td class="team-name text-left px-0" width="34%">
 

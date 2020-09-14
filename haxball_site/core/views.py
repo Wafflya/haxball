@@ -28,7 +28,8 @@ class PostListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        #print(context)
+        count_imp = Post.objects.filter(category__is_official=True, important=True).count()
+        context['count_imp'] = count_imp
         if self.request.user.is_authenticated:
             x_forwarded_for = self.request.META.get('HTTP_X_FORWARDED_FOR')
             if x_forwarded_for:

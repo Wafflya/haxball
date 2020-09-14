@@ -13,6 +13,7 @@
 <div class="card my-2" style="border-radius: 25px; background-image: url({% static "img/backgrounds/bg-light-4866.png" %})">
 
     <div class="card-body">
+        {% if count_imp != 0 %}
         <h3 class="text-center mt-1 mb-0"><i class="fa fa-exclamation text-danger" aria-hidden="true"></i>
 
             Актуальные новости <i class="fa fa-exclamation text-danger" aria-hidden="true"></i>
@@ -23,6 +24,7 @@
                 {% include "core/include/post_important_in_list.html" with post=post %}
             {% endif %}
         {% endfor %}
+        {% endif %}
         <h3 class="text-center mb-0"><i class="fa fa-newspaper-o text-success" aria-hidden="true"></i> Последние новости</h3>
         <hr>
 
