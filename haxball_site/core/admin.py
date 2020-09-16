@@ -26,7 +26,6 @@ class CommentAdminForm(forms.ModelForm):
         fields = '__all__'
 
 
-
 """
 def delete_selected(modeladmin, request, queryset):
     if not modeladmin.has_delete_permission(request):
@@ -39,9 +38,10 @@ def delete_selected(modeladmin, request, queryset):
 delete_selected.short_description = "Delete selected objects"
 """
 
+
 @admin.register(LikeDislike)
 class LikeDisLikeAdmin(admin.ModelAdmin):
-    list_display = ('id','vote', 'user', 'content_type', 'object_id', 'content_object')
+    list_display = ('id', 'vote', 'user', 'content_type', 'object_id', 'content_object')
     list_filter = ('user',)
     list_display_links = ('id',)
     list_editable = ('vote',)
@@ -60,7 +60,7 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     raw_id_fields = ('author',)
     form = PostAdminForm
-    #inlines = [CommentInline]
+    # inlines = [CommentInline]
 
 
 @admin.register(Profile)
@@ -68,7 +68,7 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'slug', 'background', 'karma')
     list_filter = ('id', 'name')
     list_display_links = ('name',)
-    readonly_fields = ('karma', )
+    readonly_fields = ('karma',)
 
 
 @admin.register(Themes)
@@ -87,15 +87,15 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'description', 'is_official', 'theme')
     prepopulated_fields = {'slug': ('title',)}
 
+
 # Старые комменты
-"""
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('id', 'author', 'created', 'body',)
     list_filter = ('created', 'author')
     search_fields = ('body',)
     form = CommentAdminForm
-"""
+
 
 @admin.register(NewComment)
 class NewCommentAdmin(admin.ModelAdmin):
@@ -104,7 +104,8 @@ class NewCommentAdmin(admin.ModelAdmin):
     search_fields = ('body',)
     form = CommentAdminForm
 
+
 @admin.register(IPAdress)
 class IPAdressAdmin(admin.ModelAdmin):
     list_display = ('ip', 'name', 'created', 'update', 'suspicious')
-    list_filter = ('ip','name')
+    list_filter = ('ip', 'name')
