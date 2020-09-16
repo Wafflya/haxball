@@ -122,7 +122,6 @@ def post_new(request, slug):
             post = form.save(commit=False)
             post.author = request.user
             post.category = category
-            print(category.title)
             post.slug = slugify(post.title)
             post.created = datetime.now()
             post.save()

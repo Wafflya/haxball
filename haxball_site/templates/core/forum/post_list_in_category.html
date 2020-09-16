@@ -17,7 +17,7 @@
 
                 {{ category }}
             </h3>
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and not category.is_official %}
                 <a href="{% url 'core:new_post' category.slug %}"> <i class="fa fa-pencil text-warning mr-1"
                                                                       aria-hidden="true"></i>Создать пост </a>
             {% endif %}
