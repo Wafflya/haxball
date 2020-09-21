@@ -60,24 +60,15 @@ def join_game_in_team(player, team):
 @register.filter
 def matches_in_team(player, team):
     return Match.objects.filter(team_guest=team, team_guest_start=player).count() + Match.objects.filter(
-        team_home=team, team_home_start=player).count() + Match.objects.filter(~(Q(team_guest_start=player) | Q(team_home_start=player)), match_substitutions__team=team,
-                                                                               match_substitutions__player_in=player
-                                                                               ).distinct().count()
+        team_home=team, team_home_start=player).count() + Match.objects.filter(
+        ~(Q(team_guest_start=player) | Q(team_home_start=player)), match_substitutions__team=team,
+        match_substitutions__player_in=player
+        ).distinct().count()
 
 
 # return Match.objects.filter(Q(team_home=team, team_home_start=player) | Q(team_guest=team, team_guest_start=player)).count()
 
 #   Для детальной статы матча
-"""
-@register.filter
-def team_goals_in_match(match, team):
-    if team == match.team_home:
-        return Goal.objects.filter(match=match, team=team).count() + OtherEvents.objects.filter(event='OG', match=match,
-                                                                                                team=match.team_guest).count()
-    elif team == match.team_guest:
-        return Goal.objects.filter(match=match, team=team).count() + OtherEvents.objects.filter(event='OG', match=match,
-                                                                                              team=match.team_home).count()
-"""
 
 
 @register.filter
@@ -96,6 +87,41 @@ def goals_sorted(match):
 
 #   Фильтры для таблички лиги
 #   и теги
+@register.inclusion_tag('tournament/include/cup_table.html')
+def cup_table(league):
+    return {'league': league}
+
+
+@register.filter
+def pairs_in_round(tour):
+    matches = Match.objects.filter(numb_tour=tour)
+    pairs = []
+    for m in matches:
+        pair = set()
+        pair.add(m.team_home)
+        pair.add(m.team_guest)
+        if pair not in pairs:
+            pairs.append(pair)
+    pi = []
+    for p in pairs:
+        pi.append(list(p))
+    print(pi)
+    return pi
+
+
+@register.filter
+def round_name(tour, all_tours):
+    if tour == all_tours:
+        return 'Финал'
+    elif tour == all_tours-1:
+        return '1/2 Финала'
+    elif tour == all_tours-2:
+        return '1/4 Финала'
+    elif tour == all_tours-3:
+        return '1/8 Финала'
+    else:
+        return '{} Раунд'.format(tour)
+
 
 @register.inclusion_tag('tournament/include/league_table.html')
 def league_table(league):
@@ -128,22 +154,8 @@ def league_table(league):
                 score_team = m.score_guest
                 score_opp = m.score_home
             else:
-                print('Match is broke')
                 return None
-            """
-            score_team = 0
-            score_opp = 0
-            for g in m.match_goal.all():
-                if g.team == team:
-                    score_team += 1
-                else:
-                    score_opp += 1
-            for og in m.match_event.filter(event='OG'):
-                if og.team == team:
-                    score_opp += 1
-                else:
-                    score_team += 1
-            """
+
             goals_scores_all += score_team
             goals_consided_all += score_opp
 

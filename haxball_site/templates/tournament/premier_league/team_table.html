@@ -27,7 +27,7 @@
                 <ul class="nav nav-pills nav-fill" id="myTab" style="width: 100%;">
                     <li class="nav-item" style="width: 33%;">
                         <a class="nav-link h5 active" id="table-tab" data-toggle="tab" href="#table" role="tab"
-                           aria-controls="league-table-tab" aria-selected="true">Таблица</a>
+                           aria-controls="league-table-tab" aria-selected="true">{% if not league.is_cup %}Таблица{% else %}Сетка{% endif %}</a>
                     </li>
                     <li class="nav-item" style="width: 33%;">
                         <a class="nav-link h5" id="detail-tab" data-toggle="tab" href="#detail_stat" role="tab"
@@ -47,7 +47,7 @@
                     {% if not league.is_cup %}
                         {% league_table league %}
                     {% else %}
-                        {% include 'tournament/include/cup_table.html' %}
+                        {% cup_table league %}
                     {% endif %}
 
                 </div>
@@ -204,7 +204,7 @@
                                             type="button" data-toggle="collapse"
                                             data-target="#tour{{ tour.number }}" aria-expanded="false"
                                             aria-controls="tour{{ tour.number }}" style="width: 90%">
-                                        <span class="h5">{% if not league.is_cup %}Тур{% else %}Раунд{% endif %} {{ tour.number }} ({{ tour.date_from|date:"d.m" }} - {{ tour.date_to|date:"d.m" }})</span>
+                                        <span class="h5">{% if not league.is_cup %}Тур {{ tour.number }}{% else %}{{ tour.number|round_name:league.tours.count }}{% endif %} ({{ tour.date_from|date:"d.m" }} - {{ tour.date_to|date:"d.m" }})</span>
                                     </button>
                                 </p>
                             </div>

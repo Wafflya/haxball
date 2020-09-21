@@ -1,11 +1,16 @@
+{% load tournament_extras %}
 <style>
     
 </style>
 <div class="container">
 <div class="row">
+<div class="col-12"><i>В процессе разработки</i><br></div>
 {% for tour in league.tours.all %}
     <div class="col">
-        <h5>{{ tour.number }} раунд</h5>
+        <h5>{{ tour.number|round_name:league.tours.count }}</h5>
+        {% for pair in tour|pairs_in_round %}
+            {{ pair.0.short_title }}<br>{{ pair.1.short_title }}<br><br>
+        {% endfor %}
     </div>
 {% endfor %}
 </div>

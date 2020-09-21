@@ -13,7 +13,7 @@
     .team-name{
         font-family: 'Roboto Slab', serif;
         font-weight: 500;
-        font-size: 20px;
+        font-size: 19px;
     }
     .team-table-league td {
         padding-bottom: 7px;
@@ -42,7 +42,7 @@
     </thead>
     <tbody>
     {% for team in teams %}
-        <tr {% if forloop.counter == 1 %}class="bg-for-first"{% endif %}
+        <tr {% if forloop.counter == 1 %}bgcolor="#ffd700"{% endif %}
             {% if forloop.counter == 2 %}bgcolor="silver"{% endif %}
             {% if forloop.counter == 3 %}bgcolor="#ffa81c"{% endif %}
             class="team-rows py-1"
@@ -64,7 +64,7 @@
             <td width="6%">{{ team.6 }}</td>
             <td width="6%" {% if team.7 > 0 %} class="text-success"
                                     {% elif team.7 < 0 %}class="text-danger"{% endif %}>{{ team.7 }}</td>
-            <td width="6%">{{ team.8 }}</td>
+            <td width="6%" style="font-weight: 500">{{ team.8 }}</td>
             <td class="team-form p-1" width="13%">{% for result in team.9 %}
                 <a href="{{ result.0.get_absolute_url }}" class="fa fa-circle{% if result.1 == 1 %}
                                                                        text-success
