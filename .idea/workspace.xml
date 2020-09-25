@@ -27,6 +27,11 @@
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/match/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/match/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/team_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/team_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +189,9 @@
       <workItem from="1600071669846" duration="3730000" />
       <workItem from="1600246426162" duration="1493000" />
       <workItem from="1600676185235" duration="41000" />
-      <workItem from="1600676276536" duration="13327000" />
+      <workItem from="1600676276536" duration="13917000" />
+      <workItem from="1601025200025" duration="1043000" />
+      <workItem from="1601035688500" duration="2141000" />
     </task>
     <servers />
   </component>
@@ -223,10 +230,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594740500582" />
-    <state x="493" y="267" width="424" height="479" key="FileChooserDialogImpl" timestamp="1599453498675">
-      <screen x="0" y="0" width="1280" height="997" />
+    <state x="2327" y="270" width="424" height="479" key="FileChooserDialogImpl" timestamp="1601025359234">
+      <screen x="1680" y="0" width="1680" height="1010" />
     </state>
     <state x="493" y="267" width="424" height="479" key="FileChooserDialogImpl/0.0.1280.997@0.0.1280.997" timestamp="1599453498675" />
+    <state x="2327" y="270" key="FileChooserDialogImpl/0.0.1680.1010/1680.0.1680.1010@1680.0.1680.1010" timestamp="1601025359234" />
     <state x="740" y="279" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1595012697893" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1595019364095">
       <screen x="0" y="0" width="1920" height="1040" />

@@ -39,7 +39,9 @@
                     </h3>
                     <h6>
                         {% for leagues in team|current_league %}
-                            <a href="{{ leagues.get_absolute_url }}">{{ leagues }}</a>
+                            {% if not leagues.is_cup %}
+                                <a href="{{ leagues.get_absolute_url }}">{{ leagues }}</a>
+                            {% endif %}
                         {% endfor %}
                     </h6>
                     <p class="profile-rating" style="font-weight: bold;">Позиция :
@@ -209,7 +211,13 @@
                                         <tbody>
                                         {% for match in team|team_matches_in_league:league %}
                                             <tr>
-                                                <td class="text-left h6" style="width: 10%;">Тур {{ match.numb_tour }}</td>
+                                                <td class="text-left h6 p0" style="width: 10%;">
+                                                    {% if not league.is_cup %}
+                                                        Тур {{ match.numb_tour }}
+                                                    {% else %}
+                                                        <div style="text-align: center;">{{ match.numb_tour.number|round_name:league.tours.count }}</div>
+                                                    {% endif %}
+                                                </td>
                                                 <td class="text-right" style="width: 35%;">
                                                     {% if team == match.team_home %}
                                                         <span class="text-dark font-weight-bold h6">{{ match.team_home.title }}</span>

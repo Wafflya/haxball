@@ -223,7 +223,7 @@ def get_team_assistent(team):
 #       Получаем текущую "Лигу" команды
 @register.filter
 def current_league(team):
-    return League.objects.filter(teams=team, championship__is_active=True, is_cup=False)
+    return League.objects.filter(teams=team, championship__is_active=True)
 
 
 def sort_teams(league):

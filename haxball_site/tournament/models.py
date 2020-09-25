@@ -199,6 +199,7 @@ class Match(models.Model):
                                   on_delete=models.CASCADE, null=True, )
     match_date = models.DateField('Дата матча', default=None, blank=True, null=True)
     replay_link = models.URLField('Ссылка на реплей', blank=True)
+    replay_link_second = models.URLField('Ссылка на реплей(2ой, если два)', blank=True, null=True)
     inspector = models.ForeignKey(User, verbose_name='Проверил', limit_choices_to={'is_staff': True},
                                   on_delete=models.SET_NULL, null=True, blank=True)
     updated = models.DateTimeField('Обновлено', auto_now=True)
@@ -225,7 +226,7 @@ class Match(models.Model):
     #                                               chained_model_field='team',
     is_played = models.BooleanField('Сыгран', default=False)
 
-    comment = models.CharField('Комментарий к матчу', max_length=1024, blank=True, null=True)
+    comment = models.TextField('Комментарий к матчу', max_length=1024, blank=True, null=True)
 
     def __str__(self):
         return 'Матч {} - {}, {} тур'.format(self.team_home.short_title, self.team_guest.short_title, self.numb_tour)

@@ -247,14 +247,19 @@
 
                         <div class="col-12">
                             <h6>
-                                <a href="{{ match.replay_link }}">Реплей</a>
+                                {% if not match.replay_link_second %}
+                                    <a href="{{ match.replay_link }}">Реплей</a>
+                                {% else %}
+                                    <a href="{{ match.replay_link }}">Реплей 1</a><br>
+                                    <a href="{{ match.replay_link_second }}">Реплей 2</a>
+                                {% endif %}
                             </h6>
                             <h6>
                                 Инспектор: {{ match.inspector }}
                             </h6>
                             {% if match.comment %}
                                 <h6>Комментарий:</h6>
-                                <p>{{ match.comment }}</p>
+                                <p>{{ match.comment|linebreaks }}</p>
                             {% endif %}
                         </div>
 
