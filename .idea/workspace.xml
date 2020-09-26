@@ -27,10 +27,7 @@
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/match/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/match/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/team_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/team_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -191,7 +188,7 @@
       <workItem from="1600676185235" duration="41000" />
       <workItem from="1600676276536" duration="13917000" />
       <workItem from="1601025200025" duration="1043000" />
-      <workItem from="1601035688500" duration="2141000" />
+      <workItem from="1601035688500" duration="6909000" />
     </task>
     <servers />
   </component>

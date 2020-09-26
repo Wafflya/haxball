@@ -101,6 +101,7 @@ def pairs_in_round(tour):
         pair.add(m.team_home)
         pair.add(m.team_guest)
         if pair not in pairs:
+            
             pairs.append(pair)
     pi = []
     for p in pairs:
