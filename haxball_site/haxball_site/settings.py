@@ -170,11 +170,13 @@ else:
     ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
     ACCOUNT_EMAIL_VERIFICATION = True
     # ACCOUNT_USERNAME_MIN_LENGTH = 1
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_USE_TLS = True
-    EMAIL_PORT = 587
-    EMAIL_HOST_USER = 'haxballcis@gmail.com'
-    EMAIL_HOST_PASSWORD = 'ebalvrotmarokko32288'
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'haxballcis@gmail.com'
+EMAIL_HOST_PASSWORD = 'ebalvrotmarokko32288'
 
 
 
