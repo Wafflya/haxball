@@ -1,6 +1,13 @@
 {% load tournament_extras %}
 <style>
-
+table {
+    font-size: 14px;
+}
+.team_link {
+    vertical-align: middle;
+    font-weight: 500;
+    color: #010610;
+}
 </style>
 <div class="container">
     <div class="row">
@@ -17,38 +24,38 @@
                     {% for pair in tour|pairs_in_round %}
                         <table class="table border">
                             <tbody>
-                            <tr>
-                                <td class="px-1 text-left">
+                            <tr class="py-1">
+                                <td class="p-1 text-left">
                                     <img src="{{ pair.0.logo.url }}" alt="{{ pair.0.title }}" width="24" height="24"
                                          class="mr-1">
-                                    {{ pair.0.short_title }}
+                                    <a class="team_link" href="{{ pair.0.get_absolute_url }}">{{ pair.0.short_title }}</a>
                                 </td>
-                                <td class="px-1">
+                                <td class="p-1">
                                     {% if pair.2.is_played %}
                                         {{ pair.0|team_score_in_match:pair.2 }}
                                     {% endif %}
                                 </td>
                                 {% if pair.3 %}
-                                    <td class="px-1">
+                                    <td class="p-1">
                                         {% if pair.3.is_played %}
                                             {{ pair.0|team_score_in_match:pair.3 }}
                                         {% endif %}
                                     </td>
                                 {% endif %}
                             </tr>
-                            <tr>
-                                <td class="px-1 text-left">
+                            <tr class="py-1">
+                                <td class="p-1 text-left">
                                     <img src="{{ pair.1.logo.url }}" alt="{{ pair.1.title }}" width="24" height="24"
                                          class="mr-1">
-                                    {{ pair.1.short_title }}
+                                    <a class="team_link" href="{{ pair.1.get_absolute_url }}">{{ pair.1.short_title }}</a>
                                 </td>
-                                <td class="px-1">
+                                <td class="p-1">
                                     {% if pair.2.is_played %}
                                         {{ pair.1|team_score_in_match:pair.2 }}
                                     {% endif %}
                                 </td>
                                 {% if pair.3 %}
-                                    <td class="px-1">
+                                    <td class="p-1">
                                         {% if pair.3.is_played %}
                                             {{ pair.1|team_score_in_match:pair.3 }}
                                         {% endif %}

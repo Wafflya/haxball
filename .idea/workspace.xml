@@ -26,6 +26,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/include/cup_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/include/cup_table.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -190,7 +192,7 @@
       <workItem from="1601136623029" duration="68000" />
       <workItem from="1601136711526" duration="3128000" />
       <workItem from="1601197485867" duration="312000" />
-      <workItem from="1601369724487" duration="3981000" />
+      <workItem from="1601369724487" duration="5024000" />
     </task>
     <servers />
   </component>
@@ -264,11 +266,11 @@
       <screen x="0" y="0" width="1280" height="997" />
     </state>
     <state x="449" y="414" width="372" height="161" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.997@0.0.1280.997" timestamp="1599538426253" />
-    <state x="415" y="216" width="672" height="650" key="search.everywhere.popup" timestamp="1599727499885">
-      <screen x="0" y="0" width="1280" height="997" />
+    <state x="545" y="219" width="672" height="659" key="search.everywhere.popup" timestamp="1601374674231">
+      <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="415" y="216" width="672" height="650" key="search.everywhere.popup/0.0.1280.997@0.0.1280.997" timestamp="1599727499885" />
-    <state x="545" y="219" width="588" height="659" key="search.everywhere.popup/0.0.1680.1010/1680.0.1680.1010@0.0.1680.1010" timestamp="1597448702431" />
+    <state x="545" y="219" width="672" height="659" key="search.everywhere.popup/0.0.1680.1010/1680.0.1680.1010@0.0.1680.1010" timestamp="1601374674231" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1598643377983" />
     <state x="545" y="248" width="672" height="667" key="search.everywhere.popup/1680.0.1680.1050/0.27.1680.1023@0.27.1680.1023" timestamp="1596034997041" />
   </component>
