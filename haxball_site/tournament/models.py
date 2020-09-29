@@ -237,7 +237,7 @@ class Match(models.Model):
     class Meta:
         verbose_name = 'Матч'
         verbose_name_plural = 'Матчи'
-        ordering = ['numb_tour']
+        ordering = ['id']
 
 
 class Goal(models.Model):

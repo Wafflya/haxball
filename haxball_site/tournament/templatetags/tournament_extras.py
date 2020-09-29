@@ -63,7 +63,7 @@ def matches_in_team(player, team):
         team_home=team, team_home_start=player).count() + Match.objects.filter(
         ~(Q(team_guest_start=player) | Q(team_home_start=player)), match_substitutions__team=team,
         match_substitutions__player_in=player
-        ).distinct().count()
+    ).distinct().count()
 
 
 # return Match.objects.filter(Q(team_home=team, team_home_start=player) | Q(team_guest=team, team_guest_start=player)).count()
@@ -101,24 +101,39 @@ def pairs_in_round(tour):
         pair.add(m.team_home)
         pair.add(m.team_guest)
         if pair not in pairs:
-            
             pairs.append(pair)
     pi = []
     for p in pairs:
-        pi.append(list(p))
-    print(pi)
+        pi.append(sorted(list(p), key=lambda x: x.id))
+    for m in matches:
+        for p in pi:
+            if (p[0] == m.team_home and p[1] == m.team_guest) or (p[1] == m.team_home and p[0] == m.team_guest):
+                i = pi.index(p)
+        if i != None:
+            pi[i].append(m)
+    pi = sorted(pi, key=lambda x: x[2].id)
     return pi
+
+
+@register.filter
+def team_score_in_match(team, match):
+    if team == match.team_home:
+        return match.score_home
+    elif team == match.team_guest:
+        return match.score_guest
+    else:
+        return None
 
 
 @register.filter
 def round_name(tour, all_tours):
     if tour == all_tours:
         return 'Финал'
-    elif tour == all_tours-1:
+    elif tour == all_tours - 1:
         return '1/2 Финала'
-    elif tour == all_tours-2:
+    elif tour == all_tours - 2:
         return '1/4 Финала'
-    elif tour == all_tours-3:
+    elif tour == all_tours - 3:
         return '1/8 Финала'
     else:
         return '{} Раунд'.format(tour)
