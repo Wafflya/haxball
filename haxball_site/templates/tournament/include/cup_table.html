@@ -4,18 +4,23 @@
 </style>
 <div class="container">
     <div class="row">
-        <div class="col-12"><i>В процессе разработки</i><br></div>
+        {% for tour in league.tours.all %}
+            <div class="col my-1">
+                <h5>{{ tour.number|round_name:league.tours.count }}</h5>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row">
         {% for tour in league.tours.all %}
             <div class="col flex-direction: column justify-content-between">
-                <h5>{{ tour.number|round_name:league.tours.count }}</h5>
-                <div class="col d-flex flex-column justify-content-around mt-3" style="height: 90%">
+                <div class="col d-flex flex-column justify-content-around" style="height: 100%">
                     {% for pair in tour|pairs_in_round %}
                         <table class="table border">
                             <tbody>
                             <tr>
-                                <td>
-                                    <img src="{{ pair.0.logo.url }}" alt="{{ pair.0.title }}" width="28" height="28"
-                                         class="mr-2">
+                                <td class="px-1 text-left">
+                                    <img src="{{ pair.0.logo.url }}" alt="{{ pair.0.title }}" width="24" height="24"
+                                         class="mr-1">
                                     {{ pair.0.short_title }}
                                 </td>
                                 <td class="px-1">
@@ -32,9 +37,9 @@
                                 {% endif %}
                             </tr>
                             <tr>
-                                <td>
-                                    <img src="{{ pair.1.logo.url }}" alt="{{ pair.1.title }}" width="28" height="28"
-                                         class="mr-2">
+                                <td class="px-1 text-left">
+                                    <img src="{{ pair.1.logo.url }}" alt="{{ pair.1.title }}" width="24" height="24"
+                                         class="mr-1">
                                     {{ pair.1.short_title }}
                                 </td>
                                 <td class="px-1">
