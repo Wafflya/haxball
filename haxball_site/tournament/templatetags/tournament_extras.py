@@ -185,7 +185,7 @@ def league_table(league):
                 loose_count += 1
                 last_matches[i].append((m, -1))
 
-        last_matches[i] = last_matches[i][-5:]
+        last_matches[i] = sorted(last_matches[i], key=lambda x: x[0].numb_tour.number)[-5:]
         points[i] = win_count * 3 + draw_count * 1
         diffrence[i] = goals_scores_all - goals_consided_all
         scores[i] = goals_scores_all
