@@ -68,6 +68,11 @@ def matches_in_team(player, team):
 
 # return Match.objects.filter(Q(team_home=team, team_home_start=player) | Q(team_guest=team, team_guest_start=player)).count()
 
+#   Для статы юзера по командам
+@register.inclusion_tag('tournament/include/player_team.html')
+def player_team(player):
+    return {'stat':True}
+
 #   Для детальной статы матча
 
 

@@ -1,6 +1,7 @@
 {% extends "core/home.html" %}
 {% load static %}
 {% load user_tags %}
+{% load tournament_extras %}
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static "core/profile/profile.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
@@ -28,136 +29,159 @@
 
 {% block profile_of_user %}
     <hr>
-
-    <div class="card user-card-full">
-        <div class="row m-l-0 m-r-0">
-            <div class="col-sm-4 bg-c-lite-green user-profile">
-                <div class="card-block text-center text-white">
-                    <div class="m-b-10"><img src="{{ profile.avatar.url }}" width="100%" height="100%"
-                                             class="img-radius" alt="User-Profile-Image"></div>
-                    <h3 class="f-w-600">{{ profile.name }}
-                        {% for icon in profile.user_icon.all %}
-                            <img src="{{ icon.image.url }}" width="25px" height="25px" title="{{ icon.description }}"
-                                 class="mb-1">
-                        {% endfor %}
-                    </h3>
-                    {% if profile.name.user_player.team %}
-                        <p class="mb-1">
-                            <a href="{{ profile.name.user_player.team.get_absolute_url }}" class="text-white">
-                                <img src="{{ profile.name.user_player.team.logo.url }}"
-                                     alt="{{ profile.name.user_player.team.title }}" class="mb-1"
-                                     style="width: 28px; height: 28px;">
-                                <span style="font-weight: bold; font-size: 17px;">{{ profile.name.user_player.team.title }}</span>
-                            </a>
-                        </p>
-                    {% else %}
-                        <p class="mb-1">Без команды</p>
-                    {% endif %}
-                    <p class="mb-0">Репутация
-                        <span class="badge badge-pill {% if profile.karma >= 0 %}
+    <div class="card">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="squad-tab" data-toggle="tab" href="#profile_tab" role="tab"
+                   aria-controls="profile_user-tab" aria-selected="true">Профиль пользователя</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="detail-tab" data-toggle="tab" href="#detail_stat" role="tab"
+                   aria-controls="detail_stat-tab" aria-selected="false">Статистика игрока</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content start_squad" id="myTabContent">
+        <div class="tab-pane fade show active" id="profile_tab" role="tabpanel"
+             aria-labelledby="profile_user-tab">
+            <div class="card user-card-full">
+                <div class="row m-l-0 m-r-0">
+                    <div class="col-sm-4 bg-c-lite-green user-profile">
+                        <div class="card-block text-center text-white">
+                            <div class="m-b-10"><img src="{{ profile.avatar.url }}" width="100%" height="100%"
+                                                     class="img-radius" alt="User-Profile-Image"></div>
+                            <h3 class="f-w-600">{{ profile.name }}
+                                {% for icon in profile.user_icon.all %}
+                                    <img src="{{ icon.image.url }}" width="25px" height="25px"
+                                         title="{{ icon.description }}"
+                                         class="mb-1">
+                                {% endfor %}
+                            </h3>
+                            {% if profile.name.user_player.team %}
+                                <p class="mb-1">
+                                    <a href="{{ profile.name.user_player.team.get_absolute_url }}" class="text-white">
+                                        <img src="{{ profile.name.user_player.team.logo.url }}"
+                                             alt="{{ profile.name.user_player.team.title }}" class="mb-1"
+                                             style="width: 28px; height: 28px;">
+                                        <span style="font-weight: bold; font-size: 17px;">{{ profile.name.user_player.team.title }}</span>
+                                    </a>
+                                </p>
+                            {% else %}
+                                <p class="mb-1">Без команды</p>
+                            {% endif %}
+                            <p class="mb-0">Репутация
+                                <span class="badge badge-pill {% if profile.karma >= 0 %}
                                                             badge-success
                                                         {% else %}
                                                             badge-danger
                                                         {% endif %}">
                             {{ profile.karma }}
                         </span>
-                    </p>
-                    <p>Просмотров <i class="fa fa-eye text-warning" aria-hidden="true"></i>
-                        {{ profile.views }}</p>
-                    <p class="mb-0">
-                        {% if profile.vk %}
-                            <a href="https://vk.com/{{ profile.vk }}" target="_blank"><img
-                                    src="{% static "img/ico/vk_1.png" %}" height="41" width="41"
-                                    title="{{ profile.vk }}"></a>
-                        {% endif %}
-                        {% if profile.discord %}
-                            <img src="{% static "img/ico/discord_1.png" %}" onclick="myFunction()" id=discord
-                                 height="41" width="41" data-title="{{ profile.discord }}"
-                                 title="{{ profile.discord }}" style="cursor: pointer;">
-                        {% endif %}
-                        {% if profile.telegram %}
-                            <a href="https://t.me/{{ profile.telegram }}" target="_blank"><img
-                                    src="{% static "img/ico/tg_1.png" %}" height="41" width="41"
-                                    title="{{ profile.telegram }}"></a>
-                        {% endif %}
-                    </p>
-                </div>
-            </div>
-            <div class="col-sm-8 bg-profile"
-                    {% if profile.background %}
-                 style="background-image:url({{ profile.background.url }}); background-size: cover"
-                    {% endif %}>
-                <div class="card-block">
-                    <h5 class="m-b-20 p-b-5 b-b-default f-w-600">Основная информация
-                        {% if profile.name.username == user.username %}
-
-                            <a href="{% url 'core:edit_profile' profile.slug profile.id %}"
-                               class="text-warning small text-right"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-
-                        {% endif %}
-                    </h5>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <p class="m-b-10 f-w-600">Дата регистрации</p>
-                            <h6 class="text-muted f-w-400">{{ profile.name.date_joined|date }}</h6>
-                        </div>
-                        <div class="col-sm-6">
-                            <p class="m-b-10 f-w-600">Последний визит</p>
-                            <h6 class="text-muted f-w-400">{% user_last_activity profile.name %}</h6>
-                        </div>
-                        <div class="col-sm-6">
-                            <p class="m-b-10 f-w-600">Дата рождения</p>
-                            <h6 class="text-muted f-w-400">
-
-                                {% if profile.born_date %}
-                                    {{ profile.born_date }}
-                                    ({% age profile.born_date %})
-                                {% else %}
-                                    не указана(
+                            </p>
+                            <p>Просмотров <i class="fa fa-eye text-warning" aria-hidden="true"></i>
+                                {{ profile.views }}</p>
+                            <p class="mb-0">
+                                {% if profile.vk %}
+                                    <a href="https://vk.com/{{ profile.vk }}" target="_blank"><img
+                                            src="{% static "img/ico/vk_1.png" %}" height="41" width="41"
+                                            title="{{ profile.vk }}"></a>
                                 {% endif %}
-                            </h6>
-                        </div>
-                        <div class="col-sm-6">
-                            <p class="m-b-10 f-w-600">Город</p>
-                            <h6 class="text-muted f-w-400">
-                                {% if profile.city %}
-                                    {{ profile.city }}
-                                {% else %}
-                                    не указан
-                                {% endif %}</h6>
-                        </div>
-                    </div>
-
-                    <h5 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Активность</h5>
-                    <div class="row">
-                        <div class="col-sm-4 text-center">
-                            <p class="m-b-10 f-w-600"><img src="{% static "img/ico/comment_1.png" %}"></p>
-                            <h6 class="text-primary f-w-400">{{ profile.name.n_comments_by_user.count }}</h6>
-                        </div>
-                        <div class="col-sm-4 text-center">
-                            <p class="m-b-10 f-w-600"><img src="{% static "img/ico/like_1.png" %}"></p>
-                            <h6 class="text-success f-w-400">{{ profile.name.likedislike_set.likes.count }}</h6>
-                        </div>
-                        <div class="col-sm-4 text-center">
-                            <p class="m-b-10 f-w-600"><img src="{% static "img/ico/dislike_1.png" %}"></p>
-                            <h6 class="text-danger f-w-400">{{ profile.name.likedislike_set.dislikes.count }}</h6>
+                                {% if profile.discord %}
+                                    <img src="{% static "img/ico/discord_1.png" %}" onclick="myFunction()" id=discord
+                                         height="41" width="41" data-title="{{ profile.discord }}"
+                                         title="{{ profile.discord }}" style="cursor: pointer;">
+                                {% endif %}
+                                {% if profile.telegram %}
+                                    <a href="https://t.me/{{ profile.telegram }}" target="_blank"><img
+                                            src="{% static "img/ico/tg_1.png" %}" height="41" width="41"
+                                            title="{{ profile.telegram }}"></a>
+                                {% endif %}
+                            </p>
                         </div>
                     </div>
+                    <div class="col-sm-8 bg-profile"
+                            {% if profile.background %}
+                         style="background-image:url({{ profile.background.url }}); background-size: cover"
+                            {% endif %}>
+                        <div class="card-block">
+                            <h5 class="m-b-20 p-b-5 b-b-default f-w-600">Основная информация
+                                {% if profile.name.username == user.username %}
 
-                    <h5 class="m-b-20 m-t-30 p-b-5 b-b-default f-w-600">О себе</h5>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h6 class="text-muted f-w-400">
-                                {{ profile.about|linebreaks }}
-                            </h6>
+                                    <a href="{% url 'core:edit_profile' profile.slug profile.id %}"
+                                       class="text-warning small text-right"><i class="fa fa-pencil"
+                                                                                aria-hidden="true"></i></a>
+
+                                {% endif %}
+                            </h5>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="m-b-10 f-w-600">Дата регистрации</p>
+                                    <h6 class="text-muted f-w-400">{{ profile.name.date_joined|date }}</h6>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="m-b-10 f-w-600">Последний визит</p>
+                                    <h6 class="text-muted f-w-400">{% user_last_activity profile.name %}</h6>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="m-b-10 f-w-600">Дата рождения</p>
+                                    <h6 class="text-muted f-w-400">
+
+                                        {% if profile.born_date %}
+                                            {{ profile.born_date }}
+                                            ({% age profile.born_date %})
+                                        {% else %}
+                                            не указана(
+                                        {% endif %}
+                                    </h6>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="m-b-10 f-w-600">Город</p>
+                                    <h6 class="text-muted f-w-400">
+                                        {% if profile.city %}
+                                            {{ profile.city }}
+                                        {% else %}
+                                            не указан
+                                        {% endif %}</h6>
+                                </div>
+                            </div>
+
+                            <h5 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Активность</h5>
+                            <div class="row">
+                                <div class="col-sm-4 text-center">
+                                    <p class="m-b-10 f-w-600"><img src="{% static "img/ico/comment_1.png" %}"></p>
+                                    <h6 class="text-primary f-w-400">{{ profile.name.n_comments_by_user.count }}</h6>
+                                </div>
+                                <div class="col-sm-4 text-center">
+                                    <p class="m-b-10 f-w-600"><img src="{% static "img/ico/like_1.png" %}"></p>
+                                    <h6 class="text-success f-w-400">{{ profile.name.likedislike_set.likes.count }}</h6>
+                                </div>
+                                <div class="col-sm-4 text-center">
+                                    <p class="m-b-10 f-w-600"><img src="{% static "img/ico/dislike_1.png" %}"></p>
+                                    <h6 class="text-danger f-w-400">{{ profile.name.likedislike_set.dislikes.count }}</h6>
+                                </div>
+                            </div>
+
+                            <h5 class="m-b-20 m-t-30 p-b-5 b-b-default f-w-600">О себе</h5>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h6 class="text-muted f-w-400">
+                                        {{ profile.about|linebreaks }}
+                                    </h6>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
+        <div class="tab-pane fade" id="detail_stat" role="tabpanel" aria-labelledby="detail_stat-tab">
+            <div class="card">
+                {% player_team profile.name %}
+                <h1>bla bla bla</h1>
+            </div>
+        </div>
     </div>
-
 
 {% endblock %}
 
