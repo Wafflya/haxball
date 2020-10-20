@@ -61,16 +61,17 @@ class EventInline(admin.StackedInline):
 @admin.register(Match)
 class MatchAdmin(admin.ModelAdmin):
     list_display = (
-    'league', 'numb_tour', 'team_home', 'score_home', 'team_guest', 'score_guest', 'is_played', 'updated', 'id',)
-    #readonly_fields = ('score_home', 'score_guest',)
+        'league', 'numb_tour', 'team_home', 'score_home', 'team_guest', 'score_guest', 'is_played', 'updated',
+        'inspector', 'id',)
+    # readonly_fields = ('score_home', 'score_guest',)
     filter_horizontal = ('team_home_start', 'team_guest_start',)
-    list_filter = ('numb_tour','league')
+    list_filter = ('numb_tour', 'league', 'inspector', 'is_played')
     fieldsets = (
         ('Основная инфа', {
             'fields': (('league', 'is_played', 'match_date', 'numb_tour',),)
         }),
         (None, {
-            'fields': (('team_home', 'team_guest', 'replay_link', ),)
+            'fields': (('team_home', 'team_guest', 'replay_link',),)
         }),
         (None, {
             'fields': (('score_home', 'score_guest', 'inspector', 'replay_link_second'),)

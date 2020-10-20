@@ -2,7 +2,7 @@ from django import template
 from django.db.models import Q, Count
 from django.utils import timezone
 
-from ..models import FreeAgent, OtherEvents, Goal, Match, League, Team, Player, Substitution
+from ..models import FreeAgent, OtherEvents, Goal, Match, League, Team, Player, Substitution, Season, PlayerTransfer
 
 register = template.Library()
 
@@ -71,7 +71,46 @@ def matches_in_team(player, team):
 #   Для статы юзера по командам
 @register.inclusion_tag('tournament/include/player_team.html')
 def player_team(player):
-    return {'stat':True}
+    d = {}
+    seasons = list(Season.objects.all().order_by('-number'))
+    for s in seasons:
+        d2 = {}
+        trans_teams = list(PlayerTransfer.objects.filter(season_join=s, trans_player=player.user_player))
+        for team in trans_teams:
+            d3 = {}
+            leagues = list(League.objects.filter(championship=s, teams=team.to_team))
+            for leg in leagues:
+                stat = []
+                matches_count = Match.objects.filter(team_guest=team.to_team, team_guest_start=player.user_player,
+                                                     league=leg).count() + Match.objects.filter(
+                    team_home=team.to_team, team_home_start=player.user_player, league=leg).count() + Match.objects.filter(
+                    ~(Q(team_guest_start=player.user_player) | Q(team_home_start=player.user_player)), match_substitutions__team=team.to_team,
+                    match_substitutions__player_in=player.user_player, league=leg
+                ).distinct().count()
+                stat.append(matches_count)
+                goal_count = Goal.objects.filter(author=player.user_player, team=team.to_team, match__league=leg).count()
+                stat.append(goal_count)
+                assists_count = Goal.objects.filter(assistent=player.user_player, team=team.to_team, match__league=leg).count()
+                stat.append(assists_count)
+                clean_sheets = OtherEvents.objects.filter(author=player.user_player, team=team.to_team, event='CLN', match__league=leg).count()
+                yellow_cards = OtherEvents.objects.filter(author=player.user_player, team=team.to_team, event='YEL', match__league=leg).count()
+                red_cards = OtherEvents.objects.filter(author=player.user_player, team=team.to_team, event='RED', match__league=leg).count()
+                own_goals = OtherEvents.objects.filter(author=player.user_player, team=team.to_team, event='OG', match__league=leg).count()
+                subs_in = Substitution.objects.filter(team=team.to_team, player_in=player.user_player).count()
+                subs_out = Substitution.objects.filter(team=team.to_team, player_out=player.user_player).count()
+                stat.append(clean_sheets)
+                stat.append(subs_out)
+                stat.append(subs_in)
+                stat.append(own_goals)
+                stat.append(yellow_cards)
+                stat.append(red_cards)
+                print(stat)
+                d3[leg] = stat
+            d2[team.to_team] = d3
+    d[s] = d2
+    print(d)
+    return {'stat': d}
+
 
 #   Для детальной статы матча
 
