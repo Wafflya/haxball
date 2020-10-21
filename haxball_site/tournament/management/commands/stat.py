@@ -11,7 +11,7 @@ class Command(BaseCommand):
             league = League.objects.get(championship__is_active=True, is_cup=False)
         except:
             print('Ошибка выбора лиги')
-        matches = Match.objects.filter(league=league)
+        matches = Match.objects.filter(league=league, is_played=True)
         #print(matches)
         norm_matches = []
         for m in matches:
