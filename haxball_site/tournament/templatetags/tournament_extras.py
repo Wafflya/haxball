@@ -71,14 +71,16 @@ def matches_in_team(player, team):
 #   Для статы юзера по командам
 @register.inclusion_tag('tournament/include/player_team.html')
 def player_team(player):
+    try:
+        p = player.user_player
+    except:
+        return {}
     d = {}
     p = PlayerTransfer.objects.filter(trans_player=player.user_player)
-    print(p)
     sss = []
     for tr in p:
         if not tr.season_join in sss:
             sss.append(tr.season_join)
-    print(sss)
     seasons = sorted(sss, key = lambda x: x.number)
     #seasons = list(Season.objects.all().order_by('-number'))
     for s in seasons:
@@ -129,6 +131,10 @@ def player_team(player):
 
 @register.filter
 def rows_player_stat(player, season):
+    try:
+        p = player.user_player
+    except:
+        return 0
     k = 0
     teams = PlayerTransfer.objects.filter(~Q(to_team=None), season_join=season, trans_player=player.user_player)
     tournams = season.tournaments_in_season.all()
