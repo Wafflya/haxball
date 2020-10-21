@@ -112,8 +112,8 @@ def player_team(player):
                                                        match__league=leg).count()
                 own_goals = OtherEvents.objects.filter(author=player.user_player, team=team.to_team, event='OG',
                                                        match__league=leg).count()
-                subs_in = Substitution.objects.filter(team=team.to_team, player_in=player.user_player).count()
-                subs_out = Substitution.objects.filter(team=team.to_team, player_out=player.user_player).count()
+                subs_in = Substitution.objects.filter(team=team.to_team, player_in=player.user_player, match__league=leg).count()
+                subs_out = Substitution.objects.filter(team=team.to_team, player_out=player.user_player, match__league=leg).count()
                 stat.append(clean_sheets)
                 stat.append(subs_out)
                 stat.append(subs_in)
