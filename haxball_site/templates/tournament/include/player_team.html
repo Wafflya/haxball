@@ -1,4 +1,5 @@
 {% load static %}
+{% load tournament_extras %}
 <table class="table table-striped">
     <thead>
     <tr>
@@ -41,37 +42,32 @@
     </tr>
     </thead>
     <tbody>
-    {% for key,value in stat.items %}
+    {% for seas,team in stat.items %}
         <tr>
-            {% if forloop.counter == 1 %}
-                <td rowspan="{{ value|length }}">{{ key }}</td>
-            {% endif %}
-            {% for k, v in value.items %}
-                    {% if forloop.counter == 1 %}
-                        <td rowspan="{{ v|length }}">{{ k }}</td>
-                    {% endif %}
-                    {% for vv,s in  v.items %}
-                        <td>{{ vv }}</td>
-                        {% for i in s %}
-                            <td>{{ i }}</td>
-                        {% endfor %}
+            <td rowspan="{{ player|rows_player_stat:seas }}">{{ seas }}</td>
 
+
+            {% for t,c in team.items %}
+                <td rowspan="{{ c|length }}">
+                    <img src="{{ t.logo.url }}" alt="{{ t.title }}" width="24" height="24"
+                         class="mr-1">
+                    <a class="team_link" href="{{ t.get_absolute_url }}">{{ t.short_title }}</a>
+
+                </td>
+                {% for champ, stat in c.items %}
+                    <td>{{ champ.title }}</td>
+                    {% for i in stat %}
+                        <td class="text-center">{{ i }}</td>
                     {% endfor %}
-                </tr>
+                    </tr>
+                {% endfor %}
             {% endfor %}
+
+
+
+
     {% endfor %}
 
 
     </tbody>
 </table>
-<h2>
-    {% for key,value in stat.items %}
-        <h3>{{ key }}</h3>
-        {% for k, v in value.items %}
-            <h4>{{ k }}</h4>
-            {% for vv,s in  v.items %}
-                {{ vv }}{{ s }}
-            {% endfor %}
-        {% endfor %}
-    {% endfor %}
-</h2>
