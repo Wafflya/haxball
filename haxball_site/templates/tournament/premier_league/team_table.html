@@ -27,7 +27,8 @@
                 <ul class="nav nav-pills nav-fill" id="myTab" style="width: 100%;">
                     <li class="nav-item" style="width: 33%;">
                         <a class="nav-link h5 active" id="table-tab" data-toggle="tab" href="#table" role="tab"
-                           aria-controls="league-table-tab" aria-selected="true">{% if not league.is_cup %}Таблица{% else %}Сетка{% endif %}</a>
+                           aria-controls="league-table-tab" aria-selected="true">{% if not league.is_cup %}
+                            Таблица{% else %}Сетка{% endif %}</a>
                     </li>
                     <li class="nav-item" style="width: 33%;">
                         <a class="nav-link h5" id="detail-tab" data-toggle="tab" href="#detail_stat" role="tab"
@@ -77,8 +78,14 @@
                                             {% for pl in league|top_goalscorers %}
                                                 <tr style="border-radius: 25px;">
                                                     <td width="16%" class="px-1" style="border-radius: 15px 0 0 15px;">
-                                                        <img
-                                                                src="{{ pl.team.logo.url }}" width="25px" height="25px">
+                                                        {% if pl.team %}
+                                                            <img
+                                                                    src="{{ pl.team.logo.url }}" width="25px"
+                                                                    height="25px">
+                                                        {% else %}
+                                                            <img src="{% static "img/ico/free_player.png" %}" width="25px"
+                                                                    height="25px">
+                                                        {% endif %}
                                                     </td>
                                                     <td class="text-left pl-1">
                                                         {% if pl.name %}
@@ -119,8 +126,14 @@
                                             {% for pl in league|top_assistent %}
                                                 <tr style="border-radius: 25px;">
                                                     <td width="16%" class="px-1" style="border-radius: 15px 0 0 15px;">
-                                                        <img
-                                                                src="{{ pl.team.logo.url }}" width="25px" height="25px">
+                                                        {% if pl.team %}
+                                                            <img
+                                                                    src="{{ pl.team.logo.url }}" width="25px"
+                                                                    height="25px">
+                                                        {% else %}
+                                                            <img src="{% static "img/ico/free_player.png" %}" width="25px"
+                                                                    height="25px">
+                                                        {% endif %}
                                                     </td>
                                                     <td width="68%" class="text-left pl-1">
                                                         {% if pl.name %}
@@ -163,8 +176,14 @@
                                             {% for pl in league|top_clean_sheets %}
                                                 <tr style="border-radius: 25px;">
                                                     <td class="px-1" width="16%" style="border-radius: 15px 0 0 15px;">
-                                                        <img
-                                                                src="{{ pl.team.logo.url }}" width="25px" height="25px">
+                                                        {% if pl.team %}
+                                                            <img
+                                                                    src="{{ pl.team.logo.url }}" width="25px"
+                                                                    height="25px">
+                                                        {% else %}
+                                                            <img src="{% static "img/ico/free_player.png" %}" width="25px"
+                                                                    height="25px">
+                                                        {% endif %}
                                                     </td>
                                                     <td class="text-left pl-1">
                                                         {% if pl.name %}
@@ -204,7 +223,9 @@
                                             type="button" data-toggle="collapse"
                                             data-target="#tour{{ tour.number }}" aria-expanded="false"
                                             aria-controls="tour{{ tour.number }}" style="width: 90%">
-                                        <span class="h5">{% if not league.is_cup %}Тур {{ tour.number }}{% else %}{{ tour.number|round_name:league.tours.count }}{% endif %} ({{ tour.date_from|date:"d.m" }} - {{ tour.date_to|date:"d.m" }})</span>
+                                        <span class="h5">{% if not league.is_cup %}Тур {{ tour.number }}{% else %}
+                                            {{ tour.number|round_name:league.tours.count }}{% endif %}
+                                            ({{ tour.date_from|date:"d.m" }} - {{ tour.date_to|date:"d.m" }})</span>
                                     </button>
                                 </p>
                             </div>
