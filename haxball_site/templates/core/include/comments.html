@@ -16,6 +16,14 @@
 
 <div class="row">
     <div class="col-md-12">
+        {% if user.is_authenticated and post.commentable %}
+            {% include 'core/include/form_comment.html' %}
+        {% elif post.commentable %}
+            <h6 class="text-center">
+                <a class="text-primary" data-toggle="modal" data-target="#loginModal" style="cursor: pointer">
+                    Войдите</a>, чтобы оставить комментарий
+            </h6>
+        {% endif %}
         <div class="card mb-5" style="border-radius: 20px 20px 0px 0px">
             {% if post.commentable %}
                 <div class="card-body card-body-comment">
@@ -217,14 +225,7 @@
 
 
             </div>
-            {% if user.is_authenticated and post.commentable %}
-                {% include 'core/include/form_comment.html' %}
-            {% elif post.commentable %}
-                <h6 class="text-center">
-                    <a class="text-primary" data-toggle="modal" data-target="#loginModal" style="cursor: pointer">
-                        Войдите</a>, чтобы оставить комментарий
-                </h6>
-            {% endif %}
+
         </div>
 
     </div>

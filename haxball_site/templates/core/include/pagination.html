@@ -10,7 +10,19 @@
                    aria-disabled="true">Предыдущая</a>
             </li>
         {% endif %}
+
+
+        {% for i in page.paginator.page_range %}
+            {% if i == page.number %}
+                <li class="page-item disabled"><a class="page-link" href="" aria-disabled="true">{{ i }}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="{{ object.get_absolute_url }}?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+    <!--
         <li class="page-item disabled"><a class="page-link" href="#">{{ page.number }} из {{ page.paginator.num_pages }}</a></li>
+        -->
         {% if page.has_next %}
             <li class="page-item">
                 <a class="page-link" href="?page={{ page.next_page_number }}">Следующая</a>
