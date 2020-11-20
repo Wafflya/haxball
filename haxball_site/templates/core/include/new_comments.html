@@ -19,26 +19,26 @@
 <div class="row mt-4">
     <div class="col-md-12">
 
-    <div class="card mb-2 py-2 px-1" style="border-radius: 20px">
-        {% if user.is_authenticated and object.commentable %}
-            {% if object|get_class == 'Profile' %}
-                {% include 'core/include/new_form_comment.html' %}
-            {% elif object|get_class == 'League' %}
-                {% include 'core/include/new_form_comment_league.html' %}
-            {% elif object|get_class == 'Post' %}
-                {% include 'core/include/new_form_comment_post.html' %}
-            {% elif object|get_class == 'Match' %}
-                {% include 'core/include/new_form_comment_match.html' %}
+        <div class="card mb-2 py-2 px-1" style="border-radius: 20px">
+            {% if user.is_authenticated and object.commentable %}
+                {% if object|get_class == 'Profile' %}
+                    {% include 'core/include/new_form_comment.html' %}
+                {% elif object|get_class == 'League' %}
+                    {% include 'core/include/new_form_comment_league.html' %}
+                {% elif object|get_class == 'Post' %}
+                    {% include 'core/include/new_form_comment_post.html' %}
+                {% elif object|get_class == 'Match' %}
+                    {% include 'core/include/new_form_comment_match.html' %}
+                {% endif %}
+            {% elif object.commentable %}
+                <h6 class="text-center">
+                    <a class="text-primary" data-toggle="modal" data-target="#loginModal" style="cursor: pointer">
+                        Войдите</a>, чтобы оставить комментарий
+                </h6>
+            {% elif not object.commentable and object|get_class == 'Profile' %}
+                <h5 class="text-center">Пользователь закрыл свой профиль</h5>
             {% endif %}
-        {% elif object.commentable %}
-            <h6 class="text-center">
-                <a class="text-primary" data-toggle="modal" data-target="#loginModal" style="cursor: pointer">
-                    Войдите</a>, чтобы оставить комментарий
-            </h6>
-        {% elif not object.commentable and object|get_class == 'Profile' %}
-            <h5 class="text-center">Пользователь закрыл свой профиль</h5>
-        {% endif %}
-    </div>
+        </div>
 
         <div class="card mb-5" style="border-radius: 20px 20px 0px 0px">
             {% if object.commentable %}
@@ -318,10 +318,11 @@
 {% endif %}
 
 <script>
+
     function addComment(name, id) {
-        document.getElementById('contactparent').value = id
-        document.getElementById('contactcomment').innerText = `${name},`
+        document.getElementById('contactparent').value = id;
     }
+
 
     $('#addcomment').submit(function () {
         $(this).find(':input[type=submit]').prop('disabled', true);

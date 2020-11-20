@@ -273,10 +273,88 @@ def league_table(league):
         draws[i] = draw_count
 
     l = zip(b, matches_played, wins, draws, looses, scores, consided, diffrence, points, last_matches)
+    print(l)
     s1 = sorted(l, key=lambda x: x[5], reverse=True)
     s2 = sorted(s1, key=lambda x: x[7], reverse=True)
     ls = sorted(s2, key=lambda x: x[8], reverse=True)
-    return {'teams': ls}
+
+    result = []
+    i = 0
+    while i < len(ls)-1:
+        mini_table = [ls[i][0]]
+        mini_res = [ls[i]]
+        k = i
+        for j in range(i+1, len(ls)):
+            if ls[i][8] == ls[j][8]:
+                mini_table.append(ls[j][0])
+                mini_res.append(ls[j])
+                k += 1
+            else:
+                k += 1
+                break
+        if len(mini_table) >= 2:
+            c = len(mini_table)
+            points = [0 for _ in range(c)]  # Количество очков
+            diffrence = [0 for _ in range(c)]  # Разница мячей
+            scores = [0 for _ in range(c)]  # Мячей забито
+            consided = [0 for _ in range(c)]  # Мячей пропущено
+            matches_played = [0 for _ in range(c)]  # Игр сыграно
+            wins = [0 for _ in range(c)]  # Побед
+            draws = [0 for _ in range(c)]  # Ничей
+            looses = [0 for _ in range(c)]  # Поражений
+            for i, team in enumerate(mini_table):
+                matches = []
+                matches_all = Match.objects.filter((Q(team_home=team) | Q(team_guest=team)), league=league, is_played=True)
+                for mm in matches_all:
+                    if (mm.team_home in mini_table) and (mm.team_guest in mini_table):
+                        matches.append(mm)
+                matches_played[i] = len(matches)
+                win_count = 0
+                draw_count = 0
+                loose_count = 0
+                goals_scores_all = 0
+                goals_consided_all = 0
+                for m in matches:
+
+                    if team == m.team_home:
+                        score_team = m.score_home
+                        score_opp = m.score_guest
+                    elif team == m.team_guest:
+                        score_team = m.score_guest
+                        score_opp = m.score_home
+                    else:
+                        return None
+
+                    goals_scores_all += score_team
+                    goals_consided_all += score_opp
+
+                    if score_team > score_opp:
+                        win_count += 1
+                    elif score_team == score_opp:
+                        draw_count += 1
+                    else:
+                        loose_count += 1
+                points[i] = win_count * 3 + draw_count * 1
+                diffrence[i] = goals_scores_all - goals_consided_all
+                scores[i] = goals_scores_all
+                consided[i] = goals_consided_all
+                wins[i] = win_count
+                looses[i] = loose_count
+                draws[i] = draw_count
+            l = zip(mini_table, matches_played, wins, draws, looses, scores, consided, diffrence, points)
+            s1 = sorted(l, key=lambda x: x[5], reverse=True)
+            s2 = sorted(s1, key=lambda x: x[7], reverse=True)
+            lss = sorted(s2, key=lambda x: x[8], reverse=True)
+            for lll in lss:
+                for h in mini_res:
+                    if lll[0] == h[0]:
+                        result.append(h)
+                        break
+        else:
+            result.append(mini_res[0])
+        i = k
+
+    return {'teams': result}
 
 
 # Конец тегов и фильтров для таблицы лиги

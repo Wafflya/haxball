@@ -27,13 +27,10 @@
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/comments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/new_comments.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/new_comments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/new_form_comment_league.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/new_form_comment_league.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/new_form_comment_post.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/new_form_comment_post.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/pagination.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/pagination.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +201,8 @@
       <workItem from="1603264037126" duration="13447000" />
       <workItem from="1603627711923" duration="820000" />
       <workItem from="1603886206134" duration="1928000" />
-      <workItem from="1605512319726" duration="5120000" />
+      <workItem from="1605512319726" duration="16943000" />
+      <workItem from="1605874258101" duration="8159000" />
     </task>
     <servers />
   </component>
