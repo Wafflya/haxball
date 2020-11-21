@@ -280,7 +280,7 @@ def league_table(league):
 
     result = []
     i = 0
-    while i < len(ls)-1:
+    while i < len(ls):
         mini_table = [ls[i][0]]
         mini_res = [ls[i]]
         k = i
