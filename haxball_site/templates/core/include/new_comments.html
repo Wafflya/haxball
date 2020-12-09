@@ -67,20 +67,26 @@
                             </div>
                             <div class="comment-text w-100">
                                 <div class="d-flex justify-content-between">
-                                    <a href="{{ comment.author.user_profile.get_absolute_url }}">
+                                    <span>
                                         <h5 class="m-0">
                                             {% for icon in comment.author.user_profile.user_icon.all %}
                                                 <img src="{{ icon.image.url }}" width="16px" height="16px"
                                                      title="{{ icon.description }}">
                                             {% endfor %}
-                                            {{ comment.author.username }}
+                                            <a href="{{ comment.author.user_profile.get_absolute_url }}">
+                                                {{ comment.author.username }}
+                                            </a>
+                                            {% for medal in comment.author.user_player.player_medals.all %}
+                                                <img src="{{ medal.image.url }}" width="25px" height="25px"
+                                                     title="{{ medal.description }}">
+                                            {% endfor %}
                                             <span class="badge p-0">
                                             <span class="badge badge-pill
                             {% if comment.author.user_profile.karma >= 0 %}badge-success{% else %}badge-danger{% endif %}">{{ comment.author.user_profile.karma }}
                                             </span>
                                             </span>
                                         </h5>
-                                    </a>
+                                    </span>
                                     <span>
                                             <a href="{{ object.get_absolute_url }}?page={{ comments.number }}#r{{ comment.id }}">#{{ comment.id }}</a>
                                         {% if user.is_superuser or comment.author == user and comment|can_edit %}
@@ -183,21 +189,29 @@
                                 <div class="comment-text w-100">
                                     <div class="d-flex justify-content-between">
                                         <div class="d-inline-flex">
-                                            <a href="{{ children.author.user_profile.get_absolute_url }}">
+                                            <span>
                                                 <h5 class="m-0">
                                                     {% for icon in children.author.user_profile.user_icon.all %}
                                                         <img src="{{ icon.image.url }}" width="16px" height="16px"
                                                              title="{{ icon.description }}">
                                                     {% endfor %}
+                                                    <a href="{{ children.author.user_profile.get_absolute_url }}">
                                                     {{ children.author.username }}
+                                                    </a>
+                                                    {% for medal in children.author.user_player.player_medals.all %}
+                                                        <img src="{{ medal.image.url }}" width="25px" height="25px"
+                                                             title="{{ medal.description }}">
+                                                    {% endfor %}
+
                                                     <span class="badge p-0 mr-2">
                                                         <span class="badge badge-pill
                                                             {% if children.author.user_profile.karma >= 0 %}badge-success{% else %}badge-danger{% endif %}">{{ children.author.user_profile.karma }}
                                                         </span>
                                                     </span>
 
+
                                                 </h5>
-                                            </a>
+                                            </span>
 
                                             <i style="align-self: flex-end; margin-bottom: 2px;"> ответил </i>
                                             <a href="{{ children.parent.author.user_profile.get_absolute_url }}">

@@ -35,10 +35,12 @@
                 <a class="nav-link active" id="squad-tab" data-toggle="tab" href="#profile_tab" role="tab"
                    aria-controls="profile_user-tab" aria-selected="true">Профиль пользователя</a>
             </li>
+            {% if profile.name.user_player %}
             <li class="nav-item">
                 <a class="nav-link" id="detail-tab" data-toggle="tab" href="#detail_stat" role="tab"
                    aria-controls="detail_stat-tab" aria-selected="false">Статистика игрока</a>
             </li>
+            {% endif %}
         </ul>
     </div>
     <div class="tab-content start_squad" id="myTabContent">
@@ -78,6 +80,24 @@
                             {{ profile.karma }}
                         </span>
                             </p>
+
+                            <p>
+                                <div class="row">
+                                    <div class="col-sm-4 text-center">
+                                        <p class="m-b-10 f-w-600"><img src="{% static "img/ico/comment_1.png" %}"></p>
+                                        <h6 class="text-white f-w-400">{{ profile.name.n_comments_by_user.count }}</h6>
+                                    </div>
+                                    <div class="col-sm-4 text-center">
+                                        <p class="m-b-10 f-w-600"><img src="{% static "img/ico/like_1.png" %}"></p>
+                                        <h6 class="text-white f-w-400">{{ profile.name.likedislike_set.likes.count }}</h6>
+                                    </div>
+                                    <div class="col-sm-4 text-center">
+                                        <p class="m-b-10 f-w-600"><img src="{% static "img/ico/dislike_1.png" %}"></p>
+                                        <h6 class="text-white f-w-400">{{ profile.name.likedislike_set.dislikes.count }}</h6>
+                                    </div>
+                                </div>
+                            </p>
+
                             <p>Просмотров <i class="fa fa-eye text-warning" aria-hidden="true"></i>
                                 {{ profile.views }}</p>
                             <p class="mb-0">
@@ -145,6 +165,7 @@
                                 </div>
                             </div>
 
+                        <!--
                             <h5 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Активность</h5>
                             <div class="row">
                                 <div class="col-sm-4 text-center">
@@ -160,6 +181,16 @@
                                     <h6 class="text-danger f-w-400">{{ profile.name.likedislike_set.dislikes.count }}</h6>
                                 </div>
                             </div>
+                         -->
+                            {% if profile.name.user_player.player_medals.all %}
+                                <h5 class="mb-1 m-t-40 p-b-5 b-b-default f-w-600">Достижения</h5>
+                                <div class="row">
+                                    {% for medal in profile.name.user_player.player_medals.all %}
+                                        <div class="col-sm-2 px-0 text-center"><img src="{{ medal.image.url }}" title="{{ medal.description }}" width="65px" height="65px" alt="{{ medal.title }}"></div>
+                                    {% endfor %}
+
+                                </div>
+                            {% endif %}
 
                             <h5 class="m-b-20 m-t-30 p-b-5 b-b-default f-w-600">О себе</h5>
                             <div class="row">

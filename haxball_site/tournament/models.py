@@ -394,3 +394,14 @@ class PlayerTransfer(models.Model):
     class Meta:
         verbose_name = 'Трансфер'
         verbose_name_plural = 'Трансферы'
+
+
+class Achievements(models.Model):
+    title = models.CharField('Название', max_length=64)
+    description = models.CharField('Описание', max_length=128)
+    image = models.ImageField('Изображение медальки', upload_to='medals/', blank=True, null=True)
+    player = models.ManyToManyField(Player, related_name='player_medals', blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'Медалька'
+        verbose_name_plural = 'Медальки'

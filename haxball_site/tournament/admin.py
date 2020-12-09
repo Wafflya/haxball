@@ -2,12 +2,18 @@
 from django.contrib import admin
 
 from .models import FreeAgent, Player, League, Team, Match, Goal, OtherEvents, Substitution, Season, PlayerTransfer, \
-    TourNumber, Nation
+    TourNumber, Nation, Achievements
 
 
 @admin.register(FreeAgent)
 class FreeAgentAdmin(admin.ModelAdmin):
     list_display = ('id', 'player', 'position_main', 'description', 'is_active', 'created', 'deleted')
+
+
+@admin.register(Achievements)
+class AchievmentsAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description', 'image')
+    filter_horizontal = ('player',)
 
 
 @admin.register(Player)
