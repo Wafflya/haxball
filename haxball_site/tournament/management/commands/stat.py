@@ -14,11 +14,19 @@ class Command(BaseCommand):
         matches = Match.objects.filter(league=league, is_played=True)
         #print(matches)
         norm_matches = []
+        tp_matches = []
         for m in matches:
-            if (m.team_home.title != 'ЦСКА' and m.team_guest.title != 'ЦСКА') and (
-                    m.team_home.title != 'The Beatles' and m.team_guest.title != 'One more pass') and (
-                    m.team_home.title != 'The Legendary Stars' and m.team_guest.title != 'KUMYS POWER'):
+            all_goals = m.score_home + m.score_guest
+
+            goals_scored = m.match_goal.count()+m.match_event.filter(event='OG').count()
+
+            print(all_goals, goals_scored)
+            if goals_scored == all_goals:
                 norm_matches.append(m)
+            else:
+                tp_matches.append(m)
+        print('norm',len(norm_matches))
+        print('TP', len(tp_matches))
         # Scores red/blue
         score_red = 0
         score_blue = 0
@@ -40,6 +48,7 @@ class Command(BaseCommand):
             for goal in m.match_goal.all():
                 goals[goal.time_min] += 1
 
+        print('stata')
         print(score_red, score_blue)
         print(win_red,draws,win_blue)
         print('Goals')

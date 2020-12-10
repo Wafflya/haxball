@@ -82,6 +82,7 @@ def player_team(player):
         if not tr.season_join in sss:
             sss.append(tr.season_join)
     seasons = sorted(sss, key = lambda x: x.number)
+    print(seasons)
     #seasons = list(Season.objects.all().order_by('-number'))
     for s in seasons:
         d2 = {}
@@ -89,6 +90,7 @@ def player_team(player):
         for team in trans_teams:
             d3 = {}
             leagues = list(League.objects.filter(championship=s, teams=team.to_team))
+            print(leagues)
             for leg in leagues:
                 stat = []
                 matches_count = Match.objects.filter(team_guest=team.to_team, team_guest_start=player.user_player,
@@ -124,8 +126,9 @@ def player_team(player):
                 stat.append(red_cards)
                 d3[leg] = stat
             d2[team.to_team] = d3
-    if len(seasons) != 0:
-        d[s] = d2
+        if len(seasons) != 0:
+            d[s] = d2
+    print(d)
     return {'stat': d, 'player': player}
 
 
