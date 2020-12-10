@@ -90,7 +90,7 @@ class Command(BaseCommand):
                         if g.assistent and g.team == t:
                             goals_with_assist += 1
                     og += m.match_event.filter(event='OG', team=t).count()
-                    og_opp = m.match_event.filter(event='OG').count() - m.match_event.filter(event='OG', team=t).count()
+                    og_opp = og_opp + (m.match_event.filter(event='OG').count() - m.match_event.filter(event='OG', team=t).count())
 
                     if t == m.team_home:
                         score_red += m.score_home
