@@ -80,6 +80,7 @@ class Command(BaseCommand):
             goals_not_og = 0
             goals_with_assist = 0
             og = 0
+            og_opp = 0
             matches_played = 0
             for m in norm_matches:
                 if m.team_home == t or m.team_guest == t:
@@ -89,6 +90,7 @@ class Command(BaseCommand):
                         if g.assistent and g.team == t:
                             goals_with_assist += 1
                     og += m.match_event.filter(event='OG', team=t).count()
+                    og_opp = m.match_event.filter(event='OG').count() - m.match_event.filter(event='OG', team=t).count()
 
                     if t == m.team_home:
                         score_red += m.score_home
@@ -108,11 +110,17 @@ class Command(BaseCommand):
                         if own_goal.team != t:
                             goals[goal.time_min] += 1
 
+            if score_blue+score_red != 0:
+                og_opp_percent = (og_opp/(score_red+score_blue))*100
+
             print('Статистика ', t)
             print('Матчей сыграно', matches_played)
+            print('Голов забито(с АГ сопов)', score_blue+score_red)
             print('Голов красными - синими', score_red, score_blue)
-            print('Побед красными, ничьи, побед синими', win_red, draws, win_blue)
+            print('Побед красными, побед синими', win_red, win_blue)
             print('Автоголов в матче(своих)', og)
+            print('Автоголов в матче(соперника)', og_opp)
+            print('Процент Автоголов в матче (соперника)', og_opp_percent)
             print('Голы, не автоголы ', goals_not_og)
             print('Голы с ассистированием', goals_with_assist)
             print('Распределение голов по ходу матча')
