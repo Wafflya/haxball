@@ -134,9 +134,16 @@ class Command(BaseCommand):
         players = Player.objects.all()
 
         dict = {}
+        dict_pl_g = {}
+        dict_pl_as = {}
+        ochk_min = {}
         for p in players:
             secs_in_match = 0
+            pl_goals = 0
+            pl_asissts = 0
             for m in norm_matches:
+                pl_goals += m.match_goal.filter(author=p).count()
+                pl_asissts += m.match_goal.filter(assistent=p).count()
                 vishel = m.match_substitutions.filter(player_in=p).count()
                 ushel = m.match_substitutions.filter(player_out=p).count()
                 if (p in m.team_home_start.all()) or (p in m.team_guest_start.all()):
@@ -171,10 +178,19 @@ class Command(BaseCommand):
                         sub_out = m.match_substitutions.get(player_out=p)
                         secs_in_match += ((sub_out.time_min - subs_in[0].time_min) * 60 + (
                                     sub_out.time_sec - subs_in[0].time_sec)) + (960 - (subs_in[1].time_min*60 + subs_in[1].time_sec))
-            dict[p] = secs_in_match
-        l = sorted(dict, key=lambda x: dict[x], reverse=True)
+
+            if secs_in_match > 0:
+                ochk_min[p] = round(60*(pl_goals+pl_asissts)/secs_in_match, 2)
+                dict[p] = secs_in_match
+                dict_pl_g[p] = pl_goals
+                dict_pl_as[p] = pl_asissts
+
+        l = sorted(dict, key=lambda x: ochk_min[x], reverse=True)
         for i in l:
-            print(i, dict[i])
+            minut = round(dict[i]/60, 2)
+            if dict[i] > 0:
+                #print(i, ochk_min[i], minut, dict_pl_g[i], dict_pl_as[i])
+                print(i, ochk_min[i])
         print('')
 
         print('The End')
