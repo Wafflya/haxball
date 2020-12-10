@@ -84,29 +84,35 @@ class Command(BaseCommand):
             for m in norm_matches:
                 if m.team_home == t or m.team_guest == t:
                     matches_played += 1
-                    goals_not_og += m.match_goal.count()
+                    goals_not_og += m.match_goal.filter(team=t).count()
                     for g in m.match_goal.all():
-                        if g.assistent:
+                        if g.assistent and g.team == t:
                             goals_with_assist += 1
-                    og += m.match_event.filter(event='OG').count()
+                    og += m.match_event.filter(event='OG', team=t).count()
 
-                    score_red += m.score_home
-                    score_blue += m.score_guest
-                    if m.score_home > m.score_guest:
+                    if t == m.team_home:
+                        score_red += m.score_home
+                    else:
+                        score_blue += m.score_guest
+                    if m.score_home > m.score_guest and m.team_home == t:
                         win_red += 1
-                    elif m.score_home < m.score_guest:
+                    elif m.score_home < m.score_guest and m.team_guest == t:
                         win_blue += 1
                     else:
                         draws += 1
 
                     for goal in m.match_goal.all():
-                        goals[goal.time_min] += 1
+                        if goal.team == t:
+                            goals[goal.time_min] += 1
+                    for own_goal in m.match_event.filter(event='OG').all():
+                        if own_goal.team != t:
+                            goals[goal.time_min] += 1
 
             print('Статистика ', t)
             print('Матчей сыграно', matches_played)
             print('Голов красными - синими', score_red, score_blue)
             print('Побед красными, ничьи, побед синими', win_red, draws, win_blue)
-            print('Автоголов в матче(своих+чужих)', og)
+            print('Автоголов в матче(своих)', og)
             print('Голы, не автоголы ', goals_not_og)
             print('Голы с ассистированием', goals_with_assist)
             print('Распределение голов по ходу матча')

@@ -26,7 +26,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/tournament/management/commands/stat.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/management/commands/stat.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -203,7 +202,7 @@
       <workItem from="1605941305519" duration="389000" />
       <workItem from="1607513161440" duration="987000" />
       <workItem from="1607515404964" duration="11863000" />
-      <workItem from="1607579215659" duration="2857000" />
+      <workItem from="1607579215659" duration="3561000" />
     </task>
     <servers />
   </component>
