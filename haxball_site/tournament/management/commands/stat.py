@@ -123,7 +123,7 @@ class Command(BaseCommand):
             print('Процент Автоголов в матче (соперника)', round(og_opp_percent, 2))
             print('Голы, не автоголы ', goals_not_og)
             print('Голы с ассистированием', goals_with_assist)
-            print('Процент голов с ассистами', round(goals_with_assist/goals_not_og, 2))
+            print('Процент голов с ассистами', round(100*goals_with_assist/goals_not_og, 2))
             print('Распределение голов по ходу матча')
             print(goals)
             print('')
