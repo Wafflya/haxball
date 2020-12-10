@@ -69,20 +69,21 @@ class Command(BaseCommand):
         print(league)
         #Stat for each team
 
-        score_red = 0
-        score_blue = 0
-        win_red = 0
-        win_blue = 0
-        draws = 0
-        goals = [0 for _ in range(16)]
-        # goals - og count
-        goals_not_og = 0
-        goals_with_assist = 0
-        og = 0
         for t in teams:
+            score_red = 0
+            score_blue = 0
+            win_red = 0
+            win_blue = 0
+            draws = 0
+            goals = [0 for _ in range(16)]
+            # goals - og count
+            goals_not_og = 0
+            goals_with_assist = 0
+            og = 0
+            matches_played = 0
             for m in norm_matches:
                 if m.team_home == t or m.team_guest == t:
-                    print(m)
+                    matches_played += 1
                     goals_not_og += m.match_goal.count()
                     for g in m.match_goal.all():
                         if g.assistent:
@@ -102,12 +103,13 @@ class Command(BaseCommand):
                         goals[goal.time_min] += 1
 
             print('Статистика ', t)
-            print(score_red, score_blue)
-            print(win_red, draws, win_blue)
-            print('OG', og)
-            print('Goals not og', goals_not_og)
-            print('Goals with assits', goals_with_assist)
-            print('Goals in timeline')
+            print('Матчей сыграно', matches_played)
+            print('Голов красными - синими', score_red, score_blue)
+            print('Побед красными, ничьи, побед синими', win_red, draws, win_blue)
+            print('Автоголов в матче(своих+чужих)', og)
+            print('Голы, не автоголы ', goals_not_og)
+            print('Голы с ассистированием', goals_with_assist)
+            print('Распределение голов по ходу матча')
             print(goals)
             print('')
 
