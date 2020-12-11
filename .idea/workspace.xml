@@ -80,19 +80,19 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img\ico" />
-      <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
-      <recent name="E:\haxball\haxball_site\static\img\ico" />
-      <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\media\users_avatars\default" />
-      <recent name="E:\haxball\haxball_site\ckeditor\ckeditor\plugins\images" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img\ico" />
       <recent name="E:\haxball\haxball_site\my_scripts" />
       <recent name="E:\haxball\haxball_site\static\ckeditor\ckeditor\plugins\images" />
       <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
       <recent name="$PROJECT_DIR$/haxball_site/static/img/backgrounds" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img\ico" />
+      <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
+      <recent name="E:\haxball\haxball_site\static\img\ico" />
+      <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\media\users_avatars\default" />
+      <recent name="E:\haxball\haxball_site\ckeditor\ckeditor\plugins\images" />
     </key>
   </component>
   <component name="RunManager">
@@ -204,7 +204,7 @@
       <workItem from="1605941305519" duration="389000" />
       <workItem from="1607513161440" duration="987000" />
       <workItem from="1607515404964" duration="11863000" />
-      <workItem from="1607579215659" duration="10940000" />
+      <workItem from="1607579215659" duration="22390000" />
     </task>
     <servers />
   </component>

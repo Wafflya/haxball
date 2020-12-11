@@ -141,29 +141,78 @@ class Command(BaseCommand):
             secs_in_match = 0
             pl_goals = 0
             pl_asissts = 0
+            t_score = 0
+            t_consid = 0
             for m in norm_matches:
                 pl_goals += m.match_goal.filter(author=p).count()
                 pl_asissts += m.match_goal.filter(assistent=p).count()
                 vishel = m.match_substitutions.filter(player_in=p).count()
+                t = None
+                t_sop = None
+                if vishel > 0:
+                    ss = m.match_substitutions.filter(player_in=p)
+                    t = ss[0].team
+                    if m.team_guest == t:
+                        t_sop = m.team_home
+                    elif m.team_home == t:
+                        t_sop = m.team_guest
                 ushel = m.match_substitutions.filter(player_out=p).count()
+                if ushel > 0 and t is None:
+                    ss = m.match_substitutions.filter(player_out=p)
+                    t = ss[0].team
+                    if m.team_guest == t:
+                        t_sop = m.team_home
+                    elif m.team_home == t:
+                        t_sop = m.team_guest
+
                 if (p in m.team_home_start.all()) or (p in m.team_guest_start.all()):
+                    if (p in m.team_home_start.all()) and (t is None):
+                        t = m.team_home
+                        t_sop = m.team_guest
+                    elif (p in m.team_guest_start.all()) and (t is None):
+                        t = m.team_guest
+                        t_sop = m.team_home
+
                     if vishel == 0 and ushel == 0:
+                        t_score += m.match_goal.filter(team=t).count() + m.match_event.filter(team=t_sop, event='OG').count()
+                        t_consid += m.match_goal.filter(team=t_sop).count() + m.match_event.filter(team=t, event='OG').count()
                         secs_in_match += 960
                     elif vishel == 0 and ushel == 1:
                         sub_out = m.match_substitutions.get(player_out=p)
                         secs_in_match += sub_out.time_min * 60 + sub_out.time_sec
+                        for ii in m.match_goal.filter(time_min__lte=sub_out.time_min, time_sec__lte=sub_out.time_sec):
+                            if ii.team == t:
+                                t_score += 1
+                            elif ii.team == t_sop:
+                                t_consid += 1
+                        for ii in m.match_event.filter(time_min__lte=sub_out.time_min, time_sec__lte=sub_out.time_sec, event='OG'):
+                            if ii.team == t:
+                                t_consid += 1
+                            elif ii.team == t_sop:
+                                t_score += 1
+
                     elif vishel == 1 and ushel == 1:
                         sub_out = m.match_substitutions.get(player_out=p)
                         sub_in = m.match_substitutions.get(player_in=p)
                         secs_in_match += (sub_out.time_min * 60 + sub_out.time_sec) + (
                                 960 - (sub_in.time_min * 60 + sub_in.time_sec))
+                        for ii in m.match_goal.filter(time_min__lte=sub_out.time_min, time_sec__lte=sub_out.time_sec):
+                            if ii.team == t:
+                                t_score += 1
+                            elif ii.team == t_sop:
+                                t_consid += 1
+                        for ii in m.match_event.filter(time_min__lte=sub_out.time_min, time_sec__lte=sub_out.time_sec, event='OG'):
+                            if ii.team == t:
+                                t_consid += 1
+                            elif ii.team == t_sop:
+                                t_score += 1
+
                     elif vishel == 1 and ushel == 2:
                         sub_in = m.match_substitutions.get(player_in=p)
                         subs_out = m.match_substitutions.filter(player_out=p).order_by('time_min', 'time_sec')
-                        print(subs_out)
                         secs_in_match += (subs_out[0].time_min * 60 + subs_out[0].time_sec) + (
                                 (subs_out[1].time_min - sub_in.time_min) * 60 + (
-                                    subs_out[1].time_sec - sub_in.time_sec))
+                                subs_out[1].time_sec - sub_in.time_sec))
                 else:
                     if vishel == 1 and ushel == 0:
                         sub_in = m.match_substitutions.get(player_in=p)
@@ -172,24 +221,27 @@ class Command(BaseCommand):
                         sub_out = m.match_substitutions.get(player_out=p)
                         sub_in = m.match_substitutions.get(player_in=p)
                         secs_in_match += (
-                                    (sub_out.time_min - sub_in.time_min) * 60 + (sub_out.time_sec - sub_in.time_sec))
+                                (sub_out.time_min - sub_in.time_min) * 60 + (sub_out.time_sec - sub_in.time_sec))
                     elif vishel == 2 and ushel == 1:
                         subs_in = m.match_substitutions.filter(player_in=p).order_by('time_min', 'time_sec')
                         sub_out = m.match_substitutions.get(player_out=p)
                         secs_in_match += ((sub_out.time_min - subs_in[0].time_min) * 60 + (
-                                    sub_out.time_sec - subs_in[0].time_sec)) + (960 - (subs_in[1].time_min*60 + subs_in[1].time_sec))
-
+                                sub_out.time_sec - subs_in[0].time_sec)) + (
+                                                 960 - (subs_in[1].time_min * 60 + subs_in[1].time_sec))
+                if t is not None:
+                    print(p, t, t_sop)
+                    print(t_score, t_consid)
             if secs_in_match > 0:
-                ochk_min[p] = round(60*(pl_goals+pl_asissts)/secs_in_match, 2)
+                ochk_min[p] = round(60 * (pl_goals + pl_asissts) / secs_in_match, 2)
                 dict[p] = secs_in_match
                 dict_pl_g[p] = pl_goals
                 dict_pl_as[p] = pl_asissts
 
         l = sorted(dict, key=lambda x: ochk_min[x], reverse=True)
         for i in l:
-            minut = round(dict[i]/60, 2)
+            minut = round(dict[i] / 60, 2)
             if dict[i] > 0:
-                #print(i, ochk_min[i], minut, dict_pl_g[i], dict_pl_as[i])
+                # print(i, ochk_min[i], minut, dict_pl_g[i], dict_pl_as[i])
                 print(i, ochk_min[i])
         print('')
 
