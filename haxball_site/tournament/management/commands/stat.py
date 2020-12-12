@@ -69,7 +69,7 @@ class Command(BaseCommand):
         print(goals)
         print('')
 
-        """
+
         #Stat for each team
         for t in teams:
             score_red = 0
@@ -129,7 +129,7 @@ class Command(BaseCommand):
             print('Распределение голов по ходу матча')
             print(goals)
             print('')
-        """
+
 
         players = Player.objects.all()
 
@@ -238,11 +238,11 @@ class Command(BaseCommand):
                 dict_pl_as[p] = pl_asissts
 
         l = sorted(dict, key=lambda x: ochk_min[x], reverse=True)
-        for i in l:
+        for j,i in enumerate(l):
             minut = round(dict[i] / 60, 2)
-            if dict[i] > 0:
+            if (dict[i] > 0) and (minut > 20):
                 # print(i, ochk_min[i], minut, dict_pl_g[i], dict_pl_as[i])
-                print(i, ochk_min[i])
+                print(j,i, ochk_min[i])
         print('')
 
         print('The End')
