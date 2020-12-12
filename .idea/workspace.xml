@@ -26,9 +26,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/Activate.ps1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/activate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/activate.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/chardetect.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/deactivate.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/django-admin.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/django-admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/easy_install-3.9.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/easy_install.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/gunicorn.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/iptest.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/iptest3.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/ipython.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/ipython3.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/markdown_py.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/pip.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/pip3.9.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/pip3.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/pygmentize.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/python.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/pythonw.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/Scripts/sqlformat.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/pyvenv.cfg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_venv/share/man/man1/ipython.1.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/management/commands/stat.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/management/commands/stat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/lives/lives_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/lives/lives_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,6 +229,7 @@
       <workItem from="1607513161440" duration="987000" />
       <workItem from="1607515404964" duration="11863000" />
       <workItem from="1607579215659" duration="22390000" />
+      <workItem from="1607771444030" duration="2623000" />
     </task>
     <servers />
   </component>
