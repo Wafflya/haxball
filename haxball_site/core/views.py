@@ -73,7 +73,7 @@ class LivesView(ListView):
         category = None
     queryset = Post.objects.filter(category=category)
     context_object_name = 'posts'
-    paginate_by = 6
+    paginate_by = 5
     template_name = 'core/lives/lives_list.html'
 
 
@@ -214,7 +214,7 @@ class TournamentsView(ListView):
         category = None
     queryset = Post.objects.filter(category=category)
     context_object_name = 'posts'
-    paginate_by = 6
+    paginate_by = 5
     template_name = 'core/tournaments/tournaments_list.html'
 
 

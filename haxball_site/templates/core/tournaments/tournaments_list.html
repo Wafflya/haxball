@@ -104,24 +104,20 @@
 {% block title %}Турниры        cis-haxball.com{% endblock %}
 
 {% block postlist %}
-    <div class="card my-2"
-         style="border-radius: 25px; background-image: url({% static "img/backgrounds/background1.png" %})">
+<div class="card my-2"
+     style="border-radius: 25px; background-image: url({% static "img/backgrounds/background1.png" %})">
 
-        <div class="card-body">
-            <h3 class="text-center mt-1 mb-0"><img src="{% static "img/ico/pocal_1.png" %}" height="35"
-                                                   width="40">Турниры
-            </h3>
-            <hr>
+    <div class="card-body">
+        <h3 class="text-center mt-1 mb-0"><img src="{% static "img/ico/pocal_1.png" %}" height="35"
+                                       width="40">Турниры
+        </h3>
+        <hr>
 
-            {% for post in posts %}
+        {% for post in posts %}
                 {% include "core/include/post_in_list.html" with post=post %}
-            {% endfor %}
-
-        </div>
-
-        <div class="card-footer text-muted pb-0 pt-3">
-            {% include "core/include/pagination.html" with page=page_obj %}
-        </div>
+        {% endfor %}
 
     </div>
+
+</div>
 {% endblock %}
