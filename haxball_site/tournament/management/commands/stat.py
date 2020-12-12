@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+from django.db.models import Q
 
 from ...models import League, TourNumber, Match, Team, Player
 
@@ -139,6 +140,7 @@ class Command(BaseCommand):
         dict_pl_as = {}
         ochk_min = {}
         for p in players:
+            print('Обработка ', p)
             secs_in_match = 0
             pl_goals = 0
             pl_asissts = 0
@@ -197,7 +199,7 @@ class Command(BaseCommand):
                         sub_in = m.match_substitutions.get(player_in=p)
                         secs_in_match += (sub_out.time_min * 60 + sub_out.time_sec) + (
                                 960 - (sub_in.time_min * 60 + sub_in.time_sec))
-                        for ii in m.match_goal.filter(time_min__lte=sub_out.time_min, time_sec__lte=sub_out.time_sec):
+                        for ii in m.match_goal.filter(Q(time_min__lte=sub_out.time_min, time_sec__lte=sub_out.time_sec) & Q(time_min__gte=sub_in.time_min, time_sec__lte=sub_in.time_sec)):
                             if ii.team == t:
                                 t_score += 1
                             elif ii.team == t_sop:
@@ -232,7 +234,8 @@ class Command(BaseCommand):
             #if t is not None:
              #   print(p, t, t_sop)
              #   print(t_score, t_consid)
-            if secs_in_match > 0:
+            minut = round(secs_in_match / 60)
+            if (minut > 10) and (pl_goals + pl_asissts > 0):
                 ochk_min[p] = round(60 * (pl_goals + pl_asissts) / secs_in_match, 2)
                 dict[p] = secs_in_match
                 dict_pl_g[p] = pl_goals
@@ -240,9 +243,8 @@ class Command(BaseCommand):
 
         l = sorted(dict, key=lambda x: ochk_min[x], reverse=True)
         for j,i in enumerate(l):
-            minut = round(dict[i] / 60, 2)
-            if (dict[i] > 0) and (minut > 10):
-                print(j+1, i, ochk_min[i], minut, dict_pl_g[i], dict_pl_as[i])
+            minut = round(dict[i] / 60)
+            print(j+1, i, ochk_min[i], minut, dict_pl_g[i], dict_pl_as[i])
         print('')
 
         print('The End')
