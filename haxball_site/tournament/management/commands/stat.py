@@ -241,7 +241,7 @@ class Command(BaseCommand):
         l = sorted(dict, key=lambda x: ochk_min[x], reverse=True)
         for j,i in enumerate(l):
             minut = round(dict[i] / 60, 2)
-            if (dict[i] > 0) and (minut > 0):
+            if (dict[i] > 0) and (minut > 10):
                 print(j+1, i, ochk_min[i], minut, dict_pl_g[i], dict_pl_as[i])
         print('')
 
