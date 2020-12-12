@@ -125,7 +125,8 @@ class Command(BaseCommand):
             print('Процент Автоголов в матче (соперника)', round(og_opp_percent, 2))
             print('Голы, не автоголы ', goals_not_og)
             print('Голы с ассистированием', goals_with_assist)
-            print('Процент голов с ассистами', round(100*goals_with_assist/goals_not_og, 2))
+            if goals_not_og > 0:
+                print('Процент голов с ассистами', round(100*goals_with_assist/goals_not_og, 2))
             print('Распределение голов по ходу матча')
             print(goals)
             print('')
@@ -228,9 +229,9 @@ class Command(BaseCommand):
                         secs_in_match += ((sub_out.time_min - subs_in[0].time_min) * 60 + (
                                 sub_out.time_sec - subs_in[0].time_sec)) + (
                                                  960 - (subs_in[1].time_min * 60 + subs_in[1].time_sec))
-                if t is not None:
-                    print(p, t, t_sop)
-                    print(t_score, t_consid)
+            #if t is not None:
+             #   print(p, t, t_sop)
+             #   print(t_score, t_consid)
             if secs_in_match > 0:
                 ochk_min[p] = round(60 * (pl_goals + pl_asissts) / secs_in_match, 2)
                 dict[p] = secs_in_match
@@ -240,9 +241,8 @@ class Command(BaseCommand):
         l = sorted(dict, key=lambda x: ochk_min[x], reverse=True)
         for j,i in enumerate(l):
             minut = round(dict[i] / 60, 2)
-            if (dict[i] > 0) and (minut > 20):
-                # print(i, ochk_min[i], minut, dict_pl_g[i], dict_pl_as[i])
-                print(j,i, ochk_min[i])
+            if (dict[i] > 0) and (minut > 0):
+                print(j+1, i, ochk_min[i], minut, dict_pl_g[i], dict_pl_as[i])
         print('')
 
         print('The End')
