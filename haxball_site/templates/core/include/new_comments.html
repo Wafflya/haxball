@@ -76,10 +76,7 @@
                                             <a href="{{ comment.author.user_profile.get_absolute_url }}">
                                                 {{ comment.author.username }}
                                             </a>
-                                            {% for medal in comment.author.user_player.player_medals.all %}
-                                                <img src="{{ medal.image.url }}" width="25px" height="25px"
-                                                     title="{{ medal.description }}">
-                                            {% endfor %}
+
                                             <span class="badge p-0">
                                             <span class="badge badge-pill
                             {% if comment.author.user_profile.karma >= 0 %}badge-success{% else %}badge-danger{% endif %}">{{ comment.author.user_profile.karma }}
@@ -88,8 +85,13 @@
                                         </h5>
                                     </span>
                                     <span>
+                                            {% for medal in comment.author.user_player.player_medals.all %}
+                                                <img src="{{ medal.image.url }}" width="25px" height="25px"
+                                                     title="{{ medal.description }}">
+                                            {% endfor %}
                                             <a href="{{ object.get_absolute_url }}?page={{ comments.number }}#r{{ comment.id }}">#{{ comment.id }}</a>
                                         {% if user.is_superuser or comment.author == user and comment|can_edit %}
+
                                             <a href="{% url 'core:edit_comment' comment.id %}"
                                                class="text-warning" title="Редактировать">
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
