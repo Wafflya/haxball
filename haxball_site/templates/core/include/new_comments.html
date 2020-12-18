@@ -200,10 +200,7 @@
                                                     <a href="{{ children.author.user_profile.get_absolute_url }}">
                                                     {{ children.author.username }}
                                                     </a>
-                                                    {% for medal in children.author.user_player.player_medals.all %}
-                                                        <img src="{{ medal.image.url }}" width="25px" height="25px"
-                                                             title="{{ medal.description }}">
-                                                    {% endfor %}
+
 
                                                     <span class="badge p-0 mr-2">
                                                         <span class="badge badge-pill
@@ -227,6 +224,10 @@
                                             </a>
                                         </div>
                                         <span>
+                                            {% for medal in children.author.user_player.player_medals.all %}
+                                                <img src="{{ medal.image.url }}" width="25px" height="25px"
+                                                     title="{{ medal.description }}">
+                                            {% endfor %}
                                             <a href="{{ object.get_absolute_url }}?page={{ comments.number }}#r{{ children.id }}">#{{ children.id }}</a>
                                             {% if user.is_superuser or children.author == user and children|can_edit %}
 
