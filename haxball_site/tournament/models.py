@@ -401,7 +401,9 @@ class Achievements(models.Model):
     description = models.CharField('Описание', max_length=128)
     image = models.ImageField('Изображение медальки', upload_to='medals/', blank=True, null=True)
     player = models.ManyToManyField(Player, related_name='player_medals', blank=True, null=True)
+    position_number = models.SmallIntegerField('Позиция', default=0)
 
     class Meta:
+        ordering = ['position_number']
         verbose_name = 'Медалька'
         verbose_name_plural = 'Медальки'
