@@ -180,7 +180,7 @@ def delete_comment(request, pk):
     comment = get_object_or_404(NewComment, pk=pk)
     obj = comment.content_object
     if request.method == 'POST' and \
-            ((request.user == comment.author and timezone.now() - comment.created < timezone.timedelta(minutes=10)) or request.user.is_superuser):
+            ((request.user == comment.author and timezone.now() - comment.created < timezone.timedelta(minutes=10)) or request.user.is_superuser or request.user == obj.name):
         comment.delete()
         return redirect(obj.get_absolute_url())
     else:

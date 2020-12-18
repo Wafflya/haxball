@@ -91,7 +91,6 @@
                                             {% endfor %}
                                             <a href="{{ object.get_absolute_url }}?page={{ comments.number }}#r{{ comment.id }}">#{{ comment.id }}</a>
                                         {% if user.is_superuser or comment.author == user and comment|can_edit %}
-
                                             <a href="{% url 'core:edit_comment' comment.id %}"
                                                class="text-warning" title="Редактировать">
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -128,6 +127,37 @@
                                                     </div>
                                                   </div>
                                                 </div>
+                                        {% elif comment.content_object.name == user %}
+                                            <a class="text-danger" data-toggle="modal"
+                                               data-target="#deleter{{ comment.id }}">
+                                            <i class="fa fa-times" aria-hidden="true" style="font-size: 20px"></i>
+                                            </a>
+                                            <div class="modal fade" id="deleter{{ comment.id }}" tabindex="-1"
+                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                      <div class="modal-header justify-content-center">
+                                                        <h4 class="modal-title">Удалить комментарий?</h4>
+                                                          <!--
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+
+                                                        </button>
+                                                        -->
+                                                      </div>
+                                                      <div class="modal-footer justify-content-center">
+                                                        <button type="button" class="btn btn-danger"
+                                                                data-dismiss="modal">Нет, подождите</button>
+                                                          <form method="POST"
+                                                                action="{% url 'core:delete_comment' comment.id %}">
+                                                                {% csrf_token %}
+                                                                <button type="submit" class="btn btn-primary">Да, я уверен</button>
+                                                          </form>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
                                         {% endif %}
 
                                         </span>
@@ -231,18 +261,18 @@
                                             <a href="{{ object.get_absolute_url }}?page={{ comments.number }}#r{{ children.id }}">#{{ children.id }}</a>
                                             {% if user.is_superuser or children.author == user and children|can_edit %}
 
-                                                <a href="{% url 'core:edit_comment' children.id %}"
-                                                   class="text-warning" title="Редактировать">
-                                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                                            </a>
+                                                    <a href="{% url 'core:edit_comment' children.id %}"
+                                                       class="text-warning" title="Редактировать">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                </a>
 
-                                                <a class="text-danger" data-toggle="modal"
-                                                   data-target="#deleter{{ children.id }}">
-                                            <i class="fa fa-times" aria-hidden="true" style="font-size: 20px"></i>
-                                            </a>
+                                                    <a class="text-danger" data-toggle="modal"
+                                                       data-target="#deleter{{ children.id }}">
+                                                <i class="fa fa-times" aria-hidden="true" style="font-size: 20px"></i>
+                                                </a>
 
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="deleter{{ children.id }}" tabindex="-1"
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="deleter{{ children.id }}" tabindex="-1"
                                                      role="dialog" aria-labelledby="exampleModalLabel"
                                                      aria-hidden="true">
                                                   <div class="modal-dialog">
@@ -268,6 +298,38 @@
                                                     </div>
                                                   </div>
                                                 </div>
+                                            {% elif children.content_object.name == user %}
+                                                <a class="text-danger" data-toggle="modal"
+                                                   data-target="#deleter{{ children.id }}">
+                                                <i class="fa fa-times" aria-hidden="true" style="font-size: 20px"></i>
+                                                </a>
+                                                    <div class="modal fade" id="deleter{{ children.id }}" tabindex="-1"
+                                                     role="dialog" aria-labelledby="exampleModalLabel"
+                                                     aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                      <div class="modal-header justify-content-center">
+                                                        <h4 class="modal-title">Удалить комментарий?</h4>
+                                                          <!--
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+
+                                                        </button>
+                                                        -->
+                                                      </div>
+                                                      <div class="modal-footer justify-content-center">
+                                                        <button type="button" class="btn btn-danger"
+                                                                data-dismiss="modal">Нет, подождите</button>
+                                                          <form method="POST"
+                                                                action="{% url 'core:delete_comment' children.id %}">
+                                                                {% csrf_token %}
+                                                                <button type="submit" class="btn btn-primary">Да, я уверен</button>
+                                                          </form>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+
                                             {% endif %}
 
                                         </span>
