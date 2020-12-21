@@ -12,7 +12,7 @@ class FreeAgentAdmin(admin.ModelAdmin):
 
 @admin.register(Achievements)
 class AchievmentsAdmin(admin.ModelAdmin):
-    list_display = ('id','position_number','title', 'description', 'image')
+    list_display = ('id','position_number','title', 'description', 'image', 'mini_image')
     filter_horizontal = ('player',)
 
 
