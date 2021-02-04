@@ -1,5 +1,7 @@
 {% load static %}
-
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static "core/include/navbar.css" %}">
+{% endblock %}
 <nav class="navbar navbar-light navbar_color nav-fill"
      style="background-image:url({% static "img/backgrounds/back_niqo3.png" %}); height: 100px; background-position: center; ">
 
@@ -9,6 +11,7 @@
         <button class="btn btn-success my-2 my-sm-0" type="submit">Поиск</button>
     </form>
 -->
+
     <div class="mr-100">
         <!-- <iframe src="https://money.yandex.ru/quickpay/button-widget?targets=%D0%9F%D0%BE%D0%B6%D0%B5%D1%80%D1%82%D0%B2%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5&default-sum=200&button-text=14&yamoney-payment-type=on&button-size=m&button-color=black&successURL=&quickpay=small&account=410011043451485&"
                 width="250" height="36" frameborder="0" allowtransparency="true" scrolling="no"></iframe> -->
@@ -31,12 +34,15 @@
                     Чемпионат
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'tournament:league' 'premier_league' %}">Единая лига</a>
-                    <a class="dropdown-item" href="{% url 'tournament:league' 'cup' %}">Кубок России</a>
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/86/reglament">Регламент</a>
+                    <a class="dropdown-item submenu" href="#">Лига чемпионов</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'tournament:league' 'lch2-group-a' %}">Группа А</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 'lch2-group-b' %}">Группа B</a>
+                    </div>
+                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/184/reglament">Регламент</a>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/110/bron_hosta">Бронь хоста</a>
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/109/perenosi">Переносы</a>
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/104/transfers">Трансферы</a>
+                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/187/perenosi">Переносы</a>
+                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/186/transfers">Трансферы</a>
                     <a class="dropdown-item" href="{% url 'tournament:free_agent' %}">Свободные агенты</a>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/111/org_razdel">Стол заявок</a>
 
@@ -60,6 +66,11 @@
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/47/season_2">ЧР #2</a>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/48/season_3">ЧР #3</a>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/49/season_4">ЧР #4</a>
+                    <a class="dropdown-item submenu" href="#">ЧР #5</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's5-premier_league' %}">Единая лига</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's5-cup' %}">Кубок России</a>
+                    </div>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/50/champions_league_1">ЛЧ #1</a>
 
                 </div>
