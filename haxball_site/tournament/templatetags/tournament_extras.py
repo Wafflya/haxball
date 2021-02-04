@@ -448,10 +448,12 @@ def sort_teams(league):
 
 @register.filter
 def current_position(team):
-    leag = current_league(team).first()
-    a = list(sort_teams(leag))
-    return a.index(team) + 1
-
+    try:
+        leag = current_league(team).first()
+        a = list(sort_teams(leag))
+        return a.index(team) + 1
+    except:
+        return '-'
 
 @register.filter
 def teams_in_league_count(team):
