@@ -202,7 +202,7 @@
                     <div class="tab-pane fade" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
                         <div class="row">
                             <div class="col-12">
-                                {% for league in team|current_league %}
+                                {% for league in team|all_league %}
                                     <p class="text-center mb-0">
                                         <a href="{{ league.get_absolute_url }}"
                                            class="h5 text-center">{{ league.title }}</a>

@@ -399,6 +399,11 @@ def current_league(team):
     return League.objects.filter(teams=team, championship__is_active=True)
 
 
+@register.filter
+def all_league(team):
+    return League.objects.filter(teams=team)
+
+
 def sort_teams(league):
     b = list(Team.objects.filter(leagues=league))
     points = [0 for _ in range(len(b))]
