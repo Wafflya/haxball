@@ -20,7 +20,7 @@ class AchievmentsAdmin(admin.ModelAdmin):
 class PlayerAdmin(admin.ModelAdmin):
     list_display = ('name', 'nickname', 'team', 'player_nation', 'role',)
     raw_id_fields = ('name',)
-    readonly_fields = ('team',)
+#   readonly_fields = ('team',)
 
 
 @admin.register(PlayerTransfer)
