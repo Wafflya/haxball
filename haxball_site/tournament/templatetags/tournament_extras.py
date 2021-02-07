@@ -88,7 +88,7 @@ def player_team(player):
         trans_teams = list(PlayerTransfer.objects.filter(~Q(to_team=None), season_join=s, trans_player=player.user_player))
         for team in trans_teams:
             d3 = {}
-            leagues = list(League.objects.filter(championship=s, teams=team.to_team))
+            leagues = list(League.objects.filter(championship=s, teams=team.to_team).order_by('id'))
             for leg in leagues:
                 stat = []
                 matches_count = Match.objects.filter(team_guest=team.to_team, team_guest_start=player.user_player,
@@ -401,7 +401,7 @@ def current_league(team):
 
 @register.filter
 def all_league(team):
-    return League.objects.filter(teams=team)
+    return League.objects.filter(teams=team).order_by('-id')
 
 
 def sort_teams(league):
