@@ -38,6 +38,8 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'tournament:league' 'lch2-group-a' %}">Группа А</a>
                         <a class="dropdown-item" href="{% url 'tournament:league' 'lch2-group-b' %}">Группа B</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 'ploff_lch2' %}">Плей-офф</a>
+
                     </div>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/184/reglament">Регламент</a>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/188/bron_hosta">Бронь хоста</a>
@@ -68,7 +70,8 @@
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/49/season_4">ЧР #4</a>
                     <a class="dropdown-item submenu" href="#">ЧР #5</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'tournament:league' 's5-premier_league' %}">Единая лига</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's5-premier_league' %}">Единая
+                            лига</a>
                         <a class="dropdown-item" href="{% url 'tournament:league' 's5-cup' %}">Кубок России</a>
                     </div>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/50/champions_league_1">ЛЧ #1</a>

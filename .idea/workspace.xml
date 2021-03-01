@@ -26,10 +26,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/haxball.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/haxball.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/team_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/team_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,14 +96,14 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Lesson2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="hax_inter" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="haxball" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\Marat\Documents\site\haxball\env\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$USER_HOME$/PycharmProjects/Algoritms" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -121,11 +120,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Lesson2" />
+        <item itemvalue="Python.hax_inter" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -213,12 +212,16 @@
       <workItem from="1612463261420" duration="3093000" />
       <workItem from="1612510769669" duration="4139000" />
       <workItem from="1612549969014" duration="645000" />
-      <workItem from="1612707419255" duration="3875000" />
+      <workItem from="1612707419255" duration="4764000" />
+      <workItem from="1612825815854" duration="814000" />
+      <workItem from="1613234440556" duration="2133000" />
+      <workItem from="1613514457585" duration="1528000" />
+      <workItem from="1614588083743" duration="400000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -246,30 +249,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="647" y="270" width="424" height="479" key="FileChooserDialogImpl" timestamp="1607519635346">
-      <screen x="0" y="0" width="1680" height="1010" />
-    </state>
-    <state x="493" y="267" width="424" height="479" key="FileChooserDialogImpl/0.0.1280.997@0.0.1280.997" timestamp="1599453498675" />
-    <state x="2327" y="270" key="FileChooserDialogImpl/0.0.1680.1010/1680.0.1680.1010@1680.0.1680.1010" timestamp="1601025359234" />
-    <state x="647" y="270" key="FileChooserDialogImpl/0.0.1680.1010/1680.0.1920.1040@0.0.1680.1010" timestamp="1607519635346" />
-    <state width="196" height="457" key="HiddenNamespacesPopup" timestamp="1598913811741">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="196" height="457" key="HiddenNamespacesPopup/0.0.1920.1040@0.0.1920.1040" timestamp="1598913811741" />
-    <state x="463" y="166" key="SettingsEditor" timestamp="1599213854178">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="463" y="166" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1599213854178" />
-    <state x="449" y="414" width="372" height="161" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599538426253">
-      <screen x="0" y="0" width="1280" height="997" />
-    </state>
-    <state x="449" y="414" width="372" height="161" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.997@0.0.1280.997" timestamp="1599538426253" />
-    <state x="545" y="219" width="672" height="659" key="search.everywhere.popup" timestamp="1601374674231">
-      <screen x="0" y="0" width="1680" height="1010" />
-    </state>
-    <state x="415" y="216" width="672" height="650" key="search.everywhere.popup/0.0.1280.997@0.0.1280.997" timestamp="1599727499885" />
-    <state x="545" y="219" width="672" height="659" key="search.everywhere.popup/0.0.1680.1010/1680.0.1680.1010@0.0.1680.1010" timestamp="1601374674231" />
   </component>
 </project>
