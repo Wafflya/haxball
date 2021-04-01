@@ -34,17 +34,15 @@
                     Чемпионат
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item submenu" href="#">Лига чемпионов</a>
+                    <a class="dropdown-item submenu" href="#">Чемпионат России</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'tournament:league' 'lch2-group-a' %}">Группа А</a>
-                        <a class="dropdown-item" href="{% url 'tournament:league' 'lch2-group-b' %}">Группа B</a>
-                        <a class="dropdown-item" href="{% url 'tournament:league' 'ploff_lch2' %}">Плей-офф</a>
+
 
                     </div>
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/184/reglament">Регламент</a>
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/188/bron_hosta">Бронь хоста</a>
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/187/perenosi">Переносы</a>
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/186/transfers">Трансферы</a>
+                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/213/reglament">Регламент</a>
+                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/218/bron_hosta">Бронь хоста</a>
+                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/219/perenosi">Переносы</a>
+                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/216/transfers">Трансферы</a>
                     <a class="dropdown-item" href="{% url 'tournament:free_agent' %}">Свободные агенты</a>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/111/org_razdel">Стол заявок</a>
 
@@ -64,18 +62,24 @@
                     Архив
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/46/season_1">ЧР #1</a>
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/47/season_2">ЧР #2</a>
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/48/season_3">ЧР #3</a>
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/49/season_4">ЧР #4</a>
-                    <a class="dropdown-item submenu" href="#">ЧР #5</a>
+                    <a class="dropdown-item bg-secondary" href="https://www.cis-haxball.com/post/46/season_1">ЧР #1</a>
+                    <a class="dropdown-item bg-secondary" href="https://www.cis-haxball.com/post/47/season_2">ЧР #2</a>
+                    <a class="dropdown-item bg-secondary" href="https://www.cis-haxball.com/post/48/season_3">ЧР #3</a>
+                    <a class="dropdown-item bg-primary" href="https://www.cis-haxball.com/post/50/champions_league_1">ЛЧ #1</a>
+
+                    <a class="dropdown-item bg-secondary" href="https://www.cis-haxball.com/post/49/season_4">ЧР #4</a>
+                    <a class="dropdown-item submenu bg-secondary" href="#">ЧР #5</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{% url 'tournament:league' 's5-premier_league' %}">Единая
                             лига</a>
                         <a class="dropdown-item" href="{% url 'tournament:league' 's5-cup' %}">Кубок России</a>
                     </div>
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/50/champions_league_1">ЛЧ #1</a>
-
+                    <a class="dropdown-item submenu  bg-primary" href="#">ЛЧ #2</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'tournament:league' 'lch2-group-a' %}">Группа А</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 'lch2-group-b' %}">Группа B</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 'ploff_lch2' %}">Плей-офф</a>
+                    </div>
                 </div>
             </li>
 
