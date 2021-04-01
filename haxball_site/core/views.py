@@ -205,9 +205,9 @@ class AdminListView(ListView):
     a = []
     for i in us:
         a.append([i, len(i.get_user_permissions()), i.id])
-    a.sort(key=lambda x: x[2])
-    a.sort(key=lambda x: x[1], reverse=True)
-    queryset = [i[0] for i in a]
+    b = a.sort(key=lambda x: x[2])
+    c = a.sort(key=lambda x: x[1], reverse=True)
+    queryset = [i[0] for i in c]
     context_object_name = 'users'
     template_name = 'core/admins/admin_list.html'
 
