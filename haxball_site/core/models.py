@@ -227,8 +227,9 @@ class Comment(models.Model):
     def childs_count(self):
         return len(list(bfs(self)))
 
+    # Обход графа в ширину хе-хе, хоть где-то пригодилось)
 
-# Обход графа в ширину хе-хе, хоть где-то пригодилось)
+
 def bfs(root):
     visited = set()
     queue = collections.deque([root])
