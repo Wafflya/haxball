@@ -26,8 +26,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/hall/hall_of_fame.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/hall_of_fame.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +49,8 @@
       <list>
         <option value="JavaScript File" />
         <option value="CSS File" />
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -67,7 +74,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../parse3.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/haxball_site/templates/tournament" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -80,11 +87,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\templates\tournament" />
       <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img\ico" />
       <recent name="E:\haxball\haxball_site\my_scripts" />
       <recent name="E:\haxball\haxball_site\static\ckeditor\ckeditor\plugins\images" />
       <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
-      <recent name="$PROJECT_DIR$/haxball_site/static/img/backgrounds" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img\ico" />
@@ -219,6 +226,7 @@
       <workItem from="1617303807637" duration="1719000" />
       <workItem from="1617305550463" duration="3601000" />
       <workItem from="1617411880396" duration="3187000" />
+      <workItem from="1617481834581" duration="4783000" />
     </task>
     <servers />
   </component>

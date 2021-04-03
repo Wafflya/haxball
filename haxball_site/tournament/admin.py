@@ -12,7 +12,7 @@ class FreeAgentAdmin(admin.ModelAdmin):
 
 @admin.register(Achievements)
 class AchievmentsAdmin(admin.ModelAdmin):
-    list_display = ('id','position_number','title', 'description', 'image', 'mini_image')
+    list_display = ('id', 'position_number', 'title', 'description', 'image', 'mini_image')
     filter_horizontal = ('player',)
 
 
@@ -20,12 +20,15 @@ class AchievmentsAdmin(admin.ModelAdmin):
 class PlayerAdmin(admin.ModelAdmin):
     list_display = ('name', 'nickname', 'team', 'player_nation', 'role',)
     raw_id_fields = ('name',)
+
+
 #   readonly_fields = ('team',)
 
 
 @admin.register(PlayerTransfer)
 class PlayerTransferAdmin(admin.ModelAdmin):
     list_display = ('trans_player', 'to_team', 'date_join', 'season_join')
+    list_filter = ('trans_player', 'to_team',)
 
 
 @admin.register(Team)

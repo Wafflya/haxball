@@ -99,15 +99,16 @@ class TeamList(ListView):
 class LeagueDetail(DetailView):
     context_object_name = 'league'
     model = League
-    #queryset = League.objects.filter(is_cup=False, championship__is_active=True)
+    # queryset = League.objects.filter(is_cup=False, championship__is_active=True)
     template_name = 'tournament/premier_league/team_table.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         league = context['league']
 
-        comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(League), object_id=league.id,
-                                             parent=None)
+        comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(League),
+                                                 object_id=league.id,
+                                                 parent=None)
         print(comments_obj)
         paginate = Paginator(comments_obj, 25)
         page = self.request.GET.get('page')
@@ -137,8 +138,9 @@ class MatchDetail(DetailView):
         context = super().get_context_data(**kwargs)
         match = context['match']
 
-        comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Match), object_id=match.id,
-                                             parent=None)
+        comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Match),
+                                                 object_id=match.id,
+                                                 parent=None)
         print(comments_obj)
         paginate = Paginator(comments_obj, 25)
         page = self.request.GET.get('page')
@@ -157,3 +159,17 @@ class MatchDetail(DetailView):
         comment_form = NewCommentForm()
         context['comment_form'] = comment_form
         return context
+
+
+def halloffame(request):
+    top_goalscorers = Player.objects.annotate(
+        goals_c=Count('goals__match__league')).filter(goals_c__gt=0).order_by('-goals_c')
+
+    top_assistent = Player.objects.annotate(
+        ass_c=Count('assists__match__league')).filter(ass_c__gt=0).order_by('-ass_c')
+    top_clean_sheets = Player.objects.filter(event__event='CLN').annotate(
+        event_c=Count('event__match__league')).filter(event_c__gt=0).order_by('-event_c')
+    return render(request, 'tournament/hall_of_fame.html', {'goalscorers': top_goalscorers,
+                                                            'assistents': top_assistent,
+                                                            'clean_sheeters': top_clean_sheets,
+                                                            })

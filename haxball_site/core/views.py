@@ -212,6 +212,8 @@ class AdminListView(ListView):
     template_name = 'core/admins/admin_list.html'
 
 
+#
+
 # Вьюха для турниров
 class TournamentsView(ListView):
     try:
