@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.views.generic import ListView, DetailView
 
 from .forms import FreeAgentForm, EditTeamProfileForm
-from .models import FreeAgent, Team, Match, League, Player
+from .models import FreeAgent, Team, Match, League, Player, Substitution
 from core.forms import NewCommentForm
 from core.models import NewComment, Profile
 
@@ -169,7 +169,35 @@ def halloffame(request):
         ass_c=Count('assists__match__league')).filter(ass_c__gt=0).order_by('-ass_c')
     top_clean_sheets = Player.objects.filter(event__event='CLN').annotate(
         event_c=Count('event__match__league')).filter(event_c__gt=0).order_by('-event_c')
+
+    player_matches = []
+    subs_in = []
+    subs_out = []
+    for player in Player.objects.all():
+        m_played = Match.objects.filter(
+            team_guest_start=player).count() + Match.objects.filter(
+            team_home_start=player).count() + Match.objects.filter(
+            ~(Q(team_guest_start=player) | Q(team_home_start=player)),
+
+            match_substitutions__player_in=player
+        ).distinct().count()
+        if m_played > 0:
+            player_matches.append([player, m_played])
+        subin_pl = Substitution.objects.filter(player_in=player).count()
+        if subin_pl > 0:
+            subs_in.append([player, subin_pl])
+
+        subout_pl = Substitution.objects.filter(player_out=player).count()
+        if subout_pl > 0:
+            subs_out.append([player, subout_pl])
+
+    pl = sorted(player_matches, key=lambda x: x[1], reverse=True)
+    subs_inn = sorted(subs_in, key=lambda x: x[1], reverse=True)
+    subs_outt = sorted(subs_out, key=lambda x: x[1], reverse=True)
     return render(request, 'tournament/hall_of_fame.html', {'goalscorers': top_goalscorers,
                                                             'assistents': top_assistent,
                                                             'clean_sheeters': top_clean_sheets,
+                                                            'player_matches': pl,
+                                                            'subs_in': subs_inn,
+                                                            'subs_out': subs_outt,
                                                             })
