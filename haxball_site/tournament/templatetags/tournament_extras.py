@@ -152,6 +152,8 @@ def player_team(player):
                     match_substitutions__team=team.to_team,
                     match_substitutions__player_in=player.user_player, league=leg
                 ).distinct().count()
+                if matches_count == 0:
+                    continue
                 stat.append(matches_count)
                 goal_count = Goal.objects.filter(author=player.user_player, team=team.to_team,
                                                  match__league=leg).count()
