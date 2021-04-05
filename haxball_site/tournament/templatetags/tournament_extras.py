@@ -81,11 +81,12 @@ def player_team(player):
     for tr in p:
         if not tr.season_join in sss:
             sss.append(tr.season_join)
-    seasons = sorted(sss, key = lambda x: x.number)
-    #seasons = list(Season.objects.all().order_by('-number'))
+    seasons = sorted(sss, key=lambda x: x.number)
+    # seasons = list(Season.objects.all().order_by('-number'))
     for s in seasons:
         d2 = {}
-        trans_teams = list(PlayerTransfer.objects.filter(~Q(to_team=None), season_join=s, trans_player=player.user_player))
+        trans_teams = list(
+            PlayerTransfer.objects.filter(~Q(to_team=None), season_join=s, trans_player=player.user_player))
         for team in trans_teams:
             d3 = {}
             leagues = list(League.objects.filter(championship=s, teams=team.to_team).order_by('id'))
@@ -114,8 +115,10 @@ def player_team(player):
                                                        match__league=leg).count()
                 own_goals = OtherEvents.objects.filter(author=player.user_player, team=team.to_team, event='OG',
                                                        match__league=leg).count()
-                subs_in = Substitution.objects.filter(team=team.to_team, player_in=player.user_player, match__league=leg).count()
-                subs_out = Substitution.objects.filter(team=team.to_team, player_out=player.user_player, match__league=leg).count()
+                subs_in = Substitution.objects.filter(team=team.to_team, player_in=player.user_player,
+                                                      match__league=leg).count()
+                subs_out = Substitution.objects.filter(team=team.to_team, player_out=player.user_player,
+                                                       match__league=leg).count()
                 stat.append(clean_sheets)
                 stat.append(subs_out)
                 stat.append(subs_in)
@@ -142,7 +145,7 @@ def rows_player_stat(player, season):
         print(i.to_team)
         for t in tournams:
             if i.to_team in t.teams.all():
-                k+=1
+                k += 1
     return k
 
 
@@ -280,11 +283,11 @@ def league_table(league):
 
     result = []
     i = 0
-    while i < len(ls)-1:
+    while i < len(ls) - 1:
         mini_table = [ls[i][0]]
         mini_res = [ls[i]]
         k = i
-        for j in range(i+1, len(ls)):
+        for j in range(i + 1, len(ls)):
             if ls[i][8] == ls[j][8]:
                 mini_table.append(ls[j][0])
                 mini_res.append(ls[j])
@@ -304,7 +307,8 @@ def league_table(league):
             looses = [0 for _ in range(c)]  # Поражений
             for i, team in enumerate(mini_table):
                 matches = []
-                matches_all = Match.objects.filter((Q(team_home=team) | Q(team_guest=team)), league=league, is_played=True)
+                matches_all = Match.objects.filter((Q(team_home=team) | Q(team_guest=team)), league=league,
+                                                   is_played=True)
                 for mm in matches_all:
                     if (mm.team_home in mini_table) and (mm.team_guest in mini_table):
                         matches.append(mm)
@@ -354,7 +358,7 @@ def league_table(league):
             result.append(mini_res[0])
         i = k
     if len(result) < len(ls):
-        result.append(ls[len(ls)-1])
+        result.append(ls[len(ls) - 1])
     return {'teams': result}
 
 
@@ -460,6 +464,7 @@ def current_position(team):
     except:
         return '-'
 
+
 @register.filter
 def teams_in_league_count(team):
     try:
@@ -478,8 +483,21 @@ def tour_matches_in_league(league, tour):
 def team_matches_in_league(team, league):
     return Match.objects.filter((Q(team_home=team) | Q(team_guest=team)), league=league).order_by('numb_tour')
 
+
 # сортировка игроков в профиле команды по играм
 @register.filter
 def sort_players(players):
-    a = sorted(players, key=lambda x: matches_in_team(x,x.team), reverse=True)
+    a = sorted(players, key=lambda x: matches_in_team(x, x.team), reverse=True)
+    return a
+
+
+@register.filter
+def players_in_history(team):
+    players_trans = PlayerTransfer.objects.filter(to_team=team)
+    players = []
+    for i in players_trans:
+        if matches_in_team(i.trans_player, team) >= 0:
+            players.append(i.trans_player)
+    a = sorted(players, key=lambda x: matches_in_team(x, team), reverse=True)
+    print(a)
     return a
