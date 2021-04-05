@@ -195,15 +195,15 @@
 
                                             </td>
                                             {# player.player_in_start_home.count|add:player.player_in_start_guest.count #}
-                                            <td>{{ player|matches_in_team:team }}</td>
-                                            <td>{{ player|goals_in_team:team }}</td>
-                                            <td>{{ player|assists_in_team:team }}</td>
-                                            <td>{{ player|event_count:'CLN' }}</td>
-                                            <td>{{ player|replaced_in_team:team }}</td>
-                                            <td>{{ player|join_game_in_team:team }}</td>
-                                            <td>{{ player|event_count:'OG' }}</td>
-                                            <td>{{ player|event_count:'YEL' }}</td>
-                                            <td>{{ player|event_count:'RED' }}</td>
+                                            <td>{{ player|matches_in_team_current:team }}</td>
+                                            <td>{{ player|goals_in_team_current:team }}</td>
+                                            <td>{{ player|assists_in_team_current:team }}</td>
+                                            <td>{{ player|event_count_current:'CLN' }}</td>
+                                            <td>{{ player|replaced_in_team_current:team }}</td>
+                                            <td>{{ player|join_game_in_team_current:team }}</td>
+                                            <td>{{ player|event_count_current:'OG' }}</td>
+                                            <td>{{ player|event_count_current:'YEL' }}</td>
+                                            <td>{{ player|event_count_current:'RED' }}</td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
