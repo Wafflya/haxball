@@ -181,7 +181,26 @@ def player_team(player):
             d2[team.to_team] = d3
         if len(seasons) != 0:
             d[s] = d2
-    return {'stat': d, 'player': player}
+
+    pl = player.user_player
+    overall = []
+    mc = Match.objects.filter(team_guest_start=pl).count() + Match.objects.filter(
+        team_home_start=pl).count() + Match.objects.filter(
+        ~(Q(team_guest_start=pl) | Q(team_home_start=pl)),
+        match_substitutions__player_in=pl
+    ).distinct().count()
+    overall.append(mc)
+
+    overall.append(Goal.objects.filter(author=pl).count())
+    overall.append(Goal.objects.filter(assistent=pl).count())
+    overall.append(OtherEvents.objects.filter(event='CLN', author=pl).count())
+    overall.append(Substitution.objects.filter(player_out=pl).count())
+    overall.append(Substitution.objects.filter(player_in=pl).count())
+    overall.append(OtherEvents.objects.filter(event='OG', author=pl).count())
+    overall.append(OtherEvents.objects.filter(event='YEL', author=pl).count())
+    overall.append(OtherEvents.objects.filter(event='RED', author=pl).count())
+
+    return {'stat': d, 'player': player, 'overall': overall}
 
 
 @register.filter

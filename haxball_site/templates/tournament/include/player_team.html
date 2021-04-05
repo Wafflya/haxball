@@ -63,7 +63,17 @@
                 {% endfor %}
             {% endfor %}
 
+        <tr>
+            <th colspan="3" class="text-right">
+                <h5>Всего</h5>
+            </th>
+            {% for i in overall %}
+                <td class="text-center font-weight-bolder">{{ i }} </td>
 
+            {% endfor %}
+
+
+        </tr>
 
 
     {% endfor %}
