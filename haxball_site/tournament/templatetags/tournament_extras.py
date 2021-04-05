@@ -457,12 +457,12 @@ def current_league(team):
 
 @register.filter
 def all_league_season(team, season):
-    return League.objects.filter(teams=team, championship=season).distinct().order_by('-id')
+    return League.objects.filter(teams=team, championship=season).order_by('-id')
 
 
 @register.filter
 def all_seasons(team):
-    return Season.objects.filter(tournaments_in_season__teams=team).order_by('-number')
+    return Season.objects.filter(tournaments_in_season__teams=team).distinct().order_by('-number')
 
 
 def sort_teams(league):
