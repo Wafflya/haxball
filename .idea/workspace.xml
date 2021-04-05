@@ -27,8 +27,8 @@
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/hall_of_fame.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/hall_of_fame.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +77,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -220,7 +220,10 @@
       <workItem from="1617303807637" duration="1719000" />
       <workItem from="1617305550463" duration="3601000" />
       <workItem from="1617411880396" duration="3187000" />
-      <workItem from="1617481834581" duration="8420000" />
+      <workItem from="1617481834581" duration="8614000" />
+      <workItem from="1617492285435" duration="660000" />
+      <workItem from="1617551101202" duration="1451000" />
+      <workItem from="1617647665830" duration="342000" />
     </task>
     <servers />
   </component>

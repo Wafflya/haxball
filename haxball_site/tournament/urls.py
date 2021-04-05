@@ -6,7 +6,7 @@ app_name = 'tournament'
 
 urlpatterns = [
     # Зал славы
-    path('hall_of_fame', halloffame),
+    path('hall_of_fame', halloffame, name = 'hall_of_fame'),
     path('free_agents/', FreeAgentList.as_view(), name='free_agent'),
     path('free_agents/remove/<int:pk>', remove_entry, name='remove_entry'),
     path('free_agents/update/<int:pk>', update_entry, name='update_entry'),
