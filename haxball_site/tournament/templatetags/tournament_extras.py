@@ -31,6 +31,7 @@ def can_add_entry(user):
 def date_can(user):
     return user.user_free_agent.created + timezone.timedelta(hours=6)
 
+
 # Евенты, всего/в текущем сезоне
 @register.filter
 def event_count(player, type):
@@ -44,7 +45,6 @@ def event_count_current(player, type):
                                       match__league__championship=current).count()
 
 
-
 #
 @register.filter
 def goals_in_team(player, team):
@@ -55,16 +55,21 @@ def goals_in_team(player, team):
 def goals_in_team_current(player, team):
     current = Season.objects.filter(is_active=True).first()
     return Goal.objects.filter(author=player, team=team, match__league__championship=current).count()
+
+
 #
 
 @register.filter
 def assists_in_team(player, team):
     return Goal.objects.filter(assistent=player, team=team).count()
 
+
 @register.filter
 def assists_in_team_current(player, team):
     current = Season.objects.filter(is_active=True).first()
     return Goal.objects.filter(assistent=player, team=team, match__league__championship=current).count()
+
+
 #
 
 
@@ -72,26 +77,32 @@ def assists_in_team_current(player, team):
 def replaced_in_team(player, team):
     return Substitution.objects.filter(team=team, player_out=player).count()
 
+
 @register.filter
 def replaced_in_team_current(player, team):
     current = Season.objects.filter(is_active=True).first()
     return Substitution.objects.filter(team=team, player_out=player, match__league__championship=current).count()
+
 
 #
 @register.filter
 def join_game_in_team(player, team):
     return Substitution.objects.filter(team=team, player_in=player).count()
 
+
 @register.filter
 def join_game_in_team_current(player, team):
     current = Season.objects.filter(is_active=True).first()
     return Substitution.objects.filter(team=team, player_in=player, match__league__championship=current).count()
+
+
 #
 
 
 @register.filter
 def matches_in_team_current(player, team):
-    return Match.objects.filter(team_guest=team, team_guest_start=player, league__championship__is_active=True).count() + Match.objects.filter(
+    return Match.objects.filter(team_guest=team, team_guest_start=player,
+                                league__championship__is_active=True).count() + Match.objects.filter(
         team_home=team, team_home_start=player, league__championship__is_active=True).count() + Match.objects.filter(
         ~(Q(team_guest_start=player) | Q(team_home_start=player)), match_substitutions__team=team,
         match_substitutions__player_in=player, league__championship__is_active=True
@@ -445,8 +456,13 @@ def current_league(team):
 
 
 @register.filter
-def all_league(team):
-    return League.objects.filter(teams=team).order_by('-id')
+def all_league_season(team, season):
+    return League.objects.filter(teams=team, championship=season).order_by('-id')
+
+
+@register.filter
+def all_seasons(team):
+    return Season.objects.filter(tournaments_in_season__teams=team).order_by('-number')
 
 
 def sort_teams(league):
