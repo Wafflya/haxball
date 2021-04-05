@@ -528,7 +528,7 @@ def team_matches_in_league(team, league):
 # сортировка игроков в профиле команды по играм
 @register.filter
 def sort_players(players):
-    a = sorted(players, key=lambda x: matches_in_team(x, x.team), reverse=True)
+    a = sorted(players, key=lambda x: matches_in_team_current(x, x.team), reverse=True)
     return a
 
 
@@ -537,7 +537,7 @@ def players_in_history(team):
     players_trans = PlayerTransfer.objects.filter(to_team=team)
     players = []
     for i in players_trans:
-        if matches_in_team(i.trans_player, team) > 0:
+        if (matches_in_team(i.trans_player, team) > 0) and (i.trans_player not in players):
             players.append(i.trans_player)
     a = sorted(players, key=lambda x: matches_in_team(x, team), reverse=True)
     print(a)
