@@ -26,8 +26,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/team_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/tournament/teams/team_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/templatetags/tournament_extras.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,7 +225,7 @@
       <workItem from="1617551101202" duration="1451000" />
       <workItem from="1617647665830" duration="12926000" />
       <workItem from="1617672721055" duration="3111000" />
-      <workItem from="1617688075229" duration="4852000" />
+      <workItem from="1617688075229" duration="6185000" />
     </task>
     <servers />
   </component>

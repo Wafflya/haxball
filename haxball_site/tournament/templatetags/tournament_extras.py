@@ -39,6 +39,26 @@ def event_count(player, type):
 
 
 @register.filter
+def cln_count(player, team):
+    return OtherEvents.objects.filter(author=player, team=team, event='CLN').count()
+
+
+@register.filter
+def og_count(player, team):
+    return OtherEvents.objects.filter(author=player, team=team, event='OG').count()
+
+
+@register.filter
+def yel_count(player, team):
+    return OtherEvents.objects.filter(author=player, team=team, event='YEL').count()
+
+
+@register.filter
+def red_count(player, team):
+    return OtherEvents.objects.filter(author=player, team=team, event='RED').count()
+
+
+@register.filter
 def event_count_current(player, type):
     current = Season.objects.filter(is_active=True).first()
     return OtherEvents.objects.filter(author=player, team=player.team, event=type,

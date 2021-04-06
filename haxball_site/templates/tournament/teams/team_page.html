@@ -280,12 +280,12 @@
                                             <td>{{ player|matches_in_team:team }}</td>
                                             <td>{{ player|goals_in_team:team }}</td>
                                             <td>{{ player|assists_in_team:team }}</td>
-                                            <td>{{ player|event_count:'CLN' }}</td>
+                                            <td>{{ player|cln_count:team }}</td>
                                             <td>{{ player|replaced_in_team:team }}</td>
                                             <td>{{ player|join_game_in_team:team }}</td>
-                                            <td>{{ player|event_count:'OG' }}</td>
-                                            <td>{{ player|event_count:'YEL' }}</td>
-                                            <td>{{ player|event_count:'RED' }}</td>
+                                            <td>{{ player|og_count:team }}</td>
+                                            <td>{{ player|yel_count:team }}</td>
+                                            <td>{{ player|red_count:team }}</td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
