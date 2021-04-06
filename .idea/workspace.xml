@@ -26,7 +26,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/include/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/core/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/core/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/haxball_site/tournament/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/tournament/admin.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,11 +89,11 @@
       <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img" />
       <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img\ico" />
       <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
       <recent name="E:\haxball\haxball_site\static\img\ico" />
       <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\media\users_avatars\default" />
-      <recent name="E:\haxball\haxball_site\ckeditor\ckeditor\plugins\images" />
     </key>
   </component>
   <component name="RunManager">
@@ -221,7 +224,9 @@
       <workItem from="1617481834581" duration="8614000" />
       <workItem from="1617492285435" duration="660000" />
       <workItem from="1617551101202" duration="1451000" />
-      <workItem from="1617647665830" duration="12202000" />
+      <workItem from="1617647665830" duration="12926000" />
+      <workItem from="1617672721055" duration="3111000" />
+      <workItem from="1617688075229" duration="3940000" />
     </task>
     <servers />
   </component>

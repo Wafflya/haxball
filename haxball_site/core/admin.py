@@ -26,6 +26,8 @@ class CommentAdminForm(forms.ModelForm):
         fields = '__all__'
 
 
+
+
 """
 def delete_selected(modeladmin, request, queryset):
     if not modeladmin.has_delete_permission(request):

@@ -1,8 +1,12 @@
 # Register your models here.
 from django.contrib import admin
+from django.db.models import Q
+from django.urls import resolve
 
 from .models import FreeAgent, Player, League, Team, Match, Goal, OtherEvents, Substitution, Season, PlayerTransfer, \
     TourNumber, Nation, Achievements
+from django import forms
+
 
 
 @admin.register(FreeAgent)
@@ -22,7 +26,6 @@ class PlayerAdmin(admin.ModelAdmin):
     raw_id_fields = ('name',)
 
 
-#   readonly_fields = ('team',)
 
 
 @admin.register(PlayerTransfer)
@@ -55,6 +58,17 @@ class NationAdmin(admin.ModelAdmin):
 class GoalInline(admin.StackedInline):
     model = Goal
     extra = 3
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        resolved = resolve(request.path_info)
+        not_found = False
+        try:
+            match = self.parent_model.objects.get(id=resolved.kwargs['object_id'])
+        except:
+            not_found = True
+        if db_field.name == "team" and not not_found:
+            kwargs["queryset"] = Team.objects.filter(Q(home_matches=match) | Q(guest_matches=match)).distinct()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 class SubstitutionInline(admin.StackedInline):
