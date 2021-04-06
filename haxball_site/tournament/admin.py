@@ -8,7 +8,6 @@ from .models import FreeAgent, Player, League, Team, Match, Goal, OtherEvents, S
 from django import forms
 
 
-
 @admin.register(FreeAgent)
 class FreeAgentAdmin(admin.ModelAdmin):
     list_display = ('id', 'player', 'position_main', 'description', 'is_active', 'created', 'deleted')
@@ -24,8 +23,6 @@ class AchievmentsAdmin(admin.ModelAdmin):
 class PlayerAdmin(admin.ModelAdmin):
     list_display = ('name', 'nickname', 'team', 'player_nation', 'role',)
     raw_id_fields = ('name',)
-
-
 
 
 @admin.register(PlayerTransfer)
@@ -75,10 +72,32 @@ class SubstitutionInline(admin.StackedInline):
     model = Substitution
     extra = 3
 
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        resolved = resolve(request.path_info)
+        not_found = False
+        try:
+            match = self.parent_model.objects.get(id=resolved.kwargs['object_id'])
+        except:
+            not_found = True
+        if db_field.name == "team" and not not_found:
+            kwargs["queryset"] = Team.objects.filter(Q(home_matches=match) | Q(guest_matches=match)).distinct()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
 
 class EventInline(admin.StackedInline):
     model = OtherEvents
     extra = 2
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        resolved = resolve(request.path_info)
+        not_found = False
+        try:
+            match = self.parent_model.objects.get(id=resolved.kwargs['object_id'])
+        except:
+            not_found = True
+        if db_field.name == "team" and not not_found:
+            kwargs["queryset"] = Team.objects.filter(Q(home_matches=match) | Q(guest_matches=match)).distinct()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 @admin.register(Match)
