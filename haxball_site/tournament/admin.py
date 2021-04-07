@@ -107,7 +107,7 @@ class MatchAdmin(admin.ModelAdmin):
         'inspector', 'id',)
     # readonly_fields = ('score_home', 'score_guest',)
     filter_horizontal = ('team_home_start', 'team_guest_start',)
-    list_filter = ('numb_tour', 'league', 'inspector', 'is_played')
+    list_filter = ('numb_tour__number', 'league', 'inspector', 'is_played')
     fieldsets = (
         ('Основная инфа', {
             'fields': (('league', 'is_played', 'match_date', 'numb_tour',),)
@@ -151,7 +151,7 @@ class OtherEventsAdmin(admin.ModelAdmin):
 class MatchTourAdmin(admin.ModelAdmin):
     list_display = ('number', 'league', 'is_actual')
     list_editable = ('is_actual',)
-    list_filter = ('league',)
+    list_filter = ('league','number')
 
 
 """
