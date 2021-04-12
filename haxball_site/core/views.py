@@ -205,8 +205,8 @@ class AdminListView(ListView):
     a = []
     for i in us:
         s = 0
-        for icon in i.user_profile.user_icon.all():
-            s += icon.priority
+        #for icon in i.user_profile.user_icon.all():
+         #   s += icon.priority
         print(i,s)
         if s > 0:
             a.append([i, s, i.id])
