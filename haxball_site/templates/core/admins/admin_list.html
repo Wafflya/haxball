@@ -43,7 +43,7 @@
                             {% endif %}
                         {% endfor %}
                         </th>
-                        <td><a href="{{ user.user_profile.get_absolute_url }}">{{ user.username }}</a></td>
+                        <td class="text-left h4"><a href="{{ user.user_profile.get_absolute_url }}">{{ user.username }}</a></td>
                         <td>
                             {% if user.user_profile.vk %}
                                 <a href="https://vk.com/{{ user.user_profile.vk }}"
@@ -78,7 +78,7 @@
                 </tbody>
             </table>
 
-           
+
 
         </div>
 

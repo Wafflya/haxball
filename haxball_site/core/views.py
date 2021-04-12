@@ -204,8 +204,12 @@ class AdminListView(ListView):
     us = User.objects.filter(is_staff=True).order_by('id')
     a = []
     for i in us:
-        a.append([i, len(i.get_user_permissions()), i.id])
-
+        s = 0
+        for icon in i.user_profile.user_icon.all():
+            s += icon.priority
+        print(i,s)
+        if s > 0:
+            a.append([i, s, i.id])
     c = sorted(a, key=lambda x: x[1], reverse=True)
     queryset = [i[0] for i in c]
     context_object_name = 'users'
