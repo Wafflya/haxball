@@ -4,6 +4,15 @@
 
 {% block title %}Администрация{% endblock %}
 
+{% block scripts %}
+    <script>
+        function myFunction(Element) {
+            navigator.clipboard.writeText(Element.title);
+            alert("Скопировано " + Element.title);
+        }
+    </script>
+{% endblock %}
+
 {% block postlist %}
     <div class="card my-2"
          style="border-radius: 25px; background-image: url({% static "img/backgrounds/background1.png" %})">
@@ -12,6 +21,7 @@
             <h3 class="text-center mt-1 mb-0"><i class="fa fa-user-circle text-primary" aria-hidden="true"></i>
                 Администрация
             </h3>
+            <h4>Господин waff вопросами чемпионата НЕ ЗАНИМАЕТСЯ!</h4>
             <hr>
 
             {% for user in users %}
@@ -23,6 +33,28 @@
                                      title="{{ icon.description }}">
                             {% endif %}
                         {% endfor %}{{ user.username }}
+                        {% if user.user_profile.vk %}
+                            <a href="https://vk.com/{{ user.user_profile.vk }}"
+                               target="_blank"><img
+                                    src="{% static "img/ico/vk_1.png" %}" height="30" width="30"
+                                    title="{{ user.user_profile.vk }}"></a>
+                        {% endif %}
+                        {% if user.user_profile.discord %}
+                            <img src='{% static "img/ico/discord_1.png" %}'
+                                 onclick="myFunction(this)"
+                                 height="30" width="30"
+                                 title="{{ user.user_profile.discord }}"
+                                 style="cursor: pointer;">
+                        {% endif %}
+                        {% if user.user_profile.telegram %}
+                            <a href="https://t.me/{{ user.user_profile.telegram }}"
+                               target="_blank"><img
+                                    src="{% static "img/ico/tg_1.png" %}" height="30" width="30"
+                                    title="{{ user.user_profile.telegram }}"></a>
+                        {% endif %}
+                        {% if not user.user_profile.vk and not user.user_profile.discord and not user.user_profile.telegram %}
+                            <i class="fa fa-minus text-danger text-center" aria-hidden="true"></i>
+                        {% endif %}
                     </a>
                     <span class="small text-muted">
                             {% for group in user.groups.all %}
