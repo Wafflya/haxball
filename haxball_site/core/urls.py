@@ -19,6 +19,8 @@ urlpatterns = [
     #  Путь к фасткапам
     path('fastcups/', views.FastcupView.as_view(), name='fastcups'),
 
+
+
     #  Путь к турнирам
     path('tournaments/', views.TournamentsView.as_view(), name='tournaments'),
 

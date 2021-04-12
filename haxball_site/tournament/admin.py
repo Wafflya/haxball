@@ -1,8 +1,11 @@
 # Register your models here.
 from django.contrib import admin
+from django.db.models import Q
+from django.urls import resolve
 
 from .models import FreeAgent, Player, League, Team, Match, Goal, OtherEvents, Substitution, Season, PlayerTransfer, \
     TourNumber, Nation, Achievements
+from django import forms
 
 
 @admin.register(FreeAgent)
@@ -12,7 +15,7 @@ class FreeAgentAdmin(admin.ModelAdmin):
 
 @admin.register(Achievements)
 class AchievmentsAdmin(admin.ModelAdmin):
-    list_display = ('id','position_number','title', 'description', 'image', 'mini_image')
+    list_display = ('id', 'position_number', 'title', 'description', 'image', 'mini_image')
     filter_horizontal = ('player',)
 
 
@@ -20,12 +23,12 @@ class AchievmentsAdmin(admin.ModelAdmin):
 class PlayerAdmin(admin.ModelAdmin):
     list_display = ('name', 'nickname', 'team', 'player_nation', 'role',)
     raw_id_fields = ('name',)
-#   readonly_fields = ('team',)
 
 
 @admin.register(PlayerTransfer)
 class PlayerTransferAdmin(admin.ModelAdmin):
     list_display = ('trans_player', 'to_team', 'date_join', 'season_join')
+    list_filter = ('trans_player', 'to_team',)
 
 
 @admin.register(Team)
@@ -53,15 +56,48 @@ class GoalInline(admin.StackedInline):
     model = Goal
     extra = 3
 
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        resolved = resolve(request.path_info)
+        not_found = False
+        try:
+            match = self.parent_model.objects.get(id=resolved.kwargs['object_id'])
+        except:
+            not_found = True
+        if db_field.name == "team" and not not_found:
+            kwargs["queryset"] = Team.objects.filter(Q(home_matches=match) | Q(guest_matches=match)).distinct()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
 
 class SubstitutionInline(admin.StackedInline):
     model = Substitution
     extra = 3
 
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        resolved = resolve(request.path_info)
+        not_found = False
+        try:
+            match = self.parent_model.objects.get(id=resolved.kwargs['object_id'])
+        except:
+            not_found = True
+        if db_field.name == "team" and not not_found:
+            kwargs["queryset"] = Team.objects.filter(Q(home_matches=match) | Q(guest_matches=match)).distinct()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
 
 class EventInline(admin.StackedInline):
     model = OtherEvents
     extra = 2
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        resolved = resolve(request.path_info)
+        not_found = False
+        try:
+            match = self.parent_model.objects.get(id=resolved.kwargs['object_id'])
+        except:
+            not_found = True
+        if db_field.name == "team" and not not_found:
+            kwargs["queryset"] = Team.objects.filter(Q(home_matches=match) | Q(guest_matches=match)).distinct()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 @admin.register(Match)
@@ -71,7 +107,7 @@ class MatchAdmin(admin.ModelAdmin):
         'inspector', 'id',)
     # readonly_fields = ('score_home', 'score_guest',)
     filter_horizontal = ('team_home_start', 'team_guest_start',)
-    list_filter = ('numb_tour', 'league', 'inspector', 'is_played')
+    list_filter = ('numb_tour__number', 'league', 'inspector', 'is_played')
     fieldsets = (
         ('Основная инфа', {
             'fields': (('league', 'is_played', 'match_date', 'numb_tour',),)
@@ -115,7 +151,7 @@ class OtherEventsAdmin(admin.ModelAdmin):
 class MatchTourAdmin(admin.ModelAdmin):
     list_display = ('number', 'league', 'is_actual')
     list_editable = ('is_actual',)
-    list_filter = ('league',)
+    list_filter = ('league','number')
 
 
 """

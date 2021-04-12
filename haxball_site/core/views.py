@@ -47,7 +47,6 @@ class PostListView(ListView):
             except:
                 IPAdress.objects.create(ip=ip_a, name=self.request.user)
 
-
             ips = IPAdress.objects.filter(ip=ip_a)
             if ips.count() > 1:
                 for i in ips:
@@ -180,7 +179,8 @@ def delete_comment(request, pk):
     comment = get_object_or_404(NewComment, pk=pk)
     obj = comment.content_object
     if request.method == 'POST' and \
-            ((request.user == comment.author and timezone.now() - comment.created < timezone.timedelta(minutes=10)) or request.user.is_superuser or request.user == obj.name):
+            ((request.user == comment.author and timezone.now() - comment.created < timezone.timedelta(
+                minutes=10)) or request.user.is_superuser or request.user == obj.name):
         comment.delete()
         return redirect(obj.get_absolute_url())
     else:
@@ -201,10 +201,18 @@ class FastcupView(ListView):
 
 # Список админов
 class AdminListView(ListView):
-    queryset = User.objects.filter(is_staff=True).order_by('id')
+    us = User.objects.filter(is_staff=True).order_by('id')
+    a = []
+    for i in us:
+        a.append([i, len(i.get_user_permissions()), i.id])
+
+    c = sorted(a, key=lambda x: x[1], reverse=True)
+    queryset = [i[0] for i in c]
     context_object_name = 'users'
     template_name = 'core/admins/admin_list.html'
 
+
+#
 
 # Вьюха для турниров
 class TournamentsView(ListView):
@@ -238,20 +246,22 @@ class TournamentsView(ListView):
         post.save()
         comment_form = CommentForm()
         """
+
+
 # Учитывая, что потом пост-комменты будут использоваться для форума.. Такие дела
 class PostDetailView(DetailView):
     model = Post
     context_object_name = 'post'
     template_name = 'core/post/detail.html'
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post = context['post']
         post.views = post.views + 1
         post.save()
-        comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Post), object_id=post.id,
-                                             parent=None)
+        comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Post),
+                                                 object_id=post.id,
+                                                 parent=None)
 
         paginate = Paginator(comments_obj, 25)
         page = self.request.GET.get('page')
@@ -272,7 +282,6 @@ class PostDetailView(DetailView):
         return context
 
 
-
 # Вьюха для профиля пользователя MultipleObjectMixin
 class ProfileDetail(DetailView):
     model = Profile
@@ -284,8 +293,9 @@ class ProfileDetail(DetailView):
         prof = context['profile']
         prof.views = prof.views + 1
         prof.save()
-        comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Profile), object_id=prof.id,
-                                             parent=None)
+        comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Profile),
+                                                 object_id=prof.id,
+                                                 parent=None)
 
         paginate = Paginator(comments_obj, 25)
         page = self.request.GET.get('page')
@@ -321,7 +331,6 @@ class AddCommentView(View):
             new_com.content_type = ContentType.objects.get_for_model(obj)
             new_com.save()
             return redirect(obj.get_absolute_url())
-
 
 
 class EditMyProfile(DetailView, View):
@@ -362,7 +371,7 @@ class VotesView(View):
                 likedislike.save(update_fields=['vote'])
                 result = True
             else:
-                #if obj.author != request.user:
+                # if obj.author != request.user:
                 #    author_profile.karma -= likedislike.vote
                 #    author_profile.save(update_fields=['karma'])
                 likedislike.delete()

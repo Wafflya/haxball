@@ -27,7 +27,11 @@
   <component name="ChangeListManager">
     <list default="true" id="12e7bc16-51e5-46a2-aa76-e6251196acf1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/haxball_site/templates/core/admins/admin_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/templates/core/admins/admin_list.html" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/haxball_site/haxball_site/settings.py" afterDir="false" />
+>>>>>>> ff02783544f721539b6d8df26c68e1af86529f6a
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +46,8 @@
       <list>
         <option value="JavaScript File" />
         <option value="CSS File" />
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -67,7 +71,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../parse3.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/haxball_site/templates/tournament" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -76,22 +80,22 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\templates\tournament" />
       <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img\ico" />
       <recent name="E:\haxball\haxball_site\my_scripts" />
       <recent name="E:\haxball\haxball_site\static\ckeditor\ckeditor\plugins\images" />
       <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
-      <recent name="$PROJECT_DIR$/haxball_site/static/img/backgrounds" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img" />
       <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\static\img\ico" />
       <recent name="E:\haxball\haxball_site\static\img\backgrounds" />
       <recent name="E:\haxball\haxball_site\static\img\ico" />
       <recent name="C:\Users\Marat\Documents\site\haxball\haxball_site\media\users_avatars\default" />
-      <recent name="E:\haxball\haxball_site\ckeditor\ckeditor\plugins\images" />
     </key>
   </component>
   <component name="RunManager">
@@ -215,8 +219,22 @@
       <workItem from="1612825815854" duration="814000" />
       <workItem from="1613234440556" duration="2133000" />
       <workItem from="1613514457585" duration="1528000" />
+<<<<<<< HEAD
       <workItem from="1614588083743" duration="400000" />
       <workItem from="1618245560193" duration="2273000" />
+=======
+      <workItem from="1614588083743" duration="1117000" />
+      <workItem from="1617303807637" duration="1719000" />
+      <workItem from="1617305550463" duration="3601000" />
+      <workItem from="1617411880396" duration="3187000" />
+      <workItem from="1617481834581" duration="8614000" />
+      <workItem from="1617492285435" duration="660000" />
+      <workItem from="1617551101202" duration="1451000" />
+      <workItem from="1617647665830" duration="12926000" />
+      <workItem from="1617672721055" duration="3111000" />
+      <workItem from="1617688075229" duration="6913000" />
+      <workItem from="1617773801112" duration="9288000" />
+>>>>>>> ff02783544f721539b6d8df26c68e1af86529f6a
     </task>
     <servers />
   </component>
