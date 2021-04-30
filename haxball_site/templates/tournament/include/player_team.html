@@ -1,8 +1,14 @@
 {% load static %}
 {% load tournament_extras %}
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+</style>
+<style>
     .table td, .table th {
-        padding: 0.3rem;
+        padding: 0.5rem;
+    }
+    .table .number {
+        font-family: 'Zen Dots', cursive;
     }
 </style>
 <table class="table table-striped">
@@ -49,20 +55,20 @@
     <tbody>
     {% for seas,team in stat.items %}
         <tr>
-            <td rowspan="{{ player|rows_player_stat:seas }}">{{ seas }}</td>
+            <td class="font-weight-bolder h5" rowspan="{{ player|rows_player_stat:seas }}">{{ seas }}</td>
 
 
             {% for t,c in team.items %}
                 <td rowspan="{{ c|length }}">
                     <img src="{{ t.logo.url }}" alt="{{ t.title }}" width="24" height="24"
                          class="mr-1">
-                    <a class="team_link" href="{{ t.get_absolute_url }}">{{ t.short_title }}</a>
+                    <a class="team_link font-weight-bolder" href="{{ t.get_absolute_url }}">{{ t.short_title }}</a>
 
                 </td>
                 {% for champ, stat in c.items %}
-                    <td>{{ champ.title }}</td>
+                    <td class="font-weight-bolder h5">{{ champ.title }}</td>
                     {% for i in stat %}
-                        <td class="text-center">{{ i }}</td>
+                        <td class="text-center number">{{ i }}</td>
                     {% endfor %}
                     </tr>
                 {% endfor %}
@@ -74,10 +80,10 @@
 
     <tr>
         <th colspan="3" class="text-right">
-            <h5>Всего</h5>
+            <h4>Всего</h4>
         </th>
         {% for i in overall %}
-            <td class="text-center font-weight-bolder">{{ i }} </td>
+            <td class="text-center font-weight-bolder number">{{ i }} </td>
 
         {% endfor %}
 
