@@ -66,7 +66,7 @@
 
                 </td>
                 {% for champ, stat in c.items %}
-                    <td class="font-weight-bolder h5">{{ champ.title }}</td>
+                    <td class="font-weight-bolder h5"><a href="{{ champ.get_absolute_url }}">{{ champ.title }}</a></td>
                     {% for i in stat %}
                         <td class="text-center number">{{ i }}</td>
                     {% endfor %}
