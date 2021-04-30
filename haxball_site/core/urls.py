@@ -8,8 +8,6 @@ from tournament.models import League, Match
 app_name = 'core'
 
 urlpatterns = [
-    # post views
-    # path('', views.post_list, name='home'),
     path('', views.PostListView.as_view(), name='home'),
     path('post/<int:pk>/<slug:slug>', views.PostDetailView.as_view(), name='post_detail'),
     path('profile/<int:pk>/<slug:slug>/', views.ProfileDetail.as_view(), name='profile_detail'),
@@ -19,16 +17,13 @@ urlpatterns = [
     #  Путь к фасткапам
     path('fastcups/', views.FastcupView.as_view(), name='fastcups'),
 
-
+    path('filter/', views.search_result, name='filter'),
 
     #  Путь к турнирам
     path('tournaments/', views.TournamentsView.as_view(), name='tournaments'),
 
     #  Путь к админам
     path('admin_list/', views.AdminListView.as_view(), name='admins'),
-
-    #  Правила
-
     #  Все посты
     path('news_all/', views.AllPostView.as_view(), name='all_posts'),
 
@@ -76,8 +71,6 @@ urlpatterns = [
     #       login_required(views.VotesView.as_view(model=Comment, vote_type=LikeDislike.DISLIKE)),
     #      name='comment_dislike'),
 
-    # Це пиздец госопода! Полный(
-    #Путь на XYU
     path('api/comment/<int:id>/like/',
          login_required(views.VotesView.as_view(model=NewComment, vote_type=LikeDislike.LIKE)),
          name='comment_like'),

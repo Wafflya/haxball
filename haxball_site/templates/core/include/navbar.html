@@ -5,12 +5,12 @@
 <nav class="navbar navbar-light navbar_color nav-fill"
      style="background-image:url({% static "img/backgrounds/back_niqo3.png" %}); height: 100px; background-position: center; ">
 
-    <!--
-    <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
+
+    <form class="form-inline" method="get" action="{% url 'core:filter' %}">
+        <input class="form-control mr-sm-2" type="search" name="q" placeholder="Поиск" aria-label="Search">
         <button class="btn btn-success my-2 my-sm-0" type="submit">Поиск</button>
     </form>
--->
+
 
     <div class="mr-100">
         <!-- <iframe src="https://money.yandex.ru/quickpay/button-widget?targets=%D0%9F%D0%BE%D0%B6%D0%B5%D1%80%D1%82%D0%B2%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5&default-sum=200&button-text=14&yamoney-payment-type=on&button-size=m&button-color=black&successURL=&quickpay=small&account=410011043451485&"
@@ -20,7 +20,8 @@
 
 <nav class="navbar navbar-expand-xl bg-dark navbar-dark d-flex bd-highlight mb-0 sticky-top p-1">
     <!-- Brand -->
-    <a class="navbar-brand font-weight-bold ml-2" href="{% url 'core:home' %}"><img src="{% static "img/logo_try.png" %}" width="30" height="30" alt="Главная"></a>
+    <a class="navbar-brand font-weight-bold ml-2" href="{% url 'core:home' %}"><img
+            src="{% static "img/logo_try.png" %}" width="30" height="30" alt="Главная"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -85,7 +86,8 @@
 
 
             <li class="nav-item">
-                <a class="nav-link font-weight-bold text-warning mx-1 text-right" href="{% url 'tournament:hall_of_fame' %}">Зал славы</a>
+                <a class="nav-link font-weight-bold text-warning mx-1 text-right"
+                   href="{% url 'tournament:hall_of_fame' %}">Зал славы</a>
             </li>
 
             <li class="nav-item">
@@ -105,6 +107,9 @@
 
 
         </ul>
+
+
+
 
         {% if user.is_authenticated %}
             <a class="p-2" href="{{ user.user_profile.get_absolute_url }}">{{ user.username }}</a>

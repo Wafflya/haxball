@@ -16,6 +16,7 @@ from pytils.translit import slugify
 from .forms import CommentForm, EditProfileForm, PostForm, NewCommentForm
 from .models import Post, Profile, LikeDislike, Category, Themes, Comment, NewComment, IPAdress
 from haxball_site import settings
+from tournament.models import Team
 
 
 # Вьюха для списка постов
@@ -200,6 +201,7 @@ class FastcupView(ListView):
 
 
 # Список админов
+
 class AdminListView(ListView):
     us = User.objects.filter(is_staff=True).order_by('id')
     a = []
@@ -396,3 +398,12 @@ class VotesView(View):
             }),
             content_type="application/json"
         )
+
+
+def search_result(request):
+    a = request.GET.get('q')
+    profile_list = Profile.objects.filter(name__username__icontains=a)
+    team_list = Team.objects.filter(title__icontains=a)
+    post_list = Post.objects.filter(title__icontains=a)
+    return render(request, 'core/search_result/search_result.html',
+                  {'profiles': profile_list, 'teams': team_list, 'posts': post_list})
