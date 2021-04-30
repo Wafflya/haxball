@@ -173,6 +173,9 @@ def player_team(player):
                     match_substitutions__player_in=player.user_player, league=leg
                 ).distinct().count()
 
+                if matches_count == 0:
+                    continue
+
                 stat.append(matches_count)
                 goal_count = Goal.objects.filter(author=player.user_player, team=team.to_team,
                                                  match__league=leg).count()
@@ -199,8 +202,11 @@ def player_team(player):
                 stat.append(yellow_cards)
                 stat.append(red_cards)
                 d3[leg] = stat
-            d2[team.to_team] = d3
-        if len(seasons) != 0:
+
+                print(d3, stat)
+            if d3:
+                d2[team.to_team] = d3
+        if len(seasons) != 0 and d2:
             d[s] = d2
 
     pl = player.user_player
@@ -234,10 +240,17 @@ def rows_player_stat(player, season):
     teams = PlayerTransfer.objects.filter(~Q(to_team=None), season_join=season, trans_player=player.user_player)
     tournams = season.tournaments_in_season.all()
     for i in teams:
-        print(i.to_team)
         for t in tournams:
-            if i.to_team in t.teams.all():
+            mtch_in_team_trn = Match.objects.filter(team_guest=i.to_team, team_guest_start=p,
+                                                    league=t).count() + Match.objects.filter(
+                team_home=i.to_team, team_home_start=p, league=t).count() + Match.objects.filter(
+                ~(Q(team_guest_start=p) | Q(team_home_start=p)), match_substitutions__team=i.to_team,
+                match_substitutions__player_in=p, league=t
+            ).distinct().count()
+
+            if i.to_team in t.teams.all() and mtch_in_team_trn > 0:
                 k += 1
+    print(k)
     return k
 
 
