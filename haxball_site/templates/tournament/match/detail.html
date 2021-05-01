@@ -8,6 +8,10 @@
         body {
             background-image: url({% static "img/backgrounds/bg-light-4860.png" %})
         }
+
+        .table-stat td {
+            padding: .3rem;
+        }
     </style>
 {% endblock %}
 {% block scripts %}
@@ -46,7 +50,7 @@
 
 
                 </div>
-                <div class="col-2">
+                <div class="col-2 px-0">
                     <div class="mt-5">
                         {% if match.is_played %}
                             <h3 class="font-weight-bold">{{ match.score_home }}
@@ -55,12 +59,106 @@
                         {% else %}
                             <h3>vs</h3>
                         {% endif %}
+
                     </div>
                 </div>
                 <div class="col-5">
                     <img src="{{ match.team_guest.logo.url }}" alt="{{ match.team_guest.title }}" width="60%">
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        <p>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button"
+                               aria-expanded="false" aria-controls="collapseExample">
+                                История встреч
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="collapse w-100" id="collapseExample">
+                    <div class="row mb-2">
+                        <div class="col-12">
+
+                            <div class="progress" style="height: 35px;">
+                                <div class="progress-bar bg-success justify-content-center" role="progressbar"
+                                     style="width: {{ win_home_percentage }}%"
+                                     aria-valuenow="{{ win_home_percentage }}"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100">
+                                    <div>
+                                        <img src="{{ match.team_home.logo.url }}" alt="{{ match.team_home.title }}"
+                                             width="25px">
+                                        {{ win_home_percentage }}% ({{ win_home }})
+                                    </div>
+                                </div>
+                                <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ draws_percentage }}%"
+                                     aria-valuenow="{{ draws_percentage }}"
+                                     aria-valuemin="0" aria-valuemax="100">
+
+                                    <div>
+                                        <img src="{% static 'img/ico/equals_icon.png' %}" alt="equals"
+                                             width="25px">
+                                        {{ draws_percentage }}% ({{ draws }})
+                                    </div>
+                                </div>
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ win_guest_percentage }}%"
+                                     aria-valuenow="{{ win_guest_percentage }}"
+                                     aria-valuemin="0" aria-valuemax="100">
+
+                                    <div>
+                                        <img src="{{ match.team_guest.logo.url }}" alt="{{ match.team_guest.title }}"
+                                             width="25px">
+                                        {{ win_guest_percentage }}% ({{ win_guest }})
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div>
+                                <h6 class="mb-0">Матчи</h6>
+                                <h4 class="text-warning">{{ all_matches_between.count }}</h4>
+                                <h6>Самый результативный матч: <a
+                                        href="{{ the_most_score.get_absolute_url }}"><img
+                                        src="{{ the_most_score.team_home.logo.url }}"
+                                        alt="{{ the_most_score.team_home.title }}"
+                                        width="20px">{{ the_most_score.score_home }}-{{ the_most_score.score_guest }}
+                                    <img
+                                        src="{{ the_most_score.team_guest.logo.url }}" alt="{{ the_most_score.team_guest.title }}" width="20px">
+                                </a>
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <table class="table table-borderless table-stat">
+                                <tbody>
+                                <tr>
+                                    <td>Побед</td>
+                                    <td class="font-weight-bold">{{ win_home }}</td>
+                                    <td class="font-weight-bold">{{ win_guest }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Забитых мячей</td>
+                                    <td class="font-weight-bold">{{ score_home_all }}</td>
+                                    <td class="font-weight-bold">{{ score_guest_all }}</td>
+                                </tr>
+                                <tr>
+                                    <td>В среднем за матч</td>
+                                    <td class="font-weight-bold">{{ score_home_average }}</td>
+                                    <td class="font-weight-bold">{{ score_guest_average }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             {% if match.is_played %}
 

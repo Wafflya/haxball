@@ -141,7 +141,6 @@ class MatchDetail(DetailView):
         comments_obj = NewComment.objects.filter(content_type=ContentType.objects.get_for_model(Match),
                                                  object_id=match.id,
                                                  parent=None)
-        print(comments_obj)
         paginate = Paginator(comments_obj, 25)
         page = self.request.GET.get('page')
 
@@ -158,6 +157,60 @@ class MatchDetail(DetailView):
         context['comments'] = comments
         comment_form = NewCommentForm()
         context['comment_form'] = comment_form
+        all_matches_between = Match.objects.filter(
+            Q(team_guest=match.team_guest, team_home=match.team_home) | Q(team_guest=match.team_home,
+                                                                          team_home=match.team_guest))
+        the_most_score = all_matches_between.first()
+        score = the_most_score.score_home + the_most_score.score_guest
+        win_home = 0
+        draws = 0
+        win_guest = 0
+        score_home_all = 0
+        score_guest_all = 0
+        for i in all_matches_between:
+            if i.score_home+i.score_guest>score:
+                score = i.score_home+i.score_guest
+                the_most_score = i
+
+            if i.team_home == match.team_home:
+                if i.score_home > i.score_guest:
+                    win_home += 1
+                elif i.score_home == i.score_guest:
+                    draws += 1
+                else:
+                    win_guest += 1
+            else:
+                if i.score_home < i.score_guest:
+                    win_home += 1
+                elif i.score_home == i.score_guest:
+                    draws += 1
+                else:
+                    win_guest += 1
+
+            if i.team_home == match.team_home:
+                score_home_all += i.score_home
+                score_guest_all += i.score_guest
+            else:
+                score_guest_all += i.score_home
+                score_home_all += i.score_guest
+
+        win_home_percentage = round(100*win_home/all_matches_between.count())
+        draws_percentage = round(100*draws/all_matches_between.count())
+        win_guest_percentage = 100-win_home_percentage-draws_percentage
+        print(win_home_percentage, draws_percentage,win_guest_percentage)
+        #print(match.team_home, match.team_guest, all_matches_between)
+        context['all_matches_between'] = all_matches_between
+        context['the_most_score'] = the_most_score
+        context['win_home'] = win_home
+        context['win_guest'] = win_guest
+        context['draws'] = draws
+        context['win_home_percentage'] = win_home_percentage
+        context['win_guest_percentage'] = win_guest_percentage
+        context['draws_percentage'] = draws_percentage
+        context['score_home_all'] = score_home_all
+        context['score_guest_all'] = score_guest_all
+        context['score_home_average'] = score_home_all/all_matches_between.count()
+        context['score_guest_average'] = score_guest_all/all_matches_between.count()
         return context
 
 
