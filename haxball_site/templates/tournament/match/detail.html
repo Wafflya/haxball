@@ -124,10 +124,12 @@
                                 <h6 class="mb-0">Матчи</h6>
                                 <h4 class="text-warning">{{ all_matches_between.count }}</h4>
                                 <h6>Самый результативный матч: <a
-                                        href="{{ the_most_score.get_absolute_url }}"><img
+                                        href="{{ the_most_score.get_absolute_url }}">
+                                    <img
                                         src="{{ the_most_score.team_home.logo.url }}"
                                         alt="{{ the_most_score.team_home.title }}"
-                                        width="20px">{{ the_most_score.score_home }}-{{ the_most_score.score_guest }}
+                                        width="20px">
+                                    {{ the_most_score.score_home }}-{{ the_most_score.score_guest }}
                                     <img
                                         src="{{ the_most_score.team_guest.logo.url }}" alt="{{ the_most_score.team_guest.title }}" width="20px">
                                 </a>

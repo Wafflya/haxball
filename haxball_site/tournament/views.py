@@ -158,8 +158,8 @@ class MatchDetail(DetailView):
         comment_form = NewCommentForm()
         context['comment_form'] = comment_form
         all_matches_between = Match.objects.filter(
-            Q(team_guest=match.team_guest, team_home=match.team_home) | Q(team_guest=match.team_home,
-                                                                          team_home=match.team_guest))
+            Q(team_guest=match.team_guest, team_home=match.team_home, is_played=True) | Q(team_guest=match.team_home,
+                                                                          team_home=match.team_guest, is_played=True))
         the_most_score = all_matches_between.first()
         score = the_most_score.score_home + the_most_score.score_guest
         win_home = 0
@@ -209,8 +209,8 @@ class MatchDetail(DetailView):
         context['draws_percentage'] = draws_percentage
         context['score_home_all'] = score_home_all
         context['score_guest_all'] = score_guest_all
-        context['score_home_average'] = score_home_all/all_matches_between.count()
-        context['score_guest_average'] = score_guest_all/all_matches_between.count()
+        context['score_home_average'] = round(score_home_all/all_matches_between.count(), 2)
+        context['score_guest_average'] = round(score_guest_all/all_matches_between.count(), 2)
         return context
 
 
