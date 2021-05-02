@@ -2,7 +2,7 @@
 {% load tournament_extras %}
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kurale&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 </style>
 <style>
     .table td, .table th {
@@ -14,7 +14,7 @@
     }
 
     .table .text {
-        font-family: 'Kurale', serif;
+        font-family: 'Montserrat', serif;
     }
 
     td img {
@@ -50,7 +50,7 @@
                 src="{% static "img/ico/statistic/sub-in-alt.PNG" %}"
                 title="Вышел на поле">
         </th>
-        <th scope="col"><img src="{% static "img/ico/statistic/dont-do.PNG" %}"
+        <th scope="col" class="text-center"><img src="{% static "img/ico/statistic/dont-do.PNG" %}"
                              title="Автоголы"></th>
         <th scope="col" class="text-center"><img
                 src="{% static "img/ico/statistic/yellow-card.PNG" %}"
