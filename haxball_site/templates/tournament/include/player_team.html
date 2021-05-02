@@ -25,9 +25,9 @@
 <table class="table table-striped">
     <thead>
     <tr class="text">
-        <th scope="col" class="h6" style="font-weight: 900;">Сезон</th>
-        <th scope="col" class="h6" style="font-weight: 900;">Команда</th>
-        <th scope="col" class="h6" style="font-weight: 900;">Турнир</th>
+        <th scope="col" class="h6" style="font-weight: 800;">Сезон</th>
+        <th scope="col" class="h6" style="font-weight: 800;">Команда</th>
+        <th scope="col" class="h6" style="font-weight: 800;">Турнир</th>
         <th scope="col" class="text-center"><img
                 src="{% static "img/ico/statistic/jersey.PNG" %}"
                 title="Вышел на поле"></th>
@@ -63,7 +63,7 @@
     <tbody>
     {% for seas,team in stat.items %}
         <tr>
-            <td class="h6 text" rowspan="{{ player|rows_player_stat:seas }}" style="font-weight: 900;">{{ seas }}</td>
+            <td class="h6 text" rowspan="{{ player|rows_player_stat:seas }}" style="font-weight: 700;">{{ seas }}</td>
 
 
             {% for t,c in team.items %}
@@ -87,7 +87,7 @@
     {% endfor %}
 
     <tr>
-        <th colspan="3" class="text-right text">
+        <th colspan="3" class="text-center text">
             <h4 class="mb-0" style="font-weight: 900;">Всего</h4>
         </th>
         {% for i in overall %}
