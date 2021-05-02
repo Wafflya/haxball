@@ -171,12 +171,13 @@ else:
     ACCOUNT_EMAIL_VERIFICATION = True
     # ACCOUNT_USERNAME_MIN_LENGTH = 1
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': '/var/tmp/django_cache',
+if not DEBUG:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+            'LOCATION': '/var/tmp/django_cache',
+        }
     }
-}
 
 
 EMAIL_HOST = 'smtp.gmail.com'
