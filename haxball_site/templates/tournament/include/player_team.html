@@ -2,6 +2,7 @@
 {% load tournament_extras %}
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kurale&display=swap');
 </style>
 <style>
     .table td, .table th {
@@ -9,16 +10,19 @@
     }
     .table .number {
         font-family: 'Quicksand', sans-serif;
-        font-size: 13pt;
-        font-weight: 500;
+        font-size: 12pt;
+    }
+
+    .table .text {
+        font-family: 'Kurale', serif;
     }
 </style>
 <table class="table table-striped">
     <thead>
-    <tr>
-        <th scope="col">Сезон</th>
-        <th scope="col">Команда</th>
-        <th scope="col">Турнир</th>
+    <tr class="text">
+        <th scope="col" class="h5">Сезон</th>
+        <th scope="col" class="h5">Команда</th>
+        <th scope="col" class="h5">Турнир</th>
         <th scope="col" class="text-center"><img
                 src="{% static "img/ico/matches_icon.png" %}" height="20" width="20"
                 title="Вышел на поле"></th>
@@ -57,18 +61,18 @@
     <tbody>
     {% for seas,team in stat.items %}
         <tr>
-            <td class="font-weight-bolder h5" rowspan="{{ player|rows_player_stat:seas }}">{{ seas }}</td>
+            <td class="font-weight-bolder h5 text" rowspan="{{ player|rows_player_stat:seas }}">{{ seas }}</td>
 
 
             {% for t,c in team.items %}
-                <td rowspan="{{ c|length }}">
+                <td rowspan="{{ c|length }}" class="text">
                     <img src="{{ t.logo.url }}" alt="{{ t.title }}" width="24" height="24"
                          class="mr-1">
                     <a class="team_link font-weight-bolder" href="{{ t.get_absolute_url }}">{{ t.short_title }}</a>
 
                 </td>
                 {% for champ, stat in c.items %}
-                    <td class="font-weight-bolder h6"><a href="{{ champ.get_absolute_url }}">{{ champ.title }}</a></td>
+                    <td class="font-weight-bolder h6 text"><a href="{{ champ.get_absolute_url }}">{{ champ.title }}</a></td>
                     {% for i in stat %}
                         <td class="text-center number">{{ i }}</td>
                     {% endfor %}
@@ -81,7 +85,7 @@
     {% endfor %}
 
     <tr>
-        <th colspan="3" class="text-right">
+        <th colspan="3" class="text-right text">
             <h4>Всего</h4>
         </th>
         {% for i in overall %}
