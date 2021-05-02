@@ -5,7 +5,7 @@ chardet==3.0.4
 colorama==0.4.3
 decorator==4.4.2
 defusedxml==0.6.0
-Django==3.0.8
+Django==3.0.14
 django-allauth==0.42.0
 django-autoslug==1.9.7
 django-ckeditor==5.9.0
