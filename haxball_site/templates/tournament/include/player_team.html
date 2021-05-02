@@ -17,11 +17,6 @@
         font-family: 'Kurale', serif;
     }
 
-    thead img {
-        width: 24px;
-        height: 24px;
-    }
-
     td img {
         width: 26px;
         height: 26px;
@@ -34,37 +29,34 @@
         <th scope="col" class="h5">Команда</th>
         <th scope="col" class="h5">Турнир</th>
         <th scope="col" class="text-center"><img
-                src="{% static "img/ico/matches_icon.png" %}"
+                src="{% static "img/ico/statistic/jersey.png" %}"
                 title="Вышел на поле"></th>
         <th scope="col" class="text-center"><img
-                src="{% static "img/ico/ball_2.png" %}"
+                src="{% static "img/ico/statistic/ball-alt.png" %}"
                 title="Забито"></th>
         <th scope="col" class="text-center"><img
-                src="{% static "img/ico/assists_icon.png" %}"
+                src="{% static "img/ico/statistic/boots.png" %}"
                 title="Голевые передачи"></th>
         <th scope="col" class="text-center"><img
-                src="{% static "img/ico/clean_sheet1.png" %}"
+                src="{% static "img/ico/statistic/gloves-alt2.png" %}"
                 title="Сухие таймы"></th>
-        <th scope="col">
-            <div class="h-75 text-center">
-                <i class="fa fa-arrow-down text-danger" title="Заменён" aria-hidden="true"
-                   style="font-size: 21px"></i>
-            </div>
+        <th scope="col" class="text-center">
+            <img
+                src="{% static "img/ico/statistic/sub-out.png" %}"
+                title="Ушёл с поля">
         </th>
-        <th scope="col">
-            <div class="h-75 text-center">
-                <i class="fa fa-arrow-up text-success" title="Вышел на замену"
-                   aria-hidden="true"
-                   style="font-size: 21px"></i>
-            </div>
+        <th scope="col" class="text-center">
+           <img
+                src="{% static "img/ico/statistic/sub-in.png" %}"
+                title="Вышел на поле">
         </th>
-        <th scope="col"><img src="{% static "img/ico/ball_2_og.png" %}"
+        <th scope="col"><img src="{% static "img/ico/statistic/dont-do.png" %}"
                              title="Автоголы"></th>
         <th scope="col" class="text-center"><img
-                src="{% static "img/ico/yellow_card.png" %}"
+                src="{% static "img/ico/statistic/yellow-card.png" %}"
                 title="Жёлтые карточки"></th>
         <th scope="col" class="text-center"><img
-                src="{% static "img/ico/red_card.png" %}"
+                src="{% static "img/ico/statistic/red-card.png" %}"
                 title="Красные карточки"></th>
     </tr>
     </thead>
