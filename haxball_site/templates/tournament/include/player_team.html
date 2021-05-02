@@ -10,6 +10,7 @@
     .table .number {
         font-family: 'Quicksand', sans-serif;
         font-size: 13pt;
+        font-weight: 500;
     }
 </style>
 <table class="table table-striped">
@@ -67,7 +68,7 @@
 
                 </td>
                 {% for champ, stat in c.items %}
-                    <td class="font-weight-bolder h5"><a href="{{ champ.get_absolute_url }}">{{ champ.title }}</a></td>
+                    <td class="font-weight-bolder h6"><a href="{{ champ.get_absolute_url }}">{{ champ.title }}</a></td>
                     {% for i in stat %}
                         <td class="text-center number">{{ i }}</td>
                     {% endfor %}
