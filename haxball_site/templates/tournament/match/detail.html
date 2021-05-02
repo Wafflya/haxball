@@ -71,10 +71,13 @@
                 <div class="col-12">
                     <div>
                         <p>
-                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button"
-                               aria-expanded="false" aria-controls="collapseExample">
-                                История встреч
-                            </a>
+                            <button class="btn btn-primary" type="button" data-toggle="collapse"
+                                    data-target="#collapseExample" aria-expanded="false"
+                                    aria-controls="collapseExample" {% if no_history %}disabled{% endif %}>
+
+                                {% if no_history %}Команды ранее не встречались{% else %}История встреч{% endif %}
+
+                            </button>
                         </p>
                     </div>
                 </div>
@@ -94,7 +97,8 @@
                                         {{ win_home_percentage }}% ({{ win_home }})
                                     </div>
                                 </div>
-                                <div class="progress-bar bg-secondary" role="progressbar" style="width: {{ draws_percentage }}%"
+                                <div class="progress-bar bg-secondary" role="progressbar"
+                                     style="width: {{ draws_percentage }}%"
                                      aria-valuenow="{{ draws_percentage }}"
                                      aria-valuemin="0" aria-valuemax="100">
 
@@ -104,7 +108,8 @@
                                         {{ draws_percentage }}% ({{ draws }})
                                     </div>
                                 </div>
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ win_guest_percentage }}%"
+                                <div class="progress-bar bg-primary" role="progressbar"
+                                     style="width: {{ win_guest_percentage }}%"
                                      aria-valuenow="{{ win_guest_percentage }}"
                                      aria-valuemin="0" aria-valuemax="100">
 
@@ -126,12 +131,13 @@
                                 <h6>Самый результативный матч: <a
                                         href="{{ the_most_score.get_absolute_url }}">
                                     <img
-                                        src="{{ the_most_score.team_home.logo.url }}"
-                                        alt="{{ the_most_score.team_home.title }}"
-                                        width="20px">
+                                            src="{{ the_most_score.team_home.logo.url }}"
+                                            alt="{{ the_most_score.team_home.title }}"
+                                            width="20px">
                                     {{ the_most_score.score_home }}-{{ the_most_score.score_guest }}
                                     <img
-                                        src="{{ the_most_score.team_guest.logo.url }}" alt="{{ the_most_score.team_guest.title }}" width="20px">
+                                            src="{{ the_most_score.team_guest.logo.url }}"
+                                            alt="{{ the_most_score.team_guest.title }}" width="20px">
                                 </a>
                                 </h6>
                             </div>

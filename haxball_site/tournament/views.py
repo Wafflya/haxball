@@ -160,6 +160,10 @@ class MatchDetail(DetailView):
         all_matches_between = Match.objects.filter(
             Q(team_guest=match.team_guest, team_home=match.team_home, is_played=True) | Q(team_guest=match.team_home,
                                                                           team_home=match.team_guest, is_played=True))
+
+        if all_matches_between.count()==0:
+            context['no_history'] = True
+            return context
         the_most_score = all_matches_between.first()
         score = the_most_score.score_home + the_most_score.score_guest
         win_home = 0
