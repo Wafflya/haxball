@@ -18,7 +18,7 @@
     <script type="text/javascript" src="{% static "core/js/like-dislike.js" %}"></script>
 {% endblock %}
 {% block title %}Чемпионат | {{ league.title }}          cis-haxball.com {% endblock %}
-{% cache 600 league.title %}
+{% cache 600 champ_table league.title %}
 {% block profile_of_user %}
     <div class="card mb-4 mt-2" style="border-radius: 25px">
         <div class="card-header pb-0" style="border-radius: 25px 25px 0 0">
