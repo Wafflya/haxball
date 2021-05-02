@@ -171,6 +171,13 @@ else:
     ACCOUNT_EMAIL_VERIFICATION = True
     # ACCOUNT_USERNAME_MIN_LENGTH = 1
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
@@ -204,7 +211,7 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 SITE_ID = 1
 
 # Grapelli config
-GRAPPELLI_ADMIN_TITLE = 'Петушиная банда здесь'
+GRAPPELLI_ADMIN_TITLE = 'Место уважаемых администраторов'
 
 # text-editors config
 SUMMERNOTE_THEME = 'bs4'

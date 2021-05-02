@@ -10,6 +10,8 @@ from .forms import FreeAgentForm, EditTeamProfileForm
 from .models import FreeAgent, Team, Match, League, Player, Substitution
 from core.forms import NewCommentForm
 from core.models import NewComment, Profile
+from django.views.decorators.cache import cache_page
+
 
 
 class FreeAgentList(ListView):
@@ -218,6 +220,7 @@ class MatchDetail(DetailView):
         return context
 
 
+@cache_page(60 * 15)
 def halloffame(request):
     top_goalscorers = Player.objects.annotate(
         goals_c=Count('goals__match__league')).filter(goals_c__gt=0).order_by('-goals_c')
