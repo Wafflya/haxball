@@ -86,6 +86,7 @@ def edit_team_profile(request, slug):
     return render(request, 'tournament/teams/edit_team.html', {'form': form})
 
 
+
 class TeamDetail(DetailView):
     model = Team
     context_object_name = 'team'

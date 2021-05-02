@@ -171,7 +171,14 @@ else:
     ACCOUNT_EMAIL_VERIFICATION = True
     # ACCOUNT_USERNAME_MIN_LENGTH = 1
 
-if not DEBUG:
+if DEBUG:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+            'LOCATION': os.path.join(BASE_DIR, 'mycache'),
+        }
+    }
+else:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
