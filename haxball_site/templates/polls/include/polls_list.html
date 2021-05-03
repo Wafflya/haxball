@@ -1,65 +1,72 @@
 {% load static %}
 {% load account %}
+{% load cache %}
 {% load polls_extras %}
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static "tournament/free_agent/free_agent_list.css" %}">
 {% endblock %}
 
 {% for poll in active_polls %}
-    <div class="card mt-2" style="border-radius: 20px 20px 20px 20px;">
-        <div class="card-header bg-for-online-head text-center" style="border-radius: 20px 20px 0px 0;">
-            <h6 class="text-center mb-0" style="font-size: 1rem">{{ poll.question_text }}</h6>
-            {% if poll.anonymously %}<i>(анонимно)</i>{% endif %}
-        </div>
+    {% cache 60 poll_cache %}
 
-        <div class="card-body py-2" style="border-radius: 0px 0px 20px 20px;">
-            {% if user|user_in_poll:poll and user.is_authenticated %}
-                {% for choice in poll.choices.all %}
-                    <div class="mb-2">
-                        {{ choice.choice_text }}<span class="ml-1">({{ choice.votes.count }})</span>
-                        <div class="progress">
-                            <div class="progress-bar {% if choice|most_popular_choice:poll %}bg-success{% endif %}" role="progressbar"
-                                 style="width: {{ choice|percent_choices:poll }}%;"
-                                 {% if not poll.anonymously %}
-                                 title="{% for us in choice.votes.all %}{{ us.username }}
+        <div class="card mt-2" style="border-radius: 20px 20px 20px 20px;">
+            <div class="card-header bg-for-online-head text-center" style="border-radius: 20px 20px 0px 0;">
+                <h6 class="text-center mb-0" style="font-size: 1rem">{{ poll.question_text }}</h6>
+                {% if poll.anonymously %}<i>(анонимно)</i>{% endif %}
+            </div>
+
+            <div class="card-body py-2" style="border-radius: 0px 0px 20px 20px;">
+                {% if user|user_in_poll:poll and user.is_authenticated %}
+                    {% for choice in poll.choices.all %}
+                        <div class="mb-2">
+                            {{ choice.choice_text }}<span class="ml-1">({{ choice.votes.count }})</span>
+                            <div class="progress">
+                                <div class="progress-bar {% if choice|most_popular_choice:poll %}bg-success{% endif %}"
+                                     role="progressbar"
+                                     style="width: {{ choice|percent_choices:poll }}%;"
+                                        {% if not poll.anonymously %}
+                                     title="{% for us in choice.votes.all %}{{ us.username }}
 {% endfor %}"{% else %}title="Опрос анонимен"{% endif %}
-                                 aria-valuenow="{{ choice|percent_choices:poll }}"
-                                 aria-valuemin="0" aria-valuemax="100">
+                                     aria-valuenow="{{ choice|percent_choices:poll }}"
+                                     aria-valuemin="0" aria-valuemax="100">
                                 <span class="text-dark"><strong><i>{{ choice|percent_choices:poll }}%</i></strong>
                                 </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-                <h6 class="mb-0 mt-3 text-center" style="font-size: 1rem">Спасибо за голос, {{ user.username }}!</h6>
-            {% else %}
-                <form method="POST" action="{% url 'polls:add_user_vote' poll.id %}">
-                    {% csrf_token %}
-                    {% for choice in poll.choices.all %}
-
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name='{{ poll.id }}' id=c{{ choice.id }}
-                                   value="{{ choice.id }}" {% if forloop.counter == 1 %}checked{% endif %}>
-                            <label class="form-check-label" for=c{{ choice.id }}>
-                                {{ choice.choice_text }}
-                            </label>
-                        </div>
                     {% endfor %}
+                    <h6 class="mb-0 mt-3 text-center" style="font-size: 1rem">Спасибо за
+                        голос, {{ user.username }}!</h6>
+                {% else %}
+                    <form method="POST" action="{% url 'polls:add_user_vote' poll.id %}">
+                        {% csrf_token %}
+                        {% for choice in poll.choices.all %}
 
-                    {% if user.is_authenticated %}
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name='{{ poll.id }}' id=c{{ choice.id }}
+                                       value="{{ choice.id }}" {% if forloop.counter == 1 %}checked{% endif %}>
+                                <label class="form-check-label" for=c{{ choice.id }}>
+                                    {{ choice.choice_text }}
+                                </label>
+                            </div>
+                        {% endfor %}
+
+                        {% if user.is_authenticated %}
+                            <div class="d-flex justify-content-center text-center mt-2">
+                                <button type="submit" class="btn btn-primary mb-2">Проголосовать</button>
+                            </div>
+                        {% endif %}
+                    </form>
+                    {% if not user.is_authenticated %}
                         <div class="d-flex justify-content-center text-center mt-2">
-                            <button type="submit" class="btn btn-primary mb-2">Проголосовать</button>
+                            <h6 style="font-size: 1rem"><a href="#" data-toggle="modal"
+                                                           data-target="#loginModal">Войдите</a>, чтобы
+                                голосовать</h6>
                         </div>
                     {% endif %}
-                </form>
-                {% if not user.is_authenticated %}
-                    <div class="d-flex justify-content-center text-center mt-2">
-                        <h6 style="font-size: 1rem"><a href="#" data-toggle="modal"
-                                                       data-target="#loginModal">Войдите</a>, чтобы
-                            голосовать</h6>
-                    </div>
                 {% endif %}
-            {% endif %}
+            </div>
         </div>
-    </div>
+    {% endcache %}
+
 {% endfor %}

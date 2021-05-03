@@ -1,174 +1,178 @@
 {% load static %}
+{% load cache %}
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static "core/include/sidebar_for_top_comments.css" %}">
 {% endblock %}
+{% cache 60 top_comments %}
 
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 
 
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <div class="card mt-2 bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="card mt-2 bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
 
-                <div class="card-header d-flex justify-content-between" style="border-radius: 20px 20px 0px 0;">
-                    <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="prev"
-                       style="height: 100%">
-                        <i class="fa fa-arrow-circle-left" aria-hidden="true"
-                           style="height: 100%; font-size: 24px;"></i>
-                    </a>
-                    <h4 class="mb-0 d-inline"><!--<img src="{% static "img/ico/top_1.png" %}" height="37" width="37" style="vertical-align: top"
+                    <div class="card-header d-flex justify-content-between" style="border-radius: 20px 20px 0px 0;">
+                        <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="prev"
+                           style="height: 100%">
+                            <i class="fa fa-arrow-circle-left" aria-hidden="true"
+                               style="height: 100%; font-size: 24px;"></i>
+                        </a>
+                        <h4 class="mb-0 d-inline"><!--<img src="{% static "img/ico/top_1.png" %}" height="37" width="37" style="vertical-align: top"
                                       ; class="mr-1">--><i class="fa fa-thumbs-o-up text-success mr-1"
                                                            aria-hidden="true"></i>Сегодня</h4>
-                    <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="next">
-                        <i class="fa fa-arrow-circle-right" aria-hidden="true"
-                           style="height: 100%; font-size: 24px;"></i>
-                    </a>
-
-                </div>
-
-                <div class="btn-group-vertical">
-                    {% for comment in top_comments_day %}
-                        <a type="button" href="{{ comment.get_absolute_url }}"
-                           class="btn btn-secondary btn-block text-right px-1"
-                           data-toggle="tooltip" data-placement="right"
-                           title="от {{ comment.author }} в {{ comment.content_object }}">
-                            <div class="d-flex justify-content-between">
-                                <div class="float-left">
-                                    <span class="badge badge-pill badge-success">{{ comment.votes.likes.count }}</span>
-                                    {% if comment.body|striptags %}
-                                        {{ comment.body|striptags|truncatechars:18 }}
-                                    {% else %}
-                                        <i><img src="{% static "img/ico/image_48.png" %}" height="23" width="23"> от</i>
-                                        {{ comment.author }}
-                                    {% endif %}
-                                </div>
-                                <img src="{% static "img/ico/reply.png" %}" height="30" width="30">
-                            </div>
+                        <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="next">
+                            <i class="fa fa-arrow-circle-right" aria-hidden="true"
+                               style="height: 100%; font-size: 24px;"></i>
                         </a>
 
-                    {% endfor %}
+                    </div>
+
+                    <div class="btn-group-vertical">
+                        {% for comment in top_comments_day %}
+                            <a type="button" href="{{ comment.get_absolute_url }}"
+                               class="btn btn-secondary btn-block text-right px-1"
+                               data-toggle="tooltip" data-placement="right"
+                               title="от {{ comment.author }} в {{ comment.content_object }}">
+                                <div class="d-flex justify-content-between">
+                                    <div class="float-left">
+                                        <span class="badge badge-pill badge-success">{{ comment.votes.likes.count }}</span>
+                                        {% if comment.body|striptags %}
+                                            {{ comment.body|striptags|truncatechars:18 }}
+                                        {% else %}
+                                            <i><img src="{% static "img/ico/image_48.png" %}" height="23" width="23"> от</i>
+                                            {{ comment.author }}
+                                        {% endif %}
+                                    </div>
+                                    <img src="{% static "img/ico/reply.png" %}" height="30" width="30">
+                                </div>
+                            </a>
+
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="carousel-item">
-            <div class="card mt-2 bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
+            <div class="carousel-item">
+                <div class="card mt-2 bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
 
-                <div class="card-header d-flex justify-content-between" style="border-radius: 20px 20px 0px 0;">
-                    <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="prev"
-                       style="height: 100%">
-                        <i class="fa fa-arrow-circle-left" aria-hidden="true"
-                           style="height: 100%; font-size: 24px;"></i>
-                    </a>
-                    <h4 class="mb-0 d-inline"><!--<img src="{% static "img/ico/top_1.png" %}" height="37" width="37" style="vertical-align: top"
+                    <div class="card-header d-flex justify-content-between" style="border-radius: 20px 20px 0px 0;">
+                        <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="prev"
+                           style="height: 100%">
+                            <i class="fa fa-arrow-circle-left" aria-hidden="true"
+                               style="height: 100%; font-size: 24px;"></i>
+                        </a>
+                        <h4 class="mb-0 d-inline"><!--<img src="{% static "img/ico/top_1.png" %}" height="37" width="37" style="vertical-align: top"
                                       ; class="mr-1">--><i class="fa fa-thumbs-o-up text-success mr-1"
                                                            aria-hidden="true"></i>Неделя</h4>
-                    <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="next">
-                        <i class="fa fa-arrow-circle-right" aria-hidden="true"
-                           style="height: 100%; font-size: 24px;"></i>
-                    </a>
-
-                </div>
-
-                <div class="btn-group-vertical">
-                    {% for comment in top_comments_week %}
-                        <a type="button" href="{{ comment.get_absolute_url }}"
-                           class="btn btn-secondary btn-block text-right px-1"
-                           data-toggle="tooltip" data-placement="right"
-                           title="от {{ comment.author }} в {{ comment.content_object }}">
-                            <div class="d-flex justify-content-between">
-                                <div class="float-left">
-                                    <span class="badge badge-pill badge-success">{{ comment.votes.likes.count }}</span>
-                                    {% if comment.body|striptags %}
-                                        {{ comment.body|striptags|truncatechars:18 }}
-                                    {% else %}
-                                        <i><img src="{% static "img/ico/image_48.png" %}" height="23" width="23"> от</i>
-                                        {{ comment.author }}
-                                    {% endif %}
-                                </div>
-                                <img src="{% static "img/ico/reply.png" %}" height="30" width="30">
-                            </div>
+                        <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="next">
+                            <i class="fa fa-arrow-circle-right" aria-hidden="true"
+                               style="height: 100%; font-size: 24px;"></i>
                         </a>
 
-                    {% endfor %}
+                    </div>
+
+                    <div class="btn-group-vertical">
+                        {% for comment in top_comments_week %}
+                            <a type="button" href="{{ comment.get_absolute_url }}"
+                               class="btn btn-secondary btn-block text-right px-1"
+                               data-toggle="tooltip" data-placement="right"
+                               title="от {{ comment.author }} в {{ comment.content_object }}">
+                                <div class="d-flex justify-content-between">
+                                    <div class="float-left">
+                                        <span class="badge badge-pill badge-success">{{ comment.votes.likes.count }}</span>
+                                        {% if comment.body|striptags %}
+                                            {{ comment.body|striptags|truncatechars:18 }}
+                                        {% else %}
+                                            <i><img src="{% static "img/ico/image_48.png" %}" height="23" width="23"> от</i>
+                                            {{ comment.author }}
+                                        {% endif %}
+                                    </div>
+                                    <img src="{% static "img/ico/reply.png" %}" height="30" width="30">
+                                </div>
+                            </a>
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="card mt-2 bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
+                    <div class="card-header d-flex justify-content-between" style="border-radius: 20px 20px 0px 0;">
+                        <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <i class="fa fa-arrow-circle-left" aria-hidden="true"
+                               style="height: 100%; font-size: 24px;"></i>
+                        </a>
+                        <h4 class="mb-0"><i class="fa fa-thumbs-o-up text-success mr-1" aria-hidden="true"></i>Месяц
+                        </h4>
+                        <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="next">
+                            <i class="fa fa-arrow-circle-right" aria-hidden="true"
+                               style="height: 100%; font-size: 24px;"></i>
+                        </a>
+                    </div>
+                    <div class="btn-group-vertical">
+                        {% for comment in top_comments_month %}
+                            <a type="button" href="{{ comment.get_absolute_url }}"
+                               class="btn btn-secondary btn-block text-right px-1"
+                               data-toggle="tooltip" data-placement="right"
+                               title="от {{ comment.author }} в {{ comment.content_object }}">
+                                <div class="d-flex justify-content-between">
+                                    <div class="float-left">
+                                        <span class="badge badge-pill badge-success">{{ comment.votes.likes.count }}</span>
+                                        {% if comment.body|striptags %}
+                                            {{ comment.body|striptags|truncatechars:18 }}
+                                        {% else %}
+                                            <i><img src="{% static "img/ico/image_48.png" %}" height="23" width="23"> от</i>
+                                            {{ comment.author }}
+                                        {% endif %}
+                                    </div>
+                                    <img src="{% static "img/ico/reply.png" %}" height="30" width="30">
+                                </div>
+                            </a>
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card mt-2 bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
+                    <div class="card-header d-flex justify-content-between" style="border-radius: 20px 20px 0px 0;">
+                        <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <i class="fa fa-arrow-circle-left" aria-hidden="true"
+                               style="height: 100%; font-size: 24px;"></i>
+                        </a>
+                        <h4 class="mb-0"><i class="fa fa-thumbs-o-up text-success mr-1" aria-hidden="true"></i>Год</h4>
+                        <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="next">
+                            <i class="fa fa-arrow-circle-right" aria-hidden="true"
+                               style="height: 100%; font-size: 24px;"></i>
+                        </a>
+                    </div>
+                    <div class="btn-group-vertical">
+                        {% for comment in top_comments_year %}
+                            <a type="button" href="{{ comment.get_absolute_url }}"
+                               class="btn btn-secondary btn-block text-right px-1"
+                               data-toggle="tooltip" data-placement="right"
+                               title="от {{ comment.author }} в {{ comment.content_object }}">
+                                <div class="d-flex justify-content-between">
+                                    <div class="float-left">
+                                        <span class="badge badge-pill badge-success">{{ comment.votes.likes.count }}</span>
+                                        {% if comment.body|striptags %}
+                                            {{ comment.body|striptags|truncatechars:18 }}
+                                        {% else %}
+                                            <i><img src="{% static "img/ico/image_48.png" %}" height="23" width="23"> от</i>
+                                            {{ comment.author }}
+                                        {% endif %}
+                                    </div>
+                                    <img src="{% static "img/ico/reply.png" %}" height="30" width="30">
+                                </div>
+                            </a>
+
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="carousel-item">
-            <div class="card mt-2 bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
-                <div class="card-header d-flex justify-content-between" style="border-radius: 20px 20px 0px 0;">
-                    <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="prev">
-                        <i class="fa fa-arrow-circle-left" aria-hidden="true"
-                           style="height: 100%; font-size: 24px;"></i>
-                    </a>
-                    <h4 class="mb-0"><i class="fa fa-thumbs-o-up text-success mr-1" aria-hidden="true"></i>Месяц</h4>
-                    <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="next">
-                        <i class="fa fa-arrow-circle-right" aria-hidden="true"
-                           style="height: 100%; font-size: 24px;"></i>
-                    </a>
-                </div>
-                <div class="btn-group-vertical">
-                    {% for comment in top_comments_month %}
-                        <a type="button" href="{{ comment.get_absolute_url }}"
-                           class="btn btn-secondary btn-block text-right px-1"
-                           data-toggle="tooltip" data-placement="right"
-                           title="от {{ comment.author }} в {{ comment.content_object }}">
-                            <div class="d-flex justify-content-between">
-                                <div class="float-left">
-                                    <span class="badge badge-pill badge-success">{{ comment.votes.likes.count }}</span>
-                                    {% if comment.body|striptags %}
-                                        {{ comment.body|striptags|truncatechars:18 }}
-                                    {% else %}
-                                        <i><img src="{% static "img/ico/image_48.png" %}" height="23" width="23"> от</i>
-                                        {{ comment.author }}
-                                    {% endif %}
-                                </div>
-                                <img src="{% static "img/ico/reply.png" %}" height="30" width="30">
-                            </div>
-                        </a>
-
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div class="card mt-2 bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
-                <div class="card-header d-flex justify-content-between" style="border-radius: 20px 20px 0px 0;">
-                    <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="prev">
-                        <i class="fa fa-arrow-circle-left" aria-hidden="true"
-                           style="height: 100%; font-size: 24px;"></i>
-                    </a>
-                    <h4 class="mb-0"><i class="fa fa-thumbs-o-up text-success mr-1" aria-hidden="true"></i>Год</h4>
-                    <a class="d-inline" href="#carouselExampleControls" role="button" data-slide="next">
-                        <i class="fa fa-arrow-circle-right" aria-hidden="true"
-                           style="height: 100%; font-size: 24px;"></i>
-                    </a>
-                </div>
-                <div class="btn-group-vertical">
-                    {% for comment in top_comments_year %}
-                        <a type="button" href="{{ comment.get_absolute_url }}"
-                           class="btn btn-secondary btn-block text-right px-1"
-                           data-toggle="tooltip" data-placement="right"
-                           title="от {{ comment.author }} в {{ comment.content_object }}">
-                            <div class="d-flex justify-content-between">
-                                <div class="float-left">
-                                    <span class="badge badge-pill badge-success">{{ comment.votes.likes.count }}</span>
-                                    {% if comment.body|striptags %}
-                                        {{ comment.body|striptags|truncatechars:18 }}
-                                    {% else %}
-                                        <i><img src="{% static "img/ico/image_48.png" %}" height="23" width="23"> от</i>
-                                        {{ comment.author }}
-                                    {% endif %}
-                                </div>
-                                <img src="{% static "img/ico/reply.png" %}" height="30" width="30">
-                            </div>
-                        </a>
-
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
     </div>
-
-</div>
+{% endcache %}

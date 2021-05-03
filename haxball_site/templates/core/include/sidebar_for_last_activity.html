@@ -1,26 +1,31 @@
 {% load static %}
+{% load cache %}
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static "core/include/sidebar_for_last_activity.css" %}">
 {% endblock %}
 
-<div class="card mt-2" style="border-radius: 20px 20px 0px 0;">
-    <div class="card-header text-center p-2 bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
-        <h4 class="mb-0"><img src="{% static "img/ico/new_1.png" %}" height="37" width="37" style="vertical-align: top"
-                              ;>Комментарии</h4>
+{% cache 60 last_activity %}
+
+    <div class="card mt-2" style="border-radius: 20px 20px 0px 0;">
+        <div class="card-header text-center p-2 bg-for-online-head" style="border-radius: 20px 20px 0px 0;">
+            <h4 class="mb-0"><img src="{% static "img/ico/new_1.png" %}" height="37" width="37"
+                                  style="vertical-align: top"
+                                  ;>Комментарии</h4>
+        </div>
+
+        <div class="btn-group-vertical">
+            {% for comment in last_comments %}
+                <a type="button" href="{{ comment.get_absolute_url }}" class="btn btn-secondary btn-block text-right"
+                   data-toggle="tooltip" data-placement="right" title="от {{ comment.author }}">
+                    <div class="d-flex justify-content-between">{{ comment.content_object|truncatechars:22 }} <img
+                            src="{% static "img/ico/reply.png" %}" height="30" width="30"></div>
+                </a>
+
+            {% endfor %}
+        </div>
+
     </div>
-
-    <div class="btn-group-vertical">
-        {% for comment in last_comments %}
-            <a type="button" href="{{ comment.get_absolute_url }}" class="btn btn-secondary btn-block text-right"
-               data-toggle="tooltip" data-placement="right" title="от {{ comment.author }}">
-                <div class="d-flex justify-content-between">{{ comment.content_object|truncatechars:22 }} <img
-                        src="{% static "img/ico/reply.png" %}" height="30" width="30"></div>
-            </a>
-
-        {% endfor %}
-    </div>
-
-</div>
+{% endcache %}
 
 <!--  <blockquote class="blockquote">
         <p class="mb-0">{{ comment.body|truncatechars:40 }}</p>
