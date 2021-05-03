@@ -1,13 +1,11 @@
 {% load static %}
 {% load account %}
-{% load cache %}
 {% load polls_extras %}
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static "tournament/free_agent/free_agent_list.css" %}">
 {% endblock %}
 
 {% for poll in active_polls %}
-    {% cache 60 poll_cache %}
 
         <div class="card mt-2" style="border-radius: 20px 20px 20px 20px;">
             <div class="card-header bg-for-online-head text-center" style="border-radius: 20px 20px 0px 0;">
@@ -67,6 +65,5 @@
                 {% endif %}
             </div>
         </div>
-    {% endcache %}
 
 {% endfor %}
