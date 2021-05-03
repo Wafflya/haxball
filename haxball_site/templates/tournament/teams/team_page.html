@@ -21,74 +21,75 @@
 {% endblock %}
 {% block title %}Чемпионат | Команда {{ team.title }}         cis-haxball.com {% endblock %}
 
-{% cache 6000 team_detail team %}
 {% block profile_of_user %}
-    <div class="container-fluid emp-profile"
-         style="background:linear-gradient(to right, {{ team.color_1 }}, {{ team.color_2 }})">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <img src="{{ team.logo.url }}" alt="{{ team.title }}">
-                </div>
-            </div>
-            <div class="col-md-7">
-                <div class="profile-head">
-                    <h3>
-                        {{ team.title }}
-                        {% if team.owner == user or user.is_superuser %}
-                            <a href="{% url 'tournament:edit_team' team.slug %}"
-                               class="text-warning small text-right"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                        {% endif %}
-                    </h3>
-                    <h6>
-                        {% for leagues in team|current_league %}
-                            {% if not leagues.is_cup %}
-                                <a href="{{ leagues.get_absolute_url }}">{{ leagues }}</a>
-                            {% endif %}
-                        {% endfor %}
-                    </h6>
-                    <p class="profile-rating" style="font-weight: bold;">Позиция :
-                        <span>{{ team|current_position }}/{{ team|teams_in_league_count }}</span></p>
-                    <p>
-                        <a href="{{ team.office_link }}" style="color: #671af1; font-weight: bold;">
-                            Офис
-                            <img src="{% static "img/ico/team_office.png" %}" height="28" width="28"
-                                 title="Офис команды">
-                        </a>
-                    </p>
-                    <div class="p-0" style="position: absolute; bottom: 0;">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                                   aria-controls="home" aria-selected="true">Состав</a>
-                            </li>
-                            <!--
-                            <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                   aria-controls="profile" aria-selected="false">Статистика</a>
-                            </li>
-                             -->
-                            <li class="nav-item">
-                                <a class="nav-link" id="match-tab" data-toggle="tab" href="#calendar" role="tab"
-                                   aria-controls="calendar-tab" aria-selected="false">Матчи</a>
-                            </li>
+    {% cache 6000 team_detail team %}
 
-                            <li class="nav-item">
-                                <a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab"
-                                   aria-controls="profile" aria-selected="false">Контакты</a>
-                            </li>
-                        </ul>
+        <div class="container-fluid emp-profile"
+             style="background:linear-gradient(to right, {{ team.color_1 }}, {{ team.color_2 }})">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="{{ team.logo.url }}" alt="{{ team.title }}">
                     </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="profile-head">
+                        <h3>
+                            {{ team.title }}
+                            {% if team.owner == user or user.is_superuser %}
+                                <a href="{% url 'tournament:edit_team' team.slug %}"
+                                   class="text-warning small text-right"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            {% endif %}
+                        </h3>
+                        <h6>
+                            {% for leagues in team|current_league %}
+                                {% if not leagues.is_cup %}
+                                    <a href="{{ leagues.get_absolute_url }}">{{ leagues }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </h6>
+                        <p class="profile-rating" style="font-weight: bold;">Позиция :
+                            <span>{{ team|current_position }}/{{ team|teams_in_league_count }}</span></p>
+                        <p>
+                            <a href="{{ team.office_link }}" style="color: #671af1; font-weight: bold;">
+                                Офис
+                                <img src="{% static "img/ico/team_office.png" %}" height="28" width="28"
+                                     title="Офис команды">
+                            </a>
+                        </p>
+                        <div class="p-0" style="position: absolute; bottom: 0;">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                       aria-controls="home" aria-selected="true">Состав</a>
+                                </li>
+                                <!--
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                       aria-controls="profile" aria-selected="false">Статистика</a>
+                                </li>
+                                 -->
+                                <li class="nav-item">
+                                    <a class="nav-link" id="match-tab" data-toggle="tab" href="#calendar" role="tab"
+                                       aria-controls="calendar-tab" aria-selected="false">Матчи</a>
+                                </li>
 
+                                <li class="nav-item">
+                                    <a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab"
+                                       aria-controls="profile" aria-selected="false">Контакты</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <!-- <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit"> -->
+                    <img src="{% static "img/ico/best_logo.png" %}" width="100%">
                 </div>
             </div>
-            <div class="col-md-1">
-                <!-- <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit"> -->
-                <img src="{% static "img/ico/best_logo.png" %}" width="100%">
-            </div>
-        </div>
-        <div class="row">
-            <!-- <div class="col-md-4 ml-0">
+            <div class="row">
+                <!-- <div class="col-md-4 ml-0">
                 <div class="profile-work">
                     <p>Владелец</p>
                     <div class="media">
@@ -115,191 +116,194 @@
                     <a href="">PHP, .Net</a><br/>
                 </div>
             </div> -->
-            <div class="col-md-12 py-2">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active pr-2" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="col-md-12 py-2">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active pr-2" id="home" role="tabpanel"
+                             aria-labelledby="home-tab">
 
-                        <ul class="nav nav-pills nav-fill" id="myTab" style="width: 100%;">
-                            <li class="nav-item" style="width: 33%;">
-                                <a class="nav-link h5 active" id="table-tab" data-toggle="tab" href="#table" role="tab"
-                                   aria-controls="league-table-tab" aria-selected="true">
-                                    Текущий</a>
-                            </li>
-                            <li class="nav-item" style="width: 33%;">
-                                <a class="nav-link h5" id="detail-tab" data-toggle="tab" href="#detail_stat" role="tab"
-                                   aria-controls="detail_stat-tab" aria-selected="false">За всё время</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="players-switch">
-                            <div class="tab-pane fade show active" id="table" role="tabpanel"
-                                 aria-labelledby="league-table-tab">
+                            <ul class="nav nav-pills nav-fill" id="myTab" style="width: 100%;">
+                                <li class="nav-item" style="width: 33%;">
+                                    <a class="nav-link h5 active" id="table-tab" data-toggle="tab" href="#table"
+                                       role="tab"
+                                       aria-controls="league-table-tab" aria-selected="true">
+                                        Текущий</a>
+                                </li>
+                                <li class="nav-item" style="width: 33%;">
+                                    <a class="nav-link h5" id="detail-tab" data-toggle="tab" href="#detail_stat"
+                                       role="tab"
+                                       aria-controls="detail_stat-tab" aria-selected="false">За всё время</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="players-switch">
+                                <div class="tab-pane fade show active" id="table" role="tabpanel"
+                                     aria-labelledby="league-table-tab">
 
-                                <table class="table table-bordered table-hover text-center"
-                                       bgcolor="{{ team.color_table }}"
-                                       style="color: black; font-weight: bold;">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col"><span class="h5">Игрок</span></th>
-                                        <th scope="col" class="text-center"><img
-                                                src="{% static "img/ico/matches_icon.png" %}" height="20" width="20"
-                                                title="Вышел на поле"></th>
-                                        <th scope="col" class="text-center"><img
-                                                src="{% static "img/ico/ball_2.png" %}" height="20" width="20"
-                                                title="Забито"></th>
-                                        <th scope="col" class="text-center"><img
-                                                src="{% static "img/ico/assists_icon.png" %}" height="20" width="20"
-                                                title="Голевые передачи"></th>
-                                        <th scope="col" class="text-center"><img
-                                                src="{% static "img/ico/clean_sheet1.png" %}" height="20" width="20"
-                                                title="Сухие таймы"></th>
-                                        <th scope="col">
-                                            <div class="h-75 text-center">
-                                                <i class="fa fa-arrow-down text-danger" title="Заменён"
-                                                   aria-hidden="true"
-                                                   style="font-size: 21px"></i>
-                                            </div>
-                                        </th>
-                                        <th scope="col">
-                                            <div class="h-75 text-center">
-                                                <i class="fa fa-arrow-up text-success" title="Вышел на замену"
-                                                   aria-hidden="true"
-                                                   style="font-size: 21px"></i>
-                                            </div>
-                                        </th>
-                                        <th scope="col"><img src="{% static "img/ico/ball_2_og.png" %}" height="20"
-                                                             width="20"
-                                                             title="Автоголы"></th>
-                                        <th scope="col" class="text-center"><img
-                                                src="{% static "img/ico/yellow_card.png" %}" height="20" width="20"
-                                                title="Жёлтые карточки"></th>
-                                        <th scope="col" class="text-center"><img
-                                                src="{% static "img/ico/red_card.png" %}" height="20" width="20"
-                                                title="Красные карточки"></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for player in team.players_in_team.all|sort_players %}
+                                    <table class="table table-bordered table-hover text-center"
+                                           bgcolor="{{ team.color_table }}"
+                                           style="color: black; font-weight: bold;">
+                                        <thead>
                                         <tr>
-                                            <td class="text-left">
-                                                {% if player.name %}
-                                                    <img src="{{ player.player_nation.flag.url }}" width="24"
-                                                         height="24"
-                                                         title="{{ player.player_nation.country }}">
-                                                    <a class="text-dark"
-                                                       href="{{ player.name.user_profile.get_absolute_url }}"
-                                                       style="vertical-align: middle;">{{ player }}</a>
-                                                {% else %}
-                                                    <img src="{{ player.player_nation.flag.url }}" width="24"
-                                                         height="24"
-                                                         title="{{ player.player_nation.country }}">
-                                                    <span class="text-secondary"
-                                                          style="vertical-align: middle;">{{ player }}</span>
-                                                {% endif %}
-
-                                            </td>
-                                            {# player.player_in_start_home.count|add:player.player_in_start_guest.count #}
-                                            <td>{{ player|matches_in_team_current:team }}</td>
-                                            <td>{{ player|goals_in_team_current:team }}</td>
-                                            <td>{{ player|assists_in_team_current:team }}</td>
-                                            <td>{{ player|event_count_current:'CLN' }}</td>
-                                            <td>{{ player|replaced_in_team_current:team }}</td>
-                                            <td>{{ player|join_game_in_team_current:team }}</td>
-                                            <td>{{ player|event_count_current:'OG' }}</td>
-                                            <td>{{ player|event_count_current:'YEL' }}</td>
-                                            <td>{{ player|event_count_current:'RED' }}</td>
+                                            <th scope="col"><span class="h5">Игрок</span></th>
+                                            <th scope="col" class="text-center"><img
+                                                    src="{% static "img/ico/matches_icon.png" %}" height="20" width="20"
+                                                    title="Вышел на поле"></th>
+                                            <th scope="col" class="text-center"><img
+                                                    src="{% static "img/ico/ball_2.png" %}" height="20" width="20"
+                                                    title="Забито"></th>
+                                            <th scope="col" class="text-center"><img
+                                                    src="{% static "img/ico/assists_icon.png" %}" height="20" width="20"
+                                                    title="Голевые передачи"></th>
+                                            <th scope="col" class="text-center"><img
+                                                    src="{% static "img/ico/clean_sheet1.png" %}" height="20" width="20"
+                                                    title="Сухие таймы"></th>
+                                            <th scope="col">
+                                                <div class="h-75 text-center">
+                                                    <i class="fa fa-arrow-down text-danger" title="Заменён"
+                                                       aria-hidden="true"
+                                                       style="font-size: 21px"></i>
+                                                </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="h-75 text-center">
+                                                    <i class="fa fa-arrow-up text-success" title="Вышел на замену"
+                                                       aria-hidden="true"
+                                                       style="font-size: 21px"></i>
+                                                </div>
+                                            </th>
+                                            <th scope="col"><img src="{% static "img/ico/ball_2_og.png" %}" height="20"
+                                                                 width="20"
+                                                                 title="Автоголы"></th>
+                                            <th scope="col" class="text-center"><img
+                                                    src="{% static "img/ico/yellow_card.png" %}" height="20" width="20"
+                                                    title="Жёлтые карточки"></th>
+                                            <th scope="col" class="text-center"><img
+                                                    src="{% static "img/ico/red_card.png" %}" height="20" width="20"
+                                                    title="Красные карточки"></th>
                                         </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        {% for player in team.players_in_team.all|sort_players %}
+                                            <tr>
+                                                <td class="text-left">
+                                                    {% if player.name %}
+                                                        <img src="{{ player.player_nation.flag.url }}" width="24"
+                                                             height="24"
+                                                             title="{{ player.player_nation.country }}">
+                                                        <a class="text-dark"
+                                                           href="{{ player.name.user_profile.get_absolute_url }}"
+                                                           style="vertical-align: middle;">{{ player }}</a>
+                                                    {% else %}
+                                                        <img src="{{ player.player_nation.flag.url }}" width="24"
+                                                             height="24"
+                                                             title="{{ player.player_nation.country }}">
+                                                        <span class="text-secondary"
+                                                              style="vertical-align: middle;">{{ player }}</span>
+                                                    {% endif %}
 
-                            </div>
-                            <div class="tab-pane fade" id="detail_stat" role="tabpanel"
-                                 aria-labelledby="detail_stat-tab">
+                                                </td>
+                                                {# player.player_in_start_home.count|add:player.player_in_start_guest.count #}
+                                                <td>{{ player|matches_in_team_current:team }}</td>
+                                                <td>{{ player|goals_in_team_current:team }}</td>
+                                                <td>{{ player|assists_in_team_current:team }}</td>
+                                                <td>{{ player|event_count_current:'CLN' }}</td>
+                                                <td>{{ player|replaced_in_team_current:team }}</td>
+                                                <td>{{ player|join_game_in_team_current:team }}</td>
+                                                <td>{{ player|event_count_current:'OG' }}</td>
+                                                <td>{{ player|event_count_current:'YEL' }}</td>
+                                                <td>{{ player|event_count_current:'RED' }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
 
-                                <table class="table table-bordered table-hover text-center"
-                                       bgcolor="{{ team.color_table }}"
-                                       style="color: black; font-weight: bold;">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col"><span class="h5">Игрок</span></th>
-                                        <th scope="col" class="text-center"><img
-                                                src="{% static "img/ico/matches_icon.png" %}" height="20" width="20"
-                                                title="Вышел на поле"></th>
-                                        <th scope="col" class="text-center"><img
-                                                src="{% static "img/ico/ball_2.png" %}" height="20" width="20"
-                                                title="Забито"></th>
-                                        <th scope="col" class="text-center"><img
-                                                src="{% static "img/ico/assists_icon.png" %}" height="20" width="20"
-                                                title="Голевые передачи"></th>
-                                        <th scope="col" class="text-center"><img
-                                                src="{% static "img/ico/clean_sheet1.png" %}" height="20" width="20"
-                                                title="Сухие таймы"></th>
-                                        <th scope="col">
-                                            <div class="h-75 text-center">
-                                                <i class="fa fa-arrow-down text-danger" title="Заменён"
-                                                   aria-hidden="true"
-                                                   style="font-size: 21px"></i>
-                                            </div>
-                                        </th>
-                                        <th scope="col">
-                                            <div class="h-75 text-center">
-                                                <i class="fa fa-arrow-up text-success" title="Вышел на замену"
-                                                   aria-hidden="true"
-                                                   style="font-size: 21px"></i>
-                                            </div>
-                                        </th>
-                                        <th scope="col"><img src="{% static "img/ico/ball_2_og.png" %}" height="20"
-                                                             width="20"
-                                                             title="Автоголы"></th>
-                                        <th scope="col" class="text-center"><img
-                                                src="{% static "img/ico/yellow_card.png" %}" height="20" width="20"
-                                                title="Жёлтые карточки"></th>
-                                        <th scope="col" class="text-center"><img
-                                                src="{% static "img/ico/red_card.png" %}" height="20" width="20"
-                                                title="Красные карточки"></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for player in team|players_in_history %}
+                                </div>
+                                <div class="tab-pane fade" id="detail_stat" role="tabpanel"
+                                     aria-labelledby="detail_stat-tab">
+
+                                    <table class="table table-bordered table-hover text-center"
+                                           bgcolor="{{ team.color_table }}"
+                                           style="color: black; font-weight: bold;">
+                                        <thead>
                                         <tr>
-                                            <td class="text-left">
-                                                {% if player.name %}
-                                                    <img src="{{ player.player_nation.flag.url }}" width="24"
-                                                         height="24"
-                                                         title="{{ player.player_nation.country }}">
-                                                    <a class="text-dark"
-                                                       href="{{ player.name.user_profile.get_absolute_url }}"
-                                                       style="vertical-align: middle;">{{ player }}</a>
-                                                {% else %}
-                                                    <img src="{{ player.player_nation.flag.url }}" width="24"
-                                                         height="24"
-                                                         title="{{ player.player_nation.country }}">
-                                                    <span class="text-secondary"
-                                                          style="vertical-align: middle;">{{ player }}</span>
-                                                {% endif %}
-
-                                            </td>
-                                            {# player.player_in_start_home.count|add:player.player_in_start_guest.count #}
-                                            <td>{{ player|matches_in_team:team }}</td>
-                                            <td>{{ player|goals_in_team:team }}</td>
-                                            <td>{{ player|assists_in_team:team }}</td>
-                                            <td>{{ player|cln_count:team }}</td>
-                                            <td>{{ player|replaced_in_team:team }}</td>
-                                            <td>{{ player|join_game_in_team:team }}</td>
-                                            <td>{{ player|og_count:team }}</td>
-                                            <td>{{ player|yel_count:team }}</td>
-                                            <td>{{ player|red_count:team }}</td>
+                                            <th scope="col"><span class="h5">Игрок</span></th>
+                                            <th scope="col" class="text-center"><img
+                                                    src="{% static "img/ico/matches_icon.png" %}" height="20" width="20"
+                                                    title="Вышел на поле"></th>
+                                            <th scope="col" class="text-center"><img
+                                                    src="{% static "img/ico/ball_2.png" %}" height="20" width="20"
+                                                    title="Забито"></th>
+                                            <th scope="col" class="text-center"><img
+                                                    src="{% static "img/ico/assists_icon.png" %}" height="20" width="20"
+                                                    title="Голевые передачи"></th>
+                                            <th scope="col" class="text-center"><img
+                                                    src="{% static "img/ico/clean_sheet1.png" %}" height="20" width="20"
+                                                    title="Сухие таймы"></th>
+                                            <th scope="col">
+                                                <div class="h-75 text-center">
+                                                    <i class="fa fa-arrow-down text-danger" title="Заменён"
+                                                       aria-hidden="true"
+                                                       style="font-size: 21px"></i>
+                                                </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="h-75 text-center">
+                                                    <i class="fa fa-arrow-up text-success" title="Вышел на замену"
+                                                       aria-hidden="true"
+                                                       style="font-size: 21px"></i>
+                                                </div>
+                                            </th>
+                                            <th scope="col"><img src="{% static "img/ico/ball_2_og.png" %}" height="20"
+                                                                 width="20"
+                                                                 title="Автоголы"></th>
+                                            <th scope="col" class="text-center"><img
+                                                    src="{% static "img/ico/yellow_card.png" %}" height="20" width="20"
+                                                    title="Жёлтые карточки"></th>
+                                            <th scope="col" class="text-center"><img
+                                                    src="{% static "img/ico/red_card.png" %}" height="20" width="20"
+                                                    title="Красные карточки"></th>
                                         </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        {% for player in team|players_in_history %}
+                                            <tr>
+                                                <td class="text-left">
+                                                    {% if player.name %}
+                                                        <img src="{{ player.player_nation.flag.url }}" width="24"
+                                                             height="24"
+                                                             title="{{ player.player_nation.country }}">
+                                                        <a class="text-dark"
+                                                           href="{{ player.name.user_profile.get_absolute_url }}"
+                                                           style="vertical-align: middle;">{{ player }}</a>
+                                                    {% else %}
+                                                        <img src="{{ player.player_nation.flag.url }}" width="24"
+                                                             height="24"
+                                                             title="{{ player.player_nation.country }}">
+                                                        <span class="text-secondary"
+                                                              style="vertical-align: middle;">{{ player }}</span>
+                                                    {% endif %}
+
+                                                </td>
+                                                {# player.player_in_start_home.count|add:player.player_in_start_guest.count #}
+                                                <td>{{ player|matches_in_team:team }}</td>
+                                                <td>{{ player|goals_in_team:team }}</td>
+                                                <td>{{ player|assists_in_team:team }}</td>
+                                                <td>{{ player|cln_count:team }}</td>
+                                                <td>{{ player|replaced_in_team:team }}</td>
+                                                <td>{{ player|join_game_in_team:team }}</td>
+                                                <td>{{ player|og_count:team }}</td>
+                                                <td>{{ player|yel_count:team }}</td>
+                                                <td>{{ player|red_count:team }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
+
+
                         </div>
 
-
-                    </div>
-
-                    <!--
+                        <!--
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row">
                             <div class="col-12">
@@ -309,242 +313,248 @@
                         </div>
                     </div>
                 -->
-                    <div class="tab-pane fade" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
-                        <div class="row">
-                            <div class="col-12">
+                        <div class="tab-pane fade" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
+                            <div class="row">
+                                <div class="col-12">
 
-                                <div class="tab-pane fade show active pr-2" id="matches" role="tabpanel"
-                                     aria-labelledby="shedule-tab">
+                                    <div class="tab-pane fade show active pr-2" id="matches" role="tabpanel"
+                                         aria-labelledby="shedule-tab">
 
-                                    <ul class="nav nav-pills nav-fill" id="seasons-list" style="width: 100%;">
-                                        {% for season in team|all_seasons %}
-                                            <li class="nav-item" style="width: 33%;">
-                                                <a class="nav-link h5 {% if forloop.first %}active{% endif %}"
-                                                   id="season-{{ season.id }}-tab" data-toggle="tab"
-                                                   href="#season{{ season.id }}"
-                                                   role="tab"
-                                                   aria-controls="shedule-{{ season.id }}-tab"
-                                                   {% if forloop.first %}aria-selected="true"
-                                                   {% else %}aria-selected="false"{% endif %}>
-                                                    {{ season }}</a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-content" id="seasons-switch">
-
-                            {% for season in team|all_seasons %}
-
-                                <div class="tab-pane fade {% if forloop.first %}show active{% endif %}"
-                                     id="season{{ season.id }}" role="tabpanel"
-                                     aria-labelledby="shedule-{{ season.id }}-tab">
-
-                                    {% for league in team|all_league_season:season %}
-                                        <p class="text-center mb-0">
-                                            <a href="{{ league.get_absolute_url }}"
-                                               class="h5 text-center">{{ league.title }}</a>
-                                        </p>
-                                        <table class="table table-borderless">
-                                            <tbody>
-                                            {% for match in team|team_matches_in_league:league %}
-                                                <tr>
-                                                    <td class="text-left h6 p0" style="width: 10%;">
-                                                        {% if not league.is_cup %}
-                                                            Тур {{ match.numb_tour }}
-                                                        {% else %}
-                                                            <div style="text-align: center;">{{ match.numb_tour.number|round_name:league.tours.count }}</div>
-                                                        {% endif %}
-                                                    </td>
-                                                    <td class="text-right" style="width: 35%;">
-                                                        {% if team == match.team_home %}
-                                                            <span class="text-dark font-weight-bold h6">{{ match.team_home.title }}</span>
-                                                        {% else %}
-                                                            <a class="text-dark"
-                                                               href="{{ match.team_home.get_absolute_url }}">
-                                                                {{ match.team_home.title }}</a>
-                                                        {% endif %}
-                                                    </td>
-                                                    <td class="text-center" style="width: 10%;">
-                                                        {% if not match.is_played %}
-
-                                                            <a href="{{ match.get_absolute_url }}"><span
-                                                                    class="h6">vs</span>
-                                                            </a>
-                                                        {% else %}
-                                                            <a href="{{ match.get_absolute_url }}"
-                                                               class="h6">{{ match.score_home }}
-                                                                : {{ match.score_guest }}</a>
-                                                        {% endif %}
-                                                    </td>
-                                                    <td class="text-left" style="width: 35%;">
-                                                        {% if team == match.team_guest %}
-                                                            <span class="text-dark font-weight-bold h6">{{ match.team_guest.title }}</span>
-                                                        {% else %}
-                                                            <a class="text-dark"
-                                                               href="{{ match.team_guest.get_absolute_url }}"
-                                                               class="h6">{{ match.team_guest.title }}</a>
-                                                        {% endif %}
-                                                    </td>
-                                                    <td style="width: 10%;">
-
-                                                    </td>
-                                                </tr>
+                                        <ul class="nav nav-pills nav-fill" id="seasons-list" style="width: 100%;">
+                                            {% for season in team|all_seasons %}
+                                                <li class="nav-item" style="width: 33%;">
+                                                    <a class="nav-link h5 {% if forloop.first %}active{% endif %}"
+                                                       id="season-{{ season.id }}-tab" data-toggle="tab"
+                                                       href="#season{{ season.id }}"
+                                                       role="tab"
+                                                       aria-controls="shedule-{{ season.id }}-tab"
+                                                       {% if forloop.first %}aria-selected="true"
+                                                       {% else %}aria-selected="false"{% endif %}>
+                                                        {{ season }}</a>
+                                                </li>
                                             {% endfor %}
-                                            </tbody>
-                                        </table>
-
-                                    {% endfor %}
+                                        </ul>
+                                    </div>
                                 </div>
-                            {% endfor %}
+                            </div>
+
+                            <div class="tab-content" id="seasons-switch">
+
+                                {% for season in team|all_seasons %}
+
+                                    <div class="tab-pane fade {% if forloop.first %}show active{% endif %}"
+                                         id="season{{ season.id }}" role="tabpanel"
+                                         aria-labelledby="shedule-{{ season.id }}-tab">
+
+                                        {% for league in team|all_league_season:season %}
+                                            <p class="text-center mb-0">
+                                                <a href="{{ league.get_absolute_url }}"
+                                                   class="h5 text-center">{{ league.title }}</a>
+                                            </p>
+                                            <table class="table table-borderless">
+                                                <tbody>
+                                                {% for match in team|team_matches_in_league:league %}
+                                                    <tr>
+                                                        <td class="text-left h6 p0" style="width: 10%;">
+                                                            {% if not league.is_cup %}
+                                                                Тур {{ match.numb_tour }}
+                                                            {% else %}
+                                                                <div style="text-align: center;">{{ match.numb_tour.number|round_name:league.tours.count }}</div>
+                                                            {% endif %}
+                                                        </td>
+                                                        <td class="text-right" style="width: 35%;">
+                                                            {% if team == match.team_home %}
+                                                                <span class="text-dark font-weight-bold h6">{{ match.team_home.title }}</span>
+                                                            {% else %}
+                                                                <a class="text-dark"
+                                                                   href="{{ match.team_home.get_absolute_url }}">
+                                                                    {{ match.team_home.title }}</a>
+                                                            {% endif %}
+                                                        </td>
+                                                        <td class="text-center" style="width: 10%;">
+                                                            {% if not match.is_played %}
+
+                                                                <a href="{{ match.get_absolute_url }}"><span
+                                                                        class="h6">vs</span>
+                                                                </a>
+                                                            {% else %}
+                                                                <a href="{{ match.get_absolute_url }}"
+                                                                   class="h6">{{ match.score_home }}
+                                                                    : {{ match.score_guest }}</a>
+                                                            {% endif %}
+                                                        </td>
+                                                        <td class="text-left" style="width: 35%;">
+                                                            {% if team == match.team_guest %}
+                                                                <span class="text-dark font-weight-bold h6">{{ match.team_guest.title }}</span>
+                                                            {% else %}
+                                                                <a class="text-dark"
+                                                                   href="{{ match.team_guest.get_absolute_url }}"
+                                                                   class="h6">{{ match.team_guest.title }}</a>
+                                                            {% endif %}
+                                                        </td>
+                                                        <td style="width: 10%;">
+
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+
+                                        {% endfor %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+
                         </div>
 
 
-                    </div>
+                        <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
+                            <div class="row">
+                                <div class="col-2">
 
+                                </div>
 
-                    <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
-                        <div class="row">
-                            <div class="col-2">
+                                <div class="col-8 justify-content-center">
 
-                            </div>
-
-                            <div class="col-8 justify-content-center">
-
-                                <table class="table">
-                                    <tbody>
-                                    <tr>
-                                        <td><span class="h5 text-secondary">Владелец</span></td>
-                                        <td>
-                                            <a class="h5"
-                                               href="{{ team.owner.user_profile.get_absolute_url }}">{{ team.owner.user_player }}</a>
-                                        </td>
-                                        <td class="text-center">
-                                            {% if team.owner.user_profile.vk %}
-                                                <a href="https://vk.com/{{ team.owner.user_profile.vk }}"
-                                                   target="_blank"><img
-                                                        src="{% static "img/ico/vk_1.png" %}" height="30" width="30"
-                                                        title="{{ team.owner.user_profile.vk }}"></a>
-                                            {% endif %}
-                                            {% if team.owner.user_profile.discord %}
-                                                <img src='{% static "img/ico/discord_1.png" %}'
-                                                     onclick="myFunction(this)"
-                                                     height="30" width="30"
-                                                     title="{{ team.owner.user_profile.discord }}"
-                                                     style="cursor: pointer;">
-                                            {% endif %}
-                                            {% if team.owner.user_profile.telegram %}
-                                                <a href="https://t.me/{{ team.owner.user_profile.telegram }}"
-                                                   target="_blank"><img
-                                                        src="{% static "img/ico/tg_1.png" %}" height="30" width="30"
-                                                        title="{{ team.owner.user_profile.telegram }}"></a>
-                                            {% endif %}
-                                            {% if not team.owner.user_profile.vk and not team.owner.user_profile.discord and not team.owner.user_profile.telegram %}
-                                                <i class="fa fa-minus text-danger text-center" aria-hidden="true"></i>
-                                            {% endif %}
-
-                                        </td>
-                                    </tr>
-                                    {% for cap in team|get_captain %}
+                                    <table class="table">
+                                        <tbody>
                                         <tr>
-                                            <td><span class="h5 text-secondary">Капитан</span></td>
+                                            <td><span class="h5 text-secondary">Владелец</span></td>
                                             <td>
-                                                {% if cap.name %}
-                                                    <a class="h5"
-                                                       href="{{ cap.name.user_profile.get_absolute_url }}">{{ cap }}</a>
-                                                {% else %}
-                                                    <span class="text-secondary h5">{{ cap }}</span>
-
-                                                {% endif %}
+                                                <a class="h5"
+                                                   href="{{ team.owner.user_profile.get_absolute_url }}">{{ team.owner.user_player }}</a>
                                             </td>
                                             <td class="text-center">
-                                                {% if cap.name.user_profile.vk %}
-                                                    <a href="https://vk.com/{{ cap.name.user_profile.vk }}"
-                                                       target="_blank"><img
-                                                            src="{% static "img/ico/vk_1.png" %}" height="30" width="30"
-                                                            title="{{ cap.name.user_profile.vk }}"></a>
-                                                {% endif %}
-                                                {% if cap.name.user_profile.discord %}
-                                                    <img src='{% static "img/ico/discord_1.png" %}'
-                                                         onclick="myFunction(this)"
-                                                         height="30" width="30"
-                                                         title="{{ cap.name.user_profile.discord }}"
-                                                         style="cursor: pointer;">
-                                                {% endif %}
-                                                {% if cap.name.user_profile.telegram %}
-                                                    <a href="https://t.me/{{ cap.name.user_profile.telegram }}"
-                                                       target="_blank"><img
-                                                            src="{% static "img/ico/tg_1.png" %}" height="30" width="30"
-                                                            title="{{ cap.name.user_profile.telegram }}"></a>
-                                                {% endif %}
-                                                {% if not cap.name.user_profile.vk and not cap.name.user_profile.discord and not cap.name.user_profile.telegram %}
-                                                    <i class="fa fa-minus text-danger text-center"
-                                                       aria-hidden="true"></i>
-                                                {% endif %}
-
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-
-                                    {% for cap in team|get_team_assistent %}
-                                        <tr>
-                                            <td><span class="h5 text-secondary">Ассистент</span></td>
-                                            <td>
-                                                {% if cap.name %}
-                                                    <a class="h5"
-                                                       href="{{ cap.name.user_profile.get_absolute_url }}">{{ cap }}</a>
-                                                {% else %}
-                                                    <span class="text-secondary h5">{{ cap }}</span>
-
-                                                {% endif %}
-                                            </td>
-                                            <td class="text-center">
-                                                {% if cap.name.user_profile.vk %}
+                                                {% if team.owner.user_profile.vk %}
                                                     <a href="https://vk.com/{{ team.owner.user_profile.vk }}"
                                                        target="_blank"><img
                                                             src="{% static "img/ico/vk_1.png" %}" height="30" width="30"
-                                                            title="{{ cap.name.user_profile.vk }}"></a>
+                                                            title="{{ team.owner.user_profile.vk }}"></a>
                                                 {% endif %}
-                                                {% if cap.name.user_profile.discord %}
+                                                {% if team.owner.user_profile.discord %}
                                                     <img src='{% static "img/ico/discord_1.png" %}'
                                                          onclick="myFunction(this)"
                                                          height="30" width="30"
-                                                         title="{{ cap.name.user_profile.discord }}"
+                                                         title="{{ team.owner.user_profile.discord }}"
                                                          style="cursor: pointer;">
                                                 {% endif %}
-                                                {% if cap.name.user_profile.telegram %}
-                                                    <a href="https://t.me/{{ cap.name.user_profile.telegram }}"
+                                                {% if team.owner.user_profile.telegram %}
+                                                    <a href="https://t.me/{{ team.owner.user_profile.telegram }}"
                                                        target="_blank"><img
                                                             src="{% static "img/ico/tg_1.png" %}" height="30" width="30"
-                                                            title="{{ cap.name.user_profile.telegram }}"></a>
+                                                            title="{{ team.owner.user_profile.telegram }}"></a>
                                                 {% endif %}
-                                                {% if not cap.name.user_profile.vk and not cap.name.user_profile.discord and not cap.name.user_profile.telegram %}
+                                                {% if not team.owner.user_profile.vk and not team.owner.user_profile.discord and not team.owner.user_profile.telegram %}
                                                     <i class="fa fa-minus text-danger text-center"
                                                        aria-hidden="true"></i>
                                                 {% endif %}
 
                                             </td>
                                         </tr>
-                                    {% endfor %}
+                                        {% for cap in team|get_captain %}
+                                            <tr>
+                                                <td><span class="h5 text-secondary">Капитан</span></td>
+                                                <td>
+                                                    {% if cap.name %}
+                                                        <a class="h5"
+                                                           href="{{ cap.name.user_profile.get_absolute_url }}">{{ cap }}</a>
+                                                    {% else %}
+                                                        <span class="text-secondary h5">{{ cap }}</span>
+
+                                                    {% endif %}
+                                                </td>
+                                                <td class="text-center">
+                                                    {% if cap.name.user_profile.vk %}
+                                                        <a href="https://vk.com/{{ cap.name.user_profile.vk }}"
+                                                           target="_blank"><img
+                                                                src="{% static "img/ico/vk_1.png" %}" height="30"
+                                                                width="30"
+                                                                title="{{ cap.name.user_profile.vk }}"></a>
+                                                    {% endif %}
+                                                    {% if cap.name.user_profile.discord %}
+                                                        <img src='{% static "img/ico/discord_1.png" %}'
+                                                             onclick="myFunction(this)"
+                                                             height="30" width="30"
+                                                             title="{{ cap.name.user_profile.discord }}"
+                                                             style="cursor: pointer;">
+                                                    {% endif %}
+                                                    {% if cap.name.user_profile.telegram %}
+                                                        <a href="https://t.me/{{ cap.name.user_profile.telegram }}"
+                                                           target="_blank"><img
+                                                                src="{% static "img/ico/tg_1.png" %}" height="30"
+                                                                width="30"
+                                                                title="{{ cap.name.user_profile.telegram }}"></a>
+                                                    {% endif %}
+                                                    {% if not cap.name.user_profile.vk and not cap.name.user_profile.discord and not cap.name.user_profile.telegram %}
+                                                        <i class="fa fa-minus text-danger text-center"
+                                                           aria-hidden="true"></i>
+                                                    {% endif %}
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        {% for cap in team|get_team_assistent %}
+                                            <tr>
+                                                <td><span class="h5 text-secondary">Ассистент</span></td>
+                                                <td>
+                                                    {% if cap.name %}
+                                                        <a class="h5"
+                                                           href="{{ cap.name.user_profile.get_absolute_url }}">{{ cap }}</a>
+                                                    {% else %}
+                                                        <span class="text-secondary h5">{{ cap }}</span>
+
+                                                    {% endif %}
+                                                </td>
+                                                <td class="text-center">
+                                                    {% if cap.name.user_profile.vk %}
+                                                        <a href="https://vk.com/{{ team.owner.user_profile.vk }}"
+                                                           target="_blank"><img
+                                                                src="{% static "img/ico/vk_1.png" %}" height="30"
+                                                                width="30"
+                                                                title="{{ cap.name.user_profile.vk }}"></a>
+                                                    {% endif %}
+                                                    {% if cap.name.user_profile.discord %}
+                                                        <img src='{% static "img/ico/discord_1.png" %}'
+                                                             onclick="myFunction(this)"
+                                                             height="30" width="30"
+                                                             title="{{ cap.name.user_profile.discord }}"
+                                                             style="cursor: pointer;">
+                                                    {% endif %}
+                                                    {% if cap.name.user_profile.telegram %}
+                                                        <a href="https://t.me/{{ cap.name.user_profile.telegram }}"
+                                                           target="_blank"><img
+                                                                src="{% static "img/ico/tg_1.png" %}" height="30"
+                                                                width="30"
+                                                                title="{{ cap.name.user_profile.telegram }}"></a>
+                                                    {% endif %}
+                                                    {% if not cap.name.user_profile.vk and not cap.name.user_profile.discord and not cap.name.user_profile.telegram %}
+                                                        <i class="fa fa-minus text-danger text-center"
+                                                           aria-hidden="true"></i>
+                                                    {% endif %}
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
 
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
 
 
+                                </div>
+
+                                <div class="col-2">
+
+                                </div>
                             </div>
 
-                            <div class="col-2">
-
-                            </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+    {% endcache %}
 {% endblock %}
-{% endcache %}
