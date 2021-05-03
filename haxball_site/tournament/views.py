@@ -221,7 +221,7 @@ class MatchDetail(DetailView):
         return context
 
 
-@cache_page(60 * 15)
+@cache_page(60 * 60)
 def halloffame(request):
     top_goalscorers = Player.objects.annotate(
         goals_c=Count('goals__match__league')).filter(goals_c__gt=0).order_by('-goals_c')
