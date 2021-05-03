@@ -69,7 +69,7 @@
             {% for t,c in team.items %}
                 <td rowspan="{{ c|length }}" class="text">
                     <img src="{{ t.logo.url }}" alt="{{ t.title }}"
-                         class="mr-1">
+                         class="mr-1" style="vertical-align: bottom;">
                     <a class="team_link font-weight-bolder" href="{{ t.get_absolute_url }}">{{ t.short_title }}</a>
 
                 </td>
