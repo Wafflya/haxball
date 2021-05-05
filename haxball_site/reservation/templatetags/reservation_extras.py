@@ -15,7 +15,7 @@ register = template.Library()
 def teams_can_reserv(user):
     a = user.user_player
     t = []
-    if a.role == 'C' or a.role == 'AS':
+    if a.role == 'C' or a.role == 'AC':
         t.append(a.team)
 
     tt = Team.objects.filter(owner=user)
