@@ -1,0 +1,135 @@
+{% extends "core/home.html" %}
+{% load static %}
+{% load reservation_extras %}
+{% block styles %}
+    <style>
+        body {
+            background-image: url({% static "img/backgrounds/bg-light-4860.png" %})
+        }
+
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static "reservation/css/reservation_list.css" %}">
+
+
+{% endblock %}
+{% block title %}Чемпионат | Бронь хоста           cis-haxball.com {% endblock %}
+{% block profile_of_user %}
+    <div class="card mb-2 mt-2" style="border-radius: 10px">
+        <h2 class="text-center my-2"><i class="fa fa-th text-warning" aria-hidden="true"></i>
+            Бронь хоста </h2>
+        <h3 class="text-center">
+            {% if message %}
+                <div class="text-danger h5 mb-0">{{ message }}</div>
+            {% else %}
+
+            {% endif %}
+        </h3>
+        <div class="container-fluid p-0 mx-0">
+            <div class="table-fix table-responsive">
+                <table class="table" style="max-width: 100%">
+                    <thead class="thead-dark py-2 text-center">
+                    <tr>
+                        {% for i in active_hosts %}
+                            <th width="{{ active_hosts.count|cols_span }}%">
+
+
+                            </th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody class="table-bordered" style="width: 100%;">
+                    {% for match_day in reservations|match_dates %}
+                        <tr>
+                            <td class="text-center h6" colspan="{{ active_hosts.count }}">
+                                <i class="fa fa-calendar text-muted" aria-hidden="true" style="font-size: 14pt;"></i> {{ match_day|date }}
+                            </td>
+                        </tr>
+                        <tr>
+                            {% for host in active_hosts %}
+                                <td class="text-center h5"><a href="{{ host.link }}"><img src="{% static 'img/ico/pocal_1.png' %}" width="27px">{{ host.name }}</a></td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            {% for host in active_hosts %}
+                                <td class="p-0" style="vertical-align: initial;">
+                                    <div class="d-flex flex-column">
+                                        {% for res in reservations %}
+
+                                            {% if res.host == host and res.time_date|date_equal:match_day %}
+                                                <div class="d-flex justify-content-between" style="padding:.75rem;">
+
+                                                    <span class="font-weight-bolder">
+                                                        {{ res.time_date|time:"H:i" }}
+                                                    </span>
+                                                    <span class="font-weight-bold">
+                                                        {{ res.match.numb_tour }} тур,
+                                                        <a href="{{ res.match.get_absolute_url }}">
+                                                        <img src="{{ res.match.team_home.logo.url }}" width="25px"
+                                                             height="25px" alt="{{ res.match.team_home.title }}" style="vertical-align: bottom;">
+                                                        {{ res.match.team_home.short_title }} - {{ res.match.team_guest.short_title }}
+                                                        <img src="{{ res.match.team_guest.logo.url }}"
+                                                             alt="{{ res.match.team_guest.title }}" width="25px"
+                                                             height="25px" style="vertical-align: bottom;">
+                                                        </a>
+                                                    </span>
+                                                    {% if user|match_can_delete:res.match %}
+                                                        <a class="text-danger" data-toggle="modal"
+                                                           data-target="#deleteres{{ res.id }}">
+                                                            <i class="fa fa-times" aria-hidden="true"
+                                                               style="font-size: 20px; cursor: pointer"></i>
+                                                        </a>
+                                                        <div class="modal fade" id="deleteres{{ res.id }}"
+                                                             tabindex="-1"
+                                                             role="dialog" aria-labelledby="exampleModalLabel"
+                                                             aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header justify-content-center">
+                                                                        <h4 class="modal-title">Снять бронь?</h4>
+                                                                        <!--
+                                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+
+                                                                      </button>
+                                                                      -->
+                                                                    </div>
+                                                                    <div class="modal-footer justify-content-center">
+                                                                        <button type="button" class="btn btn-danger"
+                                                                                data-dismiss="modal">Нет, подождите
+                                                                        </button>
+                                                                        <form method="POST"
+                                                                              action="{% url 'reservation:delete_entry' res.id %}">
+                                                                            {% csrf_token %}
+                                                                            <button type="submit"
+                                                                                    class="btn btn-primary">
+                                                                                Да, я
+                                                                                уверен
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% else %}
+                                                        <span></span>
+                                                    {% endif %}
+
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% if user.is_authenticated %}
+        {% if user|user_can_reserv %}
+            {% reservation_form user %}
+        {% endif %}
+    {% endif %}
+{% endblock %}

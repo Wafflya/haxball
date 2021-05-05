@@ -99,7 +99,6 @@
             <div class="card bg-c-lite-unknown mb-2" style="border-radius: 30px">
                 <form method="POST" class="row p-3">
                     {% csrf_token %}
-                    {{ form_create.as_p }}
                     <div class="form-group col-3">
                         <label for="pos_main" class="text-center h6 mb-1">Позиция</label>
                         <select id="pos_main" class="form-control" name="position_main">

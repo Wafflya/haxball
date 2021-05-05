@@ -19,6 +19,7 @@ class FreeAgentList(ListView):
     context_object_name = 'agents'
     template_name = 'tournament/free_agent/free_agents_list.html'
 
+
     def post(self, request):
         if request.method == 'POST':
             try:

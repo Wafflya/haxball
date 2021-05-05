@@ -25,6 +25,7 @@ urlpatterns = [
     path('chaining/', include('smart_selects.urls')),
     path('', include('core.urls', namespace='core')),
     path('championship/', include('tournament.urls', namespace='tournament')),
+    path('host_reservation/', include('reservation.urls', namespace='reservation')),
     path('polls/', include('polls.urls', namespace='polls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('accounts/', include('allauth.urls')),

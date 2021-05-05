@@ -3,7 +3,7 @@
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static "core/include/sidebar_for_top_comments.css" %}">
 {% endblock %}
-{% cache 60 top_comments %}
+{% cache 60 top_comments_cache %}
 
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 

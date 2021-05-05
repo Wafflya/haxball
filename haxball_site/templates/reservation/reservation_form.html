@@ -1,0 +1,38 @@
+<div class="card bg-c-lite-unknown mb-2" style="border-radius: 30px">
+    {% if matches %}
+        <form method="POST" class="row p-3">
+            {% csrf_token %}
+            <input type="hidden" name="author" value="{{ user.id }}">
+            <div class="form-group col-7">
+                <label for="match" class="text-center h6 mb-1">Матч</label>
+                <select id="match" class="form-control" name="match">
+                    {% for m in matches %}
+                        <option {% if forloop.first %}selected{% endif %} value="{{ m.id }}">
+                            {{ m.numb_tour }} Тур, {{ m.team_home.title }}-{{ m.team_guest.title }}
+
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group col-5 mb-1 text-center">
+                <h6>
+                    <label for="match_date" class="mb-1 h6">Дата матча</label>
+                </h6>
+                <input id="match_date" type="datetime-local" name="time_date"
+                       min="{{ date_today|date:"Y-m-d" }}T{{ date_today|time:"H:s" }}"
+                       max="{{ time_end|date:'Y-m-d' }}T{{ time_end|time:'H:s' }}">
+            </div>
+
+
+            <div class="d-flex justify-content-end w-100">
+                <button type="submit" class="btn btn-primary mr-3">Забронировать хост</button>
+            </div>
+
+        </form>
+    {% else %}
+            <div class="d-inline-flex justify-content-center bg-c-lite-unknown p-3" style="border-radius: 30px">
+                <h6 class="mb-0">У Вас сыграны/забронированны все матчи</h6>
+            </div>
+    {% endif %}
+</div>
