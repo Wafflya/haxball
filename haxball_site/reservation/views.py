@@ -24,8 +24,8 @@ class ReservationList(ListView):
         data = request.POST
         
         date_time_obj = datetime.strptime(data['time_date'], '%Y-%m-%dT%H:%M')
-        d1 = date_time_obj - timedelta(minutes=30)
-        d2 = date_time_obj + timedelta(minutes=30)
+        d1 = date_time_obj - timedelta(minutes=25)
+        d2 = date_time_obj + timedelta(minutes=25)
         reserved = ReservationEntry.objects.filter(time_date__range=[d1, d2])
         active_hosts = ReservationHost.objects.filter(is_active=True)
         if reserved.count() < active_hosts.count():
