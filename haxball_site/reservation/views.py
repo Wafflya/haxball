@@ -22,6 +22,7 @@ class ReservationList(ListView):
 
     def post(self, request):
         data = request.POST
+        
         date_time_obj = datetime.strptime(data['time_date'], '%Y-%m-%dT%H:%M')
         d1 = date_time_obj - timedelta(minutes=30)
         d2 = date_time_obj + timedelta(minutes=30)
@@ -32,7 +33,6 @@ class ReservationList(ListView):
             for i in reserved:
                 hosts.remove(i.host)
             h = hosts.pop()
-            print(hosts)
             ReservationEntry.objects.create(author=request.user, time_date=date_time_obj,
                                             match_id=int(data['match']), host=h)
             return redirect('reservation:host_reservation')
