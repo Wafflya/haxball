@@ -99,6 +99,18 @@ def date_equal(date, day):
         return False
 
 
+@register.filter
+def round_name(tour, all_tours):
+    if tour == all_tours:
+        return 'Финал'
+    elif tour == all_tours - 1:
+        return '1/2 Финала'
+    elif tour == all_tours - 2:
+        return '1/4 Финала'
+    elif tour == all_tours - 3:
+        return '1/8 Финала'
+    else:
+        return '{} Раунд'.format(tour)
 '''
 @register.filter
 def match_can_reserv(user):
