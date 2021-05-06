@@ -65,9 +65,9 @@
                                                     </span>
                                                     <span class="font-weight-bold">
                                                         {% if res.match.league.is_cup %}
-                                                            {{ res.match.numb_tour.number|round_name:res.match.league.tours.count }}
+                                                            {{ res.match.numb_tour.number|round_name:res.match.league.tours.count }},
                                                         {% else %}
-                                                            {{ res.match.numb_tour }} тур{% endif %},
+                                                            {{ res.match.numb_tour }} тур,{% endif %}
                                                         <a href="{{ res.match.get_absolute_url }}">
                                                         <img src="{{ res.match.team_home.logo.url }}" width="25px"
                                                              height="25px" alt="{{ res.match.team_home.title }}"
