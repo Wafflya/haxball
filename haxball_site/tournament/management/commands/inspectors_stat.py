@@ -27,7 +27,11 @@ class Command(BaseCommand):
             print('Выборка по сезону {}'.format(options['champ_number']))
             all_matches = Match.objects.filter(league__championship=ses, is_played=True)
         inspectors = {}
+        all_goals = 0
+        all_events = 0
         for m in all_matches:
+            all_goals += m.match_goal.count()
+            all_events += m.match_substitutions.count() + m.match_event.count()
             if m.inspector in inspectors.keys():
                 inspectors[m.inspector].append(m)
             else:
@@ -42,4 +46,5 @@ class Command(BaseCommand):
             for m in inspectors[inspector]:
                 goals_added += m.match_goal.count()
                 other_event_added += m.match_substitutions.count()+m.match_event.count()
-            print(inspector,len(inspectors[inspector]),goals_added, other_event_added, goals_added+other_event_added)
+            percent = round(100*((goals_added+other_event_added)/(all_goals+all_events)),2)
+            print(inspector,len(inspectors[inspector]), goals_added+other_event_added, percent)
