@@ -41,12 +41,14 @@
                     {% for match_day in reservations|match_dates %}
                         <tr>
                             <td class="text-center h6" colspan="{{ active_hosts.count }}">
-                                <i class="fa fa-calendar text-muted" aria-hidden="true" style="font-size: 14pt;"></i> {{ match_day|date }}
+                                <i class="fa fa-calendar text-muted" aria-hidden="true"
+                                   style="font-size: 14pt;"></i> {{ match_day|date }}
                             </td>
                         </tr>
                         <tr>
                             {% for host in active_hosts %}
-                                <td class="text-center h5"><a href="{{ host.link }}"><img src="{% static 'img/ico/pocal_1.png' %}" width="27px">{{ host.name }}</a></td>
+                                <td class="text-center h5"><a href="{{ host.link }}"><img
+                                        src="{% static 'img/ico/pocal_1.png' %}" width="27px">{{ host.name }}</a></td>
                             {% endfor %}
                         </tr>
                         <tr>
@@ -62,10 +64,14 @@
                                                         {{ res.time_date|time:"H:i" }}
                                                     </span>
                                                     <span class="font-weight-bold">
-                                                        {{ res.match.numb_tour }} тур,
+                                                        {% if res.match.league.is_cup %}
+                                                            {{ res.match.numb_tour.number|round_name:res.match.league.tours.count }},
+                                                        {% else %}
+                                                            {{ res.match.numb_tour }} тур,{% endif %}
                                                         <a href="{{ res.match.get_absolute_url }}">
                                                         <img src="{{ res.match.team_home.logo.url }}" width="25px"
-                                                             height="25px" alt="{{ res.match.team_home.title }}" style="vertical-align: bottom;">
+                                                             height="25px" alt="{{ res.match.team_home.title }}"
+                                                             style="vertical-align: bottom;">
                                                         {{ res.match.team_home.short_title }} - {{ res.match.team_guest.short_title }}
                                                         <img src="{{ res.match.team_guest.logo.url }}"
                                                              alt="{{ res.match.team_guest.title }}" width="25px"
