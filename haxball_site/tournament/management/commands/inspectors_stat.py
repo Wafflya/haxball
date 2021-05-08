@@ -28,17 +28,19 @@ class Command(BaseCommand):
             all_matches = Match.objects.filter(league__championship=ses, is_played=True)
         inspectors = {}
         for m in all_matches:
-            print(m.inspector)
             if m.inspector in inspectors.keys():
                 inspectors[m.inspector].append(m)
             else:
                 inspectors[m.inspector] = []
+                inspectors[m.inspector].append(m)
 
-        print("Инспектор  М  Г  другое")
+
+        print("Инспектор  М  Г другое sum")
         for inspector in inspectors:
             goals_added = 0
             other_event_added = 0
             for m in inspectors[inspector]:
+                print(m)
                 goals_added += m.match_goal.count()
                 other_event_added += m.match_substitutions.count()+m.match_event.count()
             print(inspector,len(inspectors[inspector]),goals_added, other_event_added, goals_added+other_event_added)
