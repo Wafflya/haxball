@@ -40,7 +40,6 @@ class Command(BaseCommand):
             goals_added = 0
             other_event_added = 0
             for m in inspectors[inspector]:
-                print(m)
                 goals_added += m.match_goal.count()
                 other_event_added += m.match_substitutions.count()+m.match_event.count()
             print(inspector,len(inspectors[inspector]),goals_added, other_event_added, goals_added+other_event_added)
