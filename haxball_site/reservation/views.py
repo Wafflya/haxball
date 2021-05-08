@@ -22,7 +22,7 @@ class ReservationList(ListView):
 
     def post(self, request):
         data = request.POST
-        
+
         date_time_obj = datetime.strptime(data['time_date'], '%Y-%m-%dT%H:%M')
         d1 = date_time_obj - timedelta(minutes=30)
         d2 = date_time_obj + timedelta(minutes=30)
