@@ -30,6 +30,11 @@
                     {% show_users_online 12 %}
                 {% endblock %}
                 {% polls_list 2 user %}
+                <div class="card mb-1 mr-0 mt-2 text-right">
+                    <iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=buyer&targets=&targets-hint=%D0%92%D0%B7%D0%BD%D0%BE%D1%81%20%D0%BE%D1%82%20%22%D0%9D%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%8B%22&default-sum=300&button-text=12&payment-type-choice=on&mobile-payment-type-choice=on&hint=&successURL=&quickpay=shop&account=410011043451485"
+                            width="100%" height="250" frameborder="0" allowtransparency="true"
+                            scrolling="no"></iframe>
+                </div>
             </div>
             <div class="col-8 col-xl-8 col-lg-12 col-md-12 col-sm-12 mx-0 order-xl-2 order-md-1 order-lg-1">
                 <div class="row">
@@ -98,15 +103,17 @@
                 </div>
             </div>
 
-            {% cache 600 other_scripts_cache %}
 
-                <div class="col-2 col-xl-2 col-lg-3 col-sm-6 order-3 order-xl-3 order-sm-3">
+            <div class="col-2 col-xl-2 col-lg-3 col-sm-6 order-3 order-xl-3 order-sm-3 pr-0 pl-1">
+
 
                 <div class="card mb-1 mr-0 mt-2 text-right">
-                    <iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=buyer&targets=&targets-hint=%D0%92%D0%B7%D0%BD%D0%BE%D1%81%20%D0%BE%D1%82%20%22%D0%9D%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%8B%22&default-sum=300&button-text=12&payment-type-choice=on&mobile-payment-type-choice=on&hint=&successURL=&quickpay=shop&account=410011043451485"
-                            width="100%" height="250" frameborder="0" allowtransparency="true"
-                            scrolling="no"></iframe>
+                    <iframe src="https://discord.com/widget?id=710289992160772197&theme=dark" width="100%" height="500"
+                            allowtransparency="true" frameborder="0"
+                            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
                 </div>
+
+
                 <!-- VK Widget -->
                 <div class="card mb-1 mr-0 mt-2 text-right">
                     <script type="text/javascript" src="https://vk.com/js/api/openapi.js?168"></script>
@@ -118,11 +125,7 @@
                     </script>
                 </div>
 
-                <div class="card mb-1 mr-0 mt-2 text-right">
 
-                </div>
-
-            {% endcache %}
             </div>
         </div>
     </div>

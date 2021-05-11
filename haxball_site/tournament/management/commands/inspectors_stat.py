@@ -46,5 +46,5 @@ class Command(BaseCommand):
             for m in inspectors[inspector]:
                 goals_added += m.match_goal.count()
                 other_event_added += m.match_substitutions.count()+m.match_event.count()
-            percent = round(100*((goals_added+other_event_added)/(all_goals+all_events)),2)
+            percent = round(100*((goals_added+other_event_added)/(all_goals+all_events)),1)
             print(inspector,len(inspectors[inspector]), goals_added+other_event_added, percent)
