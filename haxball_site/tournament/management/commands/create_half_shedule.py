@@ -8,7 +8,7 @@ class Command(BaseCommand):
     help = 'Generate shedule'
 
     def handle(self, *args, **options):
-        league = League.objects.get(priority=1, championship__is_active=True)
+        league = League.objects.get(priority=1, championship__is_active=True, is_cup=False)
         teams = sort_teams(league)
         half = 2
         first_half = teams[:2]
