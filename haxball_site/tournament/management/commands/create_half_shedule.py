@@ -72,7 +72,7 @@ class Command(BaseCommand):
                     tours[k].append(m)
                     to_del.append(m)
                     k += 1
-                    if len(tours) >= k:
+                    if len(tours) > k:
                         for jj in tours[k]:
                             played_first.add(jj.team_home)
                             played_first.add(jj.team_guest)
