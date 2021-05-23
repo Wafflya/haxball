@@ -68,7 +68,7 @@ class Command(BaseCommand):
 
             to_del = []
             for m in first_half_matches:
-                if t == m.team_home or t == m.team_guest and (t not in played_first):
+                if (t == m.team_home or t == m.team_guest) and (t not in played_first):
                     tours[k].append(m)
                     to_del.append(m)
                     k += 1
