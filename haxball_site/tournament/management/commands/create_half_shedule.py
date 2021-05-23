@@ -43,9 +43,12 @@ class Command(BaseCommand):
                     played_first.add(m.team_guest)
                     t_i.append(m)
                     k += 1
-                    first_half_matches.pop(first_half_matches.index(m))
                 if len(played_first) == half:
                     break
+
+            for jj in t_i:
+                first_half_matches.pop(first_half_matches.index(jj))
+
             print(t_i)
             print(len(first_half_matches))
             tours.append(t_i)
