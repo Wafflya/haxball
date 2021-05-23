@@ -72,8 +72,11 @@ class Command(BaseCommand):
                 for m in first_half_matches:
                     if (t == m.team_home or t == m.team_guest) and (
                             (m.team_home not in played_first) and (m.team_guest not in played_first)):
+                        print(ii)
                         tour.append(m)
                         to_del.append(m)
+                        played_first.add(mt.team_home)
+                        played_first.add(mt.team_guest)
                     print('')
 
                 for i in to_del:
