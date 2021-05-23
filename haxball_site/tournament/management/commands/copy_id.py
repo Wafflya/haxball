@@ -5,7 +5,7 @@ from ...models import League, TourNumber, Match, Team, Player, Achievements
 
 
 class Command(BaseCommand):
-    help = 'The Zen of Python'
+    help = 'Generate shedule'
 
     def handle(self, *args, **options):
         ach = Achievements.objects.all()
