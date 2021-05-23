@@ -65,8 +65,10 @@ class Command(BaseCommand):
             for m in first_half_matches:
                 if t == m.team_home or t == m.team_guest:
                     tours[k].append(m)
-                    k += 1
                     to_del.append(m)
+                    k += 1
+                    if k == pairs:
+                        break
 
             for i in to_del:
                 first_half_matches.pop(first_half_matches.index(i))
