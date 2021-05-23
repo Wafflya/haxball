@@ -61,14 +61,16 @@ class Command(BaseCommand):
         for t in first_half:
             print(t)
             k = 0
+            played_first = set()
             to_del = []
             for m in first_half_matches:
-                if t == m.team_home or t == m.team_guest:
+                for jj in tours[k]:
+                    played_first.add(jj.team_home)
+                    played_first.add(jj.team_guest)
+                if t == m.team_home or t == m.team_guest and (t not in played_first):
                     tours[k].append(m)
                     to_del.append(m)
                     k += 1
-                    if k == pairs:
-                        break
 
             for i in to_del:
                 first_half_matches.pop(first_half_matches.index(i))
