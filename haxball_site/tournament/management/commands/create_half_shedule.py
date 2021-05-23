@@ -65,9 +65,10 @@ class Command(BaseCommand):
             for jj in tours[k]:
                 played_first.add(jj.team_home)
                 played_first.add(jj.team_guest)
-
+            print(played_first)
             to_del = []
             for m in first_half_matches:
+                print(m)
                 if (t == m.team_home or t == m.team_guest) and ((m.team_home not in played_first) and (m.team_guest not in played_first)):
                     tours[k].append(m)
                     to_del.append(m)
@@ -77,10 +78,11 @@ class Command(BaseCommand):
                         for jj in tours[k]:
                             played_first.add(jj.team_home)
                             played_first.add(jj.team_guest)
-
+                    print(played_first)
+                print('')
             for i in to_del:
                 first_half_matches.pop(first_half_matches.index(i))
-
+            print('')
             print(k)
         print(tours)
         print('')
