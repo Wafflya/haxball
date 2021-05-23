@@ -26,8 +26,11 @@ class Command(BaseCommand):
             elif (i.team_home in second_half) and (i.team_guest in second_half):
                 second_half_matches.append(i)
 
+        print(len(first_half_matches))
+        print(len(second_half_matches))
         pairs = half/2
         tours = []
+        k = 0
         for i in range(1,half):
             played_first = set()
             played_second = set()
@@ -37,11 +40,13 @@ class Command(BaseCommand):
                     played_first.add(m.team_home)
                     played_first.add(m.team_guest)
                     t_i.append(m)
+                    k += 1
                     first_half_matches.pop(first_half_matches.index(m))
                 if len(played_first) == half:
                     break
             print(t_i)
             tours.append(t_i)
+        print(k)
         print(tours)
 
 
