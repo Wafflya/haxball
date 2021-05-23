@@ -75,8 +75,8 @@ class Command(BaseCommand):
                         print(ii)
                         tour.append(m)
                         to_del.append(m)
-                        played_first.add(mt.team_home)
-                        played_first.add(mt.team_guest)
+                        played_first.add(m.team_guest)
+                        played_first.add(m.team_home)
                     print('')
 
                 for i in to_del:
