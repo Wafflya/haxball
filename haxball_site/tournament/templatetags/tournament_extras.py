@@ -705,7 +705,7 @@ def sort_teams(league):
         i = k
     if len(result) < len(ls):
         result.append(ls[len(ls) - 1])
-    lit = [i[0] for i in ls]
+    lit = [i[0] for i in result]
     return lit
 
 
