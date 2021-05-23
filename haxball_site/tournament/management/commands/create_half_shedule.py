@@ -36,8 +36,6 @@ class Command(BaseCommand):
             played_second = set()
             t_i = []
             for m in first_half_matches:
-                print(m)
-                print(played_first)
                 if (m.team_home not in played_first) and (m.team_guest not in played_first):
                     played_first.add(m.team_home)
                     played_first.add(m.team_guest)
@@ -52,6 +50,7 @@ class Command(BaseCommand):
             print(t_i)
             print(len(first_half_matches))
             tours.append(t_i)
+            
         print(k)
         print(first_half_matches)
         print(tours)
