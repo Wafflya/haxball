@@ -622,7 +622,6 @@ def sort_teams(league):
         draws[i] = draw_count
 
     l = zip(b, matches_played, wins, draws, looses, scores, consided, diffrence, points, last_matches)
-    print(l)
     s1 = sorted(l, key=lambda x: x[5], reverse=True)
     s2 = sorted(s1, key=lambda x: x[7], reverse=True)
     ls = sorted(s2, key=lambda x: x[8], reverse=True)
