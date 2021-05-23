@@ -59,7 +59,6 @@ class Command(BaseCommand):
         print(len(first_half_matches))
         tours = [[] for i in range(0, half - 1)]
         for t in first_half:
-            print(t)
 
             for ii,tour in enumerate(tours):
 
@@ -68,7 +67,6 @@ class Command(BaseCommand):
                 for mt in tour:
                     played_first.add(mt.team_home)
                     played_first.add(mt.team_guest)
-                print(ii, played_first)
                 for m in first_half_matches:
                     if (t == m.team_home or t == m.team_guest) and (
                             (m.team_home not in played_first) and (m.team_guest not in played_first)):
@@ -84,4 +82,5 @@ class Command(BaseCommand):
                 print(tour)
             print('')
         print(tours)
+        print(first_half_matches)
         print('')
