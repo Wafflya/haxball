@@ -12,11 +12,12 @@ class Command(BaseCommand):
         teams = sort_teams(league)
         half = 8
         first_half = teams[:half]
+        print(first_half)
         second_half = []
         for t in teams[half:]:
             if t.title != 'Дети Солнца':
                 second_half.append(t)
-
+        print(second_half)
         first_half_matches = []
         second_half_matches = []
         for i in Match.objects.filter(league=league):
