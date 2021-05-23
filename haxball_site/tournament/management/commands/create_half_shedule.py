@@ -60,22 +60,25 @@ class Command(BaseCommand):
         tours = [[] for i in range(0, half - 1)]
         for t in first_half:
             print(t)
-            played_first = set()
-            k = 0
 
-            to_del = []
-            for m in first_half_matches:
-                print(m)
-                if (t == m.team_home or t == m.team_guest) and ((m.team_home not in played_first) and (m.team_guest not in played_first)):
-                    tours[k].append(m)
-                    played_first.add(m)
-                    to_del.append(m)
-                    k += 1
-                    print(played_first)
-                print('')
-            for i in to_del:
-                first_half_matches.pop(first_half_matches.index(i))
+            for ii,tour in enumerate(tours):
+
+                to_del = []
+                played_first = set()
+                for mt in tour:
+                    played_first.add(mt.team_home)
+                    played_first.add(mt.team_guest)
+                print(ii, played_first)
+                for m in first_half_matches:
+                    if (t == m.team_home or t == m.team_guest) and (
+                            (m.team_home not in played_first) and (m.team_guest not in played_first)):
+                        tour.append(m)
+                        to_del.append(m)
+                    print('')
+
+                for i in to_del:
+                    first_half_matches.pop(first_half_matches.index(i))
+                print(tour)
             print('')
-            print(k)
         print(tours)
         print('')
