@@ -10,10 +10,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         league = League.objects.get(priority=1, championship__is_active=True, is_cup=False)
         teams = sort_teams(league)
-        half = 2
-        first_half = teams[:2]
+        half = 8
+        first_half = teams[:half]
         second_half = []
-        for t in teams[2:]:
+        for t in teams[half:]:
             if t.title != 'Дети Солнца':
                 second_half.append(t)
 
