@@ -45,6 +45,7 @@ class Command(BaseCommand):
                 if len(played_first) == half:
                     break
             print(t_i)
+            print(len(first_half_matches))
             tours.append(t_i)
         print(k)
         print(tours)
