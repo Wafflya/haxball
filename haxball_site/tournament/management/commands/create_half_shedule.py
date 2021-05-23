@@ -48,6 +48,7 @@ class Command(BaseCommand):
             print(len(first_half_matches))
             tours.append(t_i)
         print(k)
+        print(first_half_matches)
         print(tours)
 
 
