@@ -14,7 +14,7 @@ urlpatterns = [
     # path('comment/<int:id>/<slug:slug>', views.AddComment.as_view(), name='add_comment'),
     path('profile/<slug:slug>/<int:pk>/edit', views.EditMyProfile.as_view(), name='edit_profile'),
 
-    path('anime', views.anime_view, name = 'anime'),
+    path('anime/', views.anime_view, name='anime'),
     #  Путь к фасткапам
     path('fastcups/', views.FastcupView.as_view(), name='fastcups'),
 
