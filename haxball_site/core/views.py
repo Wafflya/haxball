@@ -79,7 +79,6 @@ class LivesView(ListView):
 
 
 def anime_view(request):
-    print(request)
     return render(request, 'core/anime/marat_anime.html')
 
 
