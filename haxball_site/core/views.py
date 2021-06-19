@@ -21,8 +21,6 @@ from tournament.models import Team
 
 # Вьюха для списка постов
 
-def anime_view(request):
-    render(request, 'core/anime/marat_anime.html')
 
 class PostListView(ListView):
     queryset = Post.objects.filter(category__is_official=True).order_by('-important', '-created', )
@@ -78,6 +76,11 @@ class LivesView(ListView):
     context_object_name = 'posts'
     paginate_by = 6
     template_name = 'core/lives/lives_list.html'
+
+
+def anime_view(request):
+    print(request)
+    return render(request, 'core/anime/marat_anime.html')
 
 
 # Главная форума тута
