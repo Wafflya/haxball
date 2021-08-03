@@ -24,7 +24,7 @@ class PlayerAdmin(admin.ModelAdmin):
     list_display = ('name', 'nickname', 'team', 'player_nation', 'role',)
     raw_id_fields = ('name',)
     list_filter = ('role','team','name')
-    search_fields = ('name',)
+    search_fields = ('nickname','name__username',)
 
 @admin.register(PlayerTransfer)
 class PlayerTransferAdmin(admin.ModelAdmin):

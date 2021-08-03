@@ -62,6 +62,8 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     raw_id_fields = ('author',)
     form = PostAdminForm
+    list_editable = ('important',)
+
     # inlines = [CommentInline]
 
 

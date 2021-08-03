@@ -42,8 +42,8 @@
             </h4>
             <small class="text-muted">
                 <img src="{% static "img/ico/calendar_1.png" %}" height="21"
-                     width="21"> {{ post.created|date:"SHORT_DATE_FORMAT" }} <img
-                    src="{% static "img/ico/clock_1.png" %}" height="19" width="19"> {{ post.created|time:"H:i" }} <img
+                     width="21"> {{ post.publish|date:"SHORT_DATE_FORMAT" }} <img
+                    src="{% static "img/ico/clock_1.png" %}" height="19" width="19"> {{ post.publish|time:"H:i" }} <img
                     src="{% static "img/ico/user_1.png" %}" height="19" width="19"><a
                     href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>
 

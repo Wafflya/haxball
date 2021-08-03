@@ -6,21 +6,16 @@
        class="button btn btn-outline-info btn-lg btn-block" style="border-radius:20px 20px 0px 0px;">
 
         {{ post.title }}
-        {% if post.created|is_fresh:5 %}
+        {% if post.publish|is_fresh:5 %}
             <span class="badge badge-pill badge-success">Новая!</span>
         {% endif %}
 
     </a>
-    <div class="collapse" id="{{ post.slug }}{{ post.id }}">
-        <div class="card card-body">
-            {{ post.body|safe }}
-        </div>
-    </div>
 
     <div class="card-footer px-3 py-1 d-inline-flex justify-content-between" style="border-radius:0px 0px 20px 20px;">
         <span class="text-muted"> <img src="{% static "img/ico/calendar_1.png" %}" height="21"
-                                       width="21">  {{ post.created|date:"SHORT_DATE_FORMAT" }} <img
-                src="{% static "img/ico/clock_1.png" %}" height="19" width="19"> {{ post.created|time:"H:i" }} <img
+                                       width="21">  {{ post.publish|date:"SHORT_DATE_FORMAT" }} <img
+                src="{% static "img/ico/clock_1.png" %}" height="19" width="19"> {{ post.publish|time:"H:i" }} <img
                 src="{% static "img/ico/user_1.png" %}" height="19" width="19"><a
                 href="{{ post.author.user_profile.get_absolute_url }}">{{ post.author }}</a>,
             <i class="fa fa-comments-o text-primary" aria-hidden="true"></i>
