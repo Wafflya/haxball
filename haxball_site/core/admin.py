@@ -69,7 +69,7 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'slug', 'background', 'karma')
+    list_display = ('id', 'name', 'slug', 'background', 'karma', 'views')
     list_filter = ('id', 'name')
     list_display_links = ('name',)
     readonly_fields = ('karma',)
