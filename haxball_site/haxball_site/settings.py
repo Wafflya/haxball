@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'django_summernote',
     'froala_editor',
     'ckeditor_uploader',
+    'sorl.thumbnail',
+
 ]
 
 MIDDLEWARE = [

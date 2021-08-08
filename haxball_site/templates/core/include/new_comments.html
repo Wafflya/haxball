@@ -1,5 +1,8 @@
 {% load static %}
 {% load user_tags %}
+{% load thumbnail %}
+
+
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static "core/include/comments.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
@@ -60,8 +63,11 @@
                             <div class="p-2">
                             <span class="round">
                                 <a href="{{ comment.author.user_profile.get_absolute_url }}">
-                                <img src="{{ comment.author.user_profile.avatar.url }}"
+                            {% thumbnail comment.author.user_profile.avatar "50x50" crop="center" as im %}
+                                <img src="{{ im.url }}"
                                      alt="{{ comment.author.username }}" width="50">
+                            {% endthumbnail %}
+
                                 </a>
                             </span>
                             </div>
@@ -89,7 +95,7 @@
                                                 <img src="{{ medal.mini_image.url }}" width="20px" height="20px"
                                                      title="{{ medal.description }}">
                                             {% endfor %}
-                                            <a href="{{ object.get_absolute_url }}?page={{ comments.number }}#r{{ comment.id }}">#{{ comment.id }}</a>
+                                        <a href="{{ object.get_absolute_url }}?page={{ comments.number }}#r{{ comment.id }}">#{{ comment.id }}</a>
                                         {% if user.is_superuser or comment.author == user and comment|can_edit %}
                                             <a href="{% url 'core:edit_comment' comment.id %}"
                                                class="text-warning" title="Редактировать">
@@ -213,8 +219,10 @@
                                 <div class="p-2">
                             <span class="round">
                                 <a href="{{ children.author.user_profile.get_absolute_url }}">
-                                <img src="{{ children.author.user_profile.avatar.url }}"
-                                     alt="{{ children.author.username }}" width="50">
+                                    {% thumbnail children.author.user_profile.avatar "50x50" crop="center" as im %}
+                                        <img src="{{ im.url }}"
+                                             alt="{{ children.author.username }}" width="50">
+                                    {% endthumbnail %}
                                 </a>
                             </span>
                                 </div>
@@ -263,18 +271,18 @@
                                             <a href="{{ object.get_absolute_url }}?page={{ comments.number }}#r{{ children.id }}">#{{ children.id }}</a>
                                             {% if user.is_superuser or children.author == user and children|can_edit %}
 
-                                                    <a href="{% url 'core:edit_comment' children.id %}"
-                                                       class="text-warning" title="Редактировать">
+                                                <a href="{% url 'core:edit_comment' children.id %}"
+                                                   class="text-warning" title="Редактировать">
                                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                                 </a>
 
-                                                    <a class="text-danger" data-toggle="modal"
-                                                       data-target="#deleter{{ children.id }}">
+                                                <a class="text-danger" data-toggle="modal"
+                                                   data-target="#deleter{{ children.id }}">
                                                 <i class="fa fa-times" aria-hidden="true" style="font-size: 20px"></i>
                                                 </a>
 
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="deleter{{ children.id }}" tabindex="-1"
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="deleter{{ children.id }}" tabindex="-1"
                                                      role="dialog" aria-labelledby="exampleModalLabel"
                                                      aria-hidden="true">
                                                   <div class="modal-dialog">
@@ -305,7 +313,7 @@
                                                    data-target="#deleter{{ children.id }}">
                                                 <i class="fa fa-times" aria-hidden="true" style="font-size: 20px"></i>
                                                 </a>
-                                                    <div class="modal fade" id="deleter{{ children.id }}" tabindex="-1"
+                                                <div class="modal fade" id="deleter{{ children.id }}" tabindex="-1"
                                                      role="dialog" aria-labelledby="exampleModalLabel"
                                                      aria-hidden="true">
                                                   <div class="modal-dialog">

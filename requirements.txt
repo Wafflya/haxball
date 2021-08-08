@@ -43,3 +43,4 @@ django-grappelli==2.14.2
 django-smart-selects==1.5.8
 django-colorfield==0.3.2
 python-memcached==1.59
+sorl-thumbnail==12.7.0
