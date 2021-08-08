@@ -13,7 +13,10 @@ register = template.Library()
 
 
 def teams_can_reserv(user):
-    a = user.user_player
+    try:
+        a = user.user_player
+    except:
+        return False
     t = []
     if a.role == 'C' or a.role == 'AC':
         t.append(a.team)
@@ -111,6 +114,8 @@ def round_name(tour, all_tours):
         return '1/8 Финала'
     else:
         return '{} Раунд'.format(tour)
+
+
 '''
 @register.filter
 def match_can_reserv(user):
