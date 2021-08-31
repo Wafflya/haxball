@@ -29,7 +29,7 @@ DEBUG = False
 if DEBUG:
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = ['185.7.145.91', 'cis-haxball.com', '127.0.0.1']
+    ALLOWED_HOSTS = ['185.7.145.200', 'cis-haxball.com', '127.0.0.1']
 
 # Application definition
 
