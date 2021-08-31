@@ -81,6 +81,13 @@
                         <a class="dropdown-item" href="{% url 'tournament:league' 'lch2-group-b' %}">Группа B</a>
                         <a class="dropdown-item" href="{% url 'tournament:league' 'ploff_lch2' %}">Плей-офф</a>
                     </div>
+
+                    <a class="dropdown-item submenu bg-secondary" href="#">ЧР #6</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's6-premier_league' %}">Единая
+                            лига</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's6-cup' %}">Кубок России</a>
+                    </div>
                 </div>
             </li>
 
@@ -102,8 +109,9 @@
                 <a class="nav-link font-weight-bold mx-1 text-right" href="http://www.cis-haxball.com/post/16/rules">Правила</a>
             </li>
 
-
-            <!-- Dropdown -->
+            <li class="nav-item">
+                <a class="nav-link text-success font-weight-bold mx-1 text-right" href="{% url 'reservation:replays_list' %}">Реплеи</a>
+            </li>
 
 
         </ul>

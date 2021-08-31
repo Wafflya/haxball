@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 
-from .models import ReservationEntry, ReservationHost
+from .models import ReservationEntry, ReservationHost, Replay
 from django.views.generic import ListView
 
 from .templatetags.reservation_extras import teams_can_reserv
@@ -41,6 +41,15 @@ class ReservationList(ListView):
                 'reservations': ReservationEntry.objects.filter(match__is_played=False).order_by('-time_date'),
                 'active_hosts': ReservationHost.objects.filter(is_active=True),
                 'message': 'Выбранное время занято!!'})
+
+
+
+
+class ReplaysList(ListView):
+    queryset = Replay.objects.all().order_by('created')
+    context_object_name = 'replays'
+    template_name = 'reservation/replays_list.html'
+    paginate_by = 20
 
 
 @require_POST

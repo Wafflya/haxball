@@ -34,6 +34,8 @@ class Choice(models.Model):
         ordering = ['id']
 
 
+
+
 #class Votes(models.Model):
  #   user = models.ForeignKey(User, related_name='user_votes', on_delete=models.CASCADE)
   #  vote = models.ForeignKey(Choice, related_name='votes_for', on_delete=models.CASCADE)

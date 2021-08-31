@@ -1,0 +1,32 @@
+{% extends "core/home.html" %}
+{% load static %}
+{% load reservation_extras %}
+
+{% block styles %}
+
+    <link rel="stylesheet" type="text/css" href="{% static "reservation/css/reservation_list.css" %}">
+
+
+{% endblock %}
+{% block title %}Чемпионат | Реплеи           cis-haxball.com {% endblock %}
+
+{% block profile_of_user %}
+
+    <div class="card my-2"
+         style="border-radius: 25px; background-image: url({% static "img/backgrounds/background1.png" %})">
+
+        <div class="card-body text-center">
+            <h3 class="text-center mt-1 mb-0"><i class="fa fa-search text-success font-weight-lighter h2"
+                                                 aria-hidden="true"></i>
+
+                Реплеи
+            </h3>
+            <hr>
+            {% for i in replays %}
+                <a href="https://www.haxball.com/replay?https://www.cis-haxball.com/{{ i.file }}">{{ i.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}
