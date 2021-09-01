@@ -1,7 +1,7 @@
-from datetime import timezone
 
 from django.core.management.base import BaseCommand, CommandError
 from django.db.models import Q
+from django.utils import timezone
 
 from ...models import League, TourNumber, Match, Season, Player, PlayerTransfer
 
