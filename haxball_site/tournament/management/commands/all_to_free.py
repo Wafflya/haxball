@@ -1,4 +1,3 @@
-
 from django.core.management.base import BaseCommand, CommandError
 from django.db.models import Q
 from django.utils import timezone
@@ -25,8 +24,12 @@ class Command(BaseCommand):
         print('Выборка по сезону {}'.format(options['champ_number']))
 
         for p in players_in_team:
-            print(p)
+            print(p, p.team)
+
         s = players_in_team.first()
+
         print(s, s.team)
-        PlayerTransfer.objects.create(trans_player=s, to_team=None, season_join=seas, date_join=timezone.now)
+        print(timezone.now())
+
+        PlayerTransfer.objects.create(trans_player=s, to_team=None, season_join=seas, date_join=timezone.now())
         print(s, s.team)
