@@ -35,13 +35,15 @@
                     Чемпионат
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'tournament:league' 's6-premier_league' %}">Единая лига</a>
-                    <a class="dropdown-item" href="{% url 'tournament:league' 's6-cup' %}">Кубок России</a>
+                    <a class="dropdown-item" href="{% url 'tournament:league' 's7-premier_league' %}">Высшая лига</a>
+                    <a class="dropdown-item" href="{% url 'tournament:league' 's7-first_division' %}">Первый дивизион </a>
 
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/213/reglament">Регламент</a>
+                    <a class="dropdown-item" href="{% url 'tournament:league' 's7-cup' %}">Кубок России</a>
+
+                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/282/reglament">Регламент</a>
                     <a class="dropdown-item" href="{% url 'reservation:host_reservation' %}">Бронь хоста</a>
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/219/perenosi">Переносы</a>
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/216/transfers">Трансферы</a>
+                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/281/281">Переносы</a>
+                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/280/280">Трансферы</a>
                     <a class="dropdown-item" href="{% url 'tournament:free_agent' %}">Свободные агенты</a>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/111/org_razdel">Стол заявок</a>
 
@@ -109,10 +111,11 @@
                 <a class="nav-link font-weight-bold mx-1 text-right" href="http://www.cis-haxball.com/post/16/rules">Правила</a>
             </li>
 
+            <!--
             <li class="nav-item">
                 <a class="nav-link text-success font-weight-bold mx-1 text-right" href="{% url 'reservation:replays_list' %}">Реплеи</a>
             </li>
-
+-->
 
         </ul>
 

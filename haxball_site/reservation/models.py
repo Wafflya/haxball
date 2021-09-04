@@ -40,7 +40,7 @@ class ReservationEntry(models.Model):
 class Replay(models.Model):
     name = models.CharField(verbose_name='Название реплея',max_length=256)
     description = models.TextField(verbose_name='Описание',blank=True, null=True)
-    file = models.FileField(upload_to='replays/%Y/%m/%d', )
+    file = models.FileField(upload_to='hbr', )
     author = models.ForeignKey(User,verbose_name='Выложил', on_delete=models.SET_NULL, null=True,
                                related_name='uploaded_replays')
     created = models.DateTimeField(auto_now_add=True)
