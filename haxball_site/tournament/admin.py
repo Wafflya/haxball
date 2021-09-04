@@ -150,7 +150,7 @@ class OtherEventsAdmin(admin.ModelAdmin):
 
 @admin.register(TourNumber)
 class MatchTourAdmin(admin.ModelAdmin):
-    list_display = ('number', 'league', 'is_actual')
+    list_display = ('number', 'league', 'is_actual', 'date_from', 'date_to')
     list_editable = ('is_actual',)
     list_filter = ('league','number')
 

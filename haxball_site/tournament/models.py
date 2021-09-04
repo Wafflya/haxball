@@ -184,7 +184,7 @@ class TourNumber(models.Model):
     is_actual = models.BooleanField('Актуальный', default=False)
 
     def __str__(self):
-        return '{}'.format(self.number)
+        return '{} с {} по {}'.format(self.number, self.date_from, self.date_to)
 
     class Meta:
         verbose_name = 'Тур'
