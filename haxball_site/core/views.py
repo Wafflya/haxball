@@ -212,12 +212,12 @@ class AdminListView(ListView):
     a = []
     for i in us:
         s = 0
-        """
+
         for icon in i.user_profile.user_icon.all():
             s += icon.priority
         if s > 0:
             a.append([i, s, i.id])
-        """
+
     c = sorted(a, key=lambda x: x[1], reverse=True)
     queryset = [i[0] for i in c]
     context_object_name = 'users'
