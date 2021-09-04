@@ -33,7 +33,7 @@
                 {% elif object|get_class == 'Match' %}
                     {% include 'core/include/new_form_comment_match.html' %}
                 {% endif %}
-            {% elif user.is_authenticated and user.user_profile.can_comment %}
+            {% elif user.is_authenticated and not user.user_profile.can_comment %}
                 <h6 class="text-center">
                     Брумасик считает, что вам лучше не писать здесь((
                 </h6>
