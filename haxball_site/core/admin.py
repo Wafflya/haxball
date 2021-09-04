@@ -113,3 +113,5 @@ class NewCommentAdmin(admin.ModelAdmin):
 class IPAdressAdmin(admin.ModelAdmin):
     list_display = ('ip', 'name', 'created', 'update', 'suspicious')
     list_filter = ('ip', 'name')
+    search_fields = ('ip',)
+
