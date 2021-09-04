@@ -275,6 +275,7 @@ class Profile(models.Model):
     comments = GenericRelation(NewComment, related_query_name='profile_comments')
     commentable = models.BooleanField("Комментируемый профиль", default=True)
     can_vote = models.BooleanField('Может голосовать', default=True)
+    can_comment = models.BooleanField('Может комментировать', default=True)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
