@@ -19,4 +19,19 @@ class Command(BaseCommand):
             print('Видимо похер')
             raise CommandError('Выбран несуществующий сезон')
 
+        s = []
+
         print(match.team_home_start.all())
+        print(match.team_guest_start.all())
+
+        for i in match.team_home_start.all():
+            s.append(i)
+        match.team_home_start.clear()
+        for i in match.team_guest_start.all():
+            match.team_home_start.add(i)
+        match.team_guest_start.clear()
+        for i in s:
+            match.team_guest_start.add(i)
+
+        print(match.team_home_start.all())
+        print(match.team_guest_start.all())
