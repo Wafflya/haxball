@@ -72,6 +72,10 @@ def reservation_form(user):
 def match_can_delete(user, match):
     if user.is_anonymous:
         return False
+    try:
+        a = user.user_player
+    except:
+        return False
     t = teams_can_reserv(user)
     delt_time = match.match_reservation.time_date - timezone.now()
     if ((match.team_home in t) or (match.team_guest in t)) and delt_time > timedelta(minutes=30):
