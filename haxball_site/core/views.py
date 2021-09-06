@@ -210,7 +210,6 @@ class FastcupView(ListView):
 class AdminListView(ListView):
     us = User.objects.filter(is_staff=True).order_by('id')
     a = []
-    """
     for i in us:
         s = 0
 
@@ -222,7 +221,6 @@ class AdminListView(ListView):
     c = sorted(a, key=lambda x: x[1], reverse=True)
     
     queryset = [i[0] for i in c]
-    """
     context_object_name = 'users'
     template_name = 'core/admins/admin_list.html'
 
