@@ -1,0 +1,13 @@
+{% load thumbnail %}
+
+<div class="row justify-content-center">
+    {% for t in teams %}
+        <div class="col-3 justify-content-center">
+            {% thumbnail t.logo "25x25" format="PNG" as im %}
+                <img src="{{ im.url }}" alt="{{ t.title }}" class="ml-1">
+            {% endthumbnail %}
+
+            <a href="{{ t.get_absolute_url }}">{{ t.title|truncatechars:11 }}</a>
+        </div>
+    {% endfor %}
+</div>
