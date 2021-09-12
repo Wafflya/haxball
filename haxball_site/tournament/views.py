@@ -13,12 +13,10 @@ from core.models import NewComment, Profile
 from django.views.decorators.cache import cache_page
 
 
-
 class FreeAgentList(ListView):
     queryset = FreeAgent.objects.filter(is_active=True).order_by('-created')
     context_object_name = 'agents'
     template_name = 'tournament/free_agent/free_agents_list.html'
-
 
     def post(self, request):
         if request.method == 'POST':
@@ -85,7 +83,6 @@ def edit_team_profile(request, slug):
         else:
             return HttpResponse('Ошибка доступа')
     return render(request, 'tournament/teams/edit_team.html', {'form': form})
-
 
 
 class TeamDetail(DetailView):
@@ -163,9 +160,10 @@ class MatchDetail(DetailView):
         context['comment_form'] = comment_form
         all_matches_between = Match.objects.filter(
             Q(team_guest=match.team_guest, team_home=match.team_home, is_played=True) | Q(team_guest=match.team_home,
-                                                                          team_home=match.team_guest, is_played=True))
+                                                                                          team_home=match.team_guest,
+                                                                                          is_played=True))
 
-        if all_matches_between.count()==0:
+        if all_matches_between.count() == 0:
             context['no_history'] = True
             return context
         the_most_score = all_matches_between.first()
@@ -176,8 +174,8 @@ class MatchDetail(DetailView):
         score_home_all = 0
         score_guest_all = 0
         for i in all_matches_between:
-            if i.score_home+i.score_guest>score:
-                score = i.score_home+i.score_guest
+            if i.score_home + i.score_guest > score:
+                score = i.score_home + i.score_guest
                 the_most_score = i
 
             if i.team_home == match.team_home:
@@ -202,11 +200,11 @@ class MatchDetail(DetailView):
                 score_guest_all += i.score_home
                 score_home_all += i.score_guest
 
-        win_home_percentage = round(100*win_home/all_matches_between.count())
-        draws_percentage = round(100*draws/all_matches_between.count())
-        win_guest_percentage = 100-win_home_percentage-draws_percentage
-        print(win_home_percentage, draws_percentage,win_guest_percentage)
-        #print(match.team_home, match.team_guest, all_matches_between)
+        win_home_percentage = round(100 * win_home / all_matches_between.count())
+        draws_percentage = round(100 * draws / all_matches_between.count())
+        win_guest_percentage = 100 - win_home_percentage - draws_percentage
+        print(win_home_percentage, draws_percentage, win_guest_percentage)
+        # print(match.team_home, match.team_guest, all_matches_between)
         context['all_matches_between'] = all_matches_between
         context['the_most_score'] = the_most_score
         context['win_home'] = win_home
@@ -217,8 +215,8 @@ class MatchDetail(DetailView):
         context['draws_percentage'] = draws_percentage
         context['score_home_all'] = score_home_all
         context['score_guest_all'] = score_guest_all
-        context['score_home_average'] = round(score_home_all/all_matches_between.count(), 2)
-        context['score_guest_average'] = round(score_guest_all/all_matches_between.count(), 2)
+        context['score_home_average'] = round(score_home_all / all_matches_between.count(), 2)
+        context['score_guest_average'] = round(score_guest_all / all_matches_between.count(), 2)
         return context
 
 
@@ -263,3 +261,8 @@ def halloffame(request):
                                                             'subs_in': subs_inn,
                                                             'subs_out': subs_outt,
                                                             })
+
+
+def team_rating(request):
+    t = Team.objects.all()
+    return render(request, 'tournament/team_all_time_rating.html', {'teams': t})

@@ -60,6 +60,7 @@ class Season(models.Model):
     number = models.SmallIntegerField('Номер сезона')
     is_active = models.BooleanField('Текущий')
     created = models.DateTimeField('Создана', auto_now_add=True)
+    is_round_robin = models.BooleanField('Круговой розыгрыш', help_text='Галочка, если обычный ЧР, если нету - ЛЧ или иже с ним', default=True)
 
     def __str__(self):
         return self.title
