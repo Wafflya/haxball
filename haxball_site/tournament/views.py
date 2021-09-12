@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.views.generic import ListView, DetailView
 
 from .forms import FreeAgentForm, EditTeamProfileForm
-from .models import FreeAgent, Team, Match, League, Player, Substitution
+from .models import FreeAgent, Team, Match, League, Player, Substitution, Season
 from core.forms import NewCommentForm
 from core.models import NewComment, Profile
 from django.views.decorators.cache import cache_page
@@ -265,4 +265,6 @@ def halloffame(request):
 
 def team_rating(request):
     t = Team.objects.all()
-    return render(request, 'tournament/team_all_time_rating.html', {'teams': t})
+    seasons = Season.objects.filter(is_round_robin=True, is_active=False).order_by('number')[:2]
+
+    return render(request, 'tournament/team_all_time_rating.html', {'teams': t, 'seas': seasons})

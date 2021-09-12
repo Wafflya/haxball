@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.utils import timezone
 from smart_selects.db_fields import ChainedForeignKey, ChainedManyToManyField
 
-#from django.db.models import
+# from django.db.models import
 
 from core.models import NewComment
 
@@ -60,7 +60,9 @@ class Season(models.Model):
     number = models.SmallIntegerField('Номер сезона')
     is_active = models.BooleanField('Текущий')
     created = models.DateTimeField('Создана', auto_now_add=True)
-    is_round_robin = models.BooleanField('Круговой розыгрыш', help_text='Галочка, если обычный ЧР, если нету - ЛЧ или иже с ним', default=True)
+    is_round_robin = models.BooleanField('Круговой розыгрыш',
+                                         help_text='Галочка, если обычный ЧР, если нету - ЛЧ или иже с ним',
+                                         default=True)
 
     def __str__(self):
         return self.title
@@ -196,7 +198,8 @@ class TourNumber(models.Model):
 class Match(models.Model):
     league = models.ForeignKey(League, verbose_name='В лиге', related_name='matches_in_league',
                                on_delete=models.CASCADE)
-    numb_tour = ChainedForeignKey(TourNumber, chained_field='league', chained_model_field='league', verbose_name='Номер тура', related_name='tour_matches',
+    numb_tour = ChainedForeignKey(TourNumber, chained_field='league', chained_model_field='league',
+                                  verbose_name='Номер тура', related_name='tour_matches',
                                   on_delete=models.CASCADE, null=True, )
     match_date = models.DateField('Дата матча', default=None, blank=True, null=True)
     replay_link = models.URLField('Ссылка на реплей', blank=True)
@@ -245,7 +248,7 @@ class Goal(models.Model):
     match = models.ForeignKey(Match, verbose_name='Матч', related_name='match_goal', null=True, blank=True,
                               on_delete=models.CASCADE)
 
-    #team = ChainedForeignKey(Team, chained_field='match', verbose_name='Команда забила', related_name='team_goals',
+    # team = ChainedForeignKey(Team, chained_field='match', verbose_name='Команда забила', related_name='team_goals',
     #                         chained_model_field='leagues__matches_in_league', null=True,
     #                         on_delete=models.SET_NULL)
 
@@ -292,7 +295,7 @@ class Substitution(models.Model):
     match = models.ForeignKey(Match, verbose_name='Матч', related_name='match_substitutions', null=True,
                               on_delete=models.CASCADE)
 
-    #team = ChainedForeignKey(Team, chained_field='match', verbose_name='Замена в команде',
+    # team = ChainedForeignKey(Team, chained_field='match', verbose_name='Замена в команде',
     #                         chained_model_field='leagues__matches_in_league', null=True,
     #                         on_delete=models.SET_NULL)
 
@@ -319,7 +322,7 @@ class Substitution(models.Model):
 class OtherEvents(models.Model):
     match = models.ForeignKey(Match, verbose_name='Матч', related_name='match_event', null=True,
                               on_delete=models.CASCADE)
-    #team = ChainedForeignKey(Team, chained_field='match', verbose_name='Команда',
+    # team = ChainedForeignKey(Team, chained_field='match', verbose_name='Команда',
     #                         chained_model_field='leagues__matches_in_league', null=True,
     #                         on_delete=models.SET_NULL)
 
@@ -362,7 +365,6 @@ class OtherEvents(models.Model):
             self.match.score_home -= 1
             self.match.save(update_fields=['score_home'])
         super(OtherEvents, self).delete(*args, **kwargs)
-
 
     def __str__(self):
         return '{}:{} {} в {}'.format(self.time_min, self.time_sec, self.event, self.match)

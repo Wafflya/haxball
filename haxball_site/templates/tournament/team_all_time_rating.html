@@ -7,10 +7,15 @@
 
         <div class="card-header pb-0" style="border-radius: 25px 25px 0 0">
 
-            <h1 class="text-center">Зал славы</h1>
+            <h1 class="text-center">Рейтинг команд</h1>
 
         </div>
         <div class="card-body text-center p-0">
+            {% for i in seas %}
+                <h4>
+                    {{ i }}
+                </h4>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
