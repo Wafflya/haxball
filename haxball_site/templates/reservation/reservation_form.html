@@ -19,7 +19,7 @@
                 <h6>
                     <label for="match_date" class="mb-1 h6">Дата матча</label>
                 </h6>
-                <input id="match_date" type="datetime-local" name="time_date"
+                <input id="match_date" required type="datetime-local" name="time_date"
                        min="{{ date_today|date:"Y-m-d" }}T{{ date_today|time:"H:s" }}"
                        max="{{ time_end|date:'Y-m-d' }}T{{ time_end|time:'H:s' }}">
             </div>
