@@ -214,7 +214,7 @@ def user_in(objects, user):
 
 @register.inclusion_tag('core/include/teams_in_navbar.html')
 def teams_in_navbar():
-    l = League.objects.filter(championship__is_active = True, is_cup = False)
+    l = League.objects.filter(championship__is_active = True, is_cup = False).order_by('priority')
     return {'leagues' : l}
     """"
     all_teams = Team.objects.all()
