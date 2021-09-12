@@ -6,12 +6,12 @@
             <a href="{{ l.get_absolute_url }}" class="h5 py-1">{{ l }}</a>
         </div>
         {% for t in l.teams.all %}
-            <div class="col-3 justify-content-center">
+            <div class="col-4 justify-content-center">
                 {% thumbnail t.logo "25x25" format="PNG" as im %}
                     <img src="{{ im.url }}" alt="{{ t.title }}" class="ml-1" width="25px" height="25px">
                 {% endthumbnail %}
 
-                <a href="{{ t.get_absolute_url }}">{{ t.title|truncatechars:11 }}</a>
+                <a href="{{ t.get_absolute_url }}" class="h6">{{ t.title|truncatechars:15 }}</a>
             </div>
         {% endfor %}
     {% endfor %}
