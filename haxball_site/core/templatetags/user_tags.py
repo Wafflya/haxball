@@ -7,7 +7,7 @@ from django.utils import timezone
 from online_users.models import OnlineUserActivity
 
 from ..models import Post, NewComment
-from tournament.models import Team
+from tournament.models import Team, League
 
 register = template.Library()
 
@@ -214,9 +214,13 @@ def user_in(objects, user):
 
 @register.inclusion_tag('core/include/teams_in_navbar.html')
 def teams_in_navbar():
+    l = League.objects.filter(championship__is_active = True, is_cup = False)
+    return {'leagues' : l}
+    """"
     all_teams = Team.objects.all()
     teams = []
     for t in all_teams:
         if len(t.get_active_leagues()) > 0:
             teams.append(t)
     return {'teams': teams}
+"""
