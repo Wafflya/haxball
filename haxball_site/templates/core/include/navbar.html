@@ -36,10 +36,10 @@
                     Чемпионат
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'tournament:league' 's7-premier_league' %}">Высшая лига</a>
-                    <a class="dropdown-item" href="{% url 'tournament:league' 's7-first_division' %}">Первая лига</a>
-
-                    <a class="dropdown-item" href="{% url 'tournament:league' 's7-cup' %}">Кубок России</a>
+                    <a class="dropdown-item" href="{% url 'tournament:league' 'lch3-group-a' %}">Группа А</a>
+                    <a class="dropdown-item" href="{% url 'tournament:league' 'lch2-group-b' %}">Группа B</a>
+                    <a class="dropdown-item" href="{% url 'tournament:league' 'lch2-group-c' %}">Группа C</a>
+                    <a class="dropdown-item" href="{% url 'tournament:league' 'lch2-group-d' %}">Группа D</a>
 
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/282/reglament">Регламент</a>
                     <a class="dropdown-item" href="{% url 'reservation:host_reservation' %}">Бронь хоста</a>
@@ -99,6 +99,16 @@
                             лига</a>
                         <a class="dropdown-item" href="{% url 'tournament:league' 's6-cup' %}">Кубок России</a>
                     </div>
+
+                    <a class="dropdown-item submenu" href="#">ЧР #7</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's7-premier_league' %}">Высшая
+                            лига</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's7-first_division' %}">Первая
+                            лига</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's7-cup' %}">Кубок России</a>
+                    </div>
+
                 </div>
             </li>
 

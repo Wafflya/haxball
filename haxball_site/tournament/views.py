@@ -265,6 +265,14 @@ def halloffame(request):
 
 def team_rating(request):
     t = Team.objects.all()
+    for s in t:
+        s.rating = 0
+        s.save(update_fields=['rating'])
+        print(s)
+
     seasons = Season.objects.filter(is_round_robin=True, is_active=False).order_by('number')[:2]
+    for s in seasons:
+        a = s.tournaments_in_season.filter(is_cup=False).first()
+        print(a)
 
     return render(request, 'tournament/team_all_time_rating.html', {'teams': t, 'seas': seasons})
