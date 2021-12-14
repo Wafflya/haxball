@@ -158,7 +158,7 @@ def player_team(player):
     for s in seasons:
         d2 = {}
         trans_teams = list(
-            PlayerTransfer.objects.filter(~Q(to_team=None), season_join=s, trans_player=player.user_player))
+            PlayerTransfer.objects.filter(~Q(to_team=None), season_join=s, trans_player=player.user_player).distinct('to_team'))
         for team in trans_teams:
             d3 = {}
             leagues = list(League.objects.filter(championship=s, teams=team.to_team).order_by('id'))
@@ -237,7 +237,7 @@ def rows_player_stat(player, season):
     except:
         return 0
     k = 0
-    teams = PlayerTransfer.objects.filter(~Q(to_team=None), season_join=season, trans_player=player.user_player)
+    teams = PlayerTransfer.objects.filter(~Q(to_team=None), season_join=season, trans_player=player.user_player).distinct('to_team')
     tournams = season.tournaments_in_season.all()
     for i in teams:
         for t in tournams:
