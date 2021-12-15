@@ -41,8 +41,7 @@ def user_can_reserv(user):
 @register.inclusion_tag('reservation/reservation_form.html')
 def reservation_form(user):
     t = teams_can_reserv(user)
-    actual_tour = TourNumber.objects.filter(league__championship__is_active=True, is_actual=True,
-                                            league__is_cup=False).first()
+    actual_tour = TourNumber.objects.filter(league__championship__is_active=True, is_actual=True).first()
 
     matches_unplayed = Match.objects.filter((Q(team_home__in=t) | Q(team_guest__in=t)), is_played=False,
                                             numb_tour__number__lte=actual_tour.number,
