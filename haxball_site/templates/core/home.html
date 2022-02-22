@@ -10,7 +10,6 @@
 
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "tournament/free_agent/free_agent_list.css" %}">
 
     <style>
         body {
@@ -18,16 +17,6 @@
         }
     </style>
 
-{% endblock %}
-
-
-{% block scripts %}
-    <script>
-        function myFunction(Element) {
-            navigator.clipboard.writeText(Element.title);
-            alert("Скопирован адрес! " + Element.title);
-        }
-    </script>
 {% endblock %}
 
 
@@ -49,14 +38,14 @@
                     <div class="card-body d-flex justify-content-around">
                         <div class="d-inline-flex">
                             <img src='{% static "img/ico/ts_logo.png" %}'
-                                 onclick="myFunction(this)"
+                                 onclick="navigator.clipboard.writeText('haxball.ts3.ru'); alert('Скопирован адрес сервера! haxball.ts3.ru');"
                                  title="haxball.ts3.ru"
                                  style="cursor: pointer;" width="100%">
                         </div>
                         <div class="d-inline-flex">
                             <a href="ts3server://haxball.ts3.ru"><img src='{% static "img/ico/ts_logo.png" %}'
-                                    title="haxball.ts3.ru"
-                                    style="cursor: pointer;" width="100%">
+                                                                      title="haxball.ts3.ru"
+                                                                      style="cursor: pointer;" width="100%">
                             </a>
                         </div>
                     </div>
