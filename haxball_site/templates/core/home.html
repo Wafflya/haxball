@@ -31,6 +31,32 @@
                     {% show_users_online 12 %}
                 {% endblock %}
 
+
+                <div class="card" style="border-radius: 20px 20px 20px 20px;">
+                    <div class="card-header d-inline-flex mb-0 justify-content-center bg-for-online-head"
+                         style="border-radius: 20px 20px 0px 0">
+                        <h5>Сервер TeamSpeak 3</h5>
+                    </div>
+                    <div class="card-body p-0 bg-for-online-body"
+                         style="position: relative; overflow: auto; border-radius: 0px 0px 20px 20px">
+                        <div>
+                            <h6>haxball.ts3.ru</h6>
+                        </div>
+                        <div style="width:  inherit; padding: 5%">
+                            <div class="d-inline-flex">
+                                <a href="ts3server://haxball.ts3.ru">
+                                    <img src='{% static "img/ico/ts_logo.png" %}' title="haxball.ts3.ru"
+                                         style="cursor: pointer; margin: 0% 5%" width="100%">
+                                </a>
+                            </div>
+                            <div class="d-inline-flex">
+                                <img src='{% static "img/ico/ts_logo.png" %}' onclick="navigator.clipboard.writeText('haxball.ts3.ru'); alert('Скопирован адрес сервера! haxball.ts3.ru');"
+                                     title="haxball.ts3.ru" style="cursor: pointer; margin: 0% 5%" width="100%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card mt-2 mb-1" style="border-radius: 20px 20px 20px 20px;">
                     <div class="card-header text-center">
                         <h5>Teamspeak3-сервер</h5>
