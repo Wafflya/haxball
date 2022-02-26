@@ -32,51 +32,6 @@
                 {% endblock %}
 
 
-                <div class="card mt-2 mb-1" style="border-radius: 20px 20px 20px 20px;">
-                    <div class="card-header d-inline-flex mb-0 justify-content-center bg-for-online-head"
-                         style="border-radius: 20px 20px 0px 0">
-                        <h5>Сервер TeamSpeak 3</h5>
-                    </div>
-
-                    <div class="card-body p-0 bg-for-online-body"
-                         style="position: relative; border-radius: 0px 0px 20px 20px; width:  inherit; padding: 5%">
-                        <h5 class="card-title mb-1 mt-1 text-center">haxball.ts3.ru</h5>
-                        <div class="d-flex">
-                            <div class="d-inline-flex mx-3 mb-2">
-                                <a href="ts3server://haxball.ts3.ru">
-                                    <img src='{% static "img/ico/ts_logo.png" %}' title="haxball.ts3.ru"
-                                         style="cursor: pointer;" width="100%">
-                                </a>
-                            </div>
-                            <div class="d-inline-flex mx-3 mb-2">
-                                <img src='{% static "img/ico/ts_logo.png" %}'
-                                     onclick="navigator.clipboard.writeText('haxball.ts3.ru'); alert('Скопирован адрес сервера! haxball.ts3.ru');"
-                                     title="haxball.ts3.ru" style="cursor: pointer;" width="100%">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mt-2 mb-1" style="border-radius: 20px 20px 20px 20px;">
-                    <div class="card-header text-center">
-                        <h5>Teamspeak3-сервер</h5>
-                    </div>
-                    <div class="card-body d-flex justify-content-around">
-                        <div class="d-inline-flex">
-                            <img src='{% static "img/ico/ts_logo.png" %}'
-                                 onclick="navigator.clipboard.writeText('haxball.ts3.ru'); alert('Скопирован адрес сервера! haxball.ts3.ru');"
-                                 title="haxball.ts3.ru"
-                                 style="cursor: pointer;" width="100%">
-                        </div>
-                        <div class="d-inline-flex">
-                            <a href="ts3server://haxball.ts3.ru"><img src='{% static "img/ico/ts_logo.png" %}'
-                                                                      title="haxball.ts3.ru"
-                                                                      style="cursor: pointer;" width="100%">
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
 
                 {% polls_list 2 user %}
 
@@ -165,23 +120,32 @@
                             sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
                 </div>
 
+                <div class="card mt-2 mb-1" style="border-radius: 20px 20px 20px 20px;">
+                    <div class="card-header d-inline-flex mb-0 justify-content-center bg-for-online-head"
+                         style="border-radius: 20px 20px 0px 0">
+                        <h5>Сервер TeamSpeak 3</h5>
+                    </div>
 
-                <!-- VK Widget -->
-                <div class="card mb-1 mr-0 mt-2 text-right">
-                    <script type="text/javascript" src="https://vk.com/js/api/openapi.js?168"></script>
-
-                    <!-- VK Widget -->
-                    <div id="vk_groups"></div>
-                    <script type="text/javascript">
-                        VK.Widgets.Group("vk_groups", {
-                            mode: 3,
-                            width: "auto",
-                            color1: '3C3C3C',
-                            color2: 'FFFFFF',
-                            color3: '0B7CFD'
-                        }, 147630853);
-                    </script>
+                    <div class="card-body p-0 bg-for-online-body"
+                         style="position: relative; border-radius: 0px 0px 20px 20px; width:  inherit; padding: 5%">
+                        <h5 class="card-title mb-1 mt-1 text-center text-white">haxball.ts3.ru</h5>
+                        <div class="d-flex">
+                            <div class="d-inline-flex mb-2">
+                                <a href="ts3server://haxball.ts3.ru" class="m-0 p-0">
+                                    <img src='{% static "img/ico/button-link.png" %}' title="haxball.ts3.ru"
+                                         style="cursor: pointer;" width="100%">
+                                </a>
+                            </div>
+                            <div class="d-inline-flex mb-2">
+                                <img src='{% static "img/ico/button-copy.png" %}'
+                                     onclick="navigator.clipboard.writeText('haxball.ts3.ru'); alert('Скопирован адрес сервера! haxball.ts3.ru');"
+                                     title="haxball.ts3.ru" style="cursor: pointer;" width="100%">
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
 
 
             </div>
