@@ -62,24 +62,25 @@
                                                 <div class="d-flex justify-content-between" style="padding:.75rem;">
 
                                                     <span style="font-size: smaller">
-                                                        <span class="font-weight-bold small"> {{ res.time_date|time:"H:i" }}
+                                                        <span class="font-weight-bold small"> {{ res.time_date|time:"H:i" }} |
                                                         </span>
                                                     <span class="small">
                                                         {% if res.match.league.is_cup %}
                                                             {{ res.match.numb_tour.number|round_name:res.match.league.tours.count }}
                                                             ,
                                                         {% else %}
-                                                            {{ res.match.numb_tour }} тур,{% endif %}
+                                                            {{ res.match.numb_tour }} тур{% endif %}
                                                     </span>
                                                         <span class="font-weight-bold small">
+                                                            |
                                                             <a href="{{ res.match.get_absolute_url }}">
-                                                            <img src="{{ res.match.team_home.logo.url }}" width="18px"
-                                                                 height="18px" alt="{{ res.match.team_home.title }}"
+                                                            <img src="{{ res.match.team_home.logo.url }}" width="16px"
+                                                                 height="16px" alt="{{ res.match.team_home.title }}"
                                                                  style="vertical-align: bottom;">
                                                             {{ res.match.team_home.short_title }} - {{ res.match.team_guest.short_title }}
                                                             <img src="{{ res.match.team_guest.logo.url }}"
-                                                                 alt="{{ res.match.team_guest.title }}" width="18px"
-                                                                 height="18px" style="vertical-align: bottom;">
+                                                                 alt="{{ res.match.team_guest.title }}" width="16px"
+                                                                 height="16px" style="vertical-align: bottom;">
                                                             </a>
                                                         </span>
                                                     </span>
