@@ -38,7 +38,21 @@
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{% url 'tournament:league' 's8-premier-league' %}">Высшая лига</a>
                     <a class="dropdown-item" href="{% url 'tournament:league' 's8-first_sharks' %}">Дивизион Акул</a>
-                    <a class="dropdown-item" href="{% url 'tournament:league' 's8-first_berkuts' %}">Дивизион Беркутов</a>
+                    <a class="dropdown-item" href="{% url 'tournament:league' 's8-first_berkuts' %}">Дивизион
+                        Беркутов</a>
+
+                    <a class="dropdown-item submenu" href="#">Кубок Лиги</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's8-league-cup-group-A' %}">Кубок Лиги
+                            группа А</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's8-league-cup-group-B' %}">Кубок Лиги
+                            группа B</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's8-league-cup-group-C' %}">Кубок Лиги
+                            группа С</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's8-league-cup-group-D' %}">Кубок Лиги
+                            группа D</a>
+
+                    </div>
 
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/397/reglament-8">Регламент</a>
                     <a class="dropdown-item" href="{% url 'reservation:host_reservation' %}">Бронь хоста</a>
@@ -59,8 +73,8 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link font-weight-bold mx-1 text-right text-danger"
-                   href="https://www.cis-haxball.com/post/403/rereg">Регистрация</a>
+                <a class="nav-link font-weight-bold mx-1 text-right text-success"
+                   href="{% url 'core:guides' %}">Гайды</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link font-weight-bold mx-1 text-right" href="{% url 'core:tournaments' %}">Турниры</a>
@@ -69,7 +83,7 @@
                 <a class="nav-link font-weight-bold mx-1 text-right" href="{% url 'core:fastcups' %}">Фасткапы</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link font-weight-bold mx-1 text-right" href="{% url 'core:lives' %}">Трансляции</a>
+                <a class="nav-link font-weight-bold mx-1 text-right" href="{% url 'core:lives' %}">Видео</a>
             </li>
             <li class="nav-item font-weight-bold dropdown mx-1 text-right">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
