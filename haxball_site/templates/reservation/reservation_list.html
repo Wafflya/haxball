@@ -61,23 +61,27 @@
                                             {% if res.host == host and res.time_date|date_equal:match_day %}
                                                 <div class="d-flex justify-content-between" style="padding:.75rem;">
 
-                                                    <span class="font-weight-bolder small">
-                                                        {{ res.time_date|time:"H:i" }}
-                                                    </span>
-                                                    <span class="font-weight-bold small">
+                                                    <span style="font-size: smaller">
+                                                        <span class="font-weight-bold small"> {{ res.time_date|time:"H:i" }}
+                                                        </span>
+                                                    <span class="small">
                                                         {% if res.match.league.is_cup %}
-                                                            {{ res.match.numb_tour.number|round_name:res.match.league.tours.count }},
+                                                            {{ res.match.numb_tour.number|round_name:res.match.league.tours.count }}
+                                                            ,
                                                         {% else %}
                                                             {{ res.match.numb_tour }} тур,{% endif %}
-                                                        <a href="{{ res.match.get_absolute_url }}">
-                                                        <img src="{{ res.match.team_home.logo.url }}" width="20px"
-                                                             height="20px" alt="{{ res.match.team_home.title }}"
-                                                             style="vertical-align: bottom;">
-                                                        {{ res.match.team_home.short_title }} - {{ res.match.team_guest.short_title }}
-                                                        <img src="{{ res.match.team_guest.logo.url }}"
-                                                             alt="{{ res.match.team_guest.title }}" width="20px"
-                                                             height="20px" style="vertical-align: bottom;">
-                                                        </a>
+                                                    </span>
+                                                        <span class="font-weight-bold small">
+                                                            <a href="{{ res.match.get_absolute_url }}">
+                                                            <img src="{{ res.match.team_home.logo.url }}" width="18px"
+                                                                 height="18px" alt="{{ res.match.team_home.title }}"
+                                                                 style="vertical-align: bottom;">
+                                                            {{ res.match.team_home.short_title }} - {{ res.match.team_guest.short_title }}
+                                                            <img src="{{ res.match.team_guest.logo.url }}"
+                                                                 alt="{{ res.match.team_guest.title }}" width="18px"
+                                                                 height="18px" style="vertical-align: bottom;">
+                                                            </a>
+                                                        </span>
                                                     </span>
                                                     {% if user|match_can_delete:res.match %}
                                                         <a class="text-danger" data-toggle="modal"
