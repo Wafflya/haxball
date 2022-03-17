@@ -3,8 +3,8 @@
         <form method="POST" class="row p-3">
             {% csrf_token %}
             <input type="hidden" name="author" value="{{ user.id }}">
-            <div class="form-group col-7">
-                <label for="match" class="text-center h6 mb-1">Матч</label>
+            <div class="form-group text-center col-7">
+                <label for="match" class="h6 mb-1">Матч</label>
                 <select id="match" class="form-control" name="match">
                     {% for m in matches %}
                         <option {% if forloop.first %}selected{% endif %} value="{{ m.id }}">
@@ -15,13 +15,41 @@
                 </select>
             </div>
 
-            <div class="form-group col-5 mb-1 text-center">
-                <h6>
-                    <label for="match_date" class="mb-1 h6">Дата матча</label>
-                </h6>
-                <input id="match_date" required type="datetime-local" name="time_date"
-                       min="{{ date_today|date:"Y-m-d" }}T{{ date_today|time:"H:s" }}"
-                       max="{{ time_end|date:'Y-m-d' }}T{{ time_end|time:'H:s' }}">
+            <div class="form-group col-2 mb-1 px-2 text-center">
+
+                <label for="match_date" class="mb-1 h6">Дата матча</label>
+                <select class="match_date custom-select" name="match_date">
+                    <option value="{{ date_today|date:"Y-m-d" }}" selected>Сегодня</option>
+                    <option value="{{ date_tomorrow|date:"Y-m-d" }}">Завтра</option>
+                </select>
+
+            </div>
+            <div class="form-group col-3 mb-1 text-center">
+
+                <label for="match_time" class="mb-1 h6">Время матча</label>
+                <div class="row">
+
+                    <div class="col-6 px-2">
+                        <select class="match_time form-control text-center" name="match_hour">
+                            {% for hour in hours_list %}
+                                <option {% if forloop.first %}selected{% endif %} value="{{ hour }}">
+                                    {{ hour }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-6 px-2">
+                        <select class="match_time form-control text-center" name="match_minute">
+                            {% for minute in minutes_list %}
+                                <option {% if forloop.first %}selected{% endif %} value="{{ minute }}">
+                                    {{ minute }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                </div>
+
             </div>
 
 
@@ -31,8 +59,8 @@
 
         </form>
     {% else %}
-            <div class="d-inline-flex justify-content-center bg-c-lite-unknown p-3" style="border-radius: 30px">
-                <h6 class="mb-0">У Вас сыграны/забронированны все матчи</h6>
-            </div>
+        <div class="d-inline-flex justify-content-center bg-c-lite-unknown p-3" style="border-radius: 30px">
+            <h6 class="mb-0">У Вас сыграны/забронированны все матчи</h6>
+        </div>
     {% endif %}
 </div>

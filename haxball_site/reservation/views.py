@@ -1,4 +1,4 @@
-from datetime import timedelta, datetime
+from datetime import timedelta, datetime, time
 from .forms import ReservationEntryForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -23,9 +23,11 @@ class ReservationList(ListView):
     def post(self, request):
         data = request.POST
 
-        date_time_obj = datetime.strptime(data['time_date'], '%Y-%m-%dT%H:%M')
-        d1 = date_time_obj - timedelta(minutes=25)
-        d2 = date_time_obj + timedelta(minutes=25)
+        # date_time_obj = datetime.strptime(data['time_date'], '%Y-%m-%dT%H:%M')
+        date_time_obj = datetime.combine(datetime.strptime(data["match_date"], '%Y-%m-%d').date(),
+                                         time(hour=int(data["match_hour"]), minute=int(data["match_minute"])))
+        d1 = date_time_obj - timedelta(minutes=29)
+        d2 = date_time_obj + timedelta(minutes=29)
         reserved = ReservationEntry.objects.filter(time_date__range=[d1, d2])
         active_hosts = ReservationHost.objects.filter(is_active=True)
         if reserved.count() < active_hosts.count():
@@ -41,8 +43,6 @@ class ReservationList(ListView):
                 'reservations': ReservationEntry.objects.filter(match__is_played=False).order_by('-time_date'),
                 'active_hosts': ReservationHost.objects.filter(is_active=True),
                 'message': 'Выбранное время занято!!'})
-
-
 
 
 class ReplaysList(ListView):

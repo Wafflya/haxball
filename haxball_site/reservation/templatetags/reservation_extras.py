@@ -41,13 +41,19 @@ def user_can_reserv(user):
 @register.inclusion_tag('reservation/reservation_form.html')
 def reservation_form(user):
     t = teams_can_reserv(user)
+
     actual_tour = TourNumber.objects.filter(league__championship__is_active=True, is_actual=True).first()
+    if actual_tour is None:
+        return {
+            'matches': []
+        }
 
     matches_unplayed = Match.objects.filter((Q(team_home__in=t) | Q(team_guest__in=t)), is_played=False,
                                             numb_tour__number__lte=actual_tour.number,
                                             ).order_by('-numb_tour__number')
     matches_to_choose = []
 
+    # Такой костыль.... Нужно поправить
     for m in matches_unplayed:
         try:
             a = m.match_reservation
@@ -55,15 +61,20 @@ def reservation_form(user):
             matches_to_choose.append(m)
 
     date_today = datetime.datetime.today()
-    d = date_today + timedelta(minutes=5)
+    """
+    Было нужно, когда можно было бронить матчи до какого-то времени.
     time_end = datetime.datetime(year=actual_tour.date_to.year, month=actual_tour.date_to.month,
                                  day=actual_tour.date_to.day, hour=23, minute=30, second=0)
-
+    """
+    hours_list = list(range(18, 24))
+    minutes_list = [0, 15, 30, 45]
     return {
         'matches': matches_to_choose,
-        'date_today': d,
-        'time_end': time_end,
         'user': user,
+        "date_today": date_today.date(),
+        "date_tomorrow": date_today.date() + timedelta(days=1),
+        "hours_list": hours_list,
+        "minutes_list": minutes_list
     }
 
 
