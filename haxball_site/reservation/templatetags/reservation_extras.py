@@ -41,26 +41,24 @@ def user_can_reserv(user):
 @register.inclusion_tag('reservation/reservation_form.html')
 def reservation_form(user):
     t = teams_can_reserv(user)
-    # print(t)
     actual_tour = TourNumber.objects.filter(league__championship__is_active=True, is_actual=True,
-                                            league__teams__in=t).first()
-    # print(actual_tour)
+                                            league__teams__in=t).distinct()
+    print(actual_tour)
     if actual_tour is None:
         return {
             'matches': []
         }
 
-    matches_unplayed = Match.objects.filter((Q(team_home__in=t) | Q(team_guest__in=t)), is_played=False,
-                                            numb_tour__number__lte=actual_tour.number,
-                                            ).order_by('-numb_tour__number')
+    # Матчи, которые можно будет выбрать
     matches_to_choose = []
 
-    # Такой костыль.... Нужно поправить
-    for m in matches_unplayed:
-        try:
-            a = m.match_reservation
-        except:
-            matches_to_choose.append(m)
+    # Просматриваем все активные туры и смотрим матчи, которые не сыграны и на которых нету брони
+    for tour in actual_tour:
+        matches_unplayed = Match.objects.filter((Q(team_home__in=t) | Q(team_guest__in=t)), is_played=False,
+                                                numb_tour__number__lte=tour.number, league=tour.league,
+                                                match_reservation=None
+                                                ).order_by('-numb_tour__number').distinct()
+        matches_to_choose.extend(matches_unplayed)
 
     date_today = datetime.datetime.today()
     """
