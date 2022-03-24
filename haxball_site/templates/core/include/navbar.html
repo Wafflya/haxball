@@ -38,9 +38,14 @@
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{% url 'tournament:league' 's8-premier-league' %}">Высшая лига</a>
                     <a class="dropdown-item" href="{% url 'tournament:league' 's8-cup' %}">Кубок России</a>
-                    <a class="dropdown-item" href="{% url 'tournament:league' 's8-first_sharks' %}">Дивизион Акул</a>
-                    <a class="dropdown-item" href="{% url 'tournament:league' 's8-first_berkuts' %}">Дивизион
-                        Беркутов</a>
+
+                    <a class="dropdown-item submenu" href="#">Первая лига</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's8-first_sharks' %}">Дивизион
+                            Акул</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's8-first_berkuts' %}">Дивизион
+                            Беркутов</a>
+                    </div>
 
                     <a class="dropdown-item submenu" href="#">Кубок Лиги</a>
                     <div class="dropdown-menu">
@@ -52,11 +57,11 @@
                             группа С</a>
                         <a class="dropdown-item" href="{% url 'tournament:league' 's8-league-cup-group-D' %}">Кубок Лиги
                             группа D</a>
-
                     </div>
 
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/397/reglament-8">Регламент</a>
-                    <a class="dropdown-item" href="https://docs.google.com/spreadsheets/d/1ePD6PJEtF9ZPuXv917uoN6C-MRo2v5Ny3R6mq5hZiLk/edit#gid=0">Календарик</a>
+                    <a class="dropdown-item"
+                       href="https://docs.google.com/spreadsheets/d/1ePD6PJEtF9ZPuXv917uoN6C-MRo2v5Ny3R6mq5hZiLk/edit#gid=0">Календарик</a>
 
                     <a class="dropdown-item" href="{% url 'reservation:host_reservation' %}">Бронь хоста</a>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/396/postpone">Переносы</a>
