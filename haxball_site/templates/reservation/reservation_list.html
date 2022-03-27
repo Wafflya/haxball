@@ -2,15 +2,10 @@
 {% load static %}
 {% load reservation_extras %}
 
+{% block styles %}
 
-<style>
-    body {
-        background-image: url({% static "img/backgrounds/bg-light-4860.png" %})
-    }
-
-</style>
-<link rel="stylesheet" type="text/css" href="{% static "reservation/css/reservation_list.css" %}">
-
+    <link rel="stylesheet" type="text/css" href="{% static "reservation/css/reservation_list.css" %}">
+{% endblock %}
 
 
 {% block title %}Чемпионат | Бронь хоста           cis-haxball.com {% endblock %}
