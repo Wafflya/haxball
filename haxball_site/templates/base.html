@@ -39,13 +39,13 @@
     <style>
 
 
-        body {
-            {#transition: background-color 9s ease 0s;#}
-            {#background-color: rgb(211, 111, 230);#}
-
+        {#        body {#}
+        {#transition: background-color 9s ease 0s;#}
+        {#background-color: rgb(211, 111, 230);#}
+        {##}
         {#background-image: url({% static "img/backgrounds/anime_back4.jpg" %});#}{#background-size: cover;#}
-
-        }
+        {##}
+        {#        }#}
     </style>
     {% block styles %} {% endblock %}
     <script data-ad-client="ca-pub-1603400488742656" async
@@ -61,12 +61,37 @@
     <script type="text/javascript">
         VK.init({apiId: 7568320, onlyWidgets: true});
     </script>
+    <script>
+        function drawColor() {
+            var r = Math.random() * 255;
+            var g = 128;
+            var b = 255 - r;
+            var avg = (r + g + b) / 3;
+            r = Math.floor((r + avg) / 5);
+            g = Math.floor((g + avg) / 5);
+            b = Math.floor((b + avg) / 5);
+            randomColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+        }
+
+        var randomColor;
+        drawColor();
+        $('body').css({'transition': "background-color 9s"})
+        $('body').css('backgroundColor', randomColor);
+        timer = setInterval(function () {
+            drawColor();
+            $('body').css('backgroundColor', randomColor);
+        }, 100);
+
+    </script>
 
     {% block scripts %} {% endblock %}
 </head>
-<body style="transition: background-color 1s ease 0s; background-color: rgb(35,35,66);">
+<body>
+
+
 {% include "core/include/navbar.html" %}
 {% block content %}
 {% endblock %}
+
 </body>
 </html>
