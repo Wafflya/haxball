@@ -38,11 +38,12 @@
           rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(-45deg, #f6dc57, #11a304, #3e5faf, #890321);
+            background: linear-gradient(-45deg, #f6cf02, #63f458, #769bfa, #ed466b);
             background-size: 400% 400%;
             animation: gradient 1s ease infinite;
             height: 100vh;
         }
+
         @keyframes gradient {
             0% {
                 background-position: 0% 50%;
@@ -78,5 +79,29 @@
 {% include "core/include/navbar.html" %}
 {% block content %}
 {% endblock %}
+<script style="transition: background-color 9s ease 0s; background-color: rgb(35, 51, 66);">
+
+    function drawColor() {
+        var r = Math.random() * 255;
+        var g = 128;
+        var b = 255 - r;
+        var avg = (r + g + b) / 3;
+        r = Math.floor((r + avg) / 5);
+        g = Math.floor((g + avg) / 5);
+        b = Math.floor((b + avg) / 5);
+        randomColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+    }
+
+    var randomColor;
+    drawColor();
+    $('body').css({'transition': "background-color 9s"})
+    $('body').css('backgroundColor', randomColor);
+    timer = setInterval(function () {
+        drawColor();
+        $('body').css('backgroundColor', randomColor);
+    }, 10000);
+
+
+</script>
 </body>
 </html>
