@@ -37,12 +37,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Serif+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap"
           rel="stylesheet">
     <style>
-        body {
-            transition: background-color 9s ease 0s;
-            background-color: rgb(211, 111, 230);
 
-            {#background-image: url({% static "img/backgrounds/anime_back4.jpg" %});#}
-            {#background-size: cover;#}
+
+        body {
+            {#transition: background-color 9s ease 0s;#}
+            {#background-color: rgb(211, 111, 230);#}
+
+        {#background-image: url({% static "img/backgrounds/anime_back4.jpg" %});#}{#background-size: cover;#}
 
         }
     </style>
@@ -63,7 +64,7 @@
 
     {% block scripts %} {% endblock %}
 </head>
-<body>
+<body style="transition: background-color 1s ease 0s; background-color: rgb(35,35,66);">
 {% include "core/include/navbar.html" %}
 {% block content %}
 {% endblock %}
