@@ -400,8 +400,8 @@ class PlayerTransfer(models.Model):
 
 
 class Achievements(models.Model):
-    title = models.CharField('Название', max_length=64)
-    description = models.CharField('Описание', max_length=128)
+    title = models.CharField('Название', max_length=200)
+    description = models.CharField('Описание', max_length=400)
     image = models.ImageField('Изображение медальки в профиле', upload_to='medals/', blank=True, null=True)
     mini_image = models.ImageField('Изображение медальки в комменты', upload_to='medals/', blank=True, null=True)
     player = models.ManyToManyField(Player, related_name='player_medals', blank=True, null=True)
