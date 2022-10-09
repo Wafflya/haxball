@@ -18,7 +18,7 @@
 
     <div class="container-fluid justify-content-center">
         <div class="row" style="max-width: 1600px; position: relative; margin: 0 auto;">
-            <div class="col-2 col-xl-2 col-lg-3 col-sm-6 order-xl-1 order-lg-2 order-md-3 order-sm-3 my-2">
+            <div class="col-1 col-xl-2 col-lg-3 col-sm-6 order-xl-1 order-lg-2 order-md-2 order-sm-2 my-2 px-1">
                 {% block sidebar_users %}
                     {% show_users_online 12 %}
                 {% endblock %}
@@ -30,80 +30,66 @@
 
                 <div class="card mb-1 mr-0 mt-2 text-right">
                     <iframe src="https://yoomoney.ru/quickpay/shop-widget?writer=seller&default-sum=500&button-text=12&payment-type-choice=on&successURL=https%3A%2F%2Fwww.cis-haxball.com%2F&quickpay=shop&account=410011043451485&targets=%D0%9F%D0%B5%D1%80%D0%B5%D0%B2%D0%BE%D0%B4%20%D0%BF%D0%BE%20%D0%BA%D0%BD%D0%BE%D0%BF%D0%BA%D0%B5&"
-                            width="423" height="222" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+                            width="100%" height="222" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
                     <a href="https://sobe.ru/na/y2Z2Y1A0s1s0" class="alert-link">Или клик сюда</a>
                 </div>
 
             </div>
-            <div class="col-8 col-xl-8 col-lg-12 col-md-12 col-sm-12 mx-0 order-xl-2 order-md-1 order-lg-1">
-                <div class="row">
+            <div class="col-6 main-col col-xl-6 col-lg-12 col-md-12 col-sm-12 mx-0 order-xl-2 order-md-1 order-sm-1 order-lg-1 px-1">
 
 
-                    <!-- Всплывающее окно входа на сайт -->
-                    {% include 'core/include/login_logout_modal/log_out_modal.html' %}
+                <!-- Всплывающее окно входа на сайт -->
+                {% include 'core/include/login_logout_modal/log_out_modal.html' %}
 
-                    <!-- Всплывающее окно выхода с сайта -->
-                    <div class="modal" id="logoutModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Хотите выйти?</h4>
-                                    <button type="button" class="close" data-dismiss="modal">×</button>
-                                </div>
-                                <div class="modal-footer">
-                                    <form method="post" action="{% url 'account_logout' %}">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-primary">Да</button>
-                                    </form>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
-                                </div>
+                <!-- Всплывающее окно выхода с сайта -->
+                <div class="modal" id="logoutModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Хотите выйти?</h4>
+                                <button type="button" class="close" data-dismiss="modal">×</button>
+                            </div>
+                            <div class="modal-footer">
+                                <form method="post" action="{% url 'account_logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary">Да</button>
+                                </form>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="main-col col-xl-9 col-lg-9 col-sm-12">
-
-                        {# Блок для отображение профиля пользователя #}
-                        {% block profile_of_user %}
-                        {% endblock %}
-
-                        {# Блок для отображение одного поста, пост-детейл #}
-                        {% block post %}
-                        {% endblock %}
-
-                        {# Блок для списка постов #}
-                        {% block postlist %}
-                        {% endblock %}
-
-                        {# Блок для отображение списка комментариев #}
-                        {% block comments %}
-                        {% endblock %}
-
-                    </div>
-
-                    <div class="col-xl-3 col-lg-3 col-sm-6 px-0">
-
-
-                        {% block sidebar_last_activity %}
-                            {% show_last_activity 10 %}
-                        {% endblock %}
-
-                        {% block sidebar_top_comments %}
-                            {% show_top_comments 5 %}
-                        {% endblock %}
-
-                        <!--
-                {#% block sidebar_for_like %#}
-                {#% show_post_with_top_likes 4 %#}
-                {#% endblock %#}  -->
-
-                    </div>
                 </div>
+
+
+                {# Блок для отображение профиля пользователя #}
+                {% block profile_of_user %}
+                {% endblock %}
+
+                {# Блок для отображение одного поста, пост-детейл #}
+                {% block post %}
+                {% endblock %}
+
+                {# Блок для списка постов #}
+                {% block postlist %}
+                {% endblock %}
+
+                {# Блок для отображение списка комментариев #}
+                {% block comments %}
+                {% endblock %}
+
             </div>
+            <div class="col-3 col-xl-2 col-lg-3 col-sm-6 order-3 order-xl-3 order-sm-3 px-1">
 
+                {% block sidebar_last_activity %}
+                    {% show_last_activity 10 %}
+                {% endblock %}
 
-            <div class="col-2 col-xl-2 col-lg-3 col-sm-6 order-3 order-xl-3 order-sm-3 pr-0 pl-1">
+                {% block sidebar_top_comments %}
+                    {% show_top_comments 5 %}
+                {% endblock %}
+
+            </div>
+            <div class="col-2 col-xl-2 col-lg-3 col-sm-6 order-3 order-xl-3 order-sm-3 px-1">
 
 
                 <div class="card mb-1 mr-0 mt-2 text-right">
