@@ -37,31 +37,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Serif+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap"
           rel="stylesheet">
     <style>
-        {#body {#}
-        {#    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);#}
-        {#    background-size: 400% 400%;#}
-        {#    animation: gradient 15s ease infinite;#}
-        {#    height: 100vh;#}
-        {##}
-        {#@keyframes gradient {#}
-        {#    0% {#}
-        {#        background-position: 0% 50%;#}
-        {#    }#}
-        {#    50% {#}
-        {#        background-position: 100% 50%;#}
-        {#    }#}
-        {#    100% {#}
-        {#        background-position: 0% 50%;#}
-        {#    }#}
+        body {
+            background: linear-gradient(-45deg, #f6dc57, #11a304, #3e5faf, #890321);
+            background-size: 400% 400%;
+            animation: gradient 1s ease infinite;
+            height: 100vh;
+        }
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
 
-
-        {#        body {#}
-        {#transition: background-color 9s ease 0s;#}
-        {#background-color: rgb(211, 111, 230);#}
-        {##}
-        {#background-image: url({% static "img/backgrounds/anime_back4.jpg" %});#}{#background-size: cover;#}
-        {##}
-        {#        }#}
     </style>
     {% block styles %} {% endblock %}
     <script data-ad-client="ca-pub-1603400488742656" async
@@ -81,29 +74,9 @@
 
     {% block scripts %} {% endblock %}
 </head>
-<body style="transition: background-color 9s ease 0s; background-color: rgb(35, 51, 66);">
+<body>
 {% include "core/include/navbar.html" %}
 {% block content %}
 {% endblock %}
-<script>
-
-  function drawColor() {
-    var r=Math.random()*255;
-    var g=128;
-    var b=255-r;
-    var avg=(r+g+b)/3;
-    r=Math.floor((r+avg)/5);g=Math.floor((g+avg)/5);b=Math.floor((b+avg)/5);
-    randomColor = 'rgb(' + r + ',' + g + ',' + b + ')';
-  }
-  var randomColor; drawColor();
-  $('body').css({'transition':  "background-color 9s"})
-  $('body').css('backgroundColor', randomColor);
-  timer = setInterval( function(){drawColor();$('body').css('backgroundColor', randomColor);}, 10000);
-
-/* Static Color
-$('body').css('backgroundColor', 'rgb(40,45,50)');
-*/
-
-</script>
 </body>
 </html>
