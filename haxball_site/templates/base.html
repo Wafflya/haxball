@@ -38,8 +38,12 @@
           rel="stylesheet">
     <style>
         body {
-            background-image: url({% static "img/backgrounds/anime_back4.jpg" %});
-            background-size: cover;
+            transition: background-color 9s ease 0s;
+            background-color: rgb(211, 111, 230);
+
+            {#background-image: url({% static "img/backgrounds/anime_back4.jpg" %});#}
+            {#background-size: cover;#}
+
         }
     </style>
     {% block styles %} {% endblock %}
