@@ -37,63 +37,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Serif+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap"
           rel="stylesheet">
     <style>
-        html {
-            height: 100%;
+       body {
+            background: linear-gradient(-45deg, #158078, #00a86b, #80bf45, #1e213d, #000000);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            height: 100vh;
         }
 
-        body {
-            margin: 0;
-        }
-
-        .bg {
-            animation: slide 3s ease-in-out infinite alternate;
-            background-image: linear-gradient(-10deg, #46fb0a 50%, #ff000d 50%);
-            bottom: 0;
-            left: -50%;
-            opacity: .5;
-            position: fixed;
-            right: -50%;
-            top: 0;
-            z-index: -1;
-        }
-
-        .bg2 {
-            animation-direction: alternate-reverse;
-            animation-duration: 4s;
-        }
-
-        .bg3 {
-            animation-duration: 5s;
-        }
-
-
-        @keyframes slide {
+        @keyframes gradient {
             0% {
-                transform: translateX(-25%);
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
             }
             100% {
-                transform: translateX(25%);
+                background-position: 0% 50%;
             }
         }
-
-        {#body {#}
-        {#    background: linear-gradient(-45deg, #721422, #482058, #158078, #00a86b);#}
-        {#    background-size: 400% 400%;#}
-        {#    animation: gradient 25s ease infinite;#}
-        {#    height: 100vh;#}
-
-        {##}
-        {#@keyframes gradient {#}
-        {#    0% {#}
-        {#        background-position: 0% 50%;#}
-        {#    }#}
-        {#    50% {#}
-        {#        background-position: 100% 50%;#}
-        {#    }#}
-        {#    100% {#}
-        {#        background-position: 0% 50%;#}
-        {#    }#}
-
     </style>
     {% block styles %} {% endblock %}
     <script data-ad-client="ca-pub-1603400488742656" async
@@ -114,9 +75,6 @@
     {% block scripts %} {% endblock %}
 </head>
 <body>
-<div class="bg"></div>
-<div class="bg bg2"></div>
-<div class="bg bg3"></div>
 {% include "core/include/navbar.html" %}
 {% block content %}
 {% endblock %}
