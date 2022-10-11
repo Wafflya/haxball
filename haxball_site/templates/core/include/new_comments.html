@@ -78,10 +78,12 @@
                             <div class="comment-text w-100">
                                 <div class="d-flex justify-content-between">
                                     <div class="m-0 d-flex" style="font-size: 13pt; font-weight: 600;">
-                                        {% for icon in comment.author.user_profile.user_icon.all %}
-                                            <img src="{{ icon.image.url }}" width="16px" height="16px"
-                                                 title="{{ icon.description }}">
-                                        {% endfor %}
+                                        <div class="mr-2" style="vertical-align: middle">
+                                            {% for icon in comment.author.user_profile.user_icon.all %}
+                                                <img src="{{ icon.image.url }}" width="16px" height="16px"
+                                                     title="{{ icon.description }}">
+                                            {% endfor %}
+                                        </div>
                                         <a href="{{ comment.author.user_profile.get_absolute_url }}">
                                             {{ comment.author.username }}
                                         </a>
