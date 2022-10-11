@@ -78,12 +78,12 @@
                             <div class="comment-text w-100">
                                 <div class="d-flex justify-content-between">
                                     <span>
-                                        <h5 class="m-0">
+                                    <div class="m-0" style="font-size: 13pt; font-weight: 600;">
                                             {% for icon in comment.author.user_profile.user_icon.all %}
                                                 <img src="{{ icon.image.url }}" width="16px" height="16px"
                                                      title="{{ icon.description }}">
                                             {% endfor %}
-                                            <a href="{{ comment.author.user_profile.get_absolute_url }}">
+                                        <a href="{{ comment.author.user_profile.get_absolute_url }}">
                                                 {{ comment.author.username }}
                                             </a>
 
@@ -92,7 +92,7 @@
                             {% if comment.author.user_profile.karma >= 0 %}badge-success{% else %}badge-danger{% endif %}">{{ comment.author.user_profile.karma }}
                                             </span>
                                             </span>
-                                        </h5>
+                                        </div>
                                     </span>
                                     <span>
                                             {% for medal in comment.author.user_player.player_medals.all %}
