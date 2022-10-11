@@ -24,6 +24,11 @@ p {
 
 }
 
+.comment-body {
+        font-size: 12pt;
+        font-family: 'Montserrat', sans-serif !important
+}
+
 .comment-body p img {
     max-width: 100%;
 }
