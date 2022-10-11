@@ -39,8 +39,29 @@
     <style>
 
         body {
-            background: linear-gradient(-45deg, #00a86b, #158078, #252850);
-            background-size: 200% 200%;
+            background: linear-gradient(-45deg, #00a86b, #158078, #191970, #000000);
+            background-size: 240% 240%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            animation: gradient 36s ease infinite;
+            height: 100vh;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        body {
+            background: linear-gradient(-45deg, #00a86b, #158078, #191970, #000000);
+            background-size: 240% 240%;
             background-repeat: no-repeat;
             background-attachment: fixed;
             animation: gradient 36s ease infinite;
@@ -114,6 +135,7 @@
         }
 
         .snowflake {
+            font-size: 50px;
             position: fixed;
             top: -10%;
             z-index: 9999;
@@ -194,15 +216,6 @@
             animation-delay: 3s, 1.5s
         }
 
-        /* Demo Purpose Only*/
-        .demo {
-            font-family: 'Raleway', sans-serif;
-            color: #fff;
-            display: block;
-            margin: 0 auto;
-            padding: 15px 0;
-            text-align: center;
-        }
 
         .demo a {
             font-family: 'Raleway', sans-serif;
@@ -240,7 +253,7 @@
         ❆
     </div>
     <div class="snowflake">
-        ❄
+        ⚽
     </div>
     <div class="snowflake">
         ❅
@@ -260,6 +273,46 @@
     <div class="snowflake">
         ❄
     </div>
+    <div class="snowflake">
+        ❄
+    </div>
+    <div class="snowflake">
+        ❄
+    </div>
+    <div class="snowflake">
+        ❄
+    </div>
+    <div class="snowflake">
+        ❄
+    </div>
+    <div class="snowflake">
+        ❄
+    </div>
+    <div class="snowflake">
+        ❄
+    </div>
+    <div class="snowflake">
+        ❄
+    </div>
+    <div class="snowflake">
+        ❄
+    </div>
+    <div class="snowflake">
+        ❄
+    </div>
+    <div class="snowflake">
+        ❄
+    </div>
+    <div class="snowflake">
+        ❄
+    </div>
+    <div class="snowflake">
+        ❄
+    </div>
+    <div class="snowflake">
+        ❄
+    </div>
+
 </div>
 {% include "core/include/navbar.html" %}
 {% block content %}
