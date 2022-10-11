@@ -234,7 +234,7 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="d-inline-flex">
                                             <span>
-                                                <h5 class="m-0">
+                                                <div class="m-0" style="font-size: 13pt; font-weight: 600;">
                                                     {% for icon in children.author.user_profile.user_icon.all %}
                                                         <img src="{{ icon.image.url }}" width="16px" height="16px"
                                                              title="{{ icon.description }}">
@@ -251,18 +251,18 @@
                                                     </span>
 
 
-                                                </h5>
+                                                </div>
                                             </span>
 
-                                            <i style="align-self: flex-end; margin-bottom: 2px;"> ответил </i>
+                                            <i style="align-self: flex-end; margin-bottom: 2px; font-size: 11pt;"> ответил </i>
                                             <a href="{{ children.parent.author.user_profile.get_absolute_url }}">
-                                                <h5 class="m-0 ml-2">
+                                                <div class="m-0 ml-2" style="font-size: 13pt; font-weight: 600;">
                                                     {% for icon in children.parent.author.user_profile.user_icon.all %}
                                                         <img src="{{ icon.image.url }}" width="16px" height="16px"
                                                              title="{{ icon.description }}">
                                                     {% endfor %}
                                                     {{ children.parent.author.username }}
-                                                </h5>
+                                                </div>
                                             </a>
                                         </div>
                                         <span>
