@@ -20,8 +20,6 @@ from tournament.models import Team
 
 
 # Вьюха для списка постов
-
-
 class PostListView(ListView):
     queryset = Post.objects.filter(category__is_official=True).order_by('-important', '-publish', )
     context_object_name = 'posts'
@@ -206,7 +204,6 @@ class FastcupView(ListView):
 
 
 # Список админов
-
 class AdminListView(ListView):
     us = User.objects.filter(is_staff=True).order_by('id')
     a = []
@@ -224,8 +221,6 @@ class AdminListView(ListView):
     context_object_name = 'users'
     template_name = 'core/admins/admin_list.html'
 
-
-#
 
 # Вьюха для турниров
 class TournamentsView(ListView):
