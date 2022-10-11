@@ -78,12 +78,13 @@
                             <div class="comment-text w-100">
                                 <div class="d-flex justify-content-between">
                                     <div class="m-0 d-flex" style="font-size: 13pt; font-weight: 600;">
-                                        <div class="mr-2" style="vertical-align: middle">
-                                            {% for icon in comment.author.user_profile.user_icon.all %}
+
+                                        {% for icon in comment.author.user_profile.user_icon.all %}
+                                            <div class="mr-1" style="vertical-align: middle">
                                                 <img src="{{ icon.image.url }}" width="16px" height="16px"
                                                      title="{{ icon.description }}">
-                                            {% endfor %}
-                                        </div>
+                                            </div>
+                                        {% endfor %}
                                         <a href="{{ comment.author.user_profile.get_absolute_url }}">
                                             {{ comment.author.username }}
                                         </a>
@@ -236,8 +237,11 @@
 
                                             <div class="m-0 d-flex mr-2" style="font-size: 13pt; font-weight: 600;">
                                                 {% for icon in children.author.user_profile.user_icon.all %}
-                                                    <img src="{{ icon.image.url }}" width="16px" height="16px"
-                                                         title="{{ icon.description }}">
+                                                    <div class="mr-1" style="vertical-align: middle">
+
+                                                        <img src="{{ icon.image.url }}" width="16px" height="16px"
+                                                             title="{{ icon.description }}">
+                                                    </div>
                                                 {% endfor %}
                                                 <a href="{{ children.author.user_profile.get_absolute_url }}">
                                                     {{ children.author.username }}
@@ -256,8 +260,11 @@
                                             <a href="{{ children.parent.author.user_profile.get_absolute_url }}">
                                                 <div class="m-0 ml-2" style="font-size: 13pt; font-weight: 600;">
                                                     {% for icon in children.parent.author.user_profile.user_icon.all %}
-                                                        <img src="{{ icon.image.url }}" width="16px" height="16px"
-                                                             title="{{ icon.description }}">
+                                                        <div class="mr-1" style="vertical-align: middle">
+
+                                                            <img src="{{ icon.image.url }}" width="16px" height="16px"
+                                                                 title="{{ icon.description }}">
+                                                        </div>
                                                     {% endfor %}
                                                     {{ children.parent.author.username }}
                                                 </div>
