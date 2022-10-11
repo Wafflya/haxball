@@ -78,20 +78,20 @@
                             <div class="comment-text w-100">
                                 <div class="d-flex justify-content-between">
                                     <div class="m-0 d-flex" style="font-size: 13pt; font-weight: 600;">
-                                            {% for icon in comment.author.user_profile.user_icon.all %}
-                                                <img src="{{ icon.image.url }}" width="16px" height="16px"
-                                                     title="{{ icon.description }}">
-                                            {% endfor %}
+                                        {% for icon in comment.author.user_profile.user_icon.all %}
+                                            <img src="{{ icon.image.url }}" width="16px" height="16px"
+                                                 title="{{ icon.description }}">
+                                        {% endfor %}
                                         <a href="{{ comment.author.user_profile.get_absolute_url }}">
-                                                {{ comment.author.username }}
-                                            </a>
+                                            {{ comment.author.username }}
+                                        </a>
 
-                                            <div class="p-0 ml-1 small">
+                                        <div class="p-0 ml-1 small" style="margin-top: 2.5%">
                                             <span class="badge badge-pill
                             {% if comment.author.user_profile.karma >= 0 %}badge-success{% else %}badge-danger{% endif %}">{{ comment.author.user_profile.karma }}
                                             </span>
-                                            </div>
                                         </div>
+                                    </div>
                                     <span>
                                             {% for medal in comment.author.user_player.player_medals.all %}
                                                 <img src="{{ medal.mini_image.url }}" width="20px" height="20px"
@@ -231,26 +231,23 @@
                                 <div class="comment-text w-100">
                                     <div class="d-flex justify-content-between">
                                         <div class="d-inline-flex">
-                                            <span>
-                                                <div class="m-0" style="font-size: 13pt; font-weight: 600;">
-                                                    {% for icon in children.author.user_profile.user_icon.all %}
-                                                        <img src="{{ icon.image.url }}" width="16px" height="16px"
-                                                             title="{{ icon.description }}">
-                                                    {% endfor %}
-                                                    <a href="{{ children.author.user_profile.get_absolute_url }}">
+
+                                            <div class="m-0 d-flex" style="font-size: 13pt; font-weight: 600;">
+                                                {% for icon in children.author.user_profile.user_icon.all %}
+                                                    <img src="{{ icon.image.url }}" width="16px" height="16px"
+                                                         title="{{ icon.description }}">
+                                                {% endfor %}
+                                                <a href="{{ children.author.user_profile.get_absolute_url }}">
                                                     {{ children.author.username }}
-                                                    </a>
+                                                </a>
 
-
-                                                    <span class="badge p-0 mr-2">
+                                                <div class="p-0 ml-1 small" style="margin-top:2.25%">
                                                         <span class="badge badge-pill
                                                             {% if children.author.user_profile.karma >= 0 %}badge-success{% else %}badge-danger{% endif %}">{{ children.author.user_profile.karma }}
                                                         </span>
-                                                    </span>
-
-
                                                 </div>
-                                            </span>
+
+                                            </div>
 
                                             <i style="align-self: flex-end; margin-bottom: 2px; font-size: 11pt;">
                                                 ответил </i>
