@@ -257,18 +257,20 @@
 
                                             <i style="align-self: flex-end; margin-bottom: 2px; font-size: 11pt;">
                                                 ответил </i>
-                                            <a href="{{ children.parent.author.user_profile.get_absolute_url }}">
-                                                <div class="m-0 ml-2" style="font-size: 13pt; font-weight: 600;">
-                                                    {% for icon in children.parent.author.user_profile.user_icon.all %}
-                                                        <div class="mr-1" style="vertical-align: middle">
 
-                                                            <img src="{{ icon.image.url }}" width="16px" height="16px"
-                                                                 title="{{ icon.description }}">
-                                                        </div>
-                                                    {% endfor %}
+                                            <div class="m-0 ml-2" style="font-size: 13pt; font-weight: 600;">
+                                                {% for icon in children.parent.author.user_profile.user_icon.all %}
+                                                    <div class="mr-1" style="vertical-align: middle">
+
+                                                        <img src="{{ icon.image.url }}" width="16px" height="16px"
+                                                             title="{{ icon.description }}">
+                                                    </div>
+                                                {% endfor %}
+                                                <a href="{{ children.parent.author.user_profile.get_absolute_url }}">
                                                     {{ children.parent.author.username }}
-                                                </div>
-                                            </a>
+                                                </a>
+                                            </div>
+
                                         </div>
                                         <span>
                                             <!--
