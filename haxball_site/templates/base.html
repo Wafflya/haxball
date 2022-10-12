@@ -38,31 +38,10 @@
           rel="stylesheet">
     <style>
 
-
         body {
             background: linear-gradient(45deg, #00a86b, #158078, #191970, #000000);
             background-size: 40% 40%;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            animation: gradient 36s ease infinite;
-            height: 100vh;
-        }
-
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        body {
-            background: linear-gradient(45deg, #00a86b, #158078, #191970, #000000);
-            background-size: 40% 40%;
+            background-position: 0 0;
             background-repeat: no-repeat;
             background-attachment: fixed;
             animation: gradient 36s ease infinite;
@@ -254,7 +233,7 @@
         ❆
     </div>
     <div class="snowflake">
-        <img src="XOsX.gif">
+        <img src="{% static "img/ico/XOsX.gif" %}">
     </div>
     <div class="snowflake">
         ❅
