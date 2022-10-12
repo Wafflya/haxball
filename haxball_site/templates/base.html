@@ -44,19 +44,19 @@
             background-position: 0 0;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            animation: gradient 24s ease infinite;
+            animation: gradient 24s linear infinite;
             height: 100vh;
         }
 
         @keyframes gradient {
             0% {
-                background-position: 0% 132px;
+                background-position: 0% 148px;
             }
             50% {
                 background-position: 100% 100%;
             }
             100% {
-                background-position: 0% 132px;
+                background-position: 0% 148px;
             }
         }
 
@@ -195,6 +195,7 @@
             -webkit-animation-delay: 3s, 1.5s;
             animation-delay: 3s, 1.5s
         }
+
         .snowflake:nth-of-type(10) {
             left: 98%;
             -webkit-animation-delay: 0s, 0s;
@@ -258,7 +259,7 @@
     <div class="snowflake">
         ❄
     </div>
-      <div class="snowflake">
+    <div class="snowflake">
         ❄
     </div>
 </div>
