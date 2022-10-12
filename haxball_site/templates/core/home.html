@@ -32,11 +32,7 @@
                     <iframe src="https://yoomoney.ru/quickpay/shop-widget?writer=seller&default-sum=500&button-text=12&payment-type-choice=on&successURL=https%3A%2F%2Fwww.cis-haxball.com%2F&quickpay=shop&account=410011043451485&targets=%D0%9F%D0%B5%D1%80%D0%B5%D0%B2%D0%BE%D0%B4%20%D0%BF%D0%BE%20%D0%BA%D0%BD%D0%BE%D0%BF%D0%BA%D0%B5&"
                             width="100%" height="250" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
                 </div>
-                <div class="card mb-1 mr-0 mt-2 text-right">
-                    <iframe src="https://discord.com/widget?id=710289992160772197&theme=dark" width="100%" height="165"
-                            allowtransparency="true" frameborder="0"
-                            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-                </div>
+
                 <div class="card mt-2 mb-1" style="border-radius: 20px 20px 20px 20px;">
                     <div class="card-header mb-0 py-1 justify-content-center bg-for-online-head"
                          style="border-radius: 20px 20px 0px 0">
@@ -111,7 +107,11 @@
                 {% block sidebar_last_activity %}
                     {% show_last_activity 10 %}
                 {% endblock %}
-
+                <div class="card mb-1 mr-0 mt-2 text-right">
+                    <iframe src="https://discord.com/widget?id=710289992160772197&theme=dark" width="100%" height="165"
+                            allowtransparency="true" frameborder="0"
+                            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+                </div>
                 {% block sidebar_top_comments %}
                     {% show_top_comments 5 %}
                 {% endblock %}

@@ -23,7 +23,7 @@ from tournament.models import Team
 class PostListView(ListView):
     queryset = Post.objects.filter(category__is_official=True).order_by('-important', '-publish', )
     context_object_name = 'posts'
-    paginate_by = 6
+    paginate_by = 8
     template_name = 'core/post/list.html'
 
     def get_context_data(self, **kwargs):
