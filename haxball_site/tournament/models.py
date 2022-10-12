@@ -36,7 +36,7 @@ class FreeAgent(models.Model):
         (GK_FWD, 'Нападающий/Вратарь'),
         (ANY, 'Любая'),
     )
-    position_main = models.CharField(max_length=20, choices=POSITION, default=ANY)
+    position_main = models.CharField(max_length=40, choices=POSITION, default=ANY)
     created = models.DateTimeField("Оставлена", default=timezone.now)
     deleted = models.DateTimeField("Снята", auto_now_add=True)
     is_active = models.BooleanField("Активно", default=True)
