@@ -19,6 +19,43 @@
     <div class="container-fluid justify-content-center">
         <div class="row" style="max-width: 1600px; position: relative; margin: 0 auto;">
             <div class="col-2 col-xl-2 col-lg-3 col-sm-6 order-xl-1 order-lg-2 order-md-2 order-sm-2 my-2 px-1">
+                <div class="card mt-2 mb-1" style="border-radius: 20px 20px 20px 20px;">
+                    <div class="card-header mb-0 py-1 justify-content-center bg-for-online-head"
+                         style="border-radius: 20px 20px 0px 0">
+                        <h5 style="margin-left: 10%">Соцсети</h5>
+                        <h6 style="margin-left: 10%; text-decoration: underline">Смотрите нас тут</h6>
+                    </div>
+
+                    <div class="card-body p-0 bg-for-online-body"
+                         style="position: relative; border-radius: 0px 0px 20px 20px; width: inherit; padding: 5%">
+                        <div class="d-flex">
+                            <div class="d-inline-flex mb-2" style="margin: 3% 1px 0 2px">
+                                <a href="https://www.youtube.com/channel/UCZGpwhM76ieR15dU8kEzn0w" class="m-0 p-0">
+                                    <img src="/static/img/ico/youtube.png" title="haxball.ts3.ru"
+                                         style="cursor: pointer;" width="100%">
+                                </a>
+                            </div>
+                            <div class="d-inline-flex mb-2" style="margin: 3% 1px 0 2px">
+                                <a href="https://discord.gg/8XrnsFGhdy" class="m-0 p-0">
+                                    <img src="{% static "img/ico/discord_1.png" %}" title="haxball.ts3.ru"
+                                         style="cursor: pointer;" width="100%">
+                                </a>
+                            </div>
+                            <div class="d-inline-flex mb-2" style="margin: 3% 1px 0 2px">
+                                <a href="https://www.twitch.tv/cis_haxball" class="m-0 p-0">
+                                    <img src="{% static "img/ico/twitch.png" %}" title="haxball.ts3.ru"
+                                         style="cursor: pointer;" width="100%">
+                                </a>
+                            </div>
+                            <div class="d-inline-flex mb-2" style="margin: 3% 1px 0 2px">
+                                <a href="https://www.tiktok.com/@cishaxball?_t=8a7V9mjQfJ8&_r=1" class="m-0 p-0">
+                                    <img src="{% static "img/ico/tik_tok.png" %}" title="haxball.ts3.ru"
+                                         style="cursor: pointer;" width="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {% block sidebar_users %}
                     {% show_users_online 12 %}
                 {% endblock %}
@@ -107,11 +144,7 @@
                 {% block sidebar_last_activity %}
                     {% show_last_activity 10 %}
                 {% endblock %}
-                <div class="card mb-1 mr-0 mt-2 text-right">
-                    <iframe src="https://discord.com/widget?id=710289992160772197&theme=dark" width="100%" height="165"
-                            allowtransparency="true" frameborder="0"
-                            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-                </div>
+
                 {% block sidebar_top_comments %}
                     {% show_top_comments 5 %}
                 {% endblock %}
