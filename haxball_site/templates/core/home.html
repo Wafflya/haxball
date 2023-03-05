@@ -10,46 +10,47 @@
 
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static "core/core.css" %}">
-
-    <style>
-        body {
-            background-image: url({% static "img/backgrounds/bg-new-green.jpg" %})
-        }
-    </style>
-
 {% endblock %}
 
 
 {% block content %}
 
 
-    <div class="container-fluid justify-content-center"
-         style="background-image:url({% static "img/backgrounds/bg-new-green.jpg" %})">
+    <div class="container-fluid justify-content-center">
         <div class="row" style="max-width: 1600px; position: relative; margin: 0 auto;">
-            <div class="col-2 col-xl-2 col-lg-3 col-sm-6 order-xl-1 order-lg-2 order-md-3 order-sm-3 my-2">
+            <div class="col-2 col-xl-2 col-lg-3 col-sm-6 order-xl-1 order-lg-2 order-md-2 order-sm-2 my-2 px-1">
                 {% block sidebar_users %}
                     {% show_users_online 12 %}
                 {% endblock %}
 
 
+
+                {% polls_list 2 user %}
+
+
+                <div class="card mb-1 mr-0 mt-2 text-right">
+                    <iframe src="https://yoomoney.ru/quickpay/shop-widget?writer=seller&default-sum=500&button-text=12&payment-type-choice=on&successURL=https%3A%2F%2Fwww.cis-haxball.com%2F&quickpay=shop&account=410011043451485&targets=%D0%9F%D0%B5%D1%80%D0%B5%D0%B2%D0%BE%D0%B4%20%D0%BF%D0%BE%20%D0%BA%D0%BD%D0%BE%D0%BF%D0%BA%D0%B5&"
+                            width="100%" height="250" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+                </div>
+
                 <div class="card mt-2 mb-1" style="border-radius: 20px 20px 20px 20px;">
-                    <div class="card-header d-inline-flex mb-0 justify-content-center bg-for-online-head"
+                    <div class="card-header mb-0 py-1 justify-content-center bg-for-online-head"
                          style="border-radius: 20px 20px 0px 0">
-                        <h5>Сервер TeamSpeak 3</h5>
+                        <h5 style="margin-left: 10%">Сервер TeamSpeak 3:</h5>
+                        <h6 style="margin-left: 10%; text-decoration: underline">haxball.ts3.ru</h6>
                     </div>
 
                     <div class="card-body p-0 bg-for-online-body"
-                         style="position: relative; border-radius: 0px 0px 20px 20px; width:  inherit; padding: 5%">
-                        <h5 class="card-title mb-1 mt-1 text-center">haxball.ts3.ru</h5>
+                         style="position: relative; border-radius: 0px 0px 20px 20px; width: inherit; padding: 5%">
                         <div class="d-flex">
-                            <div class="d-inline-flex mx-3 mb-2">
-                                <a href="ts3server://haxball.ts3.ru">
-                                    <img src='{% static "img/ico/ts_logo.png" %}' title="haxball.ts3.ru"
+                            <div class="d-inline-flex mb-2" style="margin: 3% 1px 0 2px">
+                                <a href="ts3server://haxball.ts3.ru" class="m-0 p-0">
+                                    <img src="/static/img/ico/button-link.PNG" title="haxball.ts3.ru"
                                          style="cursor: pointer;" width="100%">
                                 </a>
                             </div>
-                            <div class="d-inline-flex mx-3 mb-2">
-                                <img src='{% static "img/ico/ts_logo.png" %}'
+                            <div class="d-inline-flex mb-2" style="margin: 3% 2px 0 0">
+                                <img src="/static/img/ico/button-copy.PNG"
                                      onclick="navigator.clipboard.writeText('haxball.ts3.ru'); alert('Скопирован адрес сервера! haxball.ts3.ru');"
                                      title="haxball.ts3.ru" style="cursor: pointer;" width="100%">
                             </div>
@@ -57,132 +58,63 @@
                     </div>
                 </div>
 
-                <div class="card mt-2 mb-1" style="border-radius: 20px 20px 20px 20px;">
-                    <div class="card-header text-center">
-                        <h5>Teamspeak3-сервер</h5>
-                    </div>
-                    <div class="card-body d-flex justify-content-around">
-                        <div class="d-inline-flex">
-                            <img src='{% static "img/ico/ts_logo.png" %}'
-                                 onclick="navigator.clipboard.writeText('haxball.ts3.ru'); alert('Скопирован адрес сервера! haxball.ts3.ru');"
-                                 title="haxball.ts3.ru"
-                                 style="cursor: pointer;" width="100%">
-                        </div>
-                        <div class="d-inline-flex">
-                            <a href="ts3server://haxball.ts3.ru"><img src='{% static "img/ico/ts_logo.png" %}'
-                                                                      title="haxball.ts3.ru"
-                                                                      style="cursor: pointer;" width="100%">
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-
-                {% polls_list 2 user %}
-
-
-                <div class="card mb-1 mr-0 mt-2 text-right">
-                    <iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=buyer&targets=&targets-hint=%D0%92%D0%B7%D0%BD%D0%BE%D1%81%20%D0%BE%D1%82%20%22%D0%9D%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%8B%22&default-sum=300&button-text=12&payment-type-choice=on&mobile-payment-type-choice=on&hint=&successURL=&quickpay=shop&account=410011043451485"
-                            width="100%" height="250" frameborder="0" allowtransparency="true"
-                            scrolling="no"></iframe>
-                </div>
-
             </div>
-            <div class="col-8 col-xl-8 col-lg-12 col-md-12 col-sm-12 mx-0 order-xl-2 order-md-1 order-lg-1">
-                <div class="row">
+            <div class="col-8 main-col col-xl-8 col-lg-12 col-md-12 col-sm-12 mx-0 order-xl-2 order-md-1 order-sm-1 order-lg-1 px-1">
 
 
-                    <!-- Всплывающее окно входа на сайт -->
-                    {% include 'core/include/login_logout_modal/log_out_modal.html' %}
+                <!-- Всплывающее окно входа на сайт -->
+                {% include 'core/include/login_logout_modal/log_out_modal.html' %}
 
-                    <!-- Всплывающее окно выхода с сайта -->
-                    <div class="modal" id="logoutModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Хотите выйти?</h4>
-                                    <button type="button" class="close" data-dismiss="modal">×</button>
-                                </div>
-                                <div class="modal-footer">
-                                    <form method="post" action="{% url 'account_logout' %}">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-primary">Да</button>
-                                    </form>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
-                                </div>
+                <!-- Всплывающее окно выхода с сайта -->
+                <div class="modal" id="logoutModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Хотите выйти?</h4>
+                                <button type="button" class="close" data-dismiss="modal">×</button>
+                            </div>
+                            <div class="modal-footer">
+                                <form method="post" action="{% url 'account_logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary">Да</button>
+                                </form>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="main-col col-xl-9 col-lg-9 col-sm-12">
-
-                        {# Блок для отображение профиля пользователя #}
-                        {% block profile_of_user %}
-                        {% endblock %}
-
-                        {# Блок для отображение одного поста, пост-детейл #}
-                        {% block post %}
-                        {% endblock %}
-
-                        {# Блок для списка постов #}
-                        {% block postlist %}
-                        {% endblock %}
-
-                        {# Блок для отображение списка комментариев #}
-                        {% block comments %}
-                        {% endblock %}
-
-                    </div>
-
-                    <div class="col-xl-3 col-lg-3 col-sm-6 px-0">
-
-
-                        {% block sidebar_last_activity %}
-                            {% show_last_activity 10 %}
-                        {% endblock %}
-
-                        {% block sidebar_top_comments %}
-                            {% show_top_comments 5 %}
-                        {% endblock %}
-
-                        <!--
-                {#% block sidebar_for_like %#}
-                {#% show_post_with_top_likes 4 %#}
-                {#% endblock %#}  -->
-
-                    </div>
                 </div>
+
+
+                {# Блок для отображение профиля пользователя #}
+                {% block profile_of_user %}
+                {% endblock %}
+
+                {# Блок для отображение одного поста, пост-детейл #}
+                {% block post %}
+                {% endblock %}
+
+                {# Блок для списка постов #}
+                {% block postlist %}
+                {% endblock %}
+
+                {# Блок для отображение списка комментариев #}
+                {% block comments %}
+                {% endblock %}
+
             </div>
+            <div class="col-2 col-xl-2 col-lg-3 col-sm-6 order-3 order-xl-3 order-sm-3 px-1">
 
-
-            <div class="col-2 col-xl-2 col-lg-3 col-sm-6 order-3 order-xl-3 order-sm-3 pr-0 pl-1">
-
-
+                {% block sidebar_last_activity %}
+                    {% show_last_activity 10 %}
+                {% endblock %}
                 <div class="card mb-1 mr-0 mt-2 text-right">
-                    <iframe src="https://discord.com/widget?id=710289992160772197&theme=dark" width="100%" height="500"
+                    <iframe src="https://discord.com/widget?id=710289992160772197&theme=dark" width="100%" height="165"
                             allowtransparency="true" frameborder="0"
                             sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
                 </div>
-
-
-                <!-- VK Widget -->
-                <div class="card mb-1 mr-0 mt-2 text-right">
-                    <script type="text/javascript" src="https://vk.com/js/api/openapi.js?168"></script>
-
-                    <!-- VK Widget -->
-                    <div id="vk_groups"></div>
-                    <script type="text/javascript">
-                        VK.Widgets.Group("vk_groups", {
-                            mode: 3,
-                            width: "auto",
-                            color1: '3C3C3C',
-                            color2: 'FFFFFF',
-                            color3: '0B7CFD'
-                        }, 147630853);
-                    </script>
-                </div>
-
+                {% block sidebar_top_comments %}
+                    {% show_top_comments 5 %}
+                {% endblock %}
 
             </div>
         </div>

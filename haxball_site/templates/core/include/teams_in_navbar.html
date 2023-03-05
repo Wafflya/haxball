@@ -1,11 +1,7 @@
 {% load thumbnail %}
 
-<div class="row justify-content-center">
-    {% for l in leagues %}
-        <div class="col-12 text-center pb-1">
-            <a href="{{ l.get_absolute_url }}" class="h5 py-1">{{ l }}</a>
-        </div>
-        {% for t in l.teams.all %}
+<div class="row justify-content-start">
+        {% for t in teams %}
             <div class="col-4 justify-content-center">
                 {% thumbnail t.logo "25x25" format="PNG" as im %}
                     <img src="{{ im.url }}" alt="{{ t.title }}" class="ml-1" width="25px" height="25px">
@@ -14,6 +10,4 @@
                 <a href="{{ t.get_absolute_url }}" class="h6">{{ t.title|truncatechars:15 }}</a>
             </div>
         {% endfor %}
-    {% endfor %}
-
 </div>

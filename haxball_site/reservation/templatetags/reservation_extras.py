@@ -41,29 +41,40 @@ def user_can_reserv(user):
 @register.inclusion_tag('reservation/reservation_form.html')
 def reservation_form(user):
     t = teams_can_reserv(user)
-    actual_tour = TourNumber.objects.filter(league__championship__is_active=True, is_actual=True).first()
+    actual_tour = TourNumber.objects.filter(league__championship__is_active=True, is_actual=True,
+                                            league__teams__in=t).distinct()
+    print(actual_tour)
+    if actual_tour is None:
+        return {
+            'matches': []
+        }
 
-    matches_unplayed = Match.objects.filter((Q(team_home__in=t) | Q(team_guest__in=t)), is_played=False,
-                                            numb_tour__number__lte=actual_tour.number,
-                                            ).order_by('-numb_tour__number')
+    # Матчи, которые можно будет выбрать
     matches_to_choose = []
 
-    for m in matches_unplayed:
-        try:
-            a = m.match_reservation
-        except:
-            matches_to_choose.append(m)
+    # Просматриваем все активные туры и смотрим матчи, которые не сыграны и на которых нету брони
+    for tour in actual_tour:
+        matches_unplayed = Match.objects.filter((Q(team_home__in=t) | Q(team_guest__in=t)), is_played=False,
+                                                numb_tour__number__lte=tour.number, league=tour.league,
+                                                match_reservation=None
+                                                ).order_by('-numb_tour__number').distinct()
+        matches_to_choose.extend(matches_unplayed)
 
     date_today = datetime.datetime.today()
-    d = date_today + timedelta(minutes=5)
+    """
+    Было нужно, когда можно было бронить матчи до какого-то времени.
     time_end = datetime.datetime(year=actual_tour.date_to.year, month=actual_tour.date_to.month,
                                  day=actual_tour.date_to.day, hour=23, minute=30, second=0)
-
+    """
+    hours_list = list(range(18, 24))
+    minutes_list = [0, 15, 30, 45]
     return {
         'matches': matches_to_choose,
-        'date_today': d,
-        'time_end': time_end,
         'user': user,
+        "date_today": date_today.date(),
+        "date_tomorrow": date_today.date() + timedelta(days=1),
+        "hours_list": hours_list,
+        "minutes_list": minutes_list
     }
 
 

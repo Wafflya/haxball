@@ -3,16 +3,11 @@
 {% load reservation_extras %}
 
 {% block styles %}
-    <style>
-        body {
-            background-image: url({% static "img/backgrounds/bg-light-4860.png" %})
-        }
 
-    </style>
     <link rel="stylesheet" type="text/css" href="{% static "reservation/css/reservation_list.css" %}">
-
-
 {% endblock %}
+
+
 {% block title %}Чемпионат | Бронь хоста           cis-haxball.com {% endblock %}
 {% block profile_of_user %}
     <div class="card mb-2 mt-2" style="border-radius: 10px">
@@ -61,23 +56,28 @@
                                             {% if res.host == host and res.time_date|date_equal:match_day %}
                                                 <div class="d-flex justify-content-between" style="padding:.75rem;">
 
-                                                    <span class="font-weight-bolder">
-                                                        {{ res.time_date|time:"H:i" }}
-                                                    </span>
-                                                    <span class="font-weight-bold">
+                                                    <span style="font-size: smaller">
+                                                        <span class="font-weight-bold small"> {{ res.time_date|time:"H:i" }} |
+                                                        </span>
+                                                    <span class="small">
                                                         {% if res.match.league.is_cup %}
-                                                            {{ res.match.numb_tour.number|round_name:res.match.league.tours.count }},
+                                                            {{ res.match.numb_tour.number|round_name:res.match.league.tours.count }}
+                                                            ,
                                                         {% else %}
-                                                            {{ res.match.numb_tour }} тур,{% endif %}
-                                                        <a href="{{ res.match.get_absolute_url }}">
-                                                        <img src="{{ res.match.team_home.logo.url }}" width="25px"
-                                                             height="25px" alt="{{ res.match.team_home.title }}"
-                                                             style="vertical-align: bottom;">
-                                                        {{ res.match.team_home.short_title }} - {{ res.match.team_guest.short_title }}
-                                                        <img src="{{ res.match.team_guest.logo.url }}"
-                                                             alt="{{ res.match.team_guest.title }}" width="25px"
-                                                             height="25px" style="vertical-align: bottom;">
-                                                        </a>
+                                                            {{ res.match.numb_tour }} тур{% endif %}
+                                                    </span>
+                                                        <span class="font-weight-bold small">
+                                                            |
+                                                            <a href="{{ res.match.get_absolute_url }}">
+                                                            <img src="{{ res.match.team_home.logo.url }}" width="16px"
+                                                                 height="16px" alt="{{ res.match.team_home.title }}"
+                                                                 style="vertical-align: bottom;">
+                                                            {{ res.match.team_home.short_title }} - {{ res.match.team_guest.short_title }}
+                                                            <img src="{{ res.match.team_guest.logo.url }}"
+                                                                 alt="{{ res.match.team_guest.title }}" width="16px"
+                                                                 height="16px" style="vertical-align: bottom;">
+                                                            </a>
+                                                        </span>
                                                     </span>
                                                     {% if user|match_can_delete:res.match %}
                                                         <a class="text-danger" data-toggle="modal"

@@ -36,7 +36,7 @@ class FreeAgent(models.Model):
         (GK_FWD, 'Нападающий/Вратарь'),
         (ANY, 'Любая'),
     )
-    position_main = models.CharField(max_length=20, choices=POSITION, default=ANY)
+    position_main = models.CharField(max_length=40, choices=POSITION, default=ANY)
     created = models.DateTimeField("Оставлена", default=timezone.now)
     deleted = models.DateTimeField("Снята", auto_now_add=True)
     is_active = models.BooleanField("Активно", default=True)
@@ -400,8 +400,8 @@ class PlayerTransfer(models.Model):
 
 
 class Achievements(models.Model):
-    title = models.CharField('Название', max_length=64)
-    description = models.CharField('Описание', max_length=128)
+    title = models.CharField('Название', max_length=200)
+    description = models.CharField('Описание', max_length=400)
     image = models.ImageField('Изображение медальки в профиле', upload_to='medals/', blank=True, null=True)
     mini_image = models.ImageField('Изображение медальки в комменты', upload_to='medals/', blank=True, null=True)
     player = models.ManyToManyField(Player, related_name='player_medals', blank=True, null=True)
