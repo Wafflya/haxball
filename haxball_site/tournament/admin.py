@@ -5,7 +5,6 @@ from django.urls import resolve
 
 from .models import FreeAgent, Player, League, Team, Match, Goal, OtherEvents, Substitution, Season, PlayerTransfer, \
     TourNumber, Nation, Achievements
-from django import forms
 
 
 @admin.register(FreeAgent)
@@ -23,8 +22,9 @@ class AchievmentsAdmin(admin.ModelAdmin):
 class PlayerAdmin(admin.ModelAdmin):
     list_display = ('name', 'nickname', 'team', 'player_nation', 'role',)
     raw_id_fields = ('name',)
-    list_filter = ('role','team','name')
-    search_fields = ('nickname','name__username',)
+    list_filter = ('role', 'team', 'name')
+    search_fields = ('nickname', 'name__username',)
+
 
 @admin.register(PlayerTransfer)
 class PlayerTransferAdmin(admin.ModelAdmin):
@@ -101,6 +101,10 @@ class EventInline(admin.StackedInline):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
+
+
+
+
 @admin.register(Match)
 class MatchAdmin(admin.ModelAdmin):
     list_display = (
@@ -108,6 +112,23 @@ class MatchAdmin(admin.ModelAdmin):
         'inspector', 'id',)
     # readonly_fields = ('score_home', 'score_guest',)
     filter_horizontal = ('team_home_start', 'team_guest_start',)
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        # Берём из пути id матча
+        resolved = resolve(request.path_info)
+        
+        if db_field.name == 'team_home_start':
+            # Игроки команды хозяев
+            t = Team.objects.filter(home_matches=resolved.kwargs.get("object_id")).first()
+            kwargs["queryset"] = Player.objects.filter(team=t)
+        if db_field.name == 'team_guest_start':
+            # Игроки команды гостей
+            t = Team.objects.filter(guest_matches=resolved.kwargs.get("object_id")).first()
+            kwargs["queryset"] = Player.objects.filter(team=t)
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
+
+
+
     list_filter = ('numb_tour__number', 'league', 'inspector', 'is_played')
     fieldsets = (
         ('Основная инфа', {
@@ -152,7 +173,7 @@ class OtherEventsAdmin(admin.ModelAdmin):
 class MatchTourAdmin(admin.ModelAdmin):
     list_display = ('number', 'league', 'is_actual', 'date_from', 'date_to')
     list_editable = ('is_actual',)
-    list_filter = ('league','number')
+    list_filter = ('league', 'number')
 
 
 """

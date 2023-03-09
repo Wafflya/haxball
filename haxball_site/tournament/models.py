@@ -6,11 +6,12 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from smart_selects.db_fields import ChainedForeignKey, ChainedManyToManyField
-
-# from django.db.models import
+from smart_selects.db_fields import ChainedForeignKey
 
 from core.models import NewComment
+
+
+# from django.db.models import
 
 
 class FreeAgent(models.Model):
@@ -177,6 +178,7 @@ class Player(models.Model):
     class Meta:
         verbose_name = 'Игрок'
         verbose_name_plural = 'Игроки'
+        ordering = ('nickname',)
 
 
 class TourNumber(models.Model):
