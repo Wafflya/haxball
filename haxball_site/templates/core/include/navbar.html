@@ -36,36 +36,13 @@
                     Чемпионат
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'tournament:league' 's9-premier-league' %}">🅱️ Высшая
+                    <a class="dropdown-item" href="{% url 'tournament:league' 's10-premier-league' %}">🅱️ Высшая
                         Лига</a>
 
-                    <a class="dropdown-item submenu" href="#">🤣 Первая Лига</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{% url 'tournament:league' 's9-first-Volga' %}">Дивизион
-                            Волги</a>
-                        <a class="dropdown-item" href="{% url 'tournament:league' 's9-first-Kama' %}">Дивизион
-                            Камы</a>
-                    </div>
+                    <a class="dropdown-item" href="{% url 'tournament:league' 's10-first_division' %}">🤣 Первая
+                        Лига</a>
+                    <a class="dropdown-item" href="{% url 'tournament:league' 's10-cup' %}">🏆 Кубок России</a>
 
-
-                    <a class="dropdown-item submenu" href="#">🆑 Кубок ПЛ</a>
-                    <div class="dropdown-menu">
-                        {#                        <a class="dropdown-item" href="{% url 'tournament:league' 's8-league-cup-play-off' %}">Плей-офф#}
-                        {#                            Кубка Лиги</a>#}
-                        <a class="dropdown-item" href="{% url 'tournament:league' 's9-first-league-cup-group-A' %}">Группа
-                            А</a>
-                        <a class="dropdown-item" href="{% url 'tournament:league' 's9-first-league-cup-group-B' %}">Группа
-                            B</a>
-                        <a class="dropdown-item" href="{% url 'tournament:league' 's9-first-league-cup-group-C' %}">Группа
-                            С</a>
-                        <a class="dropdown-item" href="{% url 'tournament:league' 's9-first-league-cup-group-D' %}">Группа
-                            D</a>
-                        <a class="dropdown-item" href="{% url 'tournament:league' 's9-first-league-cup-play-off' %}">Плей-офф
-                            Кубка Первой Лиги</a>
-
-                    </div>
-
-                    <a class="dropdown-item" href="{% url 'tournament:league' 's9-cup' %}">🏆 Кубок России</a>
 
                     <a class="dropdown-item"
                        href="https://docs.google.com/spreadsheets/d/1TGyS-1VhoClWp_knNXAeezwpsdco8QK8qbp2pIcc45k/edit?usp=sharing"><span
@@ -75,17 +52,14 @@
 
                     <a class="dropdown-item submenu" href="#">⌛️ Переносы</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="https://www.cis-haxball.com/post/566/postpone-premier-league">Высшая
+                        <a class="dropdown-item" href="https://www.cis-haxball.com/post/664/postpone-premier-league10">Высшая
                             Лига</a>
-                        <a class="dropdown-item" href="https://www.cis-haxball.com/post/567/postpone-first_Volga">Дивизион
-                            Волги</a>
-                        <a class="dropdown-item" href="https://www.cis-haxball.com/post/568/postpone-first_Kama">Дивизион
-                            Камы</a>
-                        <a class="dropdown-item" href="https://www.cis-haxball.com/post/569/postpone-first_league_cup">Кубок
-                            Первой Лиги</a>
+                        <a class="dropdown-item" href="https://www.cis-haxball.com/post/665/postpone-first-league10">Первая
+                            Лига</a>
+
                     </div>
 
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/562/transfer-9">🤝 Трансферы</a>
+                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/661/transfer-10">🤝 Трансферы</a>
                     <a class="dropdown-item" href="{% url 'tournament:free_agent' %}">🆓 Свободные агенты</a>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/111/org_razdel">❓ Орг. раздел</a>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/397/reglament-9">📚 Регламент</a>
@@ -183,6 +157,29 @@
                             группа D</a>
                         <a class="dropdown-item" href="{% url 'tournament:league' 's8-league-cup-play-off' %}">Кубок
                             Лиги плей-офф</a>
+                    </div>
+
+                    <a class="dropdown-item submenu" href="#">ЧР #9</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's9-first-league-cup-group-A' %}">Группа
+                            А</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's9-first-league-cup-group-B' %}">Группа
+                            B</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's9-first-league-cup-group-C' %}">Группа
+                            С</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's9-first-league-cup-group-D' %}">Группа
+                            D</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's9-first-league-cup-play-off' %}">Плей-офф
+                            Кубка Первой Лиги</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's9-cup' %}">🏆 Кубок России</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's9-first-Volga' %}">Первая лига.
+                            Дивизион
+                            Волги</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's9-first-Kama' %}">Первая лига.
+                            Дивизион
+                            Камы</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's9-premier-league' %}">🅱️ Высшая
+                            Лига</a>
                     </div>
 
                 </div>
