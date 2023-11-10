@@ -36,30 +36,41 @@
                     Чемпионат
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'tournament:league' 's10-premier-league' %}">🅱️ Высшая
+                    <a class="dropdown-item" href="{% url 'tournament:league' 's11-premier-league' %}">Высшая
                         Лига</a>
 
-                    <a class="dropdown-item" href="{% url 'tournament:league' 's10-first_division' %}">🤣 Первая
-                        Лига</a>
-                    <a class="dropdown-item" href="{% url 'tournament:league' 's10-cup' %}">🏆 Кубок России</a>
 
+                    <a class="dropdown-item submenu" href="#">Первая лига</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's11-first-Nadezhda' %}">
+                            Дивизион Надежды</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 's11-first-Vera' %}">
+                            Дивизион Веры</a>
+
+                        <a class="dropdown-item" href="{% url 'tournament:league' 'play-offpl' %}">
+                            Плей-офф</a>
+                        <a class="dropdown-item" href="{% url 'tournament:league' 'superfinalpl' %}">
+                            Суперфинал</a>
+                    </div>
+                    <a class="dropdown-item" href="{% url 'tournament:league' 'kubokchr11' %}">Кубок России</a>
 
                     <a class="dropdown-item"
-                       href="https://docs.google.com/spreadsheets/d/1TGyS-1VhoClWp_knNXAeezwpsdco8QK8qbp2pIcc45k/edit?usp=sharing"><span
-                            style="width: 2%">🗓</span> Календарик</a>
+                       href="https://docs.google.com/spreadsheets/d/1fUegU5_9N-EXlsKZ2f-MJ9Kygj-14P9cDphS1QQB2TA/edit?usp=sharing">Календарик</a>
 
-                    <a class="dropdown-item" href="{% url 'reservation:host_reservation' %}">🕜 Бронь хоста</a>
+                    <a class="dropdown-item" href="{% url 'reservation:host_reservation' %}">Бронь хоста</a>
 
                     <a class="dropdown-item submenu" href="#">⌛️ Переносы</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="https://www.cis-haxball.com/post/664/postpone-premier-league10">Высшая
+                        <a class="dropdown-item" href="https://www.cis-haxball.com/post/751/postpone11vl">Высшая
                             Лига</a>
-                        <a class="dropdown-item" href="https://www.cis-haxball.com/post/665/postpone-first-league10">Первая
-                            Лига</a>
+                        <a class="dropdown-item" href="https://www.cis-haxball.com/post/752/postpone11plnad">Дивизион
+                            Надежды</a>
+                        <a class="dropdown-item" href="https://www.cis-haxball.com/post/753/postpone11-vera">Дивизион
+                            Веры</a>
 
                     </div>
 
-                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/661/transfer-10">🤝 Трансферы</a>
+                    <a class="dropdown-item" href="https://www.cis-haxball.com/post/750/transfers-11">🤝 Трансферы</a>
                     <a class="dropdown-item" href="{% url 'tournament:free_agent' %}">🆓 Свободные агенты</a>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/111/org_razdel">❓ Орг. раздел</a>
                     <a class="dropdown-item" href="https://www.cis-haxball.com/post/397/reglament-9">📚 Регламент</a>
